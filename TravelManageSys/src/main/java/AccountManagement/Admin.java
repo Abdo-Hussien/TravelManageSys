@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package AccountManagement;
 
-/**
- *
- * @author bmood
- */
-public interface Admin {
+public class Admin implements Administration {
     
 }
