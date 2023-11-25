@@ -5,7 +5,7 @@ public class Car {
     String model;
     String type;
     int noSeats;
-    double price=type.equals("suv") ? 0.3 : 0.2;
+    double price= this.noSeats > 4 ? .4 : type.equals("sedan") ? 0.2  :type.equals("suv") ? 0.3: 0 ; 
 
     public String getMade() {
         return this.made;
