@@ -5,8 +5,7 @@ public class Car {
     String model;
     String type;
     int noSeats;
-    double price= this.noSeats > 4 ? .4 : type.equals("sedan") ? 0.2  :type.equals("suv") ? 0.3: 0 ; 
-
+    double price;
     public String getMade() {
         return this.made;
     }
@@ -25,6 +24,17 @@ public class Car {
 
     public double getPrice() {
         return this.price;
+    }
+    public void setPrcie() {
+if (this.noSeats > 4) {
+    this.price =0.4;
+}
+else if (this.type.equals("sedan")){
+    this.price =0.2;
+}
+else if (this.type.equals("suv")) {
+    this.price =0.3;
+}
     }
 
 }
