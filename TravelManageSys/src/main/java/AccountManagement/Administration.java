@@ -9,6 +9,10 @@ package AccountManagement;
  * @author bmood
  */
 public interface Administration {
-    
+
+    void customerManipulation();
+    void tourGuideManipulation();
+    void tripsAvalability();
+    void customerDiscounts();
     
 }
