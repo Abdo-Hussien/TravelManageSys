@@ -12,7 +12,8 @@ import java.util.Scanner;
  */
 public abstract class Ticket {
     Scanner in = new Scanner(System.in);
-    protected int No_Of_Tickets =0, added_tickets, removed_tickets,total_tickets;
+    protected int No_Of_Tickets =0, added_tickets, removed_tickets;
+    public static int total_tickets;
     public String Answer;
     public char choice;
     public boolean a= true;
@@ -55,6 +56,7 @@ public abstract class Ticket {
     public void setNo_Of_Tickets() {
         System.out.println("How Many Tickets Do You Want To Book?");
         this.No_Of_Tickets =in.nextInt();
+        Ticket.total_tickets +=this.No_Of_Tickets;
         System.out.println("Successfully Booked " + this.No_Of_Tickets + " Ticket(s)!" );
         edit_tickets();
     }
@@ -81,7 +83,7 @@ public abstract class Ticket {
     public void remove_tickets(){
         System.out.println("Want To Remove Tickets?(yes or no)");
         Answer = in.next();
-        if (Answer.equals("yes")||Answer.equals("YES")||Answer.equals("Yes")) {
+        if (Answer.toLowerCase().equals("yes")) {
            do{
                 System.out.println("How Many Tickets Do You Want To Remove?");
                 this.removed_tickets=in.nextInt();
@@ -114,6 +116,7 @@ public abstract class Ticket {
         choice = in.next().charAt(0);
         if (choice =='1') {
             System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
+            System.out.println("Total Tickets: "+ Ticket.total_tickets);
         }
             else if (choice =='2') {
                 edit_tickets();

@@ -30,6 +30,6 @@ public class Platinum extends Ticket{
     }
 
     public void ticket_detalis(){
-        System.out.println("You Booked:\n" + this.No_Of_Tickets +" Platinum Tickets");
+        System.out.println(this.No_Of_Tickets +" Platinum Tickets");
     }
 }
