@@ -30,6 +30,6 @@ public class Gold extends Ticket{
     }
 
     public void ticket_detalis(){
-        System.out.println("You Booked:\n" + this.No_Of_Tickets +" Gold Tickets");
+        System.out.println(this.No_Of_Tickets +" Gold Tickets");
     }
 }

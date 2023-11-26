@@ -30,6 +30,6 @@ public class Silver extends Ticket {
     }
     
     public void ticket_detalis(){
-        System.out.println("You Booked:\n" + this.No_Of_Tickets + " Silver Tickets(Regular)");
+        System.out.println(this.No_Of_Tickets + " Silver Tickets(Regular)");
     }
 }
