@@ -63,23 +63,7 @@ public class fileManipulation {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    }
+    
     public void getAllTourGuides() {
             try {
                 ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
