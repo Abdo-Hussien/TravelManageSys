@@ -2,6 +2,7 @@
 package AccountManagement;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.FileWriter;
@@ -153,7 +154,7 @@ public class Customers extends Person {
         
          while (true) {
             System.out.println("Enter your mobile phone number : ");
-            System.out.println(" the state code (+20) is added. ");
+            System.out.println("the state code (+20) is added. ");
             System.out.println("");
             String phone_no = scanner.next();
             System.out.println("");
@@ -212,7 +213,8 @@ public class Customers extends Person {
         System.out.println("--------------------------------------");
         System.out.println("\n");
 
-        
+        scanner.nextLine();
+
         while (true) {
             System.out.println("Please enter your street address : ");
             System.out.println("");
@@ -304,7 +306,7 @@ public class Customers extends Person {
        
 
         // input data into text file
-        String filePath = "test.txt";
+        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true), true)) {
             
                 writer.println(u.first_name+" "+u.last_name);
@@ -323,64 +325,13 @@ public class Customers extends Person {
     }
 
 
+
     
 
 
-
-
-    // login into account
-    public void login() throws FileNotFoundException, IOException {
-
-        System.out.println("\n");
-        System.out.println("Login into your account : ");
-        System.out.println("==============================");
-
-        while (true) {
-            System.out.println("Enter your username : ");
-            String usern = scanner.next();
-            System.out.println("Enter your password : ");
-            String pass = scanner.next();
-
-            String filePath = "test.txt";
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\n");
-
-                    
-                    usern = u.username;
-                    pass = u.password;
-
-                    if (usern.equals(u.username) && pass.equals(u.password)) {
-                        System.out.println("Logged in successfuly.");
-                        break;
-                    }
-
-                    else {
-                        System.out.println("Wrong username or password, try again !");
-                        continue;
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } // end of while
-
-    }
-
-
-
-
-
-
-
     // diplay all users accounts and their information (for admin usage only)
-    protected void display_all_users() throws FileNotFoundException, IOException {
-        String filePath = "test.txt";
+    public void display_all_users() throws FileNotFoundException, IOException {
+        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
