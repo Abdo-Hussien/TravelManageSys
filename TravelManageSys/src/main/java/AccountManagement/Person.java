@@ -21,4 +21,7 @@ public class Person {
         this.account_id = account_id;
     }
 
+    public Person() {
+    }
+
 }
