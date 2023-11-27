@@ -5,17 +5,13 @@
 package TravelManagement;
 
 import java.util.Date;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.Enumeration;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,9 +19,9 @@ import java.util.List;
  * @author bmood
  */
 public class CustomerBooking {
-    private ArrayList<Trip> tripsList = getAllTrips();
-    private int TripCounter;
-    private int DiffTripCounter;
+    private ArrayList<Trip> tripsList = new ArrayList<>();
+    // private int TripCounter;
+    // private int DiffTripCounter;
     // Filters
     private double price_start;
     private double price_end;
@@ -35,7 +31,9 @@ public class CustomerBooking {
 
     private ArrayList<Trip> filteredTrips = new ArrayList<>();
 
-    public List<Trip> getFilteredTrips(String search_filter) {
+    // ArrayList<Trip>
+    public void getFilteredTrips(String search_filter) {
+        // tripsList = getAllTrips();
         String[] Filters = search_filter.split("/");
         // Split Filters.
         setFilters(Filters);
@@ -43,67 +41,71 @@ public class CustomerBooking {
         // Iterate through the trips and filter based on the search_text
         for (Trip trip : tripsList) {
             if (tripSearch(trip, search_text, start_date, end_date, price_start, price_end)) {
-                // filteredTrips.add(trip);
-                System.out.println("Trip Displayed Successfully");
+                filteredTrips.add(trip);
+                System.out.println(trip.getTitle() + " Trip Displayed Successfully");
             } else
-                System.out.println("Trip wasn't displayed");
+                System.out.println(trip.getTitle() + " Trip wasn't displayed");
         }
-        return filteredTrips;
+        // return filteredTrips;
         // Checkout no cancellation - Save in a file.
         // Booking Save in runtime variables (Array List) - Not save in a file.
     }
 
-    private ArrayList<Trip> getAllTrips() {
+    // private ArrayList<Trip> getAllTrips() {
+    // try {
+    // Path tripsFile = Path.of("TravelManageSys/src/data/trips.txt");
+    // String[] tripStrs = Files.readString(tripsFile).split("\\s+---\\s+");
+    // for (String tripstr : tripStrs) {
+    // Trip trip = parseTrip(tripstr);
+    // if (trip != null)
+    // tripsList.add(trip);
+    // }
 
-        try {
-            Path tripsFile = Path.of("TravelManageSys/src/data/trips.txt");
-            Trip trip = parseTrip(Files.readString(tripsFile));
-            if (trip != null)
-                tripsList.add(trip);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
 
-        return tripsList;
-    }
+    // return tripsList;
+    // }
 
-    private Trip parseTrip(String line) {
-        String[] parts = line.split("\n");
+    // private Trip parseTrip(String line) {
+    // String[] parts = line.split("\n");
 
-        // Invalid format, return null or handle appropriately
-        // if (parts.length != {Number of Lines for each Trip}) {
-        // return null;
-        // }
+    // // Invalid format, return null or handle appropriately
+    // // if (parts.length != {Number of Lines for each Trip}) {
+    // // return null;
+    // // }
 
-        try {
-            String id = parts[0];
-            String tripName = parts[1];
-            String type = parts[2];
-            double price = Double.parseDouble(parts[3]);
-            String startDate = parts[4];
-            String endDate = parts[5];
-            String description = parts[6];
-            int capacity = Integer.parseInt(parts[7]);
-            // Create a Trip object based on the type
-            switch (type) {
-                case "GeneralTour":
-                    return new GeneralTours(id, tripName, type, price, startDate, endDate, description, null,
-                            capacity, null, null, null, null);
-                case "FamilyTour":
-                    return new FamilyTours(id, tripName, type, price, startDate, endDate, description, null,
-                            capacity, null, null, null, null);
-                case "CoupleTour":
-                    return new CoupleTours(id, tripName, type, price, startDate, endDate, description, null,
-                            capacity, null, null, null, null);
-                default:
-                    // Handle unknown type or return null
-                    return null;
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace(); // Handle the exception appropriately, e.g., log or throw
-            return null;
-        }
-    }
+    // try {
+    // String id = parts[0].trim();
+    // String tripName = parts[1].trim();
+    // String type = parts[2].trim();
+    // double price = Double.parseDouble(parts[3]);
+    // String startDate = parts[4].trim();
+    // String endDate = parts[5].trim();
+    // String description = parts[6].trim();
+    // int capacity = Integer.parseInt(parts[7]);
+    // // Create a Trip object based on the type
+    // if (type.toLowerCase().equals("general")) {
+    // return new GeneralTours(id, tripName, type, price, startDate, endDate,
+    // description, null,
+    // capacity, null, null, null, null);
+    // } else if (type.toLowerCase().equals("family")) {
+    // return new FamilyTours(id, tripName, type, price, startDate, endDate,
+    // description, null,
+    // capacity, null, null, null, null);
+    // } else if (type.toLowerCase().equals("couple")) {
+    // return new CoupleTours(id, tripName, type, price, startDate, endDate,
+    // description, null,
+    // capacity, null, null, null, null);
+    // } else
+    // return null;
+    // } catch (NumberFormatException e) {
+    // e.printStackTrace(); // Handle the exception appropriately, e.g., log or
+    // throw
+    // return null;
+    // }
+    // }
 
     private void setFilters(String[] Filters) {
         for (int i = 0; i < Filters.length; i++) {
