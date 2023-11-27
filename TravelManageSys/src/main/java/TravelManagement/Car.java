@@ -1,11 +1,20 @@
 package TravelManagement;
 
 public class Car {
-    String made;
-    String model;
-    String type;
-    int noSeats;
-    double price;
+    protected String made;
+    protected String model;
+    protected String type;
+    protected int noSeats;
+    protected double price;
+
+    public Car(String made, String model, String type, int noSeats, double price) {
+        this.made = made;
+        this.model = model;
+        this.type = type;
+        this.noSeats = noSeats;
+        this.price = price;
+    }
+
     public String getMade() {
         return this.made;
     }
@@ -25,19 +34,7 @@ public class Car {
     public double getPrice() {
         return this.price;
     }
-    public void setPrcie() {
-if (this.noSeats > 4) {
-    this.price =0.4;
-}
-else if (this.type.equals("sedan")){
-    this.price =0.2;
-}
-else if (this.type.equals("suv")) {
-    this.price =0.3;
-}
-    }
 
 }
 
-
-//added in abdelrahman bracnch
+// added in abdelrahman bracnch
