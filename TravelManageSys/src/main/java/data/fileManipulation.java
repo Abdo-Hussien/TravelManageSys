@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import AccountManagement.Customers;
 import TravelManagement.Trip;
 import TravelManagement.CoupleTours;
 import TravelManagement.FamilyTours;
@@ -38,6 +39,44 @@ public class fileManipulation {
         } catch (Exception e) {
 
         }
+
+
+    
+    }
+
+     public static void getAllCustomers() {
+        try {
+            ArrayList<Customers> AllCustomers = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt");
+            String val = Files.readString(path);
+            String Customers[] = val.split("\\s+---\\s+");
+            for (String c : Customers) {
+                String[] customer = c.split(System.lineSeparator());
+                String[] Fullname = customer[1].split(" ");
+                AllCustomers.add(new Customers(customer[0],Fullname[0],Fullname[1],customer[2],customer[3],Integer.parseInt(customer[4]),customer[5],customer[6],customer[7]));
+
+
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     }

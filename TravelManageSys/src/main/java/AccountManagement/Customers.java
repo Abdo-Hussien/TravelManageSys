@@ -59,6 +59,10 @@ public class Customers extends Person {
      private String zipAddress;
             
     
+
+    public Customers(  String account_id,String first_name, String last_name, String username,String password, int age, String gender, String address, String phone_number) {
+        super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
+    }
     
     
     
@@ -303,8 +307,7 @@ public class Customers extends Person {
         String filePath = "test.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true), true)) {
             
-                writer.println(u.first_name);
-                writer.println(u.last_name);
+                writer.println(u.first_name+" "+u.last_name);
                 writer.println(u.age);
                 writer.println(u.gender.toLowerCase());
                 writer.println(u.phone_number);
@@ -320,7 +323,7 @@ public class Customers extends Person {
     }
 
 
-
+    
 
 
 
