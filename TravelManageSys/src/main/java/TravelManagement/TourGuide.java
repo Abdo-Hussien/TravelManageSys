@@ -12,21 +12,22 @@ import AccountManagement.Person;
  */
 public class TourGuide extends Person {
 
-    protected double salay;
-    protected  int TourGuidescounter;
+    protected double salary;
+    protected static int TourGuidescounter;
 
-public TourGuide(String first_name, String last_name, String username, int age, String phone_number, String address, String password, String gender, String account_id) {
-    this.first_name = first_name;
-    this.last_name = last_name;
-    this.username = username;
-    this.age = age;
-    this.phone_number = phone_number;
-    this.address = address;
-    this.password = password;
-    this.gender = gender;
-    this.account_id = account_id;
-    TourGuidescounter++;
-}
+    public TourGuide(String first_name, String last_name, String username, int age, String phone_number, String address,
+            String password, String gender, String account_id) {
+        this.account_id = account_id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.username = username;
+        this.password = password;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.phone_number = phone_number;
+        TourGuidescounter++;
+    }
 
-    //public double calcsalay(){}
+    // public double calcsalay(){}
 }
