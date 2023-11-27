@@ -10,8 +10,17 @@ package TravelManagement;
  */
 public class FamilyTours extends Trip{
 
-    public FamilyTours(int tripId, String startDate, String endDate, String tripType, String title, String Description, Hotels Hotel, int initPrice, Transportation transportation, Ticket[] ticket, TravelManagement.TourGuide TourGuide, String activities, int Capacity) {
-        super(tripId, startDate, endDate, tripType, title, Description, Hotel, initPrice, transportation, ticket, TourGuide, activities, Capacity);
+
+    public FamilyTours() {
+        super();
+    }
+
+    public FamilyTours(String tripId, String title, String tripType, double initPrice, String startDate,
+            String endDate,
+            String Description, TourGuide TourGuide, int Capacity,
+            String activities[], Hotels Hotel, Transportation transportation, Ticket[] ticket) {
+        super(tripId, title, tripType, initPrice, startDate, endDate, Description, TourGuide, Capacity, activities,
+                Hotel, transportation, ticket);
     }
     
 }
