@@ -3,6 +3,9 @@ package AccountManagement;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import TravelManagement.BookedTravels;
+
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,12 +49,11 @@ public class Customers extends Person {
 
     Scanner scanner = new Scanner(System.in);
     Person u = new Person();
-
     // keeps track of user's trip history
 
     private ArrayList<String> tripsHistory = new ArrayList<>();
 
-    // private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
+    private ArrayList<BookedTravels> bookedTravels = new ArrayList<>();
 
     // create an account
     public void create_acc() throws IOException {
