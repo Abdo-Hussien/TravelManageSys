@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -44,15 +45,15 @@ import java.io.FileReader;
 
 
 
-public class UserSettings extends Person{
+public class UserSettings extends Customer{
     
  
-    private ArrayList <Person> list= new ArrayList<Person>();
+    private ArrayList <Customer> list= new ArrayList<Customer>();
     Scanner scanner = new Scanner(System.in);
-    Person u=new Person();
+    Customer u=new Customer();
+
+    //keeps track of user's trip history
     private ArrayList<String> tripsHistory=new ArrayList<>();
-    
-    
     
     
     
@@ -118,12 +119,43 @@ public class UserSettings extends Person{
         }
     }
     
+
+         System.out.println("\n");
+         System.out.println("--------------------------------------");
+         System.out.println("\n");
     
+
+
+ while(true){
+            System.out.println("Please enter a username for your account : ");
+            System.out.println("");
+            String u_name =scanner.next();
+            System.out.println("");
+            if(u_name.length()<7){
+                System.out.println("Username is too short , it must be a minimum of 7 characters.");
+                continue;
+            }
+            
+            if(u_name.length()>14){
+                System.out.println("Username is too long , it must be a maximum of 14 characters.");
+            }
+            
+            else{
+                u.username=u_name;
+            break;
+        }
+    }
+
+
+
+
     
    
         System.out.println("\n");
         System.out.println("--------------------------------------");
         System.out.println("\n");
+
+
 
     while(true){
         System.out.println("Enter your age : ");
@@ -214,7 +246,7 @@ public class UserSettings extends Person{
         }
         
         
-        //generates random ID for Person
+        //generates random ID for Customer
         RandIDGenerator generator = new RandIDGenerator();
         generator.setItemCount(5);
         generator.generateRandID();
@@ -228,12 +260,14 @@ public class UserSettings extends Person{
         //input data into text file
         String filePath = "test.txt";
          try (PrintWriter writer = new PrintWriter(new FileWriter(filePath,true),true)) {
-            for (Person u : list) {
+            for (Customer u : list) {
                 writer.println(u.first_name);
                 writer.println(u.last_name);
                 writer.println(u.age);
-                writer.println(u.phone_number);
                 writer.println(u.address);
+                writer.println(u.phone_number);
+                writer.println(u.username);
+                writer.println(u.password);
                 writer.println(u.account_id);
                 writer.println();
             }
@@ -247,64 +281,59 @@ public class UserSettings extends Person{
     }
     
 
-
-
-
   
     //login into account
     public void login() throws FileNotFoundException, IOException{
-            System.out.println("\n");
-            System.out.println("Login into your account : ");
-            System.out.println("==============================");
-
-        while(true){
-        System.out.println("Enter your phone number : ");
-        String phone_no=scanner.next();
-        System.out.println("Enter your password : ");
-        String pass=scanner.next();
-
-
-         String filePath = "test.txt";
-         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-         String line;
-         }
-
-          try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-          String line;
-
-            // Read each line from the file until the end of the file is reached
-            
-            if ((line=reader.readLine())==pass ) {
-                System.out.println("Logged in successfully !");
-                break;
-               
-            }
-           
-        } 
-
-
-
-
-         
-
-
-        //check if phone number & password are matching
-    //     for (int i = 0; i < list.size(); i++) {
-            
         
-    //         if(phone_no.equals(list.get(i).phone_number) && pass.equals((list.get(i).password))){
-    //         System.out.println("logged in successfully.");
-    //         break;
-    //         }
+        System.out.println("\n");
+        System.out.println("Login into your account : ");
+        System.out.println("==============================");
+        
+        while(true){
+            System.out.println("Enter your username : ");
+            String usern=scanner.next();
+            System.out.println("Enter your password : ");
+            String pass=scanner.next();
+          
 
-    //         else {
-    //             System.out.println("Wrong phone number or password ! try again.");
-    //             continue;
-    //         }
-    //     }
+            String filePath = "test.txt"; 
 
-    // }
-    }
+            try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+                
+                String line;
+    
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\n");
+    
+                    // Assuming the file format is "username,password"
+                     usern = parts[5];
+                     pass = parts[6];
+    
+                    if (usern.equals(u.username) && pass.equals(u.password)) {
+                        System.out.println("Logged in successfuly.");
+                        break;
+                    }
+
+                    else{
+                        System.out.println("Wrong username or password, try again !");
+                        continue;
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+
+
+        
+
+        }//end of while
+
+    
     }
 
 
@@ -315,7 +344,7 @@ public class UserSettings extends Person{
 
 
     //diplay all users accounts and their information (for admin usage only)
-    public void display_all_users() throws FileNotFoundException, IOException{
+   protected void display_all_users() throws FileNotFoundException, IOException{
          String filePath = "test.txt";
          try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;

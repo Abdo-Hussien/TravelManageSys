@@ -4,6 +4,7 @@ public class Person {
 
     protected String first_name;
     protected String last_name;
+    protected String username;
     protected int age;
     protected String phone_number;
     protected String address;
