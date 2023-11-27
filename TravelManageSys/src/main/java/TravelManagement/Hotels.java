@@ -9,5 +9,14 @@ package TravelManagement;
  * @author bmood
  */
 public class Hotels {
+
+public String Hotelname;
+boolean booking;
+double rate;
+boolean swimmingpool;
+boolean restaurant;
+int numofRooms;
+
+
     
 }
