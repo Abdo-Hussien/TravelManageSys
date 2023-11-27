@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-
-Abdelrahman amr
-19
-female
-+201158885496
-zahraa madinet nasr | cairo | ma3andosh
-amrmylove
-amr12345
-EjZij
-
-Abdelrahman amr
-19
-female
-+201158885496
-zahraa madinet nasr | cairo | ma3andosh
-amrmywife
-amr12345
-EjZij
-
-=======
 wzdz2
 Ahmed hassan
 ahmed@gmail.com
@@ -41,4 +20,3 @@ Male
 [tripID| tripName| StartDate | EndDate | noTickets | typeTic] Bookeed trips 
 1001 | 1002 | 1005 Trip history
 ---
->>>>>>> fa99fdefb044a2fe81b7a62a1169e52cdf81f82a

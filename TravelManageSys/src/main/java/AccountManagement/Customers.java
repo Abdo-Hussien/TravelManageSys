@@ -309,26 +309,30 @@ public class Customers extends Person {
         File path = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
         Scanner scan = new Scanner(path);
         Scanner in = new Scanner(System.in);
-        System.out.println("enter your username");
+        System.out.println("Enter your username : ");
         String userName=in.next();
-        System.out.println("enter your pass");
+        System.out.println("Enter your password : ");
         String pass=in.next();
         boolean checked=false;
         String line;
+
+        
         while (scan.hasNextLine()) {
             line=scan.nextLine();
             if (line.equals(userName)) {
                 checked=true;
                 line=scan.nextLine();
                 if (line.equals(pass)) {
-                    System.out.println("login successful");
+                    System.out.println("login successful.");
                 }
             }
             
         }
         if (checked==false) {
-            System.out.println("login failed");
+            System.out.println("login failed.");
         }
+        scan.close();
+        in.close();
     }
 
     // diplay all users accounts and their information (for admin usage only)
