@@ -12,38 +12,47 @@ import java.util.Date;
  * @author bmood
  */
 public abstract class Trip {
-    protected int tripId;
+    protected String tripId;
     protected String startDate;
     protected String endDate;
     protected String tripType;
     protected String title;
     protected String Description;
     protected Hotels Hotel;
-    protected int initPrice;
+    protected double initPrice;
     protected Transportation transportation;
-    protected Ticket ticket[];                //Should this attribute be array of 3 tickets? For each Trip there should be gold, silver and platinum tickets
+    protected Ticket ticket[]; // Should this attribute be array of 3 tickets? For each Trip there should be
+                               // gold, silver and platinum tickets
     protected TourGuide TourGuide;
-    protected static int tripCounter = 0;   //static
-    protected String activities;           //array
+    protected static int tripCounter = 0; // static
+    protected String activities[]; // array
     protected int Capacity;
-    
-    public void RelationshipChecker(String customerRelationship){
-        switch (customerRelationship) {
-            case "Single":
+
+    // checks the relationship for a customer, Should be in main
+    public void RelationshipChecker(String customerRelationship) {
+        switch (customerRelationship.toLowerCase()) {
             case "single":
-                System.out.println("All trips except couple tours using tripType attribute");
+                System.out.println("All trips except couple tours using instanceOf");
                 break;
-            case "Taken":
             case "taken":
-                System.out.println("All trips including couple tours using tripType attribute");
+                System.out.println("All trips including couple tours using instanceOf");
                 break;
             default:
                 System.out.println("error..");
                 break;
         }
     }
-    
-    public Trip(int tripId, String startDate, String endDate, String tripType, String title, String Description, Hotels Hotel, int initPrice, Transportation transportation, Ticket[] ticket, TourGuide TourGuide, String activities, int Capacity) {
+
+    public void getTripDetails() {
+
+    }
+
+    public Trip() {
+    }
+
+    public Trip(String tripId, String title, String tripType, double initPrice, String startDate, String endDate,
+            String Description, TourGuide TourGuide, int Capacity,
+            String activities[], Hotels Hotel, Transportation transportation, Ticket[] ticket) {
         this.tripId = tripId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -60,13 +69,17 @@ public abstract class Trip {
         this.Capacity = Capacity;
     }
 
+    public double TripPrice(float rate) {
+        return initPrice + rate * initPrice;
+    }
+
     public int getCapacity() {
         return Capacity;
     }
 
-//    public int getTripId() {
-//        return tripId;
-//    }
+    public String getTripId() {
+        return tripId;
+    }
 
     public String getStartDate() {
         return startDate;
@@ -85,29 +98,27 @@ public abstract class Trip {
     }
 
     // Hotel name included
-    
+
     public String getDescription() {
         return Description;
     }
 
-    public int getInitPrice() {
+    public double getInitPrice() {
         return initPrice;
     }
 
-    //transportation type (flight or bus) included
+    // transportation type (flight or bus) included
 
-    //ticket type & price included
+    // ticket type & price included
 
-    //tour Guide name included
+    // tour Guide name included
 
     public static int getTripCounter() {
         return tripCounter;
     }
 
-    public String getActivities() {
-        return activities;
-    }
-    
-    
-    
+    // public String getActivities() {
+    // return activities[];
+    // }
+
 }

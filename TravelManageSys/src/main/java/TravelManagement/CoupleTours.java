@@ -10,8 +10,16 @@ package TravelManagement;
  */
 public class CoupleTours extends Trip{
 
-    public CoupleTours(int tripId, String startDate, String endDate, String tripType, String title, String Description, Hotels Hotel, int initPrice, Transportation transportation, Ticket[] ticket, TravelManagement.TourGuide TourGuide, String activities, int Capacity) {
-        super(tripId, startDate, endDate, tripType, title, Description, Hotel, initPrice, transportation, ticket, TourGuide, activities, Capacity);
+    public CoupleTours() {
+        super();
     }
+
+    public CoupleTours(String tripId, String title, String tripType, double initPrice, String startDate,
+            String endDate,
+            String Description, TourGuide TourGuide, int Capacity,
+            String activities[], Hotels Hotel, Transportation transportation, Ticket[] ticket) {
+        super(tripId, title, tripType, initPrice, startDate, endDate, Description, TourGuide, Capacity, activities,
+                Hotel, transportation, ticket);
+    } 
     
 }
