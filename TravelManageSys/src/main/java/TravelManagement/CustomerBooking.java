@@ -4,24 +4,25 @@
  */
 package TravelManagement;
 
+import AccountManagement.Person;
+
 import java.util.Date;
-import java.util.Enumeration;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
 
 /**
  *
  * @author bmood
  */
-public class CustomerBooking {
+public class CustomerBooking extends Person {
     private ArrayList<Trip> tripsList = new ArrayList<>();
     // private int TripCounter;
     // private int DiffTripCounter;
+    private String[] BookedTrips; // Only Save ID's of BookedTrips
+    private String[] TravelHistory; // Only Save ID's of TravelHistory
     // Filters
     private double price_start;
     private double price_end;
@@ -31,9 +32,35 @@ public class CustomerBooking {
 
     private ArrayList<Trip> filteredTrips = new ArrayList<>();
 
+    public CustomerBooking() {
+        super();
+    }
+
     // ArrayList<Trip>
+    public void mainCustomer() {
+        Scanner input = new Scanner(System.in);
+        tripsList = getAllTrips();
+        displayTrips(tripsList);
+        char Ans;
+        System.out.println("\n\nA. Search for a trip(s)");
+        System.out.println("B. Book a trip");
+        System.out.println("C. See details of a trip");
+        Ans = input.next().charAt(0);
+        Ans = Character.toLowerCase(Ans);
+        if (Ans == 'a') {
+            System.out.println("\nExample: TripName/StartDate/EndDate...");
+            System.out.print("Search for a trip: ");
+            this.getFilteredTrips(input.nextLine());
+        } else if (Ans == 'b') {
+            System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
+            System.out.print("Trip ID: ");
+            int tripID = input.nextInt();
+        }
+
+        input.close();
+    }
+
     public void getFilteredTrips(String search_filter) {
-        // tripsList = getAllTrips();
         String[] Filters = search_filter.split("/");
         // Split Filters.
         setFilters(Filters);
@@ -51,61 +78,67 @@ public class CustomerBooking {
         // Booking Save in runtime variables (Array List) - Not save in a file.
     }
 
-    // private ArrayList<Trip> getAllTrips() {
-    // try {
-    // Path tripsFile = Path.of("TravelManageSys/src/data/trips.txt");
-    // String[] tripStrs = Files.readString(tripsFile).split("\\s+---\\s+");
-    // for (String tripstr : tripStrs) {
-    // Trip trip = parseTrip(tripstr);
-    // if (trip != null)
-    // tripsList.add(trip);
-    // }
+    private void displayTrips(ArrayList<Trip> trips) {
+        int i = 0;
+        for (Trip trip : trips) {
+            if (i % 3 == 0)
+                System.out.println("");
+            System.out.print((i + 1) + ". " + trip.getTitle() + " " + trip.getTripId() + "\t");
+            i++;
+        }
+    }
 
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
+    private void bookTrip(Trip trip) {
+        displayTrips(filteredTrips);
+    }
 
-    // return tripsList;
-    // }
+    private ArrayList<Trip> getAllTrips() {
+        try {
+            Path tripsFile = Path.of("TravelManageSys/src/data/trips.txt");
+            String[] tripStrs = Files.readString(tripsFile).split("\\s+---\\s+");
+            for (String tripstr : tripStrs) {
+                Trip trip = parseTrip(tripstr);
+                if (trip != null)
+                    tripsList.add(trip);
+            }
 
-    // private Trip parseTrip(String line) {
-    // String[] parts = line.split("\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    // // Invalid format, return null or handle appropriately
-    // // if (parts.length != {Number of Lines for each Trip}) {
-    // // return null;
-    // // }
+        return tripsList;
+    }
 
-    // try {
-    // String id = parts[0].trim();
-    // String tripName = parts[1].trim();
-    // String type = parts[2].trim();
-    // double price = Double.parseDouble(parts[3]);
-    // String startDate = parts[4].trim();
-    // String endDate = parts[5].trim();
-    // String description = parts[6].trim();
-    // int capacity = Integer.parseInt(parts[7]);
-    // // Create a Trip object based on the type
-    // if (type.toLowerCase().equals("general")) {
-    // return new GeneralTours(id, tripName, type, price, startDate, endDate,
-    // description, null,
-    // capacity, null, null, null, null);
-    // } else if (type.toLowerCase().equals("family")) {
-    // return new FamilyTours(id, tripName, type, price, startDate, endDate,
-    // description, null,
-    // capacity, null, null, null, null);
-    // } else if (type.toLowerCase().equals("couple")) {
-    // return new CoupleTours(id, tripName, type, price, startDate, endDate,
-    // description, null,
-    // capacity, null, null, null, null);
-    // } else
-    // return null;
-    // } catch (NumberFormatException e) {
-    // e.printStackTrace(); // Handle the exception appropriately, e.g., log or
-    // throw
-    // return null;
-    // }
-    // }
+    private Trip parseTrip(String trip) {
+        String[] parts = trip.split(System.lineSeparator());
+
+        // Invalid format, return null or handle appropriately
+        // if (parts.length != {Number of Lines for each Trip}) {
+        // return null;
+        // }
+
+        try {
+            String type = parts[2];
+            // Create a Trip object based on the type
+            if (type.toLowerCase().equals("general")) {
+                return new GeneralTours(parts[0], parts[1], type, Double.parseDouble(parts[3]), parts[4], parts[5],
+                        parts[6], null,
+                        Integer.parseInt(parts[7]), null, null, null, null);
+            } else if (type.toLowerCase().equals("family")) {
+                return new FamilyTours(parts[0], parts[1], type, Double.parseDouble(parts[3]), parts[4], parts[5],
+                        parts[6], null,
+                        Integer.parseInt(parts[7]), null, null, null, null);
+            } else if (type.toLowerCase().equals("couple")) {
+                return new CoupleTours(parts[0], parts[1], type, Double.parseDouble(parts[3]), parts[4], parts[5],
+                        parts[6], null,
+                        Integer.parseInt(parts[7]), null, null, null, null);
+            } else
+                return null;
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Handle the exception appropriately, e.g., log or throw
+            return null;
+        }
+    }
 
     private void setFilters(String[] Filters) {
         for (int i = 0; i < Filters.length; i++) {
