@@ -5,7 +5,6 @@ package com.asu.main;
 
 import java.io.IOException;
 
-import AccountManagement.UserSettings;
 
 /**
  *
@@ -13,12 +12,8 @@ import AccountManagement.UserSettings;
  */
 public class TravelManageSys {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         System.out.println("Main Class is called 'TravelManageSys' is in the 'main' package");
 
-        UserSettings user1=new UserSettings();
-        //user1.create_acc();
-        user1.login();
-        
     }
 }

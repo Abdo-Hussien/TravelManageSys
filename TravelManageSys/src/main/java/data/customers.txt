@@ -6,6 +6,6 @@ pass123
 Male
 2476 Gnatty Creek Road | New York | 10013
 +20624013263
-[tripID,tripName,tripDate,noTickets,typeTic] Bookeed trips 
+[tripID| tripName| StartDate | EndDate | noTickets | typeTic] Bookeed trips 
 1001 | 1002 | 1005 Trip history
 ---
