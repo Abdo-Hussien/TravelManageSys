@@ -15,8 +15,8 @@ public class TourGuide extends Person {
     protected double salary;
     protected static int TourGuidescounter;
 
-    public TourGuide(String first_name, String last_name, String username, int age, String phone_number, String address,
-            String password, String gender, String account_id) {
+     public TourGuide( String account_id,String first_name, String last_name,String username, String password,
+     int age,String gender, String address,String phone_number) {
         this.account_id = account_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -28,6 +28,5 @@ public class TourGuide extends Person {
         this.phone_number = phone_number;
         TourGuidescounter++;
     }
-
     // public double calcsalay(){}
 }

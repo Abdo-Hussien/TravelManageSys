@@ -17,6 +17,15 @@ boolean swimmingpool;
 boolean restaurant;
 int numofRooms;
 
+    public Hotels(String Hotelname, boolean booking, double rate, boolean swimmingpool, boolean restaurant, int numofRooms) {
+        this.Hotelname = Hotelname;
+        this.booking = booking;
+        this.rate = rate;
+        this.swimmingpool = swimmingpool;
+        this.restaurant = restaurant;
+        this.numofRooms = numofRooms;
+    }
+
 
     
 }
