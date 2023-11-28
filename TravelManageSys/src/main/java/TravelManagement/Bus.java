@@ -4,8 +4,8 @@ class Bus extends Transportation {
     private String busCompany;
 
     // Constructor
-    public Bus(String pickUp, String destination, int maxCapacity, String busCompany) {
-        super(busCompany, busCompany, maxCapacity);
+    public Bus(String pickUp, int maxCapacity, String busCompany) {
+        super(pickUp, maxCapacity);
         this.busCompany = busCompany;
     }
 

@@ -74,7 +74,7 @@ public class fileManipulation {
     }
 
     // function to get all customers from the file
-    public static void getAllCustomers() {
+    public static ArrayList<Customers> getAllCustomers() {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
             Path path = Paths.get("TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt");
@@ -87,14 +87,15 @@ public class fileManipulation {
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7]));
 
             }
+            return AllCustomers;
         } catch (Exception e) {
-
+            return null;
         }
 
     }
 
     // function to get all tour guides from the file
-    public void getAllTourGuides() {
+    public ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/TourGuides.txt");
@@ -107,12 +108,13 @@ public class fileManipulation {
                         Integer.parseInt(tourguide[4]), tourguide[5], tourguide[6], tourguide[7]));
 
             }
+            return AllTourGuides;
         } catch (Exception e) {
-
+            return null;
         }
     }
 
-    public void getAllHotels() {
+    public ArrayList<Hotels> getAllHotels() {
         try {
             ArrayList<Hotels> AllHotels = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/Hotels.txt");
@@ -125,25 +127,30 @@ public class fileManipulation {
                         Boolean.parseBoolean(hotel[5])));
 
             }
+            return AllHotels;
         } catch (Exception e) {
-
+            return null;
         }
     }
 
-    // function to get all tour guides from the file
+    // function to get all Cars from the file
 
-    public static ArrayList<Car> getAllCars() throws IOException {
-
+    public static ArrayList<Car> getAllCars() {
+try{
         ArrayList<Car> AllCars = new ArrayList<>();
-        Path path = Paths.get("D://Java oop//TravelManageSys//TravelManageSys//src//main//java//data//Cars.txt");
+        Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
         String valfortour = Files.readString(path);
         String Cars[] = valfortour.split("\\s+---\\s+");
         for (String c : Cars) {
             String[] Car = c.split(System.lineSeparator());
             AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
-
         }
+
         return AllCars;
+    }
+    catch(Exception e){
+        return null;
+    }
     }
 
 }
