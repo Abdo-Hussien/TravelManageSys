@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import AccountManagement.Customers;
 import TravelManagement.Trip;
@@ -20,6 +23,9 @@ public class fileManipulation {
     // function to get all trips from the file
     public void getAllTrips() {
         try {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
             ArrayList<Trip> AllTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
             String val = Files.readString(path);
@@ -27,9 +33,16 @@ public class fileManipulation {
             for (String t : Trips) {
                 String[] trip = t.split(System.lineSeparator());
                 if (trip[2].toLowerCase().equals("family")) {
-                    AllTrips.add(new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], trip[6],
-                            null, 150, null, null, null, null));
+                    AllTrips.add(new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                            Arrays.stream(trip[4].split("\\s+|\\s+"))
+                                    .map(dateString -> dateFormat.parse())
+                                    .toArray(Date[]::new),
+                            Arrays.stream(trip[5].split("\\s+|\\s+"))
+                                    .map(dateString -> dateFormat.parse())
+                                    .toArray(Date[]::new),
+                            trip[6],
+                            trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"), trip[10], trip[11],
+                            trip[12].split("\\s+|\\s+")));
                 } else if (trip[2].toLowerCase().equals("general")) {
                     AllTrips.add(new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
                             trip[5], "",

@@ -13,20 +13,19 @@ import java.util.Date;
  */
 public abstract class Trip {
     protected String tripId;
-    protected String startDate;
-    protected String endDate;
-    protected String tripType;
     protected String title;
-    protected String Description;
-    protected Hotels Hotel;
+    protected String tripType;
     protected double initPrice;
-    protected Transportation transportation;
-    protected Ticket ticket[]; // Should this attribute be array of 3 tickets? For each Trip there should be
-                               // gold, silver and platinum tickets
-    protected TourGuide TourGuide;
-    protected static int tripCounter = 0; // static
-    protected String activities[]; // array
+    protected Date startDate[];
+    protected Date endDate[];
+    protected String Description;
+    protected String tourGuideName;
     protected int Capacity;
+    protected String activities[];
+    protected String hotelName; // mandatory
+    protected String transportationType;
+    protected String carRentalType[];
+    
 
     // checks the relationship for a customer, Should be in main
     public void RelationshipChecker(String customerRelationship) {
@@ -43,30 +42,29 @@ public abstract class Trip {
         }
     }
 
-    public void getTripDetails() {
-
+    public double TripPrice(float rate) {
+        return initPrice + rate * initPrice;
     }
 
     public Trip() {
     }
 
-    public Trip(String tripId, String title, String tripType, double initPrice, String startDate, String endDate,
-            String Description, TourGuide TourGuide, int Capacity,
-            String activities[], Hotels Hotel, Transportation transportation, Ticket[] ticket) {
+    public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
+            String Description, String tourGuide, int Capacity,
+            String activities[], String hotelName, String transportationType, String[] carRentalType) {
         this.tripId = tripId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.tripType = tripType;
         this.title = title;
         this.Description = Description;
-        this.Hotel = Hotel;
+        this.hotelName = hotelName;
         this.initPrice = initPrice;
-        this.transportation = transportation;
-        this.ticket = ticket;
-        this.TourGuide = TourGuide;
-        tripCounter++;
+        this.transportationType = transportationType;
+        this.tourGuideName = tourGuide;
         this.activities = activities;
         this.Capacity = Capacity;
+        this.carRentalType = carRentalType;
     }
 
 
@@ -78,20 +76,12 @@ public abstract class Trip {
         this.tripId = tripId;
     }
 
-    public String getStartDate() {
-        return this.startDate;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return this.endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTripType() {
@@ -102,12 +92,20 @@ public abstract class Trip {
         this.tripType = tripType;
     }
 
-    public String getTitle() {
-        return this.title;
+    public double getInitPrice() {
+        return this.initPrice;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setInitPrice(double initPrice) {
+        this.initPrice = initPrice;
+    }
+
+    public Date[] getStartDate() {
+        return this.startDate;
+    }
+
+    public Date[] getEndDate() {
+        return this.endDate;
     }
 
     public String getDescription() {
@@ -118,39 +116,13 @@ public abstract class Trip {
         this.Description = Description;
     }
 
-    public Hotels getHotel() {
-        return this.Hotel;
+    public String getTourGuideName() {
+        return this.tourGuideName;
     }
 
-    public void setHotel(Hotels Hotel) {
-        this.Hotel = Hotel;
+    public void setTourGuideName(String tourGuideName) {
+        this.tourGuideName = tourGuideName;
     }
-
-    public double getInitPrice() {
-        return this.initPrice;
-    }
-
-    public void setInitPrice(double initPrice) {
-        this.initPrice = initPrice;
-    }
-
-    public Transportation getTransportation() {
-        return this.transportation;
-    }
-
-    public void setTransportation(Transportation transportation) {
-        this.transportation = transportation;
-    }
-
-
-    public TourGuide getTourGuide() {
-        return this.TourGuide;
-    }
-
-    public void setTourGuide(TourGuide TourGuide) {
-        this.TourGuide = TourGuide;
-    }
-
 
     public int getCapacity() {
         return this.Capacity;
@@ -160,8 +132,33 @@ public abstract class Trip {
         this.Capacity = Capacity;
     }
 
-    public double TripPrice(float rate) {
-        return initPrice + rate * initPrice;
+    public String[] getActivities() {
+        return this.activities;
     }
+
+
+    public String getHotelName() {
+        return this.hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getTransportationType() {
+        return this.transportationType;
+    }
+
+    public void setTransportationType(String transportationType) {
+        this.transportationType = transportationType;
+    }
+
+    public String[] getCarRentalType() {
+
+        return this.carRentalType;
+    }
+  
+
+
 
 }

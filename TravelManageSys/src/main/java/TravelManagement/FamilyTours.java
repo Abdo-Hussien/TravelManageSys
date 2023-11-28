@@ -4,23 +4,24 @@
  */
 package TravelManagement;
 
+import java.util.Date;
+
 /**
  *
  * @author bmood
  */
-public class FamilyTours extends Trip{
-
+public class FamilyTours extends Trip {
 
     public FamilyTours() {
         super();
     }
 
-    public FamilyTours(String tripId, String title, String tripType, double initPrice, String startDate,
-            String endDate,
-            String Description, TourGuide TourGuide, int Capacity,
-            String activities[], Hotels Hotel, Transportation transportation, Ticket[] ticket) {
-        super(tripId, title, tripType, initPrice, startDate, endDate, Description, TourGuide, Capacity, activities,
-                Hotel, transportation, ticket);
+    public FamilyTours(String tripId, String title, String tripType, double initPrice, Date[] startDate,
+            Date[] endDate,
+            String Description, String tourGuide, int Capacity,
+            String activities[], String hotelName, String transportationType, String[] carRentalType) {
+        super(tripId, title, tripType, initPrice, startDate, endDate, Description, tourGuide, Capacity, activities,
+                hotelName, transportationType, carRentalType);
     }
-    
+
 }

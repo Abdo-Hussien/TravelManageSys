@@ -2,52 +2,40 @@
 Ain Sokhna
 General
 1259.99
-29-11-2023
-01-12-2023
+29-11-2023 | 05-12-2023
+01-12-2023 | 08-12-2023
 An Egyptian town in the Suez Governorate, lying on the western shore of the Red Sea's Gulf of Suez. Being a year-round sunshine destination with gentle waves of the clear Red Sea makes Al-Ain al-Sokhna an ideal destination to break from the city's congestion.
-150
+wzdz2
+165
+Parachuting | Parasailing | Skiing
+Tolip Resort El Galala Majestic
+NoTransportation
+sedan | suv
 ---
 1001
-Alexandria
+Cancun
 Family
-1669.99
-28-11-2023
-01-12-2023
-Alexandria is a Mediterranean port city in Egypt. During the Hellenistic period, it was home to a lighthouse ranking among the Seven Wonders of the Ancient World as well as a storied library. Today the library is reincarnated in the disc-shaped, ultramodern Bibliotheca Alexandrina. The city also has Greco-Roman landmarks, old-world cafes and sandy beaches. Its 15th-century seafront Qaitbay Citadel is now a museum.
-300
+1899.99
+15-12-2023
+20-12-2023
+Cancun is a coastal city in the popular vacation destination called the Mexican Caribbean. It is known for its beautiful beaches, vibrant nightlife, and ancient Mayan ruins.
+xvz34
+220
+Snorkeling | Scuba Diving | Mayan Ruins Tour
+Grand Fiesta Americana Coral Beach
+Airport Shuttle
+sedan | suv
 ---
 1002
-Dahab
+Bali
 Couple
-5165.00
-04-12-2023
-09-12-2023
-Dahab is a small Egyptian town on the southeast coast of the Sinai Peninsula in Egypt, approximately 80 km (50 mi) northeast of Sharm el-Sheikh. Dahab can be divided into three major parts. Masbat, which includes the Bedouin village of Asalah, is in the north.
-150
----
-1003
-Ain Sokhna (2)
-General
-1259.99
-29-11-2023
-01-12-2023
-An Egyptian town in the Suez Governorate, lying on the western shore of the Red Sea's Gulf of Suez. Being a year-round sunshine destination with gentle waves of the clear Red Sea makes Al-Ain al-Sokhna an ideal destination to break from the city's congestion.
-150
----
-1004
-Alexandria (2)
-Family
-1669.99
-28-11-2023
-01-12-2023
-Alexandria is a Mediterranean port city in Egypt. During the Hellenistic period, it was home to a lighthouse ranking among the Seven Wonders of the Ancient World as well as a storied library. Today the library is reincarnated in the disc-shaped, ultramodern Bibliotheca Alexandrina. The city also has Greco-Roman landmarks, old-world cafes and sandy beaches. Its 15th-century seafront Qaitbay Citadel is now a museum.
-300
----
-1005
-Dahab (2)
-Couple
-5165.00
-04-12-2023
-09-12-2023
-Dahab is a small Egyptian town on the southeast coast of the Sinai Peninsula in Egypt, approximately 80 km (50 mi) northeast of Sharm el-Sheikh. Dahab can be divided into three major parts. Masbat, which includes the Bedouin village of Asalah, is in the north.
-150
+999.99
+05-11-2023
+10-11-2023
+Bali, the famed 'Island of the Gods,' is known for its highly developed arts, including traditional and modern dance, sculpture, painting, leather, metalworking, and music.
+yab67
+120
+Surfing | Rafting | Elephant Safari
+Ubud Hanging Gardens
+Private Car
+sedan | suv
