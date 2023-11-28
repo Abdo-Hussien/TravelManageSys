@@ -33,14 +33,33 @@ public class Silver extends Ticket {
     public void addSliver() {
         System.out.println("how many sliver tickets you want?");
         addeddTicket = in.nextInt();
-        Scounter += addeddTicket;
-        System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+        if (addeddTicket > 0) {
+            Scounter += addeddTicket;
+            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+        }
+        // else if(addeddTicket > tirpcapacity) {
+        // System.out.println("too many tickets entered! avalibale tickerts is"+
+        // avalibale);
+        // }
+        else {
+            System.out.println("invalid number of tickets entered! Please try again.");
+            addSliver();
+        }
+
     }
 
     public void deleteSliver() {
         System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
-        Scounter -= deletedTicket;
-        System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+        if (deletedTicket > 0) {
+            Scounter -= deletedTicket;
+            System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+        } else if (deletedTicket > Scounter) {
+            System.out.println("you entered more tickets than you have! please tyr again...");
+            deleteSliver();
+        } else {
+            System.out.println("invalid number of tickets entered! Please try again.");
+            deleteSliver();
+        }
     }
 }

@@ -11,7 +11,6 @@ package TravelManagement;
 public class Gold extends Ticket {
     int Gcounter;
 
-
     public Gold() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
         // function
@@ -29,17 +28,36 @@ public class Gold extends Ticket {
         System.out.println();
     }
 
-    public void addGOLD() {
-        System.out.println("how many GOLD tickets you want?");
+    public void addGold() {
+        System.out.println("how many sliver tickets you want?");
         addeddTicket = in.nextInt();
-        Gcounter += addeddTicket;
-        System.out.println("Done! " + addeddTicket + "GOLD tickets added to your cart");
+        if (addeddTicket > 0) {
+            Gcounter += addeddTicket;
+            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+        }
+        // else if(addeddTicket > tirpcapacity) {
+        // System.out.println("too many tickets entered! avalibale tickerts is"+
+        // avalibale);
+        // }
+        else {
+            System.out.println("invalid number of tickets entered! Please try again.");
+            addGold();
+        }
+
     }
 
     public void deleteGOLD() {
-        System.out.println("how many GOLD tickets you want to delete?");
+        System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
-        Gcounter -= deletedTicket;
-        System.out.println("Done! " + deletedTicket + "GOLD tickets deleted from your cart");
+        if (deletedTicket > 0) {
+            Gcounter -= deletedTicket;
+            System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+        } else if (deletedTicket > Gcounter) {
+            System.out.println("you entered more tickets than you have! please tyr again...");
+            deleteGOLD();
+        } else {
+            System.out.println("invalid number of tickets entered! Please try again.");
+            deleteGOLD();
+        }
     }
 }
