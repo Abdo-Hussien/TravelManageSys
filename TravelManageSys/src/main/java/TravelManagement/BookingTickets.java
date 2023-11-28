@@ -25,7 +25,7 @@ public class BookingTickets {
 
         } else if (choice == '2') {
             gold.gold_welcome();
-            gold.addGOLD();
+            gold.addGold();
             System.out.println("go to main ment");
             choice = in.next().charAt(0);
             if (choice == 'y') {
@@ -61,7 +61,7 @@ public class BookingTickets {
 
             } else if (choice == '2') {
                 gold.gold_welcome();
-                gold.addGOLD();
+                gold.addGold();
                 System.out.println("go to main menu");
                 choice = in.next().charAt(0);
                 if (choice == 'y') {
@@ -90,7 +90,7 @@ public class BookingTickets {
 
                 } else if (choice == '2') {
                     gold.gold_welcome();
-                    gold.deleteGOLD();
+                    gold.deleteGold();
                     System.out.println("go to main menu");
                     choice = in.next().charAt(0);
                     if (choice == 'y') {
