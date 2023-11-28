@@ -13,7 +13,6 @@ import AccountManagement.Person;
 public class TourGuide extends Person {
 
     protected double salary;
-    protected static int TourGuidescounter;
 
     public TourGuide(String account_id, String first_name, String last_name, String username, String password,
             int age, String gender, String address, String phone_number) {
@@ -26,7 +25,20 @@ public class TourGuide extends Person {
         this.gender = gender;
         this.address = address;
         this.phone_number = phone_number;
-        TourGuidescounter++;
+
     }
-    // public double calcsalay(){}
+
+    public double calcsalay(int numoftrip) {
+        salary = numoftrip * 1165.46;
+        return salary;
+    }
+
+    public double getSalary() {
+        return this.salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
 }
