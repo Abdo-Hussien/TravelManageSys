@@ -135,8 +135,8 @@ public class fileManipulation {
 
     // function to get all Cars from the file
 
-    public static ArrayList<Car> getAllCars() throws IOException {
-
+    public static ArrayList<Car> getAllCars() {
+try{
         ArrayList<Car> AllCars = new ArrayList<>();
         Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
         String valfortour = Files.readString(path);
@@ -147,7 +147,10 @@ public class fileManipulation {
         }
 
         return AllCars;
-
+    }
+    catch(Exception e){
+        return null;
+    }
     }
 
 }
