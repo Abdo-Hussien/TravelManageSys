@@ -25,7 +25,6 @@ public abstract class Trip {
     protected String activities[];
     protected String hotelName; // mandatory
     protected String transportationType;
-    protected String carRentalType[];
 
     // checks the relationship for a customer, Should be in main
     public void RelationshipChecker(String customerRelationship) {
@@ -61,7 +60,7 @@ public abstract class Trip {
 
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
             String Description, String tourGuide, int Capacity,
-            String activities[], String hotelName, String transportationType, String[] carRentalType) {
+            String activities[], String hotelName, String transportationType) {
         this.tripId = tripId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -74,7 +73,6 @@ public abstract class Trip {
         this.tourGuideName = tourGuide;
         this.activities = activities;
         this.Capacity = Capacity;
-        this.carRentalType = carRentalType;
     }
 
     public String getTripId() {
@@ -160,10 +158,4 @@ public abstract class Trip {
     public void setTransportationType(String transportationType) {
         this.transportationType = transportationType;
     }
-
-    public String[] getCarRentalType() {
-
-        return this.carRentalType;
-    }
-
 }

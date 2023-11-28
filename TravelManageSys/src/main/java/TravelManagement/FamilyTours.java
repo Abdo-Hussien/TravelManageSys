@@ -16,12 +16,11 @@ public class FamilyTours extends Trip {
         super();
     }
 
-    public FamilyTours(String tripId, String title, String tripType, double initPrice, Date[] startDate,
-            Date[] endDate,
-            String Description, String tourGuide, int Capacity,
-            String activities[], String hotelName, String transportationType, String[] carRentalType) {
+    public FamilyTours(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
+            String Description, String tourGuide, int Capacity, String activities[], String hotelName,
+            String transportationType) {
         super(tripId, title, tripType, initPrice, startDate, endDate, Description, tourGuide, Capacity, activities,
-                hotelName, transportationType, carRentalType);
+                hotelName, transportationType);
     }
 
 }
