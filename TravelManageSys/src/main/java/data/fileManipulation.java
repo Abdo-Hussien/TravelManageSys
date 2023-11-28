@@ -9,13 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import AccountManagement.Customers;
 import TravelManagement.*;
 
 public class fileManipulation {
 
-    // function to get all trips from the file
+    // Function to get all Trips from the file
     public static ArrayList<Trip> getAllTrips() {
         try {
             ArrayList<Trip> AllTrips = new ArrayList<>();
@@ -32,20 +34,20 @@ public class fileManipulation {
             System.out.println("Path is invalid for Reading");
             return null;
         }
-
     }
 
+    // Function to convert String to Trip
     private static Trip parseTrip(String tripString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String[] trip = tripString.split(System.lineSeparator());
-        Date[] start_date = Arrays.stream(trip[4].split(" \\| ")).map(date_str -> {
+        Date[] start_date = Arrays.stream(trip[4].split("\\s+\\|\\s+")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
                 return null;
             }
         }).toArray(Date[]::new);
-        Date[] end_date = Arrays.stream(trip[5].split(" \\| ")).map(date_str -> {
+        Date[] end_date = Arrays.stream(trip[5].split("\\s+\\|\\s+")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
@@ -68,29 +70,56 @@ public class fileManipulation {
             return null;
     }
 
-    // function to get all customers from the file
+    // Function to get all Customers from the file
     public static ArrayList<Customers> getAllCustomers() {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
+            ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
             String fileContent = Files.readString(path);
             String Customers[] = fileContent.split("\\s+---\\s+");
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
+                /*
+                 * Add CustomerBookedTrips Object to line 90 in the Constructor of Customers
+                 * Add customer[8] to line 90 in the Constructor of Customers
+                 */
+                CustomerBookedTrips = parseBookedTrip(customer[8].split("\\s+<>\\s+"));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7]));
-
             }
             return AllCustomers;
         } catch (Exception e) {
             System.out.println("Path is invalid for Reading");
             return null;
         }
-
     }
 
-    // function to get all tour guides from the file
+    // Function to convert String to BookedTravels
+    public static ArrayList<BookedTravels> parseBookedTrip(String[] BookedTripsLine) throws ParseException {
+        ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String regex = "\\[\\s*(.*?)\\s*\\]";
+        String content = new String("");
+        Pattern pattern = Pattern.compile(regex);
+        for (int index = 0; index < BookedTripsLine.length; index++) {
+            Matcher matcher = pattern.matcher(BookedTripsLine[index]);
+            if (matcher.find()) {
+                content = matcher.group(1);
+            } else {
+                System.out.println("No match found.");
+            }
+            String bookedTripArr[] = content.split("\\s*,\\s*");
+            String dates[] = bookedTripArr[1].split("\\s+\\|\\s+");
+            CustomerBookedTrips
+                    .add(new BookedTravels(bookedTripArr[0], dateFormat.parse(dates[0]), dateFormat.parse(dates[1]),
+                            Integer.parseInt(bookedTripArr[2]), bookedTripArr[3]));
+        }
+        return CustomerBookedTrips;
+    }
+
+    // Function to get all TourGuides from the file
     public ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
@@ -111,6 +140,7 @@ public class fileManipulation {
         }
     }
 
+    // Function to get all Hotels from the file
     public ArrayList<Hotels> getAllHotels() {
         try {
             ArrayList<Hotels> AllHotels = new ArrayList<>();
@@ -122,7 +152,6 @@ public class fileManipulation {
                 AllHotels.add(new Hotels(hotel[0], Double.parseDouble(hotel[1]), Integer.parseInt(hotel[2]),
                         Boolean.parseBoolean(hotel[3]), Boolean.parseBoolean(hotel[4]),
                         Boolean.parseBoolean(hotel[5])));
-
             }
             return AllHotels;
         } catch (Exception e) {
@@ -131,8 +160,7 @@ public class fileManipulation {
         }
     }
 
-    // function to get all Cars from the file
-
+    // Function to get all Cars from the file
     public static ArrayList<Car> getAllCars() {
         try {
             ArrayList<Car> AllCars = new ArrayList<>();
@@ -143,7 +171,6 @@ public class fileManipulation {
                 String[] Car = c.split(System.lineSeparator());
                 AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
             }
-
             return AllCars;
         } catch (Exception e) {
             System.out.println("Path is invalid for Reading");
@@ -151,7 +178,7 @@ public class fileManipulation {
         }
     }
 
-    // function to get all transportation data
+    // Function to get all Transportation from the file
     public static ArrayList<Transportation> getAllTransportations() {
         try {
             ArrayList<Transportation> AllTransportations = new ArrayList<>();
