@@ -16,7 +16,7 @@ import TravelManagement.*;
 public class fileManipulation {
 
     // function to get all trips from the file
-    public ArrayList<Trip> getAllTrips() {
+    public static ArrayList<Trip> getAllTrips() {
         try {
             ArrayList<Trip> AllTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
@@ -35,7 +35,7 @@ public class fileManipulation {
 
     }
 
-    private Trip parseTrip(String tripString) {
+    private static Trip parseTrip(String tripString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String[] trip = tripString.split(System.lineSeparator());
         Date[] start_date = Arrays.stream(trip[4].split("\\s+|\\s+")).map(date_str -> {
