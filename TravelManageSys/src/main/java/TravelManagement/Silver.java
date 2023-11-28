@@ -52,12 +52,15 @@ public class Silver extends Ticket {
         System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
-            Scounter -= deletedTicket;
-            System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
-        } else if (deletedTicket > Scounter) {
-            System.out.println("you entered more tickets than you have! please tyr again...");
-            deleteSliver();
+            if (deletedTicket > Scounter) {
+                System.out.println("you entered more tickets than you have! please tyr again...");
+                deleteSliver();
+            } else {
+                Scounter -= deletedTicket;
+                System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+            }
         } else {
+
             System.out.println("invalid number of tickets entered! Please try again.");
             deleteSliver();
         }

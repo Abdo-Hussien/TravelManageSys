@@ -50,11 +50,13 @@ public class Platinum extends Ticket {
         System.out.println("how many Platinum tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
-            Pcounter -= deletedTicket;
-            System.out.println("Done! " + deletedTicket + " Platinum tickets deleted from your cart");
-        } else if (deletedTicket > Pcounter) {
-            System.out.println("you entered more tickets than you have! please tyr again...");
-            deletePlatinum();
+            if (deletedTicket > Pcounter) {
+                System.out.println("you entered more tickets than you have! please tyr again...");
+                deletePlatinum();
+            } else {
+                Pcounter -= deletedTicket;
+                System.out.println("Done! " + deletedTicket + " Platinum tickets deleted from your cart");
+            }
         } else {
             System.out.println("invalid number of tickets entered! Please try again.");
             deletePlatinum();
