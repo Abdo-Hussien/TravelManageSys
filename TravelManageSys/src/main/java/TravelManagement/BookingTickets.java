@@ -12,33 +12,10 @@ public class BookingTickets {
     int totalTickets = 0;
 
     public void ticketTypeMenu() {
-        ticketDisplayMenu();
-        choice = in.next().charAt(0);
-        if (choice == '1') {
-            silver.silver_welcome();
-            silver.addSliver();
-            System.out.println("go to main ment");
-            choice = in.next().charAt(0);
-            if (choice == 'y') {
-                TicketMainMenu();
-            }
-
-        } else if (choice == '2') {
-            gold.gold_welcome();
-            gold.addGold();
-            System.out.println("go to main ment");
-            choice = in.next().charAt(0);
-            if (choice == 'y') {
-                TicketMainMenu();
-            }
-        } else if (choice == '3') {
-            platinum.platinum_welcome();
-            platinum.addPlatinum();
-        } else {
-            System.out.println("Invalid Number, Please Try Again.");
-            ticketTypeMenu();
-        }
+        ticketDisplayMenu("add");
     }
+
+    
 
     public void TicketMainMenu() {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -48,62 +25,9 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         choice = in.next().charAt(0);
         if (choice == '1') {
-            ticketDisplayMenu();
-            choice = in.next().charAt(0);
-            if (choice == '1') {
-                silver.silver_welcome();
-                silver.addSliver();
-                System.out.println("go to main menu");
-                choice = in.next().charAt(0);
-                if (choice == 'y') {
-                    TicketMainMenu();
-                }
-
-            } else if (choice == '2') {
-                gold.gold_welcome();
-                gold.addGold();
-                System.out.println("go to main menu");
-                choice = in.next().charAt(0);
-                if (choice == 'y') {
-                    TicketMainMenu();
-                }
-            } else if (choice == '3') {
-                platinum.platinum_welcome();
-                platinum.addPlatinum();
-            } else {
-                System.out.println("Invalid Number, Please Try Again.");
-                ticketTypeMenu();
-            }
+            ticketDisplayMenu("add");
         } else if (choice == '2') {
-            ticketDisplayMenu();
-            choice = in.next().charAt(0);
-            if (choice == '1') {
-                ticketDisplayMenu();
-                if (choice == '1') {
-                    silver.silver_welcome();
-                    silver.deleteSliver();
-                    System.out.println("go to main menu");
-                    choice = in.next().charAt(0);
-                    if (choice == 'y') {
-                        TicketMainMenu();
-                    }
-
-                } else if (choice == '2') {
-                    gold.gold_welcome();
-                    gold.deleteGold();
-                    System.out.println("go to main menu");
-                    choice = in.next().charAt(0);
-                    if (choice == 'y') {
-                        TicketMainMenu();
-                    }
-                } else if (choice == '3') {
-                    platinum.platinum_welcome();
-                    platinum.deletePlatinum();
-                } else {
-                    System.out.println("Invalid Number, Please Try Again.");
-                    ticketTypeMenu();
-                }
-            }
+            ticketDisplayMenu("delete");
 
         } else if (choice == '3') {
             System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
@@ -119,12 +43,57 @@ public class BookingTickets {
         }
     }
 
-    public void ticketDisplayMenu() {
+    public void ticketDisplayMenu(String s) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Choose Your Ticket Type:");
         System.out.println("1. Silver Ticket (Regular Ticket) ");
         System.out.println("2. Gold Ticket ");
         System.out.println("3. Platinum Ticket ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        choice = in.next().charAt(0);
+        if (choice == '1') {
+            if (s.equals("add")) {
+                silver.silver_welcome();
+                silver.addSliver();
+            } else if (s.equals("delete")) {
+                silver.silver_welcome();
+                silver.deleteSliver();
+            }
+            System.out.println("go to main menu");
+            choice = in.next().charAt(0);
+            if (choice == 'y') {
+                TicketMainMenu();
+            }
+
+        } else if (choice == '2') {
+            if (s.equals("add")) {
+                gold.gold_welcome();
+                gold.addGold();
+            } else if (s.equals("delete")) {
+                gold.gold_welcome();
+                gold.deleteGold();
+            }
+            System.out.println("go to main menu");
+            choice = in.next().charAt(0);
+            if (choice == 'y') {
+                TicketMainMenu();
+            }
+        } else if (choice == '3') {
+            if (s.equals("add")) {
+                platinum.platinum_welcome();
+                platinum.addPlatinum();
+            } else if (s.equals("delete")) {
+                platinum.platinum_welcome();
+                platinum.deletePlatinum();
+            }
+                        System.out.println("go to main menu");
+            choice = in.next().charAt(0);
+            if (choice == 'y') {
+                TicketMainMenu();
+            }
+        } else {
+            System.out.println("Invalid Number, Please Try Again.");
+            ticketTypeMenu();
+        }
     }
 }
