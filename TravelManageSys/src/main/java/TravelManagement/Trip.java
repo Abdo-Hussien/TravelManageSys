@@ -4,6 +4,7 @@
  */
 package TravelManagement;
 
+import java.util.ArrayList;
 import java.util.Date;
 // In need for a Date checker to check if the start and end date are after the current date for the availability of the trip.
 
@@ -25,7 +26,6 @@ public abstract class Trip {
     protected String hotelName; // mandatory
     protected String transportationType;
     protected String carRentalType[];
-    
 
     // checks the relationship for a customer, Should be in main
     public void RelationshipChecker(String customerRelationship) {
@@ -44,6 +44,16 @@ public abstract class Trip {
 
     public double TripPrice(float rate) {
         return initPrice + rate * initPrice;
+    }
+
+    public static void displayTrips(ArrayList<Trip> trips) {
+        int i = 0;
+        for (Trip trip : trips) {
+            if (i % 3 == 0)
+                System.out.println("");
+            System.out.print((i + 1) + ". " + trip.getTitle() + " " + trip.getTripId() + "\t");
+            i++;
+        }
     }
 
     public Trip() {
@@ -66,7 +76,6 @@ public abstract class Trip {
         this.Capacity = Capacity;
         this.carRentalType = carRentalType;
     }
-
 
     public String getTripId() {
         return this.tripId;
@@ -136,7 +145,6 @@ public abstract class Trip {
         return this.activities;
     }
 
-
     public String getHotelName() {
         return this.hotelName;
     }
@@ -157,8 +165,5 @@ public abstract class Trip {
 
         return this.carRentalType;
     }
-  
-
-
 
 }

@@ -22,7 +22,7 @@ import TravelManagement.TourGuide;
 public class fileManipulation {
 
     // function to get all trips from the file
-    public void getAllTrips() {
+    public ArrayList<Trip> getAllTrips() {
         try {
             ArrayList<Trip> AllTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
@@ -32,10 +32,10 @@ public class fileManipulation {
                 Trip trip = parseTrip(tripString);
                 if (trip != null)
                     AllTrips.add(trip);
-
             }
+            return AllTrips;
         } catch (Exception e) {
-
+            return null;
         }
 
     }
