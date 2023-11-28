@@ -18,6 +18,7 @@ import TravelManagement.FamilyTours;
 import TravelManagement.GeneralTours;
 import TravelManagement.Hotels;
 import TravelManagement.TourGuide;
+import TravelManagement.Transportation;
 
 public class fileManipulation {
 
@@ -136,21 +137,38 @@ public class fileManipulation {
     // function to get all Cars from the file
 
     public static ArrayList<Car> getAllCars() {
-try{
-        ArrayList<Car> AllCars = new ArrayList<>();
-        Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
-        String valfortour = Files.readString(path);
-        String Cars[] = valfortour.split("\\s+---\\s+");
-        for (String c : Cars) {
-            String[] Car = c.split(System.lineSeparator());
-            AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
-        }
+        try {
+            ArrayList<Car> AllCars = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
+            String valfortour = Files.readString(path);
+            String Cars[] = valfortour.split("\\s+---\\s+");
+            for (String c : Cars) {
+                String[] Car = c.split(System.lineSeparator());
+                AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
+            }
 
-        return AllCars;
+            return AllCars;
+        } catch (Exception e) {
+            return null;
+        }
     }
-    catch(Exception e){
-        return null;
-    }
+
+    // function to get all transportation data
+    public static ArrayList<Transportation> getAllTransportations() {
+        try {
+            ArrayList<Transportation> AllTransportation = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Transportation.txt");
+            String fileContent = Files.readString(path);
+            String Transportations[] = fileContent.split("\\s+---\\s+");
+            for (String t_str : Transportations) {
+                String[] Transportation = t_str.split(System.lineSeparator());
+            AllTransportation.add()
+            }
+
+            return AllTransportation;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
