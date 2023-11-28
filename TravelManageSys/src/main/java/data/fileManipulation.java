@@ -38,14 +38,14 @@ public class fileManipulation {
     private static Trip parseTrip(String tripString) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String[] trip = tripString.split(System.lineSeparator());
-        Date[] start_date = Arrays.stream(trip[4].split("\\s+|\\s+")).map(date_str -> {
+        Date[] start_date = Arrays.stream(trip[4].split(" \\| ")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
                 return null;
             }
         }).toArray(Date[]::new);
-        Date[] end_date = Arrays.stream(trip[5].split("\\s+|\\s+")).map(date_str -> {
+        Date[] end_date = Arrays.stream(trip[5].split(" \\| ")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
