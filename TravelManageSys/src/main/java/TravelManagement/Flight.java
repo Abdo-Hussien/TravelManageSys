@@ -1,6 +1,6 @@
 package TravelManagement;
 
-class Flight extends Transportation {
+public class Flight extends Transportation {
     private String airline;
 
     // Constructor
