@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package TravelManagement;
 
-/**
- *
- * @author bmood
- */
 public class Bus extends Transportation {
+    private String busCompany;
+
+    // Constructor
+    public Bus(String pickUp, int maxCapacity, String busCompany) {
+        super(pickUp, maxCapacity);
+        this.busCompany = busCompany;
+    }
+
+    public String getBusCompany() {
+        return busCompany;
+    }
     
+   
 }
+

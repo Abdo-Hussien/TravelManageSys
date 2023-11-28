@@ -1,0 +1,10 @@
+Flight
+Cairo International Airport
+550
+Egyptair
+---
+Bus
+Tahrir Square
+40
+Mwasalat Misr
+---

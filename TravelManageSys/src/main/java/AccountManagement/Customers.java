@@ -2,7 +2,6 @@
 package AccountManagement;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Random;
 import java.io.FileWriter;
@@ -152,7 +151,7 @@ public class Customers extends Person {
 
         while (true) {
             System.out.println("Enter your mobile phone number : ");
-            System.out.println("the state code (+20) is added. ");
+            System.out.println(" the state code (+20) is added. ");
             System.out.println("");
             String phone_no = scanner.next();
             System.out.println("");
@@ -208,7 +207,6 @@ public class Customers extends Person {
         System.out.println("--------------------------------------");
         System.out.println("\n");
 
-        
         while (true) {
             System.out.println("Please enter your street address : ");
             System.out.println("");
@@ -287,7 +285,7 @@ public class Customers extends Person {
         u.account_id = generator.getRandID();
 
         // input data into text file
-        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
+        String filePath = "test.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true), true)) {
 
             writer.println(u.first_name + " " + u.last_name);
@@ -309,35 +307,31 @@ public class Customers extends Person {
         File path = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
         Scanner scan = new Scanner(path);
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter your username : ");
+        System.out.println("enter your username");
         String userName=in.next();
-        System.out.println("Enter your password : ");
+        System.out.println("enter your pass");
         String pass=in.next();
         boolean checked=false;
         String line;
-
-        
         while (scan.hasNextLine()) {
             line=scan.nextLine();
             if (line.equals(userName)) {
                 checked=true;
                 line=scan.nextLine();
                 if (line.equals(pass)) {
-                    System.out.println("login successful.");
+                    System.out.println("login successful");
                 }
             }
             
         }
         if (checked==false) {
-            System.out.println("login failed.");
+            System.out.println("login failed");
         }
-        scan.close();
-        in.close();
     }
 
     // diplay all users accounts and their information (for admin usage only)
-    public void display_all_users() throws FileNotFoundException, IOException {
-        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
+    protected void display_all_users() throws FileNotFoundException, IOException {
+        String filePath = "test.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
