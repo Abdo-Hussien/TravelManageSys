@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import AccountManagement.Customers;
 import TravelManagement.Trip;
@@ -24,27 +28,49 @@ public class fileManipulation {
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
             String val = Files.readString(path);
             String Trips[] = val.split("\\s+---\\s+");
-            for (String t : Trips) {
-                String[] trip = t.split(System.lineSeparator());
-                if (trip[2].toLowerCase().equals("family")) {
-                    AllTrips.add(new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], trip[6],
-                            null, 150, null, null, null, null));
-                } else if (trip[2].toLowerCase().equals("general")) {
-                    AllTrips.add(new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], "",
-                            null, 150, null, null, null, null));
-                } else if (trip[2].toLowerCase().equals("couple")) {
-                    AllTrips.add(new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], "",
-                            null, 150, null, null, null, null));
-                }
+            for (String tripString : Trips) {
+                Trip trip = parseTrip(tripString);
+                if (trip != null)
+                    AllTrips.add(trip);
             }
             return AllTrips;
         } catch (Exception e) {
             return null;
         }
 
+    }
+
+    private Trip parseTrip(String tripString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String[] trip = tripString.split(System.lineSeparator());
+        Date[] start_date = Arrays.stream(trip[4].split("\\s+|\\s+")).map(date_str -> {
+            try {
+                return dateFormat.parse(date_str);
+            } catch (ParseException e) {
+                return null;
+            }
+        }).toArray(Date[]::new);
+        Date[] end_date = Arrays.stream(trip[5].split("\\s+|\\s+")).map(date_str -> {
+            try {
+                return dateFormat.parse(date_str);
+            } catch (ParseException e) {
+                return null;
+            }
+        }).toArray(Date[]::new);
+        if (trip[2].toLowerCase().equals("family")) {
+            return new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else if (trip[2].toLowerCase().equals("general")) {
+            return new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else if (trip[2].toLowerCase().equals("couple")) {
+            return new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else
+            return null;
     }
 
     // function to get all customers from the file
