@@ -29,11 +29,11 @@ public class Gold extends Ticket {
     }
 
     public void addGold() {
-        System.out.println("how many sliver tickets you want?");
+        System.out.println("how many Gold tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
             Gcounter += addeddTicket;
-            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+            System.out.println("Done! " + addeddTicket + " Gold tickets added to your cart");
         }
         // else if(addeddTicket > tirpcapacity) {
         // System.out.println("too many tickets entered! avalibale tickerts is"+
@@ -46,18 +46,18 @@ public class Gold extends Ticket {
 
     }
 
-    public void deleteGOLD() {
-        System.out.println("how many sliver tickets you want to delete?");
+    public void deleteGold() {
+        System.out.println("how many Gold tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
             Gcounter -= deletedTicket;
-            System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+            System.out.println("Done! " + deletedTicket + " Gold tickets deleted from your cart");
         } else if (deletedTicket > Gcounter) {
             System.out.println("you entered more tickets than you have! please tyr again...");
-            deleteGOLD();
+            deleteGold();
         } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            deleteGOLD();
+            deleteGold();
         }
     }
 }

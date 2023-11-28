@@ -29,11 +29,11 @@ public class Platinum extends Ticket {
     }
 
     public void addPlatinum() {
-        System.out.println("how many sliver tickets you want?");
+        System.out.println("how many Platinum tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
             Pcounter += addeddTicket;
-            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+            System.out.println("Done! " + addeddTicket + " Platinum tickets added to your cart");
         }
         // else if(addeddTicket > tirpcapacity) {
         // System.out.println("too many tickets entered! avalibale tickerts is"+
@@ -47,11 +47,11 @@ public class Platinum extends Ticket {
     }
 
     public void deletePlatinum() {
-        System.out.println("how many sliver tickets you want to delete?");
+        System.out.println("how many Platinum tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
             Pcounter -= deletedTicket;
-            System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+            System.out.println("Done! " + deletedTicket + " Platinum tickets deleted from your cart");
         } else if (deletedTicket > Pcounter) {
             System.out.println("you entered more tickets than you have! please tyr again...");
             deletePlatinum();
