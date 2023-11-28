@@ -72,7 +72,7 @@ public class fileManipulation {
     public static ArrayList<Customers> getAllCustomers() {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
             String fileContent = Files.readString(path);
             String Customers[] = fileContent.split("\\s+---\\s+");
             for (String c : Customers) {
@@ -136,7 +136,7 @@ public class fileManipulation {
     public static ArrayList<Car> getAllCars() {
         try {
             ArrayList<Car> AllCars = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Cars.txt");
             String fileContent = Files.readString(path);
             String Cars[] = fileContent.split("\\s+---\\s+");
             for (String c : Cars) {
@@ -155,7 +155,7 @@ public class fileManipulation {
     public static ArrayList<Transportation> getAllTransportations() {
         try {
             ArrayList<Transportation> AllTransportations = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Transportation.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Transportation.txt");
             String fileContent = Files.readString(path);
             String Transportations[] = fileContent.split("\\s+---\\s+");
             for (String t_str : Transportations) {

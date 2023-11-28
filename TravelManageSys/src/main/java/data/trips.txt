@@ -15,8 +15,8 @@ NoTransportation
 Cancun
 Family
 1899.99
-15-12-2023
-20-12-2023
+15-12-2023 | 
+20-12-2023 | 
 Cancun is a coastal city in the popular vacation destination called the Mexican Caribbean. It is known for its beautiful beaches, vibrant nightlife, and ancient Mayan ruins.
 xvz34
 220
@@ -28,8 +28,8 @@ Airport Shuttle
 Bali
 Couple
 999.99
-05-11-2023
-10-11-2023
+05-11-2023 | 
+10-11-2023 | 
 Bali, the famed 'Island of the Gods,' is known for its highly developed arts, including traditional and modern dance, sculpture, painting, leather, metalworking, and music.
 yab67
 120

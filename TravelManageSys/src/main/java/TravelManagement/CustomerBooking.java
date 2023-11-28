@@ -22,7 +22,6 @@ import java.util.Scanner;
  */
 public class CustomerBooking {
     private ArrayList<Trip> tripsList = new ArrayList<>();
-    private ArrayList<Trip> filteredTrips = new ArrayList<>();
 
     private BookedTravels[] BookedTrips; // [ tripID, tripName, tripDate, noTickets, typeTic ]
     private String[] TravelHistory; // Only Save ID's of TravelHistory
@@ -43,11 +42,12 @@ public class CustomerBooking {
         System.out.println("B. Book a trip");
         System.out.println("C. See details of a trip");
         Ans = input.next().charAt(0);
+        input.nextLine();
         Ans = Character.toLowerCase(Ans);
         if (Ans == 'a') {
             System.out.println("\nExample: TripName/StartDate/EndDate...");
             System.out.print("Search for a trip: ");
-            this.getFilteredTrips(input.nextLine());
+            Trip.displayTrips(this.getFilteredTrips(input.nextLine()));
         } else if (Ans == 'b') {
             System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
             System.out.print("Trip ID: ");
@@ -57,6 +57,7 @@ public class CustomerBooking {
     }
 
     public ArrayList<Trip> getFilteredTrips(String search_filter) {
+        ArrayList<Trip> filteredTrips = new ArrayList<>();
         String[] Filters = search_filter.split("/");
         // Split Filters.
         setFilters(Filters);
@@ -112,6 +113,8 @@ public class CustomerBooking {
     }
 
     private boolean tripSearch(Trip trip, String search_start_date, String search_end_date) throws ParseException {
+        if (search_start_date == null || search_end_date == null)
+            return true;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date start_date = dateFormat.parse(search_start_date);
         Date end_date = dateFormat.parse(search_end_date);
@@ -119,8 +122,6 @@ public class CustomerBooking {
         Date tripEndDates[] = trip.getEndDate();
         Boolean FoundDate = false;
 
-        if (search_start_date == null || search_end_date == null)
-            return true;
         for (Date s_date : tripStartDates) {
             FoundDate = s_date.after(start_date) || s_date.equals(start_date);
         }
