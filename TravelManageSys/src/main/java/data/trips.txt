@@ -10,7 +10,6 @@ wzdz2
 Parachuting | Parasailing | Skiing
 Tolip Resort El Galala Majestic
 NoTransportation
-sedan | suv
 ---
 1001
 Cancun
@@ -24,7 +23,6 @@ xvz34
 Snorkeling | Scuba Diving | Mayan Ruins Tour
 Grand Fiesta Americana Coral Beach
 Airport Shuttle
-sedan | suv
 ---
 1002
 Bali
@@ -38,4 +36,3 @@ yab67
 Surfing | Rafting | Elephant Safari
 Ubud Hanging Gardens
 Private Car
-sedan | suv
