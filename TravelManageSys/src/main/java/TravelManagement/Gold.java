@@ -4,23 +4,42 @@
  */
 package TravelManagement;
 
-import java.util.Scanner;
-
 /**
  *
  * @author bmood
  */
-public class Gold extends Ticket{
-    Scanner in = new Scanner(System.in);
-    @Override
-    public double Ticket_Price(){
-       return 0.2;
+public class Gold extends Ticket {
+    int Gcounter;
+
+
+    public Gold() {
+        // super.ticketExpiration=; the date the user will choose from the bookoing
+        // function
     }
 
-    public void gold_welcome(){
+    @Override
+    public double Ticket_Price() {
+        return 0.3;
+    }
+
+    public void gold_welcome() {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t\tGOLD TICKET");
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
+    }
+
+    public void addGOLD() {
+        System.out.println("how many GOLD tickets you want?");
+        addeddTicket = in.nextInt();
+        Gcounter += addeddTicket;
+        System.out.println("Done! " + addeddTicket + "GOLD tickets added to your cart");
+    }
+
+    public void deleteGOLD() {
+        System.out.println("how many GOLD tickets you want to delete?");
+        deletedTicket = in.nextInt();
+        Gcounter -= deletedTicket;
+        System.out.println("Done! " + deletedTicket + "GOLD tickets deleted from your cart");
     }
 }
