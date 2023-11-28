@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import AccountManagement.Customers;
 import TravelManagement.Trip;
@@ -12,41 +16,66 @@ import TravelManagement.Car;
 import TravelManagement.CoupleTours;
 import TravelManagement.FamilyTours;
 import TravelManagement.GeneralTours;
+import TravelManagement.Hotels;
 import TravelManagement.TourGuide;
+import TravelManagement.Transportation;
 
 public class fileManipulation {
 
     // function to get all trips from the file
-    public void getAllTrips() {
+    public ArrayList<Trip> getAllTrips() {
         try {
             ArrayList<Trip> AllTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
             String val = Files.readString(path);
             String Trips[] = val.split("\\s+---\\s+");
-            for (String t : Trips) {
-                String[] trip = t.split(System.lineSeparator());
-                if (trip[2].toLowerCase().equals("family")) {
-                    AllTrips.add(new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], trip[6],
-                            null, 150, null, null, null, null));
-                } else if (trip[2].toLowerCase().equals("general")) {
-                    AllTrips.add(new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], "",
-                            null, 150, null, null, null, null));
-                } else if (trip[2].toLowerCase().equals("couple")) {
-                    AllTrips.add(new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]), trip[4],
-                            trip[5], "",
-                            null, 150, null, null, null, null));
-                }
+            for (String tripString : Trips) {
+                Trip trip = parseTrip(tripString);
+                if (trip != null)
+                    AllTrips.add(trip);
             }
+            return AllTrips;
         } catch (Exception e) {
-
+            return null;
         }
 
     }
 
+    private Trip parseTrip(String tripString) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String[] trip = tripString.split(System.lineSeparator());
+        Date[] start_date = Arrays.stream(trip[4].split("\\s+|\\s+")).map(date_str -> {
+            try {
+                return dateFormat.parse(date_str);
+            } catch (ParseException e) {
+                return null;
+            }
+        }).toArray(Date[]::new);
+        Date[] end_date = Arrays.stream(trip[5].split("\\s+|\\s+")).map(date_str -> {
+            try {
+                return dateFormat.parse(date_str);
+            } catch (ParseException e) {
+                return null;
+            }
+        }).toArray(Date[]::new);
+        if (trip[2].toLowerCase().equals("family")) {
+            return new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else if (trip[2].toLowerCase().equals("general")) {
+            return new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else if (trip[2].toLowerCase().equals("couple")) {
+            return new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    trip[10], trip[11]);
+        } else
+            return null;
+    }
+
     // function to get all customers from the file
-    public static void getAllCustomers() {
+    public static ArrayList<Customers> getAllCustomers() {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
             Path path = Paths.get("TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt");
@@ -59,14 +88,15 @@ public class fileManipulation {
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7]));
 
             }
+            return AllCustomers;
         } catch (Exception e) {
-
+            return null;
         }
 
     }
 
     // function to get all tour guides from the file
-    public void getAllTourGuides() {
+    public ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/TourGuides.txt");
@@ -79,25 +109,66 @@ public class fileManipulation {
                         Integer.parseInt(tourguide[4]), tourguide[5], tourguide[6], tourguide[7]));
 
             }
+            return AllTourGuides;
         } catch (Exception e) {
-
+            return null;
         }
     }
 
-    // function to get all tour guides from the file
+    public ArrayList<Hotels> getAllHotels() {
+        try {
+            ArrayList<Hotels> AllHotels = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Hotels.txt");
+            String valforhotels = Files.readString(path);
+            String Hotels[] = valforhotels.split("\\s+---\\s+");
+            for (String t : Hotels) {
+                String[] hotel = t.split(System.lineSeparator());
+                AllHotels.add(new Hotels(hotel[0], Double.parseDouble(hotel[1]), Integer.parseInt(hotel[2]),
+                        Boolean.parseBoolean(hotel[3]), Boolean.parseBoolean(hotel[4]),
+                        Boolean.parseBoolean(hotel[5])));
 
-    public  static ArrayList<Car> getAllCars() throws IOException {
-
-        ArrayList<Car> AllCars = new ArrayList<>();
-        Path path = Paths.get("D://Java oop//TravelManageSys//TravelManageSys//src//main//java//data//Cars.txt");
-        String valfortour = Files.readString(path);
-        String Cars[] = valfortour.split("\\s+---\\s+");
-        for (String c : Cars) {
-            String[] Car = c.split(System.lineSeparator());
-            AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
-
+            }
+            return AllHotels;
+        } catch (Exception e) {
+            return null;
         }
-        return AllCars;
+    }
+
+    // function to get all Cars from the file
+
+    public static ArrayList<Car> getAllCars() {
+        try {
+            ArrayList<Car> AllCars = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
+            String valfortour = Files.readString(path);
+            String Cars[] = valfortour.split("\\s+---\\s+");
+            for (String c : Cars) {
+                String[] Car = c.split(System.lineSeparator());
+                AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
+            }
+
+            return AllCars;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // function to get all transportation data
+    public static ArrayList<Transportation> getAllTransportations() {
+        try {
+            ArrayList<Transportation> AllTransportation = new ArrayList<>();
+            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Transportation.txt");
+            String fileContent = Files.readString(path);
+            String Transportations[] = fileContent.split("\\s+---\\s+");
+            for (String t_str : Transportations) {
+                String[] Transportation = t_str.split(System.lineSeparator());
+            AllTransportation.add()
+            }
+
+            return AllTransportation;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
