@@ -10,22 +10,22 @@ package TravelManagement;
  */
 public class Hotels {
 
-public String Hotelname;
-boolean booking;
-double rate;
-boolean swimmingpool;
-boolean restaurant;
-int numofRooms;
+    public String Hotelname;
+    boolean booking;
+    double rate;
+    boolean swimmingpool;
+    boolean restaurant;
+    int numofRooms;
 
-    public Hotels(String Hotelname, boolean booking, double rate, boolean swimmingpool, boolean restaurant, int numofRooms) {
+    public Hotels(String Hotelname, double rate, int numofRooms,
+            boolean booking, boolean swimmingpool, boolean restaurant) {
         this.Hotelname = Hotelname;
-        this.booking = booking;
         this.rate = rate;
+        this.numofRooms = numofRooms;
+        this.booking = booking;
         this.swimmingpool = swimmingpool;
         this.restaurant = restaurant;
-        this.numofRooms = numofRooms;
+
     }
 
-
-    
 }
