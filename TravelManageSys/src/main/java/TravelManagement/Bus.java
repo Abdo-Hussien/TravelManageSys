@@ -1,6 +1,6 @@
 package TravelManagement;
 
-class Bus extends Transportation {
+public class Bus extends Transportation {
     private String busCompany;
 
     // Constructor
