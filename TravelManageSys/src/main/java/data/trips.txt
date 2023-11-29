@@ -7,7 +7,7 @@ General
 An Egyptian town in the Suez Governorate, lying on the western shore of the Red Sea's Gulf of Suez. Being a year-round sunshine destination with gentle waves of the clear Red Sea makes Al-Ain al-Sokhna an ideal destination to break from the city's congestion.
 wzdz2
 165
-Parachuting | Parasailing | Skiing
+Parachuting | Parasailing | Skiing | 
 Tolip Resort El Galala Majestic
 NoTransportation
 ---
@@ -20,7 +20,7 @@ Family
 Cancun is a coastal city in the popular vacation destination called the Mexican Caribbean. It is known for its beautiful beaches, vibrant nightlife, and ancient Mayan ruins.
 xvz34
 220
-Snorkeling | Scuba Diving | Mayan Ruins Tour
+Snorkeling | Scuba Diving | Mayan Ruins Tour | 
 Grand Fiesta Americana Coral Beach
 Airport Shuttle
 ---
@@ -33,6 +33,6 @@ Couple
 Bali, the famed 'Island of the Gods,' is known for its highly developed arts, including traditional and modern dance, sculpture, painting, leather, metalworking, and music.
 yab67
 120
-Surfing | Rafting | Elephant Safari
+Surfing | Rafting | Elephant Safari |
 Ubud Hanging Gardens
 Private Car

@@ -56,15 +56,15 @@ public class fileManipulation {
         }).toArray(Date[]::new);
         if (trip[2].toLowerCase().equals("family")) {
             return new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
                     trip[10], trip[11]);
         } else if (trip[2].toLowerCase().equals("general")) {
             return new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
                     trip[10], trip[11]);
         } else if (trip[2].toLowerCase().equals("couple")) {
             return new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
                     trip[10], trip[11]);
         } else
             return null;
@@ -81,13 +81,10 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                /*
-                 * Add CustomerBookedTrips Object to line 90 in the Constructor of Customers
-                 * Add customer[8] to line 90 in the Constructor of Customers
-                 */
                 CustomerBookedTrips = parseBookedTrip(customer[8].split("\\s+<>\\s+"));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
-                        Integer.parseInt(customer[4]), customer[5], customer[6], customer[7]));
+                        Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
+                        customer[8].split("\\s+\\|\\s+")));
             }
             return AllCustomers;
         } catch (Exception e) {
