@@ -36,7 +36,7 @@ public class CustomerBooking {
     public void mainCustomer() {
         Scanner input = new Scanner(System.in);
         tripsList = fileManipulation.getAllTrips();
-        Trip.displayTrips(tripsList);
+        Trip.displayAllTrips(tripsList);
         char Ans;
         System.out.println("\n\nA. Search for a trip(s)");
         System.out.println("B. Book a trip");
@@ -47,7 +47,7 @@ public class CustomerBooking {
         if (Ans == 'a') {
             System.out.println("\nExample: TripName/StartDate/EndDate...");
             System.out.print("Search for a trip: ");
-            Trip.displayTrips(this.getFilteredTrips(input.nextLine()));
+            Trip.displayAllTrips(this.getFilteredTrips(input.nextLine()));
         } else if (Ans == 'b') {
             System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
             System.out.print("Trip ID: ");
