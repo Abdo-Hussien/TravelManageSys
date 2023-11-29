@@ -55,21 +55,22 @@ public class Customers extends Person {
         super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
         this.BookingManipulations.CustomerBookedTrips = oldBookingTrips;
     }
-
+    
     Scanner scanner = new Scanner(System.in);
     Person u = new Person();
-
+    
     // keeps track of user's trip history
     private ArrayList<String> tripsHistory = new ArrayList<>();
-
+    
     // private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
-
+    
     // user address attributes
     private String streetAddress;
     private String stateAddress;
     private String zipAddress;
-
+    
     boolean logged_in = false; // used in edit account for user
+    
 
     // create an account
     public void create_acc() throws IOException {
@@ -312,7 +313,19 @@ public class Customers extends Person {
             writer.println();
 
         }
-        userMenu();
+
+        System.out.println("Successfully created the account : "+u.username);
+        System.out.println("Would you wish to create an another account? (yes/no) ");
+        String choice=scanner.next();
+        if(choice.toLowerCase().equals("yes")||choice.toLowerCase().equals("y")){
+        create_acc();
+        }
+
+        else{
+           
+            userMenu();
+        }
+
     }
 
     // login into account
@@ -330,6 +343,7 @@ public class Customers extends Person {
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\n");
 
+
         System.out.println("Enter your username : ");
         System.out.println("");
         String userName = in.next();
@@ -342,8 +356,7 @@ public class Customers extends Person {
         System.out.println("");
         String pass = in.next();
         System.out.println("\n");
-        System.out.println("--------------------------------------");
-        System.out.println("\n");
+        
 
         boolean checked = false;
         String line;
@@ -365,36 +378,41 @@ public class Customers extends Person {
 
         }
         if (checked == false) {
-            System.out.println("");
+            
             System.out.println("---------------------------------------");
-            System.out.println("login failed.");
+            System.out.println("login failed!");
+            System.out.println("Wrong username or password, please try again.");
             System.out.println("---------------------------------------");
-            System.out.println("");
+            System.out.println( "");
+   
+
+
+
+
+            login();
         }
-        scan.close();
-        in.close();
+        
         userMenu();
     }
 
     // user can edit his account information
     public void edit_acc() throws FileNotFoundException, IOException {
-
+        
         String line;
         File filePath = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         StringBuilder content = new StringBuilder();
 
-        String new_phoneNumber = "";
-        String prev_phoneNumber = "";
-        String prev_userName = "";
-        String new_userName = "";
-        String prev_password = "";
-        String new_password = "";
-        String prev_address = "";
-        String new_address = "";
+        String new_phoneNumber ;
+        String prev_phoneNumber;
+        String prev_userName;
+        String new_userName ;
+        String prev_password ;
+        String new_password ;
         String userInput;
 
-        if (logged_in == false) {
+        if (  1==0  /*logged_in == false*/) {
             System.out.println("");
             System.out.println("---------------------------------------------");
             System.out.println("You have to logged in to edit your account.");
@@ -411,12 +429,14 @@ public class Customers extends Person {
             System.out.println("1) Phone number");
             System.out.println("2) Username ");
             System.out.println("3) Password");
-            System.out.println("4) Address ");
+            System.out.println("4) Go back to menu");
             System.out.println("------------------------------------------------- ");
 
             userInput = scanner.next();
             System.out.println("");
 
+
+            //change phone number
             if (userInput.equals("1")) {
 
                 while (true) {
@@ -451,7 +471,7 @@ public class Customers extends Person {
                     }
                 }
 
-            }
+            
 
             while ((line = reader.readLine()) != null) {
                 // Replace the old value with the new value
@@ -461,11 +481,133 @@ public class Customers extends Person {
             reader.close();
 
             // Write the updated content back to the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            // System.out.println("Successfully changed phone number to :
-            // "+new_phoneNumber);
+            System.out.println("Successfully changed phone number to :"+new_phoneNumber);
             writer.write(content.toString());
             writer.close();
+        }
+
+
+            //change username
+            if (userInput.equals("2")) {
+
+                while (true) {
+                    System.out.println("Enter your previous username : ");
+                    prev_userName = scanner.next();
+
+                    System.out.println("");
+                    if (prev_userName.length() < 7) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    } 
+                    if(prev_userName.length()>14) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+
+
+                while (true) {
+                    System.out.println("Enter your new username : ");
+                    new_userName = scanner.next();
+
+                    System.out.println("");
+                    if (new_userName.length() < 7) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    } 
+                    if(new_userName.length()>14) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+
+
+
+            while ((line = reader.readLine()) != null) {
+                line = line.replace(prev_userName, new_userName);
+                content.append(line).append("\n");
+            }
+            reader.close();
+
+            
+            System.out.println("Successfully changed  your username to :"+new_userName);
+            writer.write(content.toString());
+            writer.close();
+        }
+
+            //change password
+            if (userInput.equals("3")) {
+
+                while (true) {
+                    System.out.println("Enter your previous username : ");
+                    prev_userName = scanner.next();
+
+                    System.out.println("");
+                    if (prev_userName.length() < 7) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    } 
+                    if(prev_userName.length()>14) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+
+
+                while (true) {
+                    System.out.println("Enter your new username : ");
+                    new_userName = scanner.next();
+
+                    System.out.println("");
+                    if (new_userName.length() < 7) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    } 
+                    if(new_userName.length()>14) {
+                        System.out.println("Your username should be a minimum of 7 characters.");
+                        continue;
+                    }
+                    else{
+                        break;
+                    }
+
+                }
+
+
+
+            while ((line = reader.readLine()) != null) {
+                line = line.replace(prev_userName, new_userName);
+                content.append(line).append("\n");
+            }
+            reader.close();
+
+            
+            System.out.println("Successfully changed  your username to :"+new_userName);
+            writer.write(content.toString());
+            writer.close();
+        }
+
+            //return back to usermenu
+            if (userInput.equals("4")) {
+                userMenu();   
+        }
+
+
+
+
+
 
         } // else
 
