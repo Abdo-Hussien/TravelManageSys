@@ -11,6 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import com.asu.main.TravelManageSys;
 
 import TravelManagement.BookedTravels;
 import TravelManagement.Trip;
@@ -32,96 +35,120 @@ public class CustomerBooking {
     private String end_date;
 
     public void mainCustomer() {
-        try {
-            char Ans;
-            Trip ChosenTrip;
-            Scanner input = new Scanner(System.in);
-            tripsList = fileManipulation.getAllTrips();
-            Trip.displayAllTrips(tripsList);
-            System.out.println("\nA. Search for a trip(s)");
-            System.out.println("B. Book a trip");
-            System.out.println("C. See details of a trip");
-            System.out.println("D. Go Back");
-            System.out.print("Choice: ");
-            Ans = Character.toLowerCase(input.next().charAt(0));
-            input.nextLine();
-            switch (Ans) {
-                case 'a':
-                    System.out.println("\nExample: TripName/StartDate/EndDate...");
-                    System.out.print("Search for a trip: ");
-                    ArrayList<Trip> filteredTrips = this.getFilteredTrips(input.nextLine());
-                    Trip.displayAllTrips(filteredTrips);
-                    break;
-                case 'b':
-                    System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
-                    System.out.print("Trip ID: ");
-                    ChosenTrip = getTrip(input.next());
-                    if (ChosenTrip == null) {
-                        System.out.println("No Trips Found!");
-                        Thread.sleep(2000);
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
-                        mainCustomer();
-                    }
-                    addBookingTrip(ChosenTrip);
-                    // Call Ticket Functions!
-                    System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
-                    break;
-                case 'c':
-                    System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
-                    System.out.print("Trip ID: ");
-                    ChosenTrip = getTrip(input.next());
-                    if (ChosenTrip == null) {
-                        System.out.println("No Trips Found!");
-                        Thread.sleep(2000);
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
-                        mainCustomer();
-                    }
-                    Trip.displayTripDetails(ChosenTrip);
-                    System.out.println("A. Book " + ChosenTrip.getTitle() + " trip");
-                    System.out.println("B. Go Back");
-                    System.out.print("Choice: ");
-                    Ans = Character.toLowerCase(input.next().charAt(0));
-                    switch (Ans) {
-                        case 'a':
-                            addBookingTrip(ChosenTrip);
-                            // Call Ticket Functions!
-                            System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
-                            break;
-                        case 'b':
-                            // Go Back.
-                            break;
-                        default:
-                            System.out.println("Wrong Input.. Try again!");
-                            Thread.sleep(2000);
-                            System.out.print("\033[H\033[2J");
-                            System.out.flush();
-                            mainCustomer();
-                            break;
-                    }
-                    break;
-                case 'd':
-                    // Go Back.
-                    break;
-                default:
-                    System.out.println("Wrong Input.. Try again!");
-                    Thread.sleep(2000);
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-                    mainCustomer();
-                    break;
-            }
-            input.close();
-        } catch (InterruptedException e) {
-            System.out.println("Thread error sleeping.");
-            e.printStackTrace();
+        ArrayList<Trip> FeaturedTrips = new ArrayList<>();
+        tripsList = fileManipulation.getAllTrips();
+        FeaturedTrips = tripsList.stream()
+                .limit(3)
+                .collect(Collectors.toCollection(ArrayList::new));
+        char Ans;
+        Trip ChosenTrip = null;
+        Scanner input = new Scanner(System.in);
+        Trip.displayTrips(FeaturedTrips);
+        System.out.println("\nA. Search for a trip(s)");
+        System.out.println("B. See details of a trip");
+        System.out.println("C. Go Back");
+        System.out.print("Choice: ");
+        Ans = Character.toLowerCase(input.next().charAt(0));
+        input.nextLine();
+        switch (Ans) {
+            case 'a':
+                SearchTrips(Ans, ChosenTrip);
+                break;
+            case 'b':
+                input.close();
+                ShowTripDetails(ChosenTrip, Ans);
+                break;
+            case 'c':
+                // Go Back.
+                break;
+            default:
+                ErrorMessage("Wrong Input.. Try again!", 2000);
+                break;
         }
+        input.close();
+    }
+
+    private void SearchTrips(char Ans, Trip ChosenTrip) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nExample: TripName/StartDate/EndDate...");
+        System.out.print("Search for a trip: ");
+        ArrayList<Trip> filteredTrips = this.getFilteredTrips(input.nextLine());
+        Trip.displaySearchTrips(filteredTrips);
+        System.out.println("\nA. Search More Trips.");
+        System.out.println("B. Book a Trip.");
+        System.out.println("C. Show Trip details.");
+        System.out.println("D. Go Back.");
+        Ans = Character.toLowerCase(input.next().charAt(0));
+        switch (Ans) {
+            case 'a':
+                SearchTrips(Ans, ChosenTrip);
+                break;
+            case 'b':
+                System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
+                System.out.print("Trip ID: ");
+                ChosenTrip = getTrip(input.next());
+                if (ChosenTrip == null)
+                    ErrorMessage("No Trips Found!", 2000);
+                addBookingTrip(ChosenTrip);
+                // Call Ticket Functions!
+                System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
+                break;
+            case 'c':
+                input.close();
+                ShowTripDetails(ChosenTrip, Ans);
+                break;
+            default:
+                ErrorMessage("Wrong Input.. Try again!", 2000);
+                break;
+        }
+
+    }
+
+    private void ShowTripDetails(Trip ChosenTrip, char Ans) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
+        System.out.print("Trip ID: ");
+        ChosenTrip = getTrip(input.next());
+        if (ChosenTrip == null)
+            ErrorMessage("No Trips Found!", 2000);
+        Trip.displayTripDetails(ChosenTrip);
+        System.out.println("A. Book " + ChosenTrip.getTitle() + " trip");
+        System.out.println("B. Go Back");
+        System.out.print("Choice: ");
+        Ans = Character.toLowerCase(input.next().charAt(0));
+        input.close();
+        switch (Ans) {
+            case 'a':
+                addBookingTrip(ChosenTrip);
+                // Call Ticket Functions!
+                System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
+                break;
+            case 'b':
+                // Go Back.
+                break;
+            default:
+                ErrorMessage("Wrong Input.. Try again!", 2000);
+                break;
+        }
+
     }
 
     private void addBookingTrip(Trip ChosenTrip) {
         CustomerBookedTrips
                 .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(), null, null, 0, null));
+    }
+
+    private void ErrorMessage(String message, int timeout) {
+        try {
+            System.out.println(message);
+            Thread.sleep(timeout);
+            // System.out.print("\033[H\033[2J");
+            // System.out.flush();
+            mainCustomer();
+        } catch (Exception e) {
+            System.out.println("Thread error sleeping.");
+            // e.printStackTrace();
+        }
     }
 
     private Trip getTrip(String id) {
@@ -144,8 +171,6 @@ public class CustomerBooking {
             try {
                 if (tripSearch(trip, search_text, start_date, end_date, price_start, price_end)) {
                     filteredTrips.add(trip);
-                } else {
-                    System.out.println(trip.getTitle() + " Trip wasn't displayed");
                 }
             } catch (ParseException e) {
                 System.out.println(
@@ -153,6 +178,8 @@ public class CustomerBooking {
                 mainCustomer();
             }
         }
+        if (filteredTrips.isEmpty())
+            System.out.println("\nNo Trip Found with these preferences..");
         return filteredTrips;
         // Checkout no cancellation - Save in a file.
         // Booking Save in runtime variables (Array List) - Not save in a file.

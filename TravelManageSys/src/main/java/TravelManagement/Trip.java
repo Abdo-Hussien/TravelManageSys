@@ -46,53 +46,60 @@ public abstract class Trip {
         return initPrice + rate * initPrice;
     }
 
-    public static void displayAllTrips(ArrayList<Trip> trips) {
+    public static void displaySearchTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
         Date[] endDates;
+        System.out.println("");
+        System.out.println("-------------------------------");
         for (Trip trip : trips) {
             startDates = trip.getStartDate();
             endDates = trip.getEndDate();
-            System.out.println("**********************************");
-            System.out.println("Explore the Beauty of " + trip.getTitle() + ".");
-            System.out.println("**********************************");
-            System.out.println("");
-            System.out.println("" + trip.getTitle());
-            System.out.println("" + "For " + trip.getTripType() + " touring");
+            System.out.println(trip.getTripId());
+            System.out.println(trip.getTitle());
+            System.out.println("For " + trip.getTripType() + " touring");
             // Cannot retrieve rate of ticket price from Silver class
-            System.out.println("" + "$" + 1299.99 + "/person");
+            System.out.println("$" + 1299.99 + "/person");
             for (int i = 0; i < startDates.length; i++)
                 System.out.print(dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
-            System.out.println("\n");
+            System.out.println("-------------------------------");
         }
-        System.out.println("************************************************");
-        System.out.println("Book Now and Embark on an Unforgettable Journey!");
-        System.out.println("************************************************");
     }
 
-    public static void displayTrips(Trip trip) {
+    public static void displayTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
         Date[] endDates;
-        startDates = trip.getStartDate();
-        endDates = trip.getEndDate();
-        System.out.println("**********************************");
-        System.out.println("Explore the Beauty of " + trip.getTitle() + ".");
-        System.out.println("**********************************");
+        System.out.println("\t\t\t\t\t\t\t\t\t  **********************************");
+        System.out.println("\t\t\t\t\t\t\t\t\t\t   Featured Trips");
+        System.out.println("\t\t\t\t\t\t\t\t\t  **********************************\n");
+        for (Trip trip : trips) {
+            System.out.print("\t\t\t\t\t  " + trip.getTitle());
+        }
         System.out.println("");
-        System.out.println("" + trip.getTitle());
-        System.out.println("" + "For " + trip.getTripType() + " touring");
+        for (Trip trip : trips) {
+            System.out.print("\t\t\t\t" + "For " + trip.getTripType() + " touring");
+        }
+        System.out.println("");
+        for (Trip trip : trips) {
+            System.out.print("\t\t\t\t " + "$" + 1299.99 + "/person");
+        }
+        System.out.println("");
+        // System.out.println("" + "For " + trip.getTripType() + " touring");
         // Cannot retrieve rate of ticket price from Silver class
-        System.out.println("" + "$" + 1299.99 + "/person");
-        for (int i = 0; i < startDates.length; i++)
-            System.out.print(dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
-        System.out.println("" + "More Details? (y/n)");
-        System.out.println("" + "Book now? (book)");
-        System.out.println("");
-        System.out.println("************************************************");
-        System.out.println("Book Now and Embark on an Unforgettable Journey!");
-        System.out.println("************************************************");
+        // System.out.println("" + "$" + 1299.99 + "/person");
+        for (Trip trip : trips) {
+            startDates = trip.getStartDate();
+            endDates = trip.getEndDate();
+            System.out.print(
+                    "\t\t\t\t" + dateFormat.format(startDates[0]) + "  " + dateFormat.format(endDates[0]));
+        }
+        System.out.println("\n");
+        System.out.println("\t\t\t\t\t\t\t\t  ************************************************");
+        System.out.println("\t\t\t\t\t\t\t\t  Book Now and Embark on an Unforgettable Journey!");
+        System.out.println("\t\t\t\t\t\t\t\t  ************************************************");
     }
+
     public static void displayTripDetails(Trip trip) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
@@ -114,7 +121,7 @@ public abstract class Trip {
             System.out.print(dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
         System.out.println("");
         System.out.println("" + "Activities:\n");
-        for (String game : Activities){
+        for (String game : Activities) {
             System.out.println("" + "- " + game);
         }
         System.out.println("");
