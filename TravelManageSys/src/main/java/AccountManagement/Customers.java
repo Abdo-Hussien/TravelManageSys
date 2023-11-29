@@ -9,6 +9,9 @@ import javax.sound.midi.SysexMessage;
 
 import data.fileManipulation;
 
+import TravelManagement.BookedTravels;
+import TravelManagement.Trip;
+
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,15 +24,43 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 //contains method for genrating a random ID
+class RandIDGenerator {
+    private StringBuilder str;
+    private int itemCount;
+    private String alphaNumeric;
 
+    public RandIDGenerator() {
+        str = new StringBuilder();
+        itemCount = 0;
+        alphaNumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    }
+
+    public void generateRandID() {
+        Random rand = new Random();
+        for (int i = 0; i < itemCount; i++) {
+            str.append(alphaNumeric.charAt(rand.nextInt(alphaNumeric.length())));
+        }
+    }
+
+    public void setItemCount(int itemCount) {
+        this.itemCount = itemCount;
+    }
+
+    public String getRandID() {
+        return str.toString();
+    }
+}
 
 public class Customers extends Person {
 
-    public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
-            String gender, String address, String phone_number) {
-        super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
-    }
+    private CustomerBooking BookingManipulations = new CustomerBooking();
 
+    public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
+            String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
+            String[] tripHistory) {
+        super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
+        this.BookingManipulations.CustomerBookedTrips = oldBookingTrips;
+    }
 
     Scanner scanner = new Scanner(System.in);
     Person u = new Person();
@@ -287,7 +318,19 @@ public class Customers extends Person {
             writer.println();
 
         }
-        userMenu();
+
+        System.out.println("Successfully created the account : " + u.username);
+        System.out.println("Would you wish to create an another account? (yes/no) ");
+        String choice = scanner.next();
+        if (choice.toLowerCase().equals("yes") || choice.toLowerCase().equals("y")) {
+            create_acc();
+        }
+
+        else {
+
+            userMenu();
+        }
+
     }
 
     // login into account
@@ -297,6 +340,7 @@ public class Customers extends Person {
         int counter = 0;
         boolean cheked = false;
         Scanner in = new Scanner(System.in);
+
         System.out.println("\n");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("");
@@ -374,7 +418,7 @@ public class Customers extends Person {
             System.out.println("1) Phone number");
             System.out.println("2) Username ");
             System.out.println("3) Password");
-            System.out.println("4) Address ");
+            System.out.println("4) Go back to menu");
             System.out.println("------------------------------------------------- ");
 
             userInput = scanner.next();
