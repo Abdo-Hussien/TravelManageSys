@@ -4,6 +4,11 @@ package AccountManagement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.sound.midi.SysexMessage;
+
+import data.fileManipulation;
+
 import java.util.Random;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,44 +21,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 //contains method for genrating a random ID
-class RandIDGenerator {
-    private StringBuilder str;
-    private int itemCount;
-    private String alphaNumeric;
-    
-    
-    public RandIDGenerator() {
-        str = new StringBuilder();
-        itemCount = 0;
-        alphaNumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    }
 
-    public void generateRandID() {
-        Random rand = new Random();
-        for (int i = 0; i < itemCount; i++) {
-            str.append(alphaNumeric.charAt(rand.nextInt(alphaNumeric.length())));
-        }
-    }
-
-    public void setItemCount(int itemCount) {
-        this.itemCount = itemCount;
-    }
-
-    public String getRandID() {
-        return str.toString();
-    }
-}
 
 public class Customers extends Person {
-    
+
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number) {
         super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
     }
 
+
     Scanner scanner = new Scanner(System.in);
     Person u = new Person();
-    
+
     // keeps track of user's trip history
     private ArrayList<String> tripsHistory = new ArrayList<>();
 
@@ -64,9 +44,7 @@ public class Customers extends Person {
     private String stateAddress;
     private String zipAddress;
 
-    boolean logged_in=false; //used in edit account for user
-
-    
+    boolean logged_in = false; // used in edit account for user
 
     // create an account
     public void create_acc() throws IOException {
@@ -211,7 +189,6 @@ public class Customers extends Person {
         System.out.println("\n");
         scanner.nextLine();
 
-        
         while (true) {
             System.out.println("Please enter your street address : ");
             System.out.println("");
@@ -219,7 +196,6 @@ public class Customers extends Person {
             System.out.println("");
             break;
         }
-
 
         System.out.println("\n");
         System.out.println("--------------------------------------");
@@ -273,11 +249,11 @@ public class Customers extends Person {
                 String confirm_pass = scanner.next();
                 System.out.println("");
                 if (confirm_pass.equals(pass)) {
-                System.out.println("");
-                System.out.println("---------------------------------------");
-                System.out.println("Created account successfully.");
-                System.out.println("---------------------------------------");
-                System.out.println("");
+                    System.out.println("");
+                    System.out.println("---------------------------------------");
+                    System.out.println("Created account successfully.");
+                    System.out.println("---------------------------------------");
+                    System.out.println("");
                     break;
                 }
 
@@ -316,12 +292,11 @@ public class Customers extends Person {
 
     // login into account
     public void login() throws FileNotFoundException, IOException {
-
-        File path = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
-        Scanner scan = new Scanner(path);
+        ArrayList<Customers> allCustomers = new ArrayList<>();
+        allCustomers = fileManipulation.getAllCustomers();
+        int counter = 0;
+        boolean cheked = false;
         Scanner in = new Scanner(System.in);
-        
-
         System.out.println("\n");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("");
@@ -329,93 +304,69 @@ public class Customers extends Person {
         System.out.println("");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\n");
+        while (counter != 3) {
+            System.out.println("Enter your username : ");
+            System.out.println("");
+            String userName = in.next();
 
-        System.out.println("Enter your username : ");
-        System.out.println("");
-        String userName=in.next();
+            System.out.println("\n");
+            System.out.println("--------------------------------------");
+            System.out.println("\n");
 
-        System.out.println("\n");
-        System.out.println("--------------------------------------");
-        System.out.println("\n");
-
-        System.out.println("Enter your password : ");
-        System.out.println("");
-        String pass=in.next();
-        System.out.println("\n");
-        System.out.println("--------------------------------------");
-        System.out.println("\n");
-
-
-        boolean checked=false;
-        String line;
-
-        
-        while (scan.hasNextLine()) {
-            line=scan.nextLine();
-            if (line.equals(userName)) {
-                checked=true;
-                line=scan.nextLine();
-                if (line.equals(pass)) {
-                    System.out.println("");
-                    System.out.println("---------------------------------------");
-                    System.out.println("login successful.");
-                    System.out.println("---------------------------------------");
-                    System.out.println("");
-                    logged_in=true;
+            System.out.println("Enter your password : ");
+            System.out.println("");
+            String pass = in.next();
+            System.out.println("\n");
+            System.out.println("--------------------------------------");
+            System.out.println("\n");
+            for (int i = 0; i < allCustomers.size(); i++) {
+                if (allCustomers.get(i).username.equals(userName)) {
+                    if (allCustomers.get(i).password.equals(pass)) {
+                        cheked = true;
+                        System.out.println("login successful!");
+                        // main page
+                    }
                 }
             }
-            
+            if (cheked == false) {
+                counter++;
+                System.out.println("you have " + counter + "/3 attempts left");
+            }
+            if (counter == 3) {
+                System.out.println("unfortunately you can't login..!");
+                System.exit(0);
+            }
         }
-        if (checked==false) {
-                    System.out.println("");
-                    System.out.println("---------------------------------------");
-                    System.out.println("login failed.");
-                    System.out.println("---------------------------------------");
-                    System.out.println("");
-                }
-                scan.close();
-                in.close();
-                userMenu();
-            }
-    
+    }
 
+    // user can edit his account information
+    public void edit_acc() throws FileNotFoundException, IOException {
 
+        String line;
+        File filePath = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        StringBuilder content = new StringBuilder();
 
-    //user can edit his account information
- public void edit_acc() throws FileNotFoundException, IOException{
-        
-                
-                String line;
-                File filePath = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
-                BufferedReader reader = new BufferedReader(new FileReader(filePath));
-                StringBuilder content = new StringBuilder();
-                
+        String new_phoneNumber = "";
+        String prev_phoneNumber = "";
+        String prev_userName = "";
+        String new_userName = "";
+        String prev_password = "";
+        String new_password = "";
+        String prev_address = "";
+        String new_address = "";
+        String userInput;
 
-                
-                String new_phoneNumber="";
-                String prev_phoneNumber="";
-                String prev_userName="";
-                String new_userName="";
-                String prev_password="";
-                String new_password="";
-                String prev_address="";
-                String new_address="";
-                String userInput;
-
-
-
-         if(logged_in==false){
-                    System.out.println("");
-                    System.out.println("---------------------------------------------");
-                    System.out.println("You have to logged in to edit your account.");
-                    System.out.println("---------------------------------------------");
-                    
+        if (logged_in == false) {
+            System.out.println("");
+            System.out.println("---------------------------------------------");
+            System.out.println("You have to logged in to edit your account.");
+            System.out.println("---------------------------------------------");
 
             login();
         }
 
-        else{
-
+        else {
 
             System.out.println("What field would you wish to edit ? ");
             System.out.println("");
@@ -426,142 +377,108 @@ public class Customers extends Person {
             System.out.println("4) Address ");
             System.out.println("------------------------------------------------- ");
 
-            userInput=scanner.next();
+            userInput = scanner.next();
             System.out.println("");
-            
-            if(userInput.equals("1")){
 
-               
+            if (userInput.equals("1")) {
 
-                while(true){
-                System.out.println("Enter your previous phone number : ");
-                System.out.println("the state code (+20) is added.");
-                prev_phoneNumber=scanner.next();
+                while (true) {
+                    System.out.println("Enter your previous phone number : ");
+                    System.out.println("the state code (+20) is added.");
+                    prev_phoneNumber = scanner.next();
 
-                        System.out.println("");
+                    System.out.println("");
                     if (prev_phoneNumber.length() == 10) {
-                        prev_phoneNumber="+20"+prev_phoneNumber;
+                        prev_phoneNumber = "+20" + prev_phoneNumber;
                         break;
                     } else {
                         System.out.println("Invalid phone number, the phone number should be 10 numbers !");
                         continue;
 
                     }
-                        }
-
-
-                        
-
-               
-
-                while(true){
-                System.out.println("Enter the phone number you want to be added : ");
-                System.out.println("the state code (+20) is added.");
-                 new_phoneNumber=scanner.next();
-
-
-                        System.out.println("");
-                    if (new_phoneNumber.length() == 10) {
-                        new_phoneNumber="+20"+new_phoneNumber;
-                        break;
-                    } else {
-                        System.out.println("Invalid phone number, the phone number should be 10 numbers !");
-                        continue;
-
-                    }
-                        }
-
-
                 }
 
+                while (true) {
+                    System.out.println("Enter the phone number you want to be added : ");
+                    System.out.println("the state code (+20) is added.");
+                    new_phoneNumber = scanner.next();
 
+                    System.out.println("");
+                    if (new_phoneNumber.length() == 10) {
+                        new_phoneNumber = "+20" + new_phoneNumber;
+                        break;
+                    } else {
+                        System.out.println("Invalid phone number, the phone number should be 10 numbers !");
+                        continue;
 
+                    }
+                }
 
-               
+            }
 
             while ((line = reader.readLine()) != null) {
                 // Replace the old value with the new value
                 line = line.replace(prev_phoneNumber, new_phoneNumber);
                 content.append(line).append("\n");
             }
-                reader.close();
-                
-                // Write the updated content back to the file
-                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-                //System.out.println("Successfully changed phone number to : "+new_phoneNumber);
-                writer.write(content.toString());
-                writer.close();
+            reader.close();
 
-            }//else
-            
-            
+            // Write the updated content back to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            // System.out.println("Successfully changed phone number to :
+            // "+new_phoneNumber);
+            writer.write(content.toString());
+            writer.close();
 
+        } // else
 
-        } //func
+    } // func
 
+    // user interface menu
+    public void userMenu() throws IOException {
 
-    
-    
-    
-    
-    //user interface menu
-    public void userMenu() throws IOException{
-        
-        
-        while(true){
-        
-        System.out.println(" ");
-        System.out.println("Choose an action you want to perfom : ");
-        System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
-        System.out.println(" ");
-        System.out.println("1.) Create account");
-        System.out.println(" ");
-        System.out.println("2.) Login");
-        System.out.println(" ");
-        System.out.println("3.) Edit account");
-        System.out.println(" ");
-        System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
-        System.out.println("\n");
-        String userInput=scanner.next();
-        System.out.println("");
+        while (true) {
 
+            System.out.println(" ");
+            System.out.println("Choose an action you want to perfom : ");
+            System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
+            System.out.println(" ");
+            System.out.println("1.) Create account");
+            System.out.println(" ");
+            System.out.println("2.) Login");
+            System.out.println(" ");
+            System.out.println("3.) Edit account");
+            System.out.println(" ");
+            System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
+            System.out.println("\n");
+            String userInput = scanner.next();
+            System.out.println("");
 
-         if(userInput.equals("1")){
-            create_acc();
-            break;
-         }
-    
-         if(userInput.equals("2")){
-            login();
-            break;
-         }
-         
-         if(userInput.equals("3")){
-            
+            if (userInput.equals("1")) {
+                create_acc();
+                break;
+            }
+
+            if (userInput.equals("2")) {
+                login();
+                break;
+            }
+
+            if (userInput.equals("3")) {
+
                 edit_acc();
                 break;
-            
 
-            
-         }
+            }
 
-         else{
-            System.out.println("Invalid input! please choose only from the following options.");
-            continue;
-         }
-
+            else {
+                System.out.println("Invalid input! please choose only from the following options.");
+                continue;
+            }
 
         }
-    
+
     }
-
-
-
-
-
-
-
-
 
     // diplay all users accounts and their information (for admin usage only)
     public void display_all_users() throws FileNotFoundException, IOException {

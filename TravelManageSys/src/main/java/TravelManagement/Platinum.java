@@ -4,6 +4,8 @@
  */
 package TravelManagement;
 
+import AccountManagement.RandIDGenerator;
+
 /**
  *
  * @author bmood
@@ -14,6 +16,10 @@ public class Platinum extends Ticket {
     public Platinum() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
         // function
+        RandIDGenerator generator = new RandIDGenerator();
+        generator.setItemCount(3);
+        generator.generateRandID();
+        ticketId = generator.getRandID();
     }
 
     @Override
@@ -21,14 +27,8 @@ public class Platinum extends Ticket {
         return 0.6;
     }
 
-    public void platinum_welcome() {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t     PLATINUM TICKET");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println();
-    }
-
-    public void addPlatinum() {
+    public void Add() {
+        ticketTypeheader("Platinum");
         System.out.println("how many Platinum tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
@@ -41,25 +41,40 @@ public class Platinum extends Ticket {
         // }
         else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            addPlatinum();
+            Add();
         }
 
     }
 
-    public void deletePlatinum() {
+    public void Delete() {
         System.out.println("how many Platinum tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
             if (deletedTicket > Pcounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
-                deletePlatinum();
+                Delete();
             } else {
                 Pcounter -= deletedTicket;
                 System.out.println("Done! " + deletedTicket + " Platinum tickets deleted from your cart");
             }
         } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            deletePlatinum();
+            Delete();
         }
     }
+
+    @Override
+    public void setType() {
+        this.type = "platinum";
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getCounter() {
+        return Pcounter;
+    }
+
 }
