@@ -111,10 +111,11 @@ public class fileManipulation {
                 System.out.println("No match found.");
             }
             String bookedTripArr[] = content.split("\\s*,\\s*");
-            String dates[] = bookedTripArr[1].split("\\s+\\|\\s+");
+            String dates[] = bookedTripArr[2].split("\\s+\\|\\s+");
             CustomerBookedTrips
-                    .add(new BookedTravels(bookedTripArr[0], dateFormat.parse(dates[0]), dateFormat.parse(dates[1]),
-                            Integer.parseInt(bookedTripArr[2]), bookedTripArr[3]));
+                    .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1], dateFormat.parse(dates[0]),
+                            dateFormat.parse(dates[1]),
+                            Integer.parseInt(bookedTripArr[3]), bookedTripArr[4]));
         }
         return CustomerBookedTrips;
     }
