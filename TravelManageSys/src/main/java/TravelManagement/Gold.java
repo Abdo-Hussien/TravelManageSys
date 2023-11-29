@@ -4,6 +4,8 @@
  */
 package TravelManagement;
 
+import AccountManagement.RandIDGenerator;
+
 /**
  *
  * @author bmood
@@ -14,6 +16,10 @@ public class Gold extends Ticket {
     public Gold() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
         // function
+        RandIDGenerator generator = new RandIDGenerator();
+        generator.setItemCount(3);
+        generator.generateRandID();
+        ticketId = generator.getRandID();
     }
 
     @Override
@@ -21,14 +27,7 @@ public class Gold extends Ticket {
         return 0.3;
     }
 
-    public void gold_welcome() {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t\tGOLD TICKET");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println();
-    }
-
-    public void addGold() {
+    public void Add() {
         System.out.println("how many Gold tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
@@ -41,25 +40,41 @@ public class Gold extends Ticket {
         // }
         else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            addGold();
+            Add();
         }
 
     }
 
-    public void deleteGold() {
+    public void Delete() {
+        ticketTypeheader("Gold");
         System.out.println("how many Gold tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
             if (deletedTicket > Gcounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
-                deleteGold();
+                Delete();
             } else {
                 Gcounter -= deletedTicket;
                 System.out.println("Done! " + deletedTicket + " Gold tickets deleted from your cart");
             }
         } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            deleteGold();
+            Delete();
         }
     }
+
+    @Override
+    public void setType() {
+        this.type = "gold";
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getCounter() {
+        return Gcounter;
+    }
+
 }

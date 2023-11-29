@@ -6,6 +6,8 @@ package TravelManagement;
 
 import java.util.Scanner;
 
+import AccountManagement.RandIDGenerator;
+
 /**
  *
  * @author bmood
@@ -16,21 +18,20 @@ public class Silver extends Ticket {
     public Silver() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
         // function
-    }
 
+        RandIDGenerator generator = new RandIDGenerator();
+        generator.setItemCount(3);
+        generator.generateRandID();
+        ticketId = generator.getRandID();
+    }
+    
     @Override
     public double Ticket_Price() {
         return 0.05;
     }
 
-    public void silver_welcome() {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t       SILVER TICKET");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println();
-    }
-
-    public void addSliver() {
+    public void Add() {
+        ticketTypeheader("Silver");
         System.out.println("how many sliver tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
@@ -43,18 +44,18 @@ public class Silver extends Ticket {
         // }
         else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            addSliver();
+            Add();
         }
 
     }
 
-    public void deleteSliver() {
+    public void Delete() {
         System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {
             if (deletedTicket > Scounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
-                deleteSliver();
+                Delete();
             } else {
                 Scounter -= deletedTicket;
                 System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
@@ -62,7 +63,22 @@ public class Silver extends Ticket {
         } else {
 
             System.out.println("invalid number of tickets entered! Please try again.");
-            deleteSliver();
+            Delete();
         }
     }
+
+    @Override
+    public void setType() {
+        this.type = "silver";
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public int getCounter() {
+        return Scounter;
+    }
+
 }
