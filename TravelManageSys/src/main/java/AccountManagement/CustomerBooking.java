@@ -91,7 +91,7 @@ public class CustomerBooking {
                 ShowTripDetails(ChosenTrip, Ans);
                 break;
             case 'd':
-                mainCustomer();            
+                mainCustomer();
                 break;
             default:
                 ErrorMessage("Wrong Input.. Try again!", 2000);
@@ -102,9 +102,11 @@ public class CustomerBooking {
 
     private void ShowTripDetails(Trip ChosenTrip, char Ans) {
         Scanner input = new Scanner(System.in);
-        System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
-        System.out.print("Trip ID: ");
-        ChosenTrip = getTrip(input.next());
+        if (Ans != '?') {
+            System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
+            System.out.print("Trip ID: ");
+            ChosenTrip = getTrip(input.next());
+        }
         if (ChosenTrip == null)
             ErrorMessage("No Trips Found!", 2000);
         Trip.displayTripDetails(ChosenTrip);
@@ -137,8 +139,6 @@ public class CustomerBooking {
         try {
             System.out.println(message);
             Thread.sleep(timeout);
-            // System.out.print("\033[H\033[2J");
-            // System.out.flush();
             mainCustomer();
         } catch (Exception e) {
             System.out.println("Thread error sleeping.");
@@ -173,7 +173,14 @@ public class CustomerBooking {
                 mainCustomer();
             }
         }
-        if (filteredTrips.isEmpty())
+        price_start = 0;
+        price_end = 0;
+        search_text = null;
+        start_date = null;
+        end_date = null;
+        if (filteredTrips.size() == 1) {
+            ShowTripDetails(filteredTrips.get(0), '?');
+        } else if (filteredTrips.isEmpty())
             ErrorMessage("\nNo Trip Found with these preferences..", 3000);
         return filteredTrips;
         // Checkout no cancellation - Save in a file.
@@ -184,14 +191,14 @@ public class CustomerBooking {
         for (int i = 0; i < Filters.length; i++) {
             if (Filters[i].matches("\\d{1,2}-\\d{1,2}-\\d{4}")) {
                 start_date = Filters[i];
-                end_date = Filters[i + 1];
+                end_date = i + 1 == Filters.length ? "01-12-3000" : Filters[i + 1];
                 i += 1;
                 continue;
             }
             if (Filters[i].matches("\\d+(\\.\\d+)?")) {
                 try {
                     price_start = Double.parseDouble(Filters[i]);
-                    price_end = Double.parseDouble(Filters[i + 1]);
+                    price_end = Double.parseDouble(i + 1 == Filters.length ? "99999999" : Filters[i + 1]);
                     i += 1;
                     continue;
                 } catch (Exception e) {
@@ -212,27 +219,38 @@ public class CustomerBooking {
     }
 
     private boolean tripSearch(Trip trip, String search_start_date, String search_end_date) throws ParseException {
-        if (search_start_date == null || search_end_date == null)
+        if (search_start_date == null && search_end_date == null)
             return true;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date start_date = dateFormat.parse(search_start_date);
-        Date end_date = dateFormat.parse(search_end_date);
+        // 05-11-2023
+        Date start_date = null;
+        Date end_date = null;
+        if (search_start_date != null)
+            start_date = dateFormat.parse(search_start_date);
+        if (search_end_date != null)
+            end_date = dateFormat.parse(search_end_date);
         Date tripStartDates[] = trip.getStartDate();
         Date tripEndDates[] = trip.getEndDate();
-        Boolean FoundDate = false;
+        Boolean FoundStartDate = false;
+        Boolean FoundEndDate = false;
 
         for (Date s_date : tripStartDates) {
-            FoundDate = s_date.after(start_date) || s_date.equals(start_date);
+            FoundStartDate = s_date.after(start_date) || s_date.equals(start_date);
+            if (FoundStartDate)
+                break;
         }
         for (Date e_date : tripEndDates) {
-            FoundDate = e_date.after(end_date) || e_date.equals(end_date);
+            FoundEndDate = e_date.after(end_date) || e_date.equals(end_date);
+            if (FoundEndDate)
+                break;
         }
-        return FoundDate;
+        return FoundStartDate || FoundEndDate;
     }
 
     private boolean tripSearch(Trip trip, double price_start, double price_end) {
         double tripPrice = trip.getInitPrice();
-        return tripPrice >= price_start && (price_end > 0 && price_end > price_start) ? tripPrice <= price_end : true;
+        return (tripPrice >= price_start)
+                && ((price_end > 0 && price_end > price_start) ? tripPrice <= price_end : true);
     }
 
     private boolean tripSearch(Trip trip, String search_filter, String start_date, String end_date, double price_start,

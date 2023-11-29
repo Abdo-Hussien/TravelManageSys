@@ -60,8 +60,10 @@ public abstract class Trip {
             System.out.println("For " + trip.getTripType() + " touring");
             // Cannot retrieve rate of ticket price from Silver class
             System.out.println("$" + 1299.99 + "/person");
+            System.out.println("Available dates:");
             for (int i = 0; i < startDates.length; i++)
-                System.out.print(dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
+                System.out
+                        .print("~ " + dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
             System.out.println("-------------------------------");
         }
     }
@@ -85,9 +87,9 @@ public abstract class Trip {
             System.out.print("\t\t\t\t " + "$" + 1299.99 + "/person");
         }
         System.out.println("");
-        // System.out.println("" + "For " + trip.getTripType() + " touring");
+        // System.out.println("For " + trip.getTripType() + " touring");
         // Cannot retrieve rate of ticket price from Silver class
-        // System.out.println("" + "$" + 1299.99 + "/person");
+        // System.out.println("$" + 1299.99 + "/person");
         for (Trip trip : trips) {
             startDates = trip.getStartDate();
             endDates = trip.getEndDate();
@@ -111,23 +113,24 @@ public abstract class Trip {
         System.out.println("Explore the Beauty of " + trip.getTitle() + ".");
         System.out.println("**********************************");
         System.out.println("");
-        System.out.println("" + trip.getDescription());
+        System.out.println(trip.getDescription());
         System.out.println("");
-        System.out.println("" + trip.getTitle());
-        System.out.println("" + "For " + trip.getTripType() + " touring");
+        System.out.println(trip.getTitle());
+        System.out.println("For " + trip.getTripType() + " touring");
         // Cannot retrieve rate of ticket price from Silver class
-        System.out.println("" + "$" + 1299.99 + "/person");
+        System.out.println("$" + 1299.99 + "/person");
+        System.out.println("Available dates:");
         for (int i = 0; i < startDates.length; i++)
-            System.out.print(dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
+            System.out.print("~ " + dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
         System.out.println("");
-        System.out.println("" + "Activities:\n");
+        System.out.println("Activities:\n");
         for (String game : Activities) {
-            System.out.println("" + "- " + game);
+            System.out.println("- " + game);
         }
         System.out.println("");
-        System.out.println("" + "Staying at: " + trip.getHotelName());
-        System.out.println("" + "Going by: " + trip.getTransportationType());
-        System.out.println("" + "Car Rentals (Optional)");
+        System.out.println("Staying at: " + trip.getHotelName());
+        System.out.println("Going by: " + trip.getTransportationType());
+        System.out.println("Car Rentals (Optional)");
         System.out.println("");
         System.out.println("************************************************");
         System.out.println("Book Now and Embark on an Unforgettable Journey!");
