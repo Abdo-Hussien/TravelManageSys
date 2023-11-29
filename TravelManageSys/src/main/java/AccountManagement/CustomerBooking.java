@@ -45,20 +45,14 @@ public class CustomerBooking {
         Scanner input = new Scanner(System.in);
         Trip.displayTrips(FeaturedTrips);
         System.out.println("\nA. Search for a trip(s)");
-        System.out.println("B. See details of a trip");
-        System.out.println("C. Go Back");
+        System.out.println("B. Go Back");
         System.out.print("Choice: ");
         Ans = Character.toLowerCase(input.next().charAt(0));
-        input.nextLine();
         switch (Ans) {
             case 'a':
                 SearchTrips(Ans, ChosenTrip);
                 break;
             case 'b':
-                input.close();
-                ShowTripDetails(ChosenTrip, Ans);
-                break;
-            case 'c':
                 // Go Back.
                 break;
             default:
@@ -94,8 +88,10 @@ public class CustomerBooking {
                 System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
                 break;
             case 'c':
-                input.close();
                 ShowTripDetails(ChosenTrip, Ans);
+                break;
+            case 'd':
+                mainCustomer();            
                 break;
             default:
                 ErrorMessage("Wrong Input.. Try again!", 2000);
@@ -116,7 +112,6 @@ public class CustomerBooking {
         System.out.println("B. Go Back");
         System.out.print("Choice: ");
         Ans = Character.toLowerCase(input.next().charAt(0));
-        input.close();
         switch (Ans) {
             case 'a':
                 addBookingTrip(ChosenTrip);
@@ -124,13 +119,13 @@ public class CustomerBooking {
                 System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
                 break;
             case 'b':
-                // Go Back.
+                mainCustomer();
                 break;
             default:
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-
+        input.close();
     }
 
     private void addBookingTrip(Trip ChosenTrip) {
@@ -179,7 +174,7 @@ public class CustomerBooking {
             }
         }
         if (filteredTrips.isEmpty())
-            System.out.println("\nNo Trip Found with these preferences..");
+            ErrorMessage("\nNo Trip Found with these preferences..", 3000);
         return filteredTrips;
         // Checkout no cancellation - Save in a file.
         // Booking Save in runtime variables (Array List) - Not save in a file.
