@@ -51,6 +51,9 @@ public class Customers extends Person {
 
     boolean logged_in = false; // used in edit account for user
 
+    public Customers() {
+    }
+
     // create an account
     public void create_acc() throws IOException {
         System.out.println("\n");
