@@ -357,7 +357,7 @@ public class Customers extends Person {
                 System.out.println("you have " + counter + "/3 attempts left");
             }
             if (counter == 3) {
-                System.out.println("unfortunately you can't login..you have been timed out temporarily!");
+                System.out.println("unfortunately you can't login...you have been timed out temporarily!");
                 System.exit(0);
             }
         }
