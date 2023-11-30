@@ -6,7 +6,7 @@ pass123
 Male
 2476 Gnatty Creek Road | New York | 
 +201158885496
-[ 1001 , 15-12-2023 | 20-12-2023 | , 2 , Platinum , ] <> [ 1007 , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
+[ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Platinum , ] <> [ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
 1005 | 
 ---
 abc45
@@ -17,8 +17,8 @@ summer2023
 Female
 112 Oak Street | California | 
 +4085557890
-[ 1003 , 10-02-2024 | 15-02-2024 | , 1 , Platinum , ]
-1006
+No Booked Trips
+1006 | 
 ---
 xyz78
 Michael Rodriguez
@@ -28,7 +28,8 @@ traveler21
 Male
 789 Maple Avenue | Texas | 
 +5127771234
-[ 1001 , 15-12-2023 | 20-12-2023 | , 2 , Silver , ]
+[ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Silver , ] <> 
+No Trips History
 ---
 def12
 Sophia Garcia
@@ -38,8 +39,8 @@ sunflower12
 Female
 456 Pine Street | Florida | 
 +3054445678
-[ 1005 , 20-09-2024 | 27-09-2024 | , 1 , Gold , ]
-1005
+No Booked Trips
+1005 | 
 ---
 ghi90
 Benjamin Lee
@@ -49,7 +50,8 @@ adventure123
 Male
 890 Cedar Avenue | Arizona | 
 +6238889999
-[ 1006 , 12-04-2024 | 18-04-2024 | , 2 , Platinum , ]
+[ 1006 , Santorini , 12-04-2024 | 18-04-2024 | , 2 , Platinum , ] <> 
+No Trips History
 ---
 jkl23
 Olivia Turner
@@ -59,8 +61,8 @@ exploreNow
 Female
 678 Birch Street | Nevada | 
 +7753334444
-[ 1007 , 08-07-2024 | 15-07-2024 | , 1 , Silver , ]
-1007
+[ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
+1007 | 
 ---
 mno34
 Christopher Martin
@@ -70,7 +72,8 @@ holiday321
 Male
 234 Redwood Lane | Colorado | 
 +3031112222
-[ 1008 , 03-12-2024 | 10-12-2024 | , 2 , Gold , ]
+[ 1008 , Maldives , 03-12-2024 | 10-12-2024 | , 2 , Gold , ] <> 
+No Trips History
 ---
 pqr56
 Isabella Adams
@@ -80,8 +83,8 @@ dreamer45
 Female
 890 Oakwood Drive | Oregon | 
 +5415556666
-[ 1009 , 14-05-2024 | 21-05-2024 | , 1 , Platinum , ]
-1009
+[ 1002 , Ain Sokhna , 05-12-2023 | 08-12-2023 | , 1 , Platinum , ] <> 
+1009 | 
 ---
 stu89
 Samuel Lewis
@@ -91,7 +94,8 @@ sammy123
 Male
 345 Elm Street | Washington | 
 +2069876543
-[ 1010 , 02-08-2024 | 09-08-2024 | , 2 , Silver , ]
+[ 1010 , Dubai , 02-08-2024 | 09-08-2024 | , 2 , Silver , ] <> 
+No Trips History
 ---
 vwx67
 Lily Nguyen
@@ -101,8 +105,8 @@ flowerPower
 Female
 567 Magnolia Avenue | Hawaii | 
 +8083335555
-[ 1011 , 15-10-2024 | 22-10-2024 | , 1 , Platinum , ]
-1011 | 1019 | 
+[ 1017 , Reykjavik , 11-09-2024 | 18-09-2024 | , 1 , Platinum , ] <> [ 1000 , Cancun , 15-12-2023 | 20-12-2023 | , 1 , Gold , ] <> 
+1011 | 1019 | 1004 | 
 ---
 yzab1
 Aisha Malik
@@ -112,7 +116,8 @@ sunshine123
 Female
 123 Pineapple Lane | California | 
 +4089991111
-[ 1012 , 05-04-2024 | 12-04-2024 | , 1 , Gold , ]
+[ 1012 , Kyoto , 05-04-2024 | 12-04-2024 | , 1 , Gold , ] <> 
+No Trips History
 ---
 cde78
 Daniel Thompson
@@ -122,7 +127,8 @@ traveler456
 Male
 456 Cedar Street | Texas | 
 +5126667777
-[ 1013 , 07-12-2024 | 14-12-2024 | , 2 , Platinum , ]
+[ 1004 , Tokyo , 07-02-2024 | 14-02-2024 | , 1 , Platinum , ] <> 
+No Trips History
 ---
 def45
 Mia Johnson
@@ -132,8 +138,8 @@ exploreNature
 Female
 789 Maple Avenue | Florida | 
 +3052223333
-[ 1014 , 03-03-2024 | 10-03-2024 | , 1 , Silver , ]
-1014
+[ 1019 , Vancouver , 05-05-2024 | 12-05-2024 | , 1 , Silver , ] <> 
+1005 | 1002 | 1004 | 1008 | 
 ---
 fgh67
 Jonathan Williams
@@ -143,7 +149,8 @@ adventureTime
 Male
 890 Cedar Avenue | Arizona | 
 +6238889999
-[ 1015 , 18-01-2024 | 25-01-2024 | , 2 , Platinum , ]
+[ 1015 , Cape Town , 18-01-2024 | 25-01-2024 | , 4 , Silver , ] <> 
+No Trips History
 ---
 hij89
 Emily Kim
@@ -153,8 +160,8 @@ winterWonder
 Female
 678 Birch Street | Nevada | 
 +7753334444
-[ 1016 , 22-06-2024 | 29-06-2024 | , 1 , Silver , ]
-1016
+[ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> 
+1005 | 
 ---
 klm12
 Liam Martin
@@ -164,7 +171,8 @@ holiday321
 Male
 234 Redwood Lane | Colorado | 
 +3031112222
-[ 1018 , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> 
+No Booked Trips
+No Trips History
 ---
 lno34
 Sophia Adams
@@ -174,8 +182,8 @@ dreamer45
 Female
 890 Oakwood Drive | Oregon | 
 +5415556666
-[ 1017 , 11-09-2024 | 18-09-2024 | , 2 , Gold , ] <> [ 1020 , 20-08-2024 | 27-08-2024 | , 1 , Silver , ] <> 
-1008 | 1010
+[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 2 , Gold , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Silver , ] <> 
+1008 | 1010 | 
 ---
 opq56
 Olivia Parker
@@ -185,6 +193,6 @@ adventure123
 Female
 567 Magnolia Avenue | Hawaii | 
 +8083335555
-[ 1018 , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> [ 1016 , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> 
-1003
+[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> [ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> 
+1003 | 
 ---
