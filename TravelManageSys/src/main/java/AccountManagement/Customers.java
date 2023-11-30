@@ -39,6 +39,7 @@ public class Customers extends Person {
     private String stateAddress;
     private String zipAddress;
     boolean logged_in = false; // used in edit account for user
+    private ArrayList<Customers> allcustomer1 = new ArrayList<Customers>();
 
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
@@ -311,10 +312,7 @@ public class Customers extends Person {
     }
 
     // login into account
-    public void login() throws FileNotFoundException, IOException {
-
-        ArrayList<Customers> allCustomers = new ArrayList<>();
-        allCustomers = fileManipulation.getAllCustomers();
+    public void login(ArrayList<Customers> allCustomers) throws FileNotFoundException, IOException {
 
         int counter = 0;
         boolean checked = false;
@@ -347,14 +345,16 @@ public class Customers extends Person {
                 if (allCustomers.get(i).username.equals(userName)) {
                     if (allCustomers.get(i).password.equals(pass)) {
                         checked = true;
-                        System.out.println("login successful!");
-                        // main page
                     }
                 }
             }
             if (checked == false) {
                 counter++;
                 System.out.println("you have " + counter + "/3 attempts left");
+            } else if (checked == true) {
+                System.out.println("login successful!");
+                break;
+                // main
             }
             if (counter == 3) {
                 System.out.println("unfortunately you can't login...you have been timed out temporarily!");
@@ -386,7 +386,7 @@ public class Customers extends Person {
             System.out.println("You have to logged in to edit your account.");
             System.out.println("---------------------------------------------");
 
-            login();
+            login(allcustomer1);
         }
 
         else {
@@ -587,7 +587,7 @@ public class Customers extends Person {
             }
 
             if (userInput.equals("2")) {
-                login();
+                login(allcustomer1);
                 break;
             }
 
