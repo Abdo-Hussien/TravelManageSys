@@ -4,14 +4,18 @@
  */
 package AccountManagement;
 
+import java.util.ArrayList;
+
+import TravelManagement.TourGuide;
+
 /**
  *
  * @author bmood
  */
 public interface Administration {
 
-    void customerManipulation();
-    void tourGuideManipulation();
+    void customerManipulation(ArrayList<Customers> AllCustomers);
+    void tourGuideManipulation(ArrayList<TourGuide> AllTourGuide);
     void tripsAvalability();
     void customerDiscounts();
     
