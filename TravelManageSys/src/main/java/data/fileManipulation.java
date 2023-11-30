@@ -118,7 +118,7 @@ public class fileManipulation {
     }
 
     // Function to get all TourGuides from the file
-    public ArrayList<TourGuide> getAllTourGuides() {
+    public static ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/TourGuides.txt");
@@ -139,7 +139,7 @@ public class fileManipulation {
     }
 
     // Function to get all Hotels from the file
-    public ArrayList<Hotels> getAllHotels() {
+    public static ArrayList<Hotels> getAllHotels() {
         try {
             ArrayList<Hotels> AllHotels = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/Hotels.txt");
