@@ -1,13 +1,13 @@
 package AccountManagement;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
-import data.fileManipulation;
+import TravelManagement.TourGuide;
 
 public class AdminFunctions extends Admin {
     int index;
 
-    public void displayAllCustomersinfo() {
+    public void displayAllCustomersinfo(ArrayList<Customers> AllCustomers) {
         System.out.println("Please enter the customer id: ");
         input = in.next();
         for (int i = 0; i < AllCustomers.size(); i++) {
@@ -29,26 +29,26 @@ public class AdminFunctions extends Admin {
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
-                editCustomerInformations("null");
+                editCustomerInformations("null", AllCustomers);
                 break;
             case '2':
-                DeleteCustomer();
+                DeleteCustomer(AllCustomers);
                 break;
             case '3':
-                customerManipulation();
+                customerManipulation(AllCustomers);
                 break;
             default:
                 System.out.println("wrong input! please try again");
-                displayAllCustomersinfo();
+                displayAllCustomersinfo(AllCustomers);
                 break;
         }
 
     }
 
-    public void editCustomerInformations(String status) {
+    public void editCustomerInformations(String status, ArrayList<Customers> AllCustomers) {
         if (status.equals("new")) {
 
-            displayAllCustomersinfo();
+            displayAllCustomersinfo(AllCustomers);
         }
 
         System.out.println("what filed you want to edit: " +
@@ -92,10 +92,10 @@ public class AdminFunctions extends Admin {
             System.out.println("invalid input! please try again..");
 
         }
-        editCustomerInformations("null");
+        editCustomerInformations("null", AllCustomers);
     }
 
-    public void DeleteCustomer() {
+    public void DeleteCustomer(ArrayList<Customers> AllCustomers) {
         System.out.println("Please enter the Tour guide id you want to delete: ");
         input = in.next();
         for (int i = 0; i < AllCustomers.size(); i++) {
@@ -110,12 +110,12 @@ public class AdminFunctions extends Admin {
         }
         if (checked == false) {
             System.out.println("Wrong input! Please try again..");
-            DeleteCustomer();
+            DeleteCustomer(AllCustomers);
         }
 
     }
 
-    public void displayAllTourGuideinfo() {
+    public void displayAllTourGuideinfo(ArrayList<TourGuide> AllTourGuide) {
         System.out.println("Please enter the Tour guide id: ");
         input = in.next();
         for (int i = 0; i < AllTourGuide.size(); i++) {
@@ -137,26 +137,26 @@ public class AdminFunctions extends Admin {
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
-                editTourguideInformations("null");
+                editTourguideInformations("null", AllTourGuide);
                 break;
             case '2':
-                DeleteTourGuide();
+                DeleteTourGuide(AllTourGuide);
                 break;
             case '3':
-                tourGuideManipulation();
+                tourGuideManipulation(AllTourGuide);
                 break;
             default:
                 System.out.println("wrong input! please try again");
-                displayAllTourGuideinfo();
+                displayAllTourGuideinfo(AllTourGuide);
                 break;
         }
 
     }
 
-    public void editTourguideInformations(String status) {
+    public void editTourguideInformations(String status, ArrayList<TourGuide> AllTourGuide) {
         if (status.equals("new")) {
 
-            displayAllTourGuideinfo();
+            displayAllTourGuideinfo(AllTourGuide);
         }
 
         System.out.println("what filed you want to edit: " +
@@ -202,10 +202,10 @@ public class AdminFunctions extends Admin {
             System.out.println("invalid input! please try again..");
 
         }
-        editTourguideInformations("null");
+        editTourguideInformations("null", AllTourGuide);
     }
 
-    public void DeleteTourGuide() {
+    public void DeleteTourGuide(ArrayList<TourGuide> AllTourGuide) {
         System.out.println("Please enter the Tour guide id you want to delete: ");
         input = in.next();
         for (int i = 0; i < AllTourGuide.size(); i++) {
@@ -220,7 +220,7 @@ public class AdminFunctions extends Admin {
         }
         if (checked == false) {
             System.out.println("Wrong input! Please try again..");
-            DeleteTourGuide();
+            DeleteTourGuide(AllTourGuide);
         }
 
     }

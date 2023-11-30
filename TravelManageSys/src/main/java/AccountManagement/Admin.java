@@ -5,20 +5,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import TravelManagement.TourGuide;
-import data.fileManipulation;
 
 public class Admin implements Administration {
     protected Scanner in = new Scanner(System.in);
     protected String input;
     protected char choice;
     protected boolean checked = false;
-    protected ArrayList<Customers> AllCustomers = new ArrayList<>(fileManipulation.getAllCustomers());
-    protected ArrayList<TourGuide> AllTourGuide = new ArrayList<>(fileManipulation.getAllTourGuides());
     protected AdminFunctions functions = new AdminFunctions();
     protected Customers addAccount = new Customers();
 
     @Override
-    public void customerManipulation() {
+    public void customerManipulation(ArrayList<Customers> AllCustomers) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t       CUSTOMERS");
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -37,13 +34,13 @@ public class Admin implements Administration {
             choice = in.next().charAt(0);
             switch (choice) {
                 case '1':
-                    functions.displayAllTourGuideinfo();
+                    functions.displayAllCustomersinfo(AllCustomers);
                     break;
                 case '2':
-                    functions.editCustomerInformations("new");
+                    functions.editCustomerInformations("new", AllCustomers);
                     break;
                 case '3':
-                    functions.DeleteCustomer();
+                    functions.DeleteCustomer(AllCustomers);
                     break;
                 case '4':
                     try {
@@ -68,14 +65,14 @@ public class Admin implements Administration {
     }
 
     @Override
-    public void tourGuideManipulation() {
+    public void tourGuideManipulation(ArrayList<TourGuide> AllTourGuide) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t       TOUR GUIDES");
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
         for (int i = 0; i < AllTourGuide.size(); i++) {
             System.out.println(AllTourGuide.get(i).account_id);
-            System.out.println(AllTourGuide.get(i).first_name + " " + AllCustomers.get(i).last_name);
+            System.out.println(AllTourGuide.get(i).first_name + " " + AllTourGuide.get(i).last_name);
             System.out.println(AllTourGuide.get(i).username);
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
         }
@@ -87,13 +84,13 @@ public class Admin implements Administration {
             choice = in.next().charAt(0);
             switch (choice) {
                 case '1':
-                    functions.displayAllCustomersinfo();
+                    functions.displayAllTourGuideinfo(AllTourGuide);
                     break;
                 case '2':
-                    functions.editTourguideInformations("new");
+                    functions.editTourguideInformations("new", AllTourGuide);
                     break;
                 case '3':
-                    functions.DeleteTourGuide();
+                    functions.DeleteTourGuide(AllTourGuide);
                     break;
                 case '4':
                     try {
@@ -108,7 +105,7 @@ public class Admin implements Administration {
 
                 default:
                     System.out.println("invalid input! please try again...");
-                    tourGuideManipulation();
+                    tourGuideManipulation(AllTourGuide);
                     break;
             }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');

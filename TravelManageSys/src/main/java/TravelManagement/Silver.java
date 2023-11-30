@@ -4,7 +4,6 @@
  */
 package TravelManagement;
 
-import java.util.Scanner;
 
 import AccountManagement.RandIDGenerator;
 

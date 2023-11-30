@@ -75,16 +75,17 @@ public class fileManipulation {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
             ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
             String fileContent = Files.readString(path);
             String Customers[] = fileContent.split("\\s+---\\s+");
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                CustomerBookedTrips = parseBookedTrip(customer[8].split("\\s+<>\\s+"));
+                CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
+                        : parseBookedTrip(customer[8].split("\\s+<>\\s+"));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
-                        customer[8].split("\\s+\\|\\s+")));
+                        customer[8].equalsIgnoreCase("No Trips History") ? null : customer[8].split("\\s+\\|\\s+")));
             }
             return AllCustomers;
         } catch (Exception e) {
@@ -106,9 +107,12 @@ public class fileManipulation {
                 content = matcher.group(1);
             } else {
                 System.out.println("No match found.");
+                content = null;
             }
-            String bookedTripArr[] = content.split("\\s*,\\s*");
-            String dates[] = bookedTripArr[2].split("\\s+\\|\\s+");
+            String bookedTripArr[] = content == null ? null : content.split("\\s*,\\s*");
+            String dates[] = content == null ? null : bookedTripArr[2].split("\\s+\\|\\s+");
+            if (bookedTripArr == null && dates == null)
+                continue;
             CustomerBookedTrips
                     .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1], dateFormat.parse(dates[0]),
                             dateFormat.parse(dates[1]),
