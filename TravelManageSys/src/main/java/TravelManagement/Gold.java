@@ -28,6 +28,7 @@ public class Gold extends Ticket {
     }
 
     public void Add() {
+        ticketTypeheader("Gold");
         System.out.println("how many Gold tickets you want?");
         addeddTicket = in.nextInt();
         if (addeddTicket > 0) {
@@ -46,7 +47,6 @@ public class Gold extends Ticket {
     }
 
     public void Delete() {
-        ticketTypeheader("Gold");
         System.out.println("how many Gold tickets you want to delete?");
         deletedTicket = in.nextInt();
         if (deletedTicket > 0) {

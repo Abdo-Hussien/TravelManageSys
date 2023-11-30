@@ -9,8 +9,10 @@ public class BookingTickets {
     Scanner in = new Scanner(System.in);
     int totalTickets = 0;
     ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+    boolean Typeisfound = false;
+    int index;
 
-    public void ticketMenu(String status) {
+    public void ticketMenu() {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t           TICKETS");
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -24,49 +26,56 @@ public class BookingTickets {
         choice = in.next().charAt(0);
 
         if (choice == '1') {
-            if (status.equals("new")) {
+            for (int i = 0; i < ticketList.size(); i++) {
+                if (ticketList.get(i).getType().equals("silver")) {
+                    Typeisfound = true;
+                    index = i;
+                }
+            }
+            if (Typeisfound == true) {
+                ticketList.get(index).Add();
+            } else {
                 ticketList.add(new Silver());
-                ticketList.get(0).Add();
-                ticketList.get(0).setType();
+                ticketList.get(ticketList.size() - 1).Add();
+                ticketList.get(ticketList.size() - 1).setType();
 
-                TicketEditMenu();
-            } else if (status.equals("old")) {
-                for (int i = 0; i < ticketList.size(); i++) {
-                    if (ticketList.get(i).getType().equals("silver")) {
-                        ticketList.get(i).Add();
-                        TicketEditMenu();
-                    } else {
-                        System.out.println("invalid Ticket Type");
-                    }
-                }
             }
+            TicketEditMenu();
         } else if (choice == '2') {
-            if (status.equals("new")) {
+            for (int i = 0; i < ticketList.size(); i++) {
+                if (ticketList.get(i).getType().equals("gold")) {
+                    Typeisfound = true;
+                    index = i;
+                }
+            }
+            if (Typeisfound == true) {
+                ticketList.get(index).Add();
+            } else {
                 ticketList.add(new Gold());
-                ticketList.get(0).Add();
-            } else if (status.equals("old")) {
-                for (int i = 0; i < ticketList.size(); i++) {
-                    if (ticketList.get(i).getType().equals("gold")) {
-                        ticketList.get(i).Add();
-                        ticketList.get(0).setType();
-                    }
-                }
+                ticketList.get(ticketList.size() - 1).Add();
+                ticketList.get(ticketList.size() - 1).setType();
             }
+            TicketEditMenu();
+
         } else if (choice == '3') {
-            if (status.equals("new")) {
-                ticketList.add(new Platinum());
-                ticketList.get(0).Add();
-            } else if (status.equals("old")) {
-                for (int i = 0; i < ticketList.size(); i++) {
-                    if (ticketList.get(i).getType().equals("platinum")) {
-                        ticketList.get(i).Add();
-                        ticketList.get(0).setType();
-                    }
+            for (int i = 0; i < ticketList.size(); i++) {
+                if (ticketList.get(i).getType().equals("platinum")) {
+                    Typeisfound = true;
+                    index = i;
                 }
             }
+            if (Typeisfound == true) {
+                ticketList.get(index).Add();
+            } else {
+                ticketList.add(new Platinum());
+                ticketList.get(ticketList.size() - 1).Add();
+                ticketList.get(ticketList.size() - 1).setType();
+
+            }
+            TicketEditMenu();
         } else {
             System.out.println("invalid input! please try again");
-            ticketMenu("new");
+            ticketMenu();
         }
 
     }
@@ -79,7 +88,7 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         choice = in.next().charAt(0);
         if (choice == '1') {
-            ticketMenu("old");
+            ticketMenu();
         } else if (choice == '2') {
             DeleteTicket();
         } else if (choice == '3') {
@@ -93,11 +102,11 @@ public class BookingTickets {
     public void DeleteTicket() {
         System.out.println("Your Cart:");
         for (int i = 0; i < ticketList.size(); i++) {
-            System.out.println(ticketList.get(i).type);
-            System.out.println(ticketList.get(i).getCounter());
+            System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).type + " tickets");
             System.out.println("**********");
         }
-        System.out.println("what type of ticket you want to delete?");
+        System.out.println("what type of ticket you want to delete?" + "\"enter ticketType\" ");
+        System.out.println("back to return to main menu");
         String ans = in.next();
         if (ans.toLowerCase().equals("silver")) {
             for (int i = 0; i < ticketList.size(); i++) {
@@ -110,14 +119,21 @@ public class BookingTickets {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
                     ticketList.get(i).Delete();
+                    TicketEditMenu();
                 }
             }
         } else if (ans.toLowerCase().equals("platinum")) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("platinum")) {
                     ticketList.get(i).Delete();
+                    TicketEditMenu();
                 }
             }
+        } else if (ans.toLowerCase().equals("back")) {
+            TicketEditMenu();
+        } else {
+            System.out.println("Invalid input! please try again");
+            DeleteTicket();
         }
     };
 
@@ -129,5 +145,8 @@ public class BookingTickets {
             totalTickets += ticketList.get(i).getCounter();
         }
         System.out.println("Total Tickets: " + totalTickets);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Enjoy your trip!");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~");
     }
 }
