@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import TravelManagement.TourGuide;
+import TravelManagement.Trip;
 
 public class Admin implements Administration {
     protected Scanner in = new Scanner(System.in);
@@ -24,6 +27,12 @@ public class Admin implements Administration {
             System.out.println(AllCustomers.get(i).account_id);
             System.out.println(AllCustomers.get(i).first_name + " " + AllCustomers.get(i).last_name);
             System.out.println(AllCustomers.get(i).username);
+            if (AllCustomers.get(i).getTripHistoryCounter() > 2) {
+                System.out.println("Discount status: True");
+            } else {
+                System.out.println("Discount status: False");
+            }
+
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
         }
         System.out.println("total number of customers: " + AllCustomers.size());
@@ -112,13 +121,41 @@ public class Admin implements Administration {
     }
 
     @Override
-    public void tripsAvalability() {
-        // tripsAvalability
-    }
-
-    @Override
-    public void customerDiscounts() {
-        // customerDiscounts
+    public void tripsAvalability(ArrayList<Trip> AllTrip) {
+        System.out.println("All available Trips!:");
+        System.out.println("*****************************************");
+        for (int i = 0; i < AllTrip.size(); i++) {
+            System.out.println("Trip ID: " + AllTrip.get(i).getTripId());
+            System.out.println("Trip Name: " + AllTrip.get(i).getTitle());
+            System.out.println("Trip capacity: " + AllTrip.get(i).getCapacity());
+            // availbaltiy ticket variable here
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        while (choice != '1' || choice != '2') {
+            System.out.println("*****************************************");
+            System.out.println("1-To show more details about tip");
+            System.out.println("2-To get back");
+            choice = in.next().charAt(0);
+            if (choice == '1') {
+                while (checked == true) {
+                    System.out.println("Enter The trip ID:");
+                    input = in.next();
+                    for (int i = 0; i < AllTrip.size(); i++) {
+                        if (AllTrip.get(i).getTripId().equals(input)) {
+                            Trip.displayTripDetails(null);
+                            checked = true;
+                        }
+                    }
+                    if (checked == false) {
+                        System.out.println("invalid input! please try again");
+                    }
+                }
+            } else if (choice == '2') {
+                // main menu
+            } else {
+                System.out.println("invaild input! please try again");
+            }
+        }
     }
 
 }
