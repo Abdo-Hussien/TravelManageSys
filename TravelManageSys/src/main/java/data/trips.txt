@@ -9,7 +9,7 @@ xvz34
 220
 Snorkeling | Scuba Diving | Mayan Ruins Tour | 
 Grand Fiesta Americana Coral Beach
-Airport Shuttle
+Flight
 ---
 1001
 Bali
@@ -22,7 +22,7 @@ yab67
 120
 Surfing | Rafting | Elephant Safari | 
 Ubud Hanging Gardens
-Private Car
+Bus
 ---
 1002
 Ain Sokhna
@@ -37,3 +37,223 @@ Parachuting | Parasailing | Skiing |
 Tolip Resort El Galala Majestic
 NoTransportation
 ---
+1003
+Sydney
+Couple
+1499.99
+10-02-2024 | 
+15-02-2024 | 
+Sydney, the capital of New South Wales, is known for its stunning harbor, iconic landmarks like the Sydney Opera House, and beautiful beaches.
+abc45
+300
+Harbour Cruise | Bridge Climb | Taronga Zoo Visit | 
+Park Hyatt Sydney
+Flight
+---
+1004
+Tokyo
+General
+2799.99
+05-06-2024 | 07-02-2024 | 
+12-06-2024 | 14-02-2024 | 
+Tokyo, the bustling capital of Japan, is a blend of modern skyscrapers and historic temples. Explore the vibrant neighborhoods, indulge in sushi, and experience the unique blend of tradition and technology.
+xyz78
+300
+Robot Restaurant Show | Tsukiji Fish Market Tour | Sumo Wrestling Match | 
+Aman Tokyo
+Bus
+---
+1005
+Rome
+Family
+1599.99
+20-09-2024 | 
+27-09-2024 | 
+Rome, the capital of Italy, is a city steeped in history, with ancient ruins, art, and delicious cuisine. Visit the Colosseum, Vatican City, and enjoy authentic pasta in the heart of the Eternal City.
+def12
+300
+Colosseum Tour | Vatican Museums | Pizza Making Class | 
+Hotel Eden
+Bus
+---
+1006
+Santorini
+Couple
+2099.99
+12-04-2024 | 
+18-04-2024 | 
+Santorini, a Greek island in the Aegean Sea, is famous for its white-washed buildings and stunning sunsets. Explore the charming villages, relax on the black sand beaches, and savor Greek cuisine.
+ghi90
+6
+Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
+Canaves Oia Hotel
+Bus
+---
+1007
+Machu Picchu
+General
+2399.99
+08-07-2024 | 
+15-07-2024 | 
+Machu Picchu, the ancient Incan citadel in Peru, is a UNESCO World Heritage site. Embark on the Inca Trail, marvel at the breathtaking views, and immerse yourself in the rich history of this mystical place.
+jkl23
+300
+Inca Trail Trek | Machu Picchu Tour | Sacred Valley Exploration | 
+Belmond Sanctuary Lodge
+Flight
+---
+1008
+Maldives
+Couple
+2999.99
+03-12-2024 | 09-12-2024 | 23-12-2024 | 
+10-12-2024 | 15-12-2024 | 01-01-2025 | 
+The Maldives, a tropical paradise in the Indian Ocean, is known for its overwater bungalows, crystal-clear waters, and vibrant coral reefs. Experience luxury and romance in this idyllic island destination.
+mno34
+300
+Snorkeling Safari | Dolphin Watching | Private Beach Dinner | 
+Gili Lankanfushi
+Flight
+---
+1009
+Barcelona
+General
+1799.99
+14-05-2024 | 
+21-05-2024 | 
+Barcelona, the capital of Catalonia, is known for its unique architecture, including the famous Sagrada Familia. Explore the lively streets, indulge in tapas, and enjoy the artistic atmosphere of this vibrant city.
+pqr56
+300
+Sagrada Familia Tour | Gothic Quarter Exploration | Flamenco Show | 
+W Barcelona
+Bus
+---
+1010
+Dubai
+Couple
+2599.99
+02-08-2024 | 15-09-2024 | 
+09-08-2024 | 22-09-2024 | 
+Dubai, a city of opulence and modernity, boasts iconic skyscrapers, luxury shopping, and desert adventures. Experience the glamour of the city and enjoy a desert safari, visit the Burj Khalifa, and indulge in world-class shopping.
+stu89
+300
+Desert Safari | Burj Khalifa Observation Deck | Shopping in Dubai Mall | 
+Burj Al Arab Jumeirah
+Bus
+---
+1011
+Queenstown
+General
+1899.99
+15-10-2024 | 
+22-10-2024 | 
+Queenstown, New Zealand, is a haven for adventure seekers with its stunning landscapes and adrenaline-pumping activities. Enjoy bungee jumping, jet boating, and explore the breathtaking fjords of the South Island.
+vwx67
+300
+Bungee Jumping | Milford Sound Cruise | Skydiving | 
+Matakauri Lodge
+Flight
+---
+1012
+Kyoto
+General
+1699.99
+05-04-2024 | 
+12-04-2024 | 
+Kyoto, the cultural heart of Japan, is known for its historic temples, traditional tea houses, and beautiful cherry blossoms. Immerse yourself in Japanese traditions, participate in a tea ceremony, and explore ancient shrines.
+yzab1
+300
+Fushimi Inari Shrine Visit | Tea Ceremony | Arashiyama Bamboo Grove | 
+Hoshinoya Kyoto
+Bus
+---
+1013
+Rio de Janeiro
+General
+1999.99
+07-12-2024 | 
+14-12-2024 | 
+Rio de Janeiro, Brazil, is famous for its vibrant carnival, samba music, and iconic Christ the Redeemer statue. Experience the lively nightlife, relax on Copacabana Beach, and explore the cultural richness of this South American gem.
+cde78
+300
+Christ the Redeemer Tour | Samba Night Out | Copacabana Beach Relaxation | 
+Belmond Copacabana Palace
+Bus
+---
+1014
+Phuket
+Family
+1499.99
+03-03-2024 | 
+10-03-2024 | 
+Phuket, Thailand, offers pristine beaches, crystal-clear waters, and a laid-back atmosphere. Enjoy spa treatments, island hopping, and authentic Thai cuisine in this tropical paradise.
+def45
+300
+Phi Phi Islands Tour | Thai Massage Spa Day | Sunset Dinner Cruise | 
+Amanpuri
+Flight
+---
+1015
+Cape Town
+Family
+2099.99
+18-01-2024 | 
+25-01-2024 | 
+Cape Town, South Africa, is a city surrounded by natural beauty, including Table Mountain and stunning coastlines. Explore the Cape of Good Hope, visit the penguins at Boulders Beach, and savor local wines in the nearby vineyards.
+fgh67
+300
+Table Mountain Hike | Cape Peninsula Tour | Wine Tasting in Stellenbosch | 
+Ellerman House
+Flight
+---
+1016
+Hanoi
+General
+1599.99
+22-06-2024 | 
+29-06-2024 | 
+Hanoi, the capital of Vietnam, is known for its centuries-old architecture, vibrant street markets, and delicious street food. Explore the Old Quarter, visit the Ho Chi Minh Mausoleum, and take a traditional cyclo ride.
+hij89
+300
+Old Quarter Exploration | Water Puppet Show | Street Food Tour | 
+Sofitel Legend Metropole Hanoi
+Flight
+---
+1017
+Reykjavik
+Family
+2499.99
+11-09-2024 | 
+18-09-2024 | 
+Reykjavik, the capital of Iceland, is a gateway to stunning natural wonders, including geysers, waterfalls, and the Northern Lights. Experience the magic of the Golden Circle, relax in the Blue Lagoon, and chase the Aurora Borealis.
+klm12
+300
+Golden Circle Tour | Blue Lagoon Relaxation | Northern Lights Hunt | 
+The Retreat at Blue Lagoon
+Flight
+---
+1018
+Marrakech
+General
+1799.99
+09-11-2024 | 
+16-11-2024 | 
+Marrakech, Morocco, is a city of vibrant colors, bustling souks, and historic palaces. Immerse yourself in the rich culture of the medina, visit the Jardin Majorelle, and indulge in traditional Moroccan cuisine.
+lno34
+300
+Jemaa el-Fna Square Exploration | Bahia Palace Tour | Camel Ride in the Palmeraie | 
+Royal Mansour Marrakech
+Bus
+---
+1019
+Vancouver
+Family
+1899.99
+05-05-2024 | 
+12-05-2024 | 
+Vancouver, Canada, is surrounded by mountains, forests, and the Pacific Ocean. Explore Stanley Park, go whale watching, and experience the diverse culinary scene in this vibrant Canadian city.
+opq56
+300
+Stanley Park Biking | Whale Watching Tour | Grouse | 
+Royal Mansour Marrakech
+Bus
