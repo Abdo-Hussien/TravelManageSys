@@ -11,6 +11,7 @@ public class BookingTickets {
     ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
     boolean Typeisfound = false;
     int index;
+    ArrayList<BookedTravels> bookedTravels;
 
     public void ticketMenu() {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -92,7 +93,7 @@ public class BookingTickets {
         } else if (choice == '2') {
             DeleteTicket();
         } else if (choice == '3') {
-            confirmTicket();
+            confirmTicket(bookedTravels);
         } else {
             System.out.println("Invalid Input, Please Try Again.");
             TicketEditMenu();
@@ -137,7 +138,7 @@ public class BookingTickets {
         }
     };
 
-    public void confirmTicket() {
+    public ArrayList<Ticket> confirmTicket(ArrayList<BookedTravels> bookedTravels) {
         System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
         System.out.println("You Booked:");
         for (int i = 0; i < ticketList.size(); i++) {
@@ -148,5 +149,7 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Enjoy your trip!");
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
+        bookedTravels.get(index).Bookedticket = ticketList;
+        return ticketList;
     }
 }

@@ -2,6 +2,7 @@ package AccountManagement;
 
 import java.util.ArrayList;
 
+import TravelManagement.BookedTravels;
 import TravelManagement.TourGuide;
 
 public class AdminFunctions extends Admin {
@@ -224,4 +225,37 @@ public class AdminFunctions extends Admin {
         }
 
     }
+
+    public void dashboard(ArrayList<BookedTravels> bookedTravel) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Dashboard");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        System.out.println("you booked: ");
+        for (int i = 0; i < bookedTravel.size(); i++) {
+            System.out.println("Trip name: " + bookedTravel.get(i).getTripName());
+            System.out.println("Trip ID: " + bookedTravel.get(i).getTripId());
+            System.out.println("Trip will start at: " + bookedTravel.get(i).getStartDate());
+            System.out.println("Trip will end at : " + bookedTravel.get(i).getEnDate());
+            System.out.println("your tickets:");
+            bookedTravel.get(i).getBookedticket();
+        }
+        do {
+            System.out.println("******************************");
+            System.out.println("1-check out" +
+                    "2-reschedul trip" +
+                    "3-cancel trip");
+            choice = in.next().charAt(0);
+            if (choice == '1') {
+                // check out function
+            } else if (choice == '2') {
+                // reschedul trip function
+            } else if (choice == '3') {
+                // cancel trip function
+            } else {
+                System.out.println("wrong input! please try again");
+            }
+        } while (choice != '1' || choice != '2' || choice != '3');  
+    }
+
 }

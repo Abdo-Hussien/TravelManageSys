@@ -1,5 +1,6 @@
 package TravelManagement;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,16 +9,36 @@ public class BookedTravels {
     protected String tripName;
     protected Date startDate;
     protected Date enDate;
-    protected int noTicket;
-    protected String ticketType;
+    ArrayList <Ticket> Bookedticket = new ArrayList<Ticket>();
 
     public BookedTravels(String tripId, String tripName, Date startDate, Date enDate, int noTicket, String ticketType) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.enDate = enDate;
-        this.noTicket = noTicket;
-        this.ticketType = ticketType;
+    }
+    
+
+    public String getTripId() {
+        return this.tripId;
     }
 
+    public String getTripName() {
+        return this.tripName;
+    }
+
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
+    public Date getEnDate() {
+        return this.enDate;
+    }
+
+
+    public void getBookedticket(){
+        for (int i = 0; i < Bookedticket.size(); i++) {
+            System.out.println(Bookedticket.get(i).getCounter()+ " " + Bookedticket.get(i).getType());
+        }
+    }
 }
