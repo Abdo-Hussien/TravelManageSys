@@ -11,11 +11,12 @@ public class BookedTravels {
     protected Date enDate;
     ArrayList <Ticket> Bookedticket = new ArrayList<Ticket>();
 
-    public BookedTravels(String tripId, String tripName, Date startDate, Date enDate, int noTicket, String ticketType) {
+    public BookedTravels(String tripId, String tripName, Date startDate, Date enDate, ArrayList<Ticket> ticket) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.enDate = enDate;
+        this.Bookedticket = ticket;
     }
     
 

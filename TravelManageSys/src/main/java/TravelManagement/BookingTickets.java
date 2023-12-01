@@ -13,7 +13,7 @@ public class BookingTickets {
     int index;
     ArrayList<BookedTravels> bookedTravels;
 
-    public void ticketMenu() {
+    public void ticketMenu(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t           TICKETS");
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -41,7 +41,7 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).setType();
 
             }
-            TicketEditMenu();
+            TicketEditMenu(bookedTravels, ChosenTrip);
         } else if (choice == '2') {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
@@ -56,7 +56,7 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).Add();
                 ticketList.get(ticketList.size() - 1).setType();
             }
-            TicketEditMenu();
+            TicketEditMenu(bookedTravels, ChosenTrip);
 
         } else if (choice == '3') {
             for (int i = 0; i < ticketList.size(); i++) {
@@ -73,15 +73,15 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).setType();
 
             }
-            TicketEditMenu();
+            TicketEditMenu(bookedTravels, ChosenTrip);
         } else {
             System.out.println("invalid input! please try again");
-            ticketMenu();
+            ticketMenu(bookedTravels, ChosenTrip);
         }
 
     }
 
-    public void TicketEditMenu() {
+    public void TicketEditMenu(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("1. Book More Tickets!");
         System.out.println("2. Delete Ticket");
@@ -89,14 +89,14 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         choice = in.next().charAt(0);
         if (choice == '1') {
-            ticketMenu();
+            ticketMenu(bookedTravels, ChosenTrip);
         } else if (choice == '2') {
             DeleteTicket();
         } else if (choice == '3') {
-            confirmTicket(bookedTravels);
+            confirmTicket(bookedTravels, ChosenTrip);
         } else {
             System.out.println("Invalid Input, Please Try Again.");
-            TicketEditMenu();
+            TicketEditMenu(bookedTravels, ChosenTrip);
         }
     }
 
@@ -138,7 +138,7 @@ public class BookingTickets {
         }
     };
 
-    public ArrayList<Ticket> confirmTicket(ArrayList<BookedTravels> bookedTravels) {
+    public ArrayList<Ticket> confirmTicket(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
         System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
         System.out.println("You Booked:");
         for (int i = 0; i < ticketList.size(); i++) {

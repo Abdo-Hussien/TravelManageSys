@@ -17,18 +17,18 @@ import java.util.stream.Collectors;
  * @author bmood
  */
 public abstract class Trip {
-    protected String tripId;
-    protected String title;
-    protected String tripType;
-    protected double initPrice;
-    protected Date startDate[];
-    protected Date endDate[];
-    protected String Description;
-    protected String tourGuideID;
-    protected int Capacity;
-    protected String activities[];
-    protected String hotelName; // mandatory
-    protected String transportID;
+    private String tripId;
+    private String title;
+    private String tripType;
+    private double initPrice;
+    private Date startDate[];
+    private Date endDate[];
+    private String Description;
+    private String tourGuideID;
+    private int Capacity;
+    private String activities[];
+    private String hotelName; // mandatory
+    private String transportID;
 
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
             String Description, String tourGuideID, int Capacity,
@@ -85,7 +85,7 @@ public abstract class Trip {
         }
         System.out.println("");
         for (Trip trip : trips) {
-            System.out.print("\t\t\t\t " + "$" + 1299.99 + "/person");
+            System.out.print("\t\t\t\t " + "$" + trip.TripPrice(0.05) + "/person");
         }
         System.out.println("");
         // System.out.println("For " + trip.getTripType() + " touring");
@@ -193,6 +193,10 @@ public abstract class Trip {
 
     public int getCapacity() {
         return this.Capacity;
+    }
+
+    public String getTourGuideID() {
+        return this.tourGuideID;
     }
 
     public void setCapacity(int Capacity) {

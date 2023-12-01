@@ -118,8 +118,9 @@ public class CustomerBooking {
         Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
+                bk.ticketMenu();
                 // bk.ticketMenu(CustomerBookedTrips,ChosenTrip);
-
+                // CustomerBookedTrips
                 // Should be in the TicketMenu: -> addBookingTrip(ChosenTrip, bk);
                 // Call Ticket Functions!
                 System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
@@ -136,7 +137,7 @@ public class CustomerBooking {
 
     private void addBookingTrip(Trip ChosenTrip) {
         CustomerBookedTrips
-                .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(), null, null, 0, null));
+                .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(), null, null, null));
     }
 
     private void ErrorMessage(String message, int timeout) {

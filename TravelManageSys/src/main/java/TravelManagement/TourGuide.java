@@ -4,7 +4,13 @@
  */
 package TravelManagement;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import AccountManagement.Person;
+import data.fileManipulation;
 
 /**
  *
@@ -28,9 +34,24 @@ public class TourGuide extends Person {
 
     }
 
-    public double calcsalay(int numoftrip) {
-        salary = numoftrip * 1165.46;
+    public double CalculateSalary(ArrayList<Trip> Trips, String TourGuideID, int Month) {
+        int numoftrip = 0;
+        for (Trip trip : Trips) {
+            if (trip.getTourGuideID().equals(TourGuideID)) {
+                for (Date date : trip.getStartDate())
+                    if (getMonthFromDate(date) + 1 == Month)
+                    numoftrip++;
+            }
+        }
+        salary = numoftrip * 2173.43;
         return salary;
+    }
+
+    private static int getMonthFromDate(Date date) {
+        // Since getMonth() is deprecated, use Calendar
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(java.util.Calendar.MONTH);
     }
 
     public double getSalary() {

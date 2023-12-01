@@ -18,7 +18,7 @@ Couple
 05-11-2023 | 
 10-11-2023 | 
 Bali, the famed 'Island of the Gods,' is known for its highly developed arts, including traditional and modern dance, sculpture, painting, leather, metalworking, and music.
-yab67
+xvz34
 120
 Surfing | Rafting | Elephant Safari | 
 Ubud Hanging Gardens
@@ -31,7 +31,7 @@ General
 29-11-2023 | 05-12-2023 | 
 01-12-2023 | 08-12-2023 | 
 An Egyptian town in the Suez Governorate, lying on the western shore of the Red Sea's Gulf of Suez. Being a year-round sunshine destination with gentle waves of the clear Red Sea makes Al-Ain al-Sokhna an ideal destination to break from the city's congestion.
-wzdz2
+xvz34
 165
 Parachuting | Parasailing | Skiing | 
 Tolip Resort El Galala Majestic
@@ -44,7 +44,7 @@ Couple
 10-02-2024 | 
 15-02-2024 | 
 Sydney, the capital of New South Wales, is known for its stunning harbor, iconic landmarks like the Sydney Opera House, and beautiful beaches.
-abc45
+xvz34
 300
 Harbour Cruise | Bridge Climb | Taronga Zoo Visit | 
 Park Hyatt Sydney
@@ -57,7 +57,7 @@ General
 05-06-2024 | 07-02-2024 | 
 12-06-2024 | 14-02-2024 | 
 Tokyo, the bustling capital of Japan, is a blend of modern skyscrapers and historic temples. Explore the vibrant neighborhoods, indulge in sushi, and experience the unique blend of tradition and technology.
-xyz78
+yab67
 300
 Robot Restaurant Show | Tsukiji Fish Market Tour | Sumo Wrestling Match | 
 Aman Tokyo
@@ -70,7 +70,7 @@ Family
 20-09-2024 | 
 27-09-2024 | 
 Rome, the capital of Italy, is a city steeped in history, with ancient ruins, art, and delicious cuisine. Visit the Colosseum, Vatican City, and enjoy authentic pasta in the heart of the Eternal City.
-def12
+yab67
 300
 Colosseum Tour | Vatican Museums | Pizza Making Class | 
 Hotel Eden
@@ -83,7 +83,7 @@ Couple
 12-04-2024 | 
 18-04-2024 | 
 Santorini, a Greek island in the Aegean Sea, is famous for its white-washed buildings and stunning sunsets. Explore the charming villages, relax on the black sand beaches, and savor Greek cuisine.
-ghi90
+erts2
 6
 Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
 Canaves Oia Hotel
@@ -96,7 +96,7 @@ General
 08-07-2024 | 
 15-07-2024 | 
 Machu Picchu, the ancient Incan citadel in Peru, is a UNESCO World Heritage site. Embark on the Inca Trail, marvel at the breathtaking views, and immerse yourself in the rich history of this mystical place.
-jkl23
+abc45
 300
 Inca Trail Trek | Machu Picchu Tour | Sacred Valley Exploration | 
 Belmond Sanctuary Lodge
@@ -109,7 +109,7 @@ Couple
 03-12-2024 | 09-12-2024 | 23-12-2024 | 
 10-12-2024 | 15-12-2024 | 01-01-2025 | 
 The Maldives, a tropical paradise in the Indian Ocean, is known for its overwater bungalows, crystal-clear waters, and vibrant coral reefs. Experience luxury and romance in this idyllic island destination.
-mno34
+abc45
 300
 Snorkeling Safari | Dolphin Watching | Private Beach Dinner | 
 Gili Lankanfushi
@@ -122,7 +122,7 @@ General
 14-05-2024 | 
 21-05-2024 | 
 Barcelona, the capital of Catalonia, is known for its unique architecture, including the famous Sagrada Familia. Explore the lively streets, indulge in tapas, and enjoy the artistic atmosphere of this vibrant city.
-pqr56
+abc45
 300
 Sagrada Familia Tour | Gothic Quarter Exploration | Flamenco Show | 
 W Barcelona
@@ -135,7 +135,7 @@ Couple
 02-08-2024 | 15-09-2024 | 
 09-08-2024 | 22-09-2024 | 
 Dubai, a city of opulence and modernity, boasts iconic skyscrapers, luxury shopping, and desert adventures. Experience the glamour of the city and enjoy a desert safari, visit the Burj Khalifa, and indulge in world-class shopping.
-stu89
+abc45
 300
 Desert Safari | Burj Khalifa Observation Deck | Shopping in Dubai Mall | 
 Burj Al Arab Jumeirah
@@ -148,7 +148,7 @@ General
 15-10-2024 | 
 22-10-2024 | 
 Queenstown, New Zealand, is a haven for adventure seekers with its stunning landscapes and adrenaline-pumping activities. Enjoy bungee jumping, jet boating, and explore the breathtaking fjords of the South Island.
-vwx67
+abc45
 300
 Bungee Jumping | Milford Sound Cruise | Skydiving | 
 Matakauri Lodge
@@ -161,7 +161,7 @@ General
 05-04-2024 | 
 12-04-2024 | 
 Kyoto, the cultural heart of Japan, is known for its historic temples, traditional tea houses, and beautiful cherry blossoms. Immerse yourself in Japanese traditions, participate in a tea ceremony, and explore ancient shrines.
-yzab1
+xyz78
 300
 Fushimi Inari Shrine Visit | Tea Ceremony | Arashiyama Bamboo Grove | 
 Hoshinoya Kyoto
@@ -174,7 +174,7 @@ General
 07-12-2024 | 
 14-12-2024 | 
 Rio de Janeiro, Brazil, is famous for its vibrant carnival, samba music, and iconic Christ the Redeemer statue. Experience the lively nightlife, relax on Copacabana Beach, and explore the cultural richness of this South American gem.
-cde78
+xyz78
 300
 Christ the Redeemer Tour | Samba Night Out | Copacabana Beach Relaxation | 
 Belmond Copacabana Palace
@@ -187,7 +187,7 @@ Family
 03-03-2024 | 
 10-03-2024 | 
 Phuket, Thailand, offers pristine beaches, crystal-clear waters, and a laid-back atmosphere. Enjoy spa treatments, island hopping, and authentic Thai cuisine in this tropical paradise.
-def45
+xyz78
 300
 Phi Phi Islands Tour | Thai Massage Spa Day | Sunset Dinner Cruise | 
 Amanpuri
@@ -200,7 +200,7 @@ Family
 18-01-2024 | 
 25-01-2024 | 
 Cape Town, South Africa, is a city surrounded by natural beauty, including Table Mountain and stunning coastlines. Explore the Cape of Good Hope, visit the penguins at Boulders Beach, and savor local wines in the nearby vineyards.
-fgh67
+tg001
 300
 Table Mountain Hike | Cape Peninsula Tour | Wine Tasting in Stellenbosch | 
 Ellerman House
@@ -213,7 +213,7 @@ General
 22-06-2024 | 
 29-06-2024 | 
 Hanoi, the capital of Vietnam, is known for its centuries-old architecture, vibrant street markets, and delicious street food. Explore the Old Quarter, visit the Ho Chi Minh Mausoleum, and take a traditional cyclo ride.
-hij89
+tg002
 300
 Old Quarter Exploration | Water Puppet Show | Street Food Tour | 
 Sofitel Legend Metropole Hanoi
@@ -226,7 +226,7 @@ Family
 11-09-2024 | 
 18-09-2024 | 
 Reykjavik, the capital of Iceland, is a gateway to stunning natural wonders, including geysers, waterfalls, and the Northern Lights. Experience the magic of the Golden Circle, relax in the Blue Lagoon, and chase the Aurora Borealis.
-klm12
+tg002
 300
 Golden Circle Tour | Blue Lagoon Relaxation | Northern Lights Hunt | 
 The Retreat at Blue Lagoon
@@ -239,7 +239,7 @@ General
 09-11-2024 | 
 16-11-2024 | 
 Marrakech, Morocco, is a city of vibrant colors, bustling souks, and historic palaces. Immerse yourself in the rich culture of the medina, visit the Jardin Majorelle, and indulge in traditional Moroccan cuisine.
-lno34
+tg003
 300
 Jemaa el-Fna Square Exploration | Bahia Palace Tour | Camel Ride in the Palmeraie | 
 Royal Mansour Marrakech
@@ -252,7 +252,7 @@ Family
 05-05-2024 | 
 12-05-2024 | 
 Vancouver, Canada, is surrounded by mountains, forests, and the Pacific Ocean. Explore Stanley Park, go whale watching, and experience the diverse culinary scene in this vibrant Canadian city.
-opq56
+tg003
 300
 Stanley Park Biking | Whale Watching Tour | Grouse | 
 Royal Mansour Marrakech
