@@ -91,7 +91,7 @@ public class BookingTickets {
         if (choice == '1') {
             ticketMenu(bookedTravels, ChosenTrip);
         } else if (choice == '2') {
-            DeleteTicket();
+            DeleteTicket(bookedTravels, ChosenTrip);
         } else if (choice == '3') {
             confirmTicket(bookedTravels, ChosenTrip);
         } else {
@@ -100,7 +100,7 @@ public class BookingTickets {
         }
     }
 
-    public void DeleteTicket() {
+    public void DeleteTicket(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
         System.out.println("Your Cart:");
         for (int i = 0; i < ticketList.size(); i++) {
             System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).type + " tickets");
@@ -113,28 +113,28 @@ public class BookingTickets {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("silver")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu();
+                    TicketEditMenu(bookedTravels, ChosenTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("gold")) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu();
+                    TicketEditMenu(bookedTravels, ChosenTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("platinum")) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("platinum")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu();
+                    TicketEditMenu(bookedTravels, ChosenTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("back")) {
-            TicketEditMenu();
+            TicketEditMenu(bookedTravels, ChosenTrip);
         } else {
             System.out.println("Invalid input! please try again");
-            DeleteTicket();
+            DeleteTicket(bookedTravels, ChosenTrip);
         }
     };
 
@@ -145,6 +145,7 @@ public class BookingTickets {
             System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).getType() + " tickets.");
             totalTickets += ticketList.get(i).getCounter();
         }
+        bookedTravels.get(bookedTravels.size() - 1).Bookedticket = ticketList;
         System.out.println("Total Tickets: " + totalTickets);
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Enjoy your trip!");

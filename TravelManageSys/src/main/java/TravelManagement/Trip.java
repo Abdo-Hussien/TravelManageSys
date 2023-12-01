@@ -26,6 +26,7 @@ public abstract class Trip {
     private String Description;
     private String tourGuideID;
     private int Capacity;
+    private int TicketCounter;
     private String activities[];
     private String hotelName; // mandatory
     private String transportID;
@@ -139,12 +140,29 @@ public abstract class Trip {
         System.out.println("************************************************");
     }
 
+    public Trip getTrip(ArrayList<Trip> tripsList, String id) {
+        for (Trip bookedTravels : tripsList) {
+            if (bookedTravels.getTripId().equals(id)) {
+                return bookedTravels;
+            }
+        }
+        return null;
+    }
+
     public double TripPrice(double rate) {
         return initPrice + rate * initPrice;
     }
 
     public String getTripId() {
         return this.tripId;
+    }
+
+    public int getTicketCounter() {
+        return this.TicketCounter;
+    }
+
+    public void getTicketCounter(int TicketCounter) {
+        this.TicketCounter = TicketCounter;
     }
 
     public void setTripId(String tripId) {

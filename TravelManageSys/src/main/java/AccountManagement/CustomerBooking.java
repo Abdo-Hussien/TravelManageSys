@@ -82,7 +82,7 @@ public class CustomerBooking {
             case 'b':
                 System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
                 System.out.print("Trip ID: ");
-                ChosenTrip = getTrip(input.next());
+                ChosenTrip = ChosenTrip.getTrip(tripsList, input.next());
                 if (ChosenTrip == null)
                     ErrorMessage("No Trips Found!", 2000);
                 addBookingTrip(ChosenTrip);
@@ -107,7 +107,7 @@ public class CustomerBooking {
         if (Ans != '?') {
             System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
             System.out.print("Trip ID: ");
-            ChosenTrip = getTrip(input.next());
+            ChosenTrip = ChosenTrip.getTrip(tripsList, input.next());
         }
         if (ChosenTrip == null)
             ErrorMessage("No Trips Found!", 2000);
@@ -118,8 +118,8 @@ public class CustomerBooking {
         Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
-                bk.ticketMenu();
-                // bk.ticketMenu(CustomerBookedTrips,ChosenTrip);
+                // bk.ticketMenu(CustomerBookedTrips, ChosenTrip);
+                addBookingTrip(ChosenTrip);
                 // CustomerBookedTrips
                 // Should be in the TicketMenu: -> addBookingTrip(ChosenTrip, bk);
                 // Call Ticket Functions!
@@ -149,15 +149,6 @@ public class CustomerBooking {
             System.out.println("Thread error sleeping.");
             // e.printStackTrace();
         }
-    }
-
-    private Trip getTrip(String id) {
-        for (Trip bookedTravels : tripsList) {
-            if (bookedTravels.getTripId().equals(id)) {
-                return bookedTravels;
-            }
-        }
-        return null;
     }
 
     public ArrayList<Trip> getFilteredTrips(String search_filter) {

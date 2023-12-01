@@ -116,7 +116,7 @@ public class fileManipulation {
             CustomerBookedTrips
                     .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1], dateFormat.parse(dates[0]),
                             dateFormat.parse(dates[1]),
-                            Integer.parseInt(bookedTripArr[3]), bookedTripArr[4]));
+                            null));
         }
         return CustomerBookedTrips;
     }

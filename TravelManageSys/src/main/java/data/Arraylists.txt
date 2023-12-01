@@ -11,3 +11,7 @@ Arraylists:
 5-Booking trips. : of New class Booking Trips .[tripID,tripName,tripDate,noTickets,typeTic]
 
 6-Travel history : string : tirp id.
+
+3aaaaamrrr:
+add new BookedTravel to the chosen Trip
+

@@ -196,3 +196,14 @@ Female
 [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> [ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> 
 1003 | 
 ---
+rtg
+Sophia Adams
+sophia_a
+dreamer45
+27
+Female
+890 Oakwood Drive | Oregon | 76771 | 
++5415556666
+[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 2 , Gold , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Silver , ] <> 
+1008 | 1010 | 
+---
