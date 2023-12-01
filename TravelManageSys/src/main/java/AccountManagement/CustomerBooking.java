@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import com.asu.main.TravelManageSys;
 
 import TravelManagement.BookedTravels;
+import TravelManagement.BookingTickets;
 import TravelManagement.Trip;
 
 /**
@@ -26,6 +27,7 @@ public class CustomerBooking {
     private ArrayList<Trip> tripsList = new ArrayList<>();
     ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
     String[] CustomerTravelHistory;
+    BookingTickets bk = new BookingTickets();
 
     // Filter Search Preferences
     private double price_start;
@@ -109,14 +111,16 @@ public class CustomerBooking {
         }
         if (ChosenTrip == null)
             ErrorMessage("No Trips Found!", 2000);
-        Trip.displayTripDetails(ChosenTrip);
+        ChosenTrip.displayTripDetails(ChosenTrip);
         System.out.println("A. Book " + ChosenTrip.getTitle() + " trip");
         System.out.println("B. Go Back");
         System.out.print("Choice: ");
         Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
-                addBookingTrip(ChosenTrip);
+                // bk.ticketMenu(CustomerBookedTrips,ChosenTrip);
+
+                // Should be in the TicketMenu: -> addBookingTrip(ChosenTrip, bk);
                 // Call Ticket Functions!
                 System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
                 break;

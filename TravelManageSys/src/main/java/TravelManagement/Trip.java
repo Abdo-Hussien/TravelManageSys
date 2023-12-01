@@ -30,23 +30,21 @@ public abstract class Trip {
     protected String hotelName; // mandatory
     protected String transportID;
 
-    // checks the relationship for a customer, Should be in main
-    public void RelationshipChecker(String customerRelationship) {
-        switch (customerRelationship.toLowerCase()) {
-            case "single":
-                System.out.println("All trips except couple tours using instanceOf");
-                break;
-            case "taken":
-                System.out.println("All trips including couple tours using instanceOf");
-                break;
-            default:
-                System.out.println("error..");
-                break;
-        }
-    }
-
-    public double TripPrice(double rate) {
-        return initPrice + rate * initPrice;
+    public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
+            String Description, String tourGuideID, int Capacity,
+            String activities[], String hotelName, String transportID) {
+        this.tripId = tripId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tripType = tripType;
+        this.title = title;
+        this.Description = Description;
+        this.hotelName = hotelName;
+        this.initPrice = initPrice;
+        this.tourGuideID = tourGuideID;
+        this.activities = activities;
+        this.Capacity = Capacity;
+        this.transportID = transportID;
     }
 
     public static void displaySearchTrips(ArrayList<Trip> trips) {
@@ -141,24 +139,8 @@ public abstract class Trip {
         System.out.println("************************************************");
     }
 
-    public Trip() {
-    }
-
-    public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
-            String Description, String tourGuideID, int Capacity,
-            String activities[], String hotelName, String transportID) {
-        this.tripId = tripId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.tripType = tripType;
-        this.title = title;
-        this.Description = Description;
-        this.hotelName = hotelName;
-        this.initPrice = initPrice;
-        this.tourGuideID = tourGuideID;
-        this.activities = activities;
-        this.Capacity = Capacity;
-        this.transportID = transportID;
+    public double TripPrice(double rate) {
+        return initPrice + rate * initPrice;
     }
 
     public String getTripId() {

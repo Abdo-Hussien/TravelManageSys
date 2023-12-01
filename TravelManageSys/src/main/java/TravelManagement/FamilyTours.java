@@ -12,10 +12,6 @@ import java.util.Date;
  */
 public class FamilyTours extends Trip {
 
-    public FamilyTours() {
-        super();
-    }
-
     public FamilyTours(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
             String Description, String tourGuide, int Capacity, String activities[], String hotelName,
             String transportID) {
