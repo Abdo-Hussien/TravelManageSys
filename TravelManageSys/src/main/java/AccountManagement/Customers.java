@@ -40,6 +40,7 @@ public class Customers extends Person {
     private String zipAddress;
     boolean logged_in = false; // used in edit account for user
     private ArrayList<Customers> allcustomer1 = new ArrayList<Customers>();
+    int index;
 
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
@@ -53,6 +54,12 @@ public class Customers extends Person {
 
     public int getTripHistoryCounter() {
         return tripsHistory.size();
+    }
+
+    public void settripHistory(ArrayList <BookedTravels> bookedTravels) {
+        for (int i = 0; i < bookedTravels.size(); i++) {
+            tripsHistory.add(bookedTravels.get(i).getTripId());
+        }
     }
 
     // create an account
@@ -344,6 +351,7 @@ public class Customers extends Person {
             for (int i = 0; i < allCustomers.size(); i++) {
                 if (allCustomers.get(i).username.equals(userName)) {
                     if (allCustomers.get(i).password.equals(pass)) {
+                        index = i;
                         checked = true;
                     }
                 }

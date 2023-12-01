@@ -34,6 +34,13 @@ public class BookedTravels {
     public Date getEnDate() {
         return this.enDate;
     }
+    public void setStartDate(Date startDate) {
+        this.startDate=startDate;
+    }
+
+    public void setEnDate(Date EndDate) {
+        this.startDate=EndDate;
+    }
 
 
     public void getBookedticket(){
