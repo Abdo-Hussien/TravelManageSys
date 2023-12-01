@@ -19,9 +19,9 @@ public class GeneralTours extends Trip {
     public GeneralTours(String tripId, String title, String tripType, double initPrice, Date[] startDate,
             Date[] endDate,
             String Description, String tourGuide, int Capacity, String activities[], String hotelName,
-            String transportationType) {
+            String transportID) {
         super(tripId, title, tripType, initPrice, startDate, endDate, Description, tourGuide, Capacity, activities,
-                hotelName, transportationType);
+                hotelName, transportID);
     }
 
 }

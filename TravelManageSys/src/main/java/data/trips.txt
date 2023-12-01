@@ -9,7 +9,7 @@ xvz34
 220
 Snorkeling | Scuba Diving | Mayan Ruins Tour | 
 Grand Fiesta Americana Coral Beach
-Flight
+jdksy1
 ---
 1001
 Bali
@@ -22,7 +22,7 @@ yab67
 120
 Surfing | Rafting | Elephant Safari | 
 Ubud Hanging Gardens
-Bus
+duiwgh2
 ---
 1002
 Ain Sokhna
@@ -35,7 +35,7 @@ wzdz2
 165
 Parachuting | Parasailing | Skiing | 
 Tolip Resort El Galala Majestic
-NoTransportation
+xyt3pqr
 ---
 1003
 Sydney
@@ -48,7 +48,7 @@ abc45
 300
 Harbour Cruise | Bridge Climb | Taronga Zoo Visit | 
 Park Hyatt Sydney
-Flight
+ab12cd3
 ---
 1004
 Tokyo
@@ -61,7 +61,7 @@ xyz78
 300
 Robot Restaurant Show | Tsukiji Fish Market Tour | Sumo Wrestling Match | 
 Aman Tokyo
-Bus
+efg45hi
 ---
 1005
 Rome
@@ -74,7 +74,7 @@ def12
 300
 Colosseum Tour | Vatican Museums | Pizza Making Class | 
 Hotel Eden
-Bus
+opq89rst
 ---
 1006
 Santorini
@@ -87,7 +87,7 @@ ghi90
 6
 Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
 Canaves Oia Hotel
-Bus
+uvw10xyz
 ---
 1007
 Machu Picchu
@@ -100,7 +100,7 @@ jkl23
 300
 Inca Trail Trek | Machu Picchu Tour | Sacred Valley Exploration | 
 Belmond Sanctuary Lodge
-Flight
+abc11def
 ---
 1008
 Maldives
@@ -113,7 +113,7 @@ mno34
 300
 Snorkeling Safari | Dolphin Watching | Private Beach Dinner | 
 Gili Lankanfushi
-Flight
+ghi12jkl
 ---
 1009
 Barcelona
@@ -126,7 +126,7 @@ pqr56
 300
 Sagrada Familia Tour | Gothic Quarter Exploration | Flamenco Show | 
 W Barcelona
-Bus
+mno13pqr
 ---
 1010
 Dubai
@@ -139,7 +139,7 @@ stu89
 300
 Desert Safari | Burj Khalifa Observation Deck | Shopping in Dubai Mall | 
 Burj Al Arab Jumeirah
-Bus
+stu14vwx
 ---
 1011
 Queenstown
@@ -152,7 +152,7 @@ vwx67
 300
 Bungee Jumping | Milford Sound Cruise | Skydiving | 
 Matakauri Lodge
-Flight
+yz15abc
 ---
 1012
 Kyoto
@@ -165,7 +165,7 @@ yzab1
 300
 Fushimi Inari Shrine Visit | Tea Ceremony | Arashiyama Bamboo Grove | 
 Hoshinoya Kyoto
-Bus
+def16ghi
 ---
 1013
 Rio de Janeiro
@@ -178,7 +178,7 @@ cde78
 300
 Christ the Redeemer Tour | Samba Night Out | Copacabana Beach Relaxation | 
 Belmond Copacabana Palace
-Bus
+jkl17mno
 ---
 1014
 Phuket
@@ -191,7 +191,7 @@ def45
 300
 Phi Phi Islands Tour | Thai Massage Spa Day | Sunset Dinner Cruise | 
 Amanpuri
-Flight
+pqr18stu
 ---
 1015
 Cape Town
@@ -204,7 +204,7 @@ fgh67
 300
 Table Mountain Hike | Cape Peninsula Tour | Wine Tasting in Stellenbosch | 
 Ellerman House
-Flight
+vwx19yz
 ---
 1016
 Hanoi
@@ -217,7 +217,7 @@ hij89
 300
 Old Quarter Exploration | Water Puppet Show | Street Food Tour | 
 Sofitel Legend Metropole Hanoi
-Flight
+abc20def
 ---
 1017
 Reykjavik
@@ -230,7 +230,7 @@ klm12
 300
 Golden Circle Tour | Blue Lagoon Relaxation | Northern Lights Hunt | 
 The Retreat at Blue Lagoon
-Flight
+ghi21jkl
 ---
 1018
 Marrakech
@@ -243,7 +243,7 @@ lno34
 300
 Jemaa el-Fna Square Exploration | Bahia Palace Tour | Camel Ride in the Palmeraie | 
 Royal Mansour Marrakech
-Bus
+mno22pqr
 ---
 1019
 Vancouver
@@ -256,4 +256,4 @@ opq56
 300
 Stanley Park Biking | Whale Watching Tour | Grouse | 
 Royal Mansour Marrakech
-Bus
+stu23vwx

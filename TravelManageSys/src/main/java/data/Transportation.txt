@@ -2,9 +2,125 @@ Flight
 Cairo International Airport
 550
 Egyptair
+jdksy1
 ---
 Bus
 Tahrir Square
 40
 Mwasalat Misr
+duiwgh2
+---
+Flight
+Luxor International Airport
+300
+AirLux
+xyt3pqr
+---
+Bus
+Aswan City Center
+35
+NileTransit
+ab12cd3
+---
+Flight
+Sharm El Sheikh Airport
+200
+SkyConnect
+efg45hi
+---
+Bus
+Alexandria Central Station
+50
+AlexBus
+jkl67mn
+---
+Flight
+Hurghada International Airport
+400
+RedSky Airlines
+opq89rst
+---
+Bus
+Giza Pyramid Complex
+30
+PyramidTrans
+uvw10xyz
+---
+Flight
+Marsa Alam Airport
+150
+StarFly
+abc11def
+---
+Bus
+Port Said Harbor
+45
+PortTrans
+ghi12jkl
+---
+Flight
+Dahab Airstrip
+100
+DesertWings
+mno13pqr
+---
+Bus
+Siwa Oasis Terminal
+25
+OasisExpress
+stu14vwx
+---
+Flight
+Abu Simbel Airport
+250
+NileWings
+yz15abc
+---
+Bus
+Suez Canal Terminal
+55
+CanalTrans
+def16ghi
+---
+Flight
+Mersa Matruh International Airport
+180
+CoastalAir
+jkl17mno
+---
+Bus
+Faiyum City Center
+48
+FaiyumTrans
+pqr18stu
+---
+Flight
+Asyut International Airport
+320
+AsyutAir
+vwx19yz
+---
+Bus
+Red Sea Resort Area
+42
+SeaShuttle
+abc20def
+---
+Flight
+Luxor West Bank Heliport
+280
+HeliLux
+ghi21jkl
+---
+Bus
+Bahariya Oasis Bus Station
+38
+DesertRide
+mno22pqr
+---
+Flight
+St. Catherine International Airport
+210
+SinaiSky
+stu23vwx
 ---

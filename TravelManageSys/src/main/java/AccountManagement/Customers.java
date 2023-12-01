@@ -4,6 +4,8 @@ package AccountManagement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.sound.midi.SysexMessage;
 
@@ -32,12 +34,10 @@ public class Customers extends Person {
     Scanner scanner = new Scanner(System.in);
     Person u = new Person();
     // keeps track of user's trip history
-    private ArrayList<String> tripsHistory = new ArrayList<>();
+    public ArrayList<String> tripsHistory = new ArrayList<>();
     // private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
     // user address attributes
-    private String streetAddress;
-    private String stateAddress;
-    private String zipAddress;
+    Matcher matcher = null;
     boolean logged_in = false; // used in edit account for user
     private ArrayList<Customers> allcustomer1 = new ArrayList<Customers>();
     int index;
@@ -46,6 +46,12 @@ public class Customers extends Person {
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
             String[] tripHistory) {
         super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
+        matcher = Pattern.compile("\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|").matcher(address);
+        if (matcher.find()) {
+            streetAddress = matcher.group(1);
+            stateAddress = matcher.group(2);
+            zipAddress = matcher.group(3);
+        }
         this.BookingManipulations.CustomerBookedTrips = oldBookingTrips;
     }
 
@@ -56,7 +62,7 @@ public class Customers extends Person {
         return tripsHistory.size();
     }
 
-    public void settripHistory(ArrayList <BookedTravels> bookedTravels) {
+    public void settripHistory(ArrayList<BookedTravels> bookedTravels) {
         for (int i = 0; i < bookedTravels.size(); i++) {
             tripsHistory.add(bookedTravels.get(i).getTripId());
         }

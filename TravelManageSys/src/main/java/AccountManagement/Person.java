@@ -10,6 +10,9 @@ public class Person {
     protected int age;
     protected String phone_number;
     protected String address;
+    protected String streetAddress;
+    protected String stateAddress;
+    protected String zipAddress;
     protected String password;
     protected String gender;
     protected String account_id; // given to user by a random method
@@ -51,7 +54,7 @@ public class Person {
     }
 
     public String getAddress() {
-        return this.address;
+        return this.streetAddress + ", " + this.stateAddress + ", " + this.zipAddress;
     }
 
     public String getPassword() {

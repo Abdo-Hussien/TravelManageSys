@@ -4,7 +4,7 @@ ahmed123
 pass123
 23
 Male
-2476 Gnatty Creek Road | New York | 
+2476 Gnatty Creek Road | New York | 11234 | 
 +201158885496
 [ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Platinum , ] <> [ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
 1005 | 
@@ -15,7 +15,7 @@ emily456
 summer2023
 29
 Female
-112 Oak Street | California | 
+112 Oak Street | California | 56282 | 
 +4085557890
 No Booked Trips
 1006 | 
@@ -26,7 +26,7 @@ mike_r
 traveler21
 35
 Male
-789 Maple Avenue | Texas | 
+789 Maple Avenue | Texas | 28477 | 
 +5127771234
 [ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Silver , ] <> 
 No Trips History
@@ -37,7 +37,7 @@ sophie_g
 sunflower12
 26
 Female
-456 Pine Street | Florida | 
+456 Pine Street | Florida | 55218 | 
 +3054445678
 No Booked Trips
 1005 | 
@@ -48,7 +48,7 @@ benny_lee
 adventure123
 30
 Male
-890 Cedar Avenue | Arizona | 
+890 Cedar Avenue | Arizona | 11927 | 
 +6238889999
 [ 1006 , Santorini , 12-04-2024 | 18-04-2024 | , 2 , Platinum , ] <> 
 No Trips History
@@ -59,7 +59,7 @@ olivia_turn
 exploreNow
 28
 Female
-678 Birch Street | Nevada | 
+678 Birch Street | Nevada | 18391 | 
 +7753334444
 [ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
 1007 | 
@@ -70,7 +70,7 @@ chris_m
 holiday321
 32
 Male
-234 Redwood Lane | Colorado | 
+234 Redwood Lane | Colorado | 87648 | 
 +3031112222
 [ 1008 , Maldives , 03-12-2024 | 10-12-2024 | , 2 , Gold , ] <> 
 No Trips History
@@ -81,7 +81,7 @@ isa_bella
 dreamer45
 27
 Female
-890 Oakwood Drive | Oregon | 
+890 Oakwood Drive | Oregon | 91766 | 
 +5415556666
 [ 1002 , Ain Sokhna , 05-12-2023 | 08-12-2023 | , 1 , Platinum , ] <> 
 1009 | 
@@ -92,7 +92,7 @@ sam_lew
 sammy123
 31
 Male
-345 Elm Street | Washington | 
+345 Elm Street | Washington | 88120 | 
 +2069876543
 [ 1010 , Dubai , 02-08-2024 | 09-08-2024 | , 2 , Silver , ] <> 
 No Trips History
@@ -103,7 +103,7 @@ lily_ng
 flowerPower
 25
 Female
-567 Magnolia Avenue | Hawaii | 
+567 Magnolia Avenue | Hawaii | 11241 | 
 +8083335555
 [ 1017 , Reykjavik , 11-09-2024 | 18-09-2024 | , 1 , Platinum , ] <> [ 1000 , Cancun , 15-12-2023 | 20-12-2023 | , 1 , Gold , ] <> 
 1011 | 1019 | 1004 | 
@@ -114,7 +114,7 @@ aisha_m
 sunshine123
 28
 Female
-123 Pineapple Lane | California | 
+123 Pineapple Lane | California | 66472 | 
 +4089991111
 [ 1012 , Kyoto , 05-04-2024 | 12-04-2024 | , 1 , Gold , ] <> 
 No Trips History
@@ -125,7 +125,7 @@ danny_t
 traveler456
 33
 Male
-456 Cedar Street | Texas | 
+456 Cedar Street | Texas | 17389 | 
 +5126667777
 [ 1004 , Tokyo , 07-02-2024 | 14-02-2024 | , 1 , Platinum , ] <> 
 No Trips History
@@ -136,7 +136,7 @@ mia_j
 exploreNature
 25
 Female
-789 Maple Avenue | Florida | 
+789 Maple Avenue | Florida | 17381 | 
 +3052223333
 [ 1019 , Vancouver , 05-05-2024 | 12-05-2024 | , 1 , Silver , ] <> 
 1005 | 1002 | 1004 | 1008 | 
@@ -147,7 +147,7 @@ jon_will
 adventureTime
 30
 Male
-890 Cedar Avenue | Arizona | 
+890 Cedar Avenue | Arizona | 43571 | 
 +6238889999
 [ 1015 , Cape Town , 18-01-2024 | 25-01-2024 | , 4 , Silver , ] <> 
 No Trips History
@@ -158,7 +158,7 @@ emily_k
 winterWonder
 28
 Female
-678 Birch Street | Nevada | 
+678 Birch Street | Nevada | 27491 | 
 +7753334444
 [ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> 
 1005 | 
@@ -169,7 +169,7 @@ liam_m
 holiday321
 32
 Male
-234 Redwood Lane | Colorado | 
+234 Redwood Lane | Colorado | 27551 | 
 +3031112222
 No Booked Trips
 No Trips History
@@ -180,7 +180,7 @@ sophia_a
 dreamer45
 27
 Female
-890 Oakwood Drive | Oregon | 
+890 Oakwood Drive | Oregon | 76771 | 
 +5415556666
 [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 2 , Gold , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Silver , ] <> 
 1008 | 1010 | 
@@ -191,7 +191,7 @@ olivia_p
 adventure123
 29
 Female
-567 Magnolia Avenue | Hawaii | 
+567 Magnolia Avenue | Hawaii | 89133 | 
 +8083335555
 [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> [ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> 
 1003 | 

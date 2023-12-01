@@ -4,10 +4,13 @@
  */
 package TravelManagement;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 // In need for a Date checker to check if the start and end date are after the current date for the availability of the trip.
+import java.util.stream.Collectors;
 
 /**
  *
@@ -21,11 +24,11 @@ public abstract class Trip {
     protected Date startDate[];
     protected Date endDate[];
     protected String Description;
-    protected String tourGuideName;
+    protected String tourGuideID;
     protected int Capacity;
     protected String activities[];
     protected String hotelName; // mandatory
-    protected String transportationType;
+    protected String transportID;
 
     // checks the relationship for a customer, Should be in main
     public void RelationshipChecker(String customerRelationship) {
@@ -102,10 +105,11 @@ public abstract class Trip {
         System.out.println("\t\t\t\t\t\t\t\t  ************************************************");
     }
 
-    public static void displayTripDetails(Trip trip) {
+    public void displayTripDetails(Trip trip) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
         Date[] endDates;
+        ArrayList<Transportation> allTranports = new ArrayList<>();
         startDates = trip.getStartDate();
         endDates = trip.getEndDate();
         String[] Activities = trip.getActivities();
@@ -129,7 +133,7 @@ public abstract class Trip {
         }
         System.out.println("");
         System.out.println("Staying at: " + trip.getHotelName());
-        System.out.println("Going by: " + trip.getTransportationType());
+        System.out.println("Going by: " + trip.getTransportation(allTranports, transportID));
         System.out.println("Car Rentals (Optional)");
         System.out.println("");
         System.out.println("************************************************");
@@ -141,8 +145,8 @@ public abstract class Trip {
     }
 
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
-            String Description, String tourGuide, int Capacity,
-            String activities[], String hotelName, String transportationType) {
+            String Description, String tourGuideID, int Capacity,
+            String activities[], String hotelName, String transportID) {
         this.tripId = tripId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -151,10 +155,10 @@ public abstract class Trip {
         this.Description = Description;
         this.hotelName = hotelName;
         this.initPrice = initPrice;
-        this.transportationType = transportationType;
-        this.tourGuideName = tourGuide;
+        this.tourGuideID = tourGuideID;
         this.activities = activities;
         this.Capacity = Capacity;
+        this.transportID = transportID;
     }
 
     public String getTripId() {
@@ -205,14 +209,6 @@ public abstract class Trip {
         this.Description = Description;
     }
 
-    public String getTourGuideName() {
-        return this.tourGuideName;
-    }
-
-    public void setTourGuideName(String tourGuideName) {
-        this.tourGuideName = tourGuideName;
-    }
-
     public int getCapacity() {
         return this.Capacity;
     }
@@ -233,11 +229,17 @@ public abstract class Trip {
         this.hotelName = hotelName;
     }
 
-    public String getTransportationType() {
-        return this.transportationType;
+    public Transportation getTransportation(ArrayList<Transportation> transportations, String transportID) {
+        for (Transportation transportation : transportations)
+            if (transportation.getTransportID().equals(transportID))
+                return transportation;
+        return null;
     }
 
-    public void setTransportationType(String transportationType) {
-        this.transportationType = transportationType;
+    public TourGuide getTourGuide(ArrayList<TourGuide> TourGuides, String tourGuideID) {
+        for (TourGuide tourGuide : TourGuides)
+            if (tourGuide.getAccount_id().equals(tourGuideID))
+                return tourGuide;
+        return null;
     }
 }
