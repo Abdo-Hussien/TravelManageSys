@@ -141,7 +141,7 @@ public class Admin implements Administration {
                     input = in.next();
                     for (int i = 0; i < AllTrip.size(); i++) {
                         if (AllTrip.get(i).getTripId().equals(input)) {
-                            Trip.displayTripDetails(null);
+                            // Trip.displayTripDetails(null);
                             checked = true;
                         }
                     }
