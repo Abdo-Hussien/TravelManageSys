@@ -104,6 +104,7 @@ public class BookingTickets {
             }
             int size = bookedTravels.size();
             System.out.println(size);
+            ticketList = new ArrayList<Ticket>();
         } else {
             System.out.println("Invalid Input, Please Try Again.");
             TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
