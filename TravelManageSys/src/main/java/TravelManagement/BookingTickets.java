@@ -94,6 +94,16 @@ public class BookingTickets {
             DeleteTicket(bookedTravels, ChosenTrip);
         } else if (choice == '3') {
             confirmTicket(bookedTravels, ChosenTrip);
+            for (int i = 0; i < bookedTravels.size(); i++) {
+                System.out.println(bookedTravels.get(i).tripId);
+                System.out.println(bookedTravels.get(i).tripName);
+                for (int j = 0; j < bookedTravels.get(i).Bookedticket.size(); j++) {
+                    System.out.println(bookedTravels.get(i).Bookedticket.get(i).getCounter() + " "
+                            + bookedTravels.get(i).Bookedticket.get(i).getType());
+                }
+            }
+            int size = bookedTravels.size();
+            System.out.println(size);
         } else {
             System.out.println("Invalid Input, Please Try Again.");
             TicketEditMenu(bookedTravels, ChosenTrip);
@@ -138,19 +148,20 @@ public class BookingTickets {
         }
     };
 
-    public ArrayList<Ticket> confirmTicket(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
+    public ArrayList<BookedTravels> confirmTicket(ArrayList<BookedTravels> bookedTravels, Trip ChosenTrip) {
         System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
         System.out.println("You Booked:");
         for (int i = 0; i < ticketList.size(); i++) {
             System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).getType() + " tickets.");
             totalTickets += ticketList.get(i).getCounter();
         }
-        bookedTravels.get(bookedTravels.size() - 1).Bookedticket = ticketList;
         System.out.println("Total Tickets: " + totalTickets);
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Enjoy your trip!");
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
-        // bookedTravels.get(index).Bookedticket = ticketList;
-        return ticketList;
+        BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(), null, null,
+                ticketList);
+        bookedTravels.add(oldBookedTravels);
+        return bookedTravels;
     }
 }

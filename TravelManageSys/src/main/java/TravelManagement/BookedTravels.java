@@ -19,6 +19,9 @@ public class BookedTravels {
         this.Bookedticket = ticket;
     }
 
+    public BookedTravels() {
+    }
+
     public String getTripId() {
         return this.tripId;
     }
