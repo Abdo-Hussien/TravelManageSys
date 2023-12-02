@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import com.asu.main.TravelManageSys;
-
 import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
+import TravelManagement.ChosenTrip;
 import TravelManagement.GeneralTours;
 import TravelManagement.Trip;
 
@@ -43,14 +42,15 @@ public class CustomerBooking {
         FeaturedTrips = tripsList.stream()
                 .limit(3)
                 .collect(Collectors.toCollection(ArrayList::new));
-        char Ans;
+        char Ans = ' ';
         Trip ChosenTrip = new GeneralTours();
         Scanner input = new Scanner(System.in);
         Trip.displayTrips(FeaturedTrips);
         System.out.println("\nA. Search for a trip(s)");
         System.out.println("B. Go Back");
         System.out.print("Choice: ");
-        Ans = Character.toLowerCase(input.next().charAt(0));
+        if (input.hasNext())
+            Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
                 SearchTrips(Ans, ChosenTrip);
@@ -62,7 +62,7 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-        input.close();
+        
     }
 
     private void SearchTrips(char Ans, Trip ChosenTrip) {
@@ -75,7 +75,8 @@ public class CustomerBooking {
         System.out.println("B. Book a Trip.");
         System.out.println("C. Show Trip details.");
         System.out.println("D. Go Back.");
-        Ans = Character.toLowerCase(input.next().charAt(0));
+        if (input.hasNext())
+            Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
                 SearchTrips(Ans, ChosenTrip);
@@ -90,7 +91,17 @@ public class CustomerBooking {
                 if (ChosenTrip.getStartDate().length > 1) {
                     dateIndex = CustomerChooseDate(ChosenTrip);
                 }
-                addBookingTrip(ChosenTrip, dateIndex);
+                if (dateIndex == -1) {
+                    ErrorMessage("No dates available with the given information!", 2000);
+                    mainCustomer();
+                    
+                    return;
+                }
+                
+                ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
+                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex]);
+                bk.ticketMenu(CustomerBookedTrips, trip, tripsList);
+                // addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
                 ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 3000);
                 break;
@@ -104,7 +115,7 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-
+        
     }
 
     private void ShowTripDetails(Trip ChosenTrip, char Ans) {
@@ -120,14 +131,25 @@ public class CustomerBooking {
         System.out.println("A. Book " + ChosenTrip.getTitle() + " trip");
         System.out.println("B. Go Back");
         System.out.print("Choice: ");
-        Ans = Character.toLowerCase(input.next().charAt(0));
+        if (input.hasNext())
+            Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
                 int dateIndex = 0;
                 if (ChosenTrip.getStartDate().length > 1) {
                     dateIndex = CustomerChooseDate(ChosenTrip);
                 }
-                addBookingTrip(ChosenTrip, dateIndex);
+                if (dateIndex == -1) {
+                    ErrorMessage("No dates available with the given information!", 2000);
+                    mainCustomer();
+                    
+                    return;
+                }
+                
+                ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
+                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex]);
+                bk.ticketMenu(CustomerBookedTrips, trip, tripsList);
+                // addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
                 ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 3000);
                 break;
@@ -138,7 +160,7 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-        input.close();
+        
     }
 
     private int CustomerChooseDate(Trip ChosenTrip) {
@@ -147,7 +169,10 @@ public class CustomerBooking {
         for (int i = 0; i < ChosenTrip.getStartDate().length; i++)
             System.out.println(i + 1 + ". " + ChosenTrip.getStartDate()[i]);
         int index = input.nextInt() - 1;
-        input.close();
+        
+        if (index > ChosenTrip.getStartDate().length || index < 0)
+            return -1;
+
         return index;
     }
 
@@ -162,7 +187,7 @@ public class CustomerBooking {
             System.out.println(message);
             Thread.sleep(timeout);
             mainCustomer();
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
             System.out.println("Thread error sleeping.");
             // e.printStackTrace();
         }

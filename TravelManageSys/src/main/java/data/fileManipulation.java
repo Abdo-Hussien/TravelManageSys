@@ -83,11 +83,18 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                ArrayList<String>[] TripHistory = customer[8].equalsIgnoreCase("No Booked Trips")
-                        ? (customer[9].equalsIgnoreCase("No Trips History") ? null
-                                : customer[9].split("\\s+\\|\\s+"))
-                        : (customer[15].equalsIgnoreCase("No Trips History") ? null
-                                : customer[15].split("\\s+\\|\\s+"));
+                ArrayList<String> TripHistory = new ArrayList<>(Arrays.asList());
+                if (customer[8].equalsIgnoreCase("No Booked Trips")) {
+                    if (customer[9].equalsIgnoreCase("No Trips History"))
+                        TripHistory = null;
+                    else
+                        TripHistory = (ArrayList<String>) Arrays.asList(customer[9].split("\\s+\\|\\s+"));
+                } else {
+                    if (customer[15].equalsIgnoreCase("No Trips History"))
+                        TripHistory = null;
+                    else
+                        TripHistory = (ArrayList<String>) Arrays.asList(customer[15].split("\\s+\\|\\s+"));
+                }
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
                         : parseBookedTrip(Arrays.copyOfRange(customer, 8, 15));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
@@ -107,25 +114,24 @@ public class fileManipulation {
         ArrayList<Ticket> CustomerTickets = new ArrayList<>();
         String[] IDs = BookedTripsLine[0].split("\\s*\\|\\s*");
         String[] Names = BookedTripsLine[1].split("\\s*\\|\\s*");
-        String[] StartDates = BookedTripsLine[2].split("\\s*\\|\\s*");
+        String[] TicketExpDates = BookedTripsLine[2].split("\\s*\\|\\s*");
         String[] TicketIDs = BookedTripsLine[3].split("\\s*\\|\\s*");
-        String[] TicketExpDates = BookedTripsLine[4].split("\\s*\\|\\s*");
+        String[] StartDates = BookedTripsLine[4].split("\\s*\\|\\s*");
         String[] TicketTypes = BookedTripsLine[5].split("\\s*\\|\\s*");
         String[] TicketCounter = BookedTripsLine[6].split("\\s*\\|\\s*");
         for (int i = 0; i < IDs.length; i++) {
             String[] TripTicketIDs = TicketIDs[i].split("\\s*,\\s*");
-            String[] TripTicketExpDates = TicketExpDates[i].split("\\s*,\\s*");
             String[] TripTicketTypes = TicketTypes[i].split("\\s*,\\s*");
             String[] TripTicketCounter = TicketCounter[i].split("\\s*,\\s*");
             for (int j = 0; j < TripTicketTypes.length; j++) {
                 if (TripTicketTypes[j].equalsIgnoreCase("silver"))
-                    CustomerTickets.add(new Silver(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                    CustomerTickets.add(new Silver(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
                 else if (TripTicketTypes[j].equalsIgnoreCase("gold"))
-                    CustomerTickets.add(new Gold(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                    CustomerTickets.add(new Gold(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
                 else if (TripTicketTypes[j].equalsIgnoreCase("platinum"))
-                    CustomerTickets.add(new Platinum(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                    CustomerTickets.add(new Platinum(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
 

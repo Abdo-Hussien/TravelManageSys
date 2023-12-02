@@ -44,7 +44,7 @@ public class Customers extends Person {
 
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
-            String[] tripHistory) {
+            ArrayList<String> tripHistory) {
         super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
         matcher = Pattern.compile("\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|").matcher(address);
         if (matcher.find()) {
