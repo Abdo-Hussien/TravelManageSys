@@ -25,13 +25,14 @@ public abstract class Trip {
     private Date endDate[];
     private String Description;
     private String tourGuideID;
-    private int Capacity;
+    private final int Capacity;
     private int TicketCounter;
     private String activities[];
     private String hotelName; // mandatory
     private String transportID;
 
     public Trip() {
+        Capacity = 0;
     }
 
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
@@ -219,10 +220,6 @@ public abstract class Trip {
 
     public String getTourGuideID() {
         return this.tourGuideID;
-    }
-
-    public void setCapacity(int Capacity) {
-        this.Capacity = Capacity;
     }
 
     public String[] getActivities() {
