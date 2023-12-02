@@ -31,6 +31,9 @@ public abstract class Trip {
     private String hotelName; // mandatory
     private String transportID;
 
+    public Trip() {
+    }
+
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
             String Description, String tourGuideID, int Capacity,
             String activities[], String hotelName, String transportID) {
@@ -61,7 +64,7 @@ public abstract class Trip {
             System.out.println(trip.getTitle());
             System.out.println("For " + trip.getTripType() + " touring");
             // Cannot retrieve rate of ticket price from Silver class
-            System.out.println("$" + 1299.99 + "/person");
+            System.out.println("$" + trip.TripPrice(0.05) + "/person");
             System.out.println("Available dates:");
             for (int i = 0; i < startDates.length; i++)
                 System.out
@@ -121,7 +124,7 @@ public abstract class Trip {
         System.out.println(trip.getTitle());
         System.out.println("For " + trip.getTripType() + " touring");
         // Cannot retrieve rate of ticket price from Silver class
-        System.out.println("$" + 1299.99 + "/person");
+        System.out.println("$" + trip.TripPrice(0.05) + "/person");
         System.out.println("Available dates:");
         for (int i = 0; i < startDates.length; i++)
             System.out.print("~ " + dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
@@ -150,7 +153,8 @@ public abstract class Trip {
     }
 
     public double TripPrice(double rate) {
-        return initPrice + rate * initPrice;
+        Double GeneralPrice = initPrice + rate * initPrice;
+        return Math.round(GeneralPrice * 100.0) / 100.0;
     }
 
     public String getTripId() {

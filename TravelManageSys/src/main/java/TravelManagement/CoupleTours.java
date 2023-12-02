@@ -12,6 +12,10 @@ import java.util.Date;
  */
 public class CoupleTours extends Trip {
 
+    public CoupleTours() {
+        super();
+    }
+
     public CoupleTours(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
             String Description, String tourGuide, int Capacity, String activities[], String hotelName,
             String transportID) {

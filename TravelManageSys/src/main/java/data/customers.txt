@@ -1,12 +1,18 @@
 wzdz2
 Omar Hassan
-ahmed123
+omar123
 pass123
 23
 Male
 2476 Gnatty Creek Road | New York | 11234 | 
 +201158885496
-[ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Platinum , ] <> [ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
+1001 | 1007 | 
+Bali | Machu Picchu | 
+15-12-2023 | 08-07-2024 | 
+t01 , t04 , | t02 , | 
+20-12-2023 , 20-12-2023 , | 15-07-2024 , | 
+Platinum , Silver , | Gold , | 
+1 , 2 , | 1 , | 
 1005 | 
 ---
 abc45
@@ -28,7 +34,13 @@ traveler21
 Male
 789 Maple Avenue | Texas | 28477 | 
 +5127771234
-[ 1001 , Bali , 15-12-2023 | 20-12-2023 | , 2 , Silver , ] <> 
+1001 | 
+Bali | 
+15-12-2023 | 
+t21 , | 
+20-12-2023 , | 
+Silver , | 
+1 , |
 No Trips History
 ---
 def12
@@ -50,7 +62,13 @@ adventure123
 Male
 890 Cedar Avenue | Arizona | 11927 | 
 +6238889999
-[ 1006 , Santorini , 12-04-2024 | 18-04-2024 | , 2 , Platinum , ] <> 
+1006 | 
+Santorini | 
+12-04-2024 | 
+t42 , | 
+18-04-2024 , | 
+Platinum , |
+1 , | 
 No Trips History
 ---
 jkl23
@@ -61,7 +79,13 @@ exploreNow
 Female
 678 Birch Street | Nevada | 18391 | 
 +7753334444
-[ 1007 , Machu Picchu , 08-07-2024 | 15-07-2024 | , 1 , Silver , ] <> 
+1007 | 
+Machu Picchu | 
+08-07-2024 | 
+t62 , | 
+15-07-2024 , | 
+Silver , | 
+3 , | 
 1007 | 
 ---
 mno34
@@ -72,7 +96,13 @@ holiday321
 Male
 234 Redwood Lane | Colorado | 87648 | 
 +3031112222
-[ 1008 , Maldives , 03-12-2024 | 10-12-2024 | , 2 , Gold , ] <> 
+1008 | 
+Maldives | 
+03-12-2024 | 
+t24 , | 
+10-12-2024 , | 
+Gold , | 
+1 , | 
 No Trips History
 ---
 pqr56
@@ -83,7 +113,13 @@ dreamer45
 Female
 890 Oakwood Drive | Oregon | 91766 | 
 +5415556666
-[ 1002 , Ain Sokhna , 05-12-2023 | 08-12-2023 | , 1 , Platinum , ] <> 
+1002 | 
+Ain Sokhna | 
+05-12-2023 | 
+t78 , | 
+08-12-2023 , | 
+Platinum , | 
+1 , | 
 1009 | 
 ---
 stu89
@@ -94,7 +130,13 @@ sammy123
 Male
 345 Elm Street | Washington | 88120 | 
 +2069876543
-[ 1010 , Dubai , 02-08-2024 | 09-08-2024 | , 2 , Silver , ] <> 
+1010 | 
+Dubai | 
+02-08-2024 | 
+t06 , | 
+09-08-2024 , | 
+Silver , | 
+2 , | 
 No Trips History
 ---
 vwx67
@@ -105,7 +147,13 @@ flowerPower
 Female
 567 Magnolia Avenue | Hawaii | 11241 | 
 +8083335555
-[ 1017 , Reykjavik , 11-09-2024 | 18-09-2024 | , 1 , Platinum , ] <> [ 1000 , Cancun , 15-12-2023 | 20-12-2023 | , 1 , Gold , ] <> 
+1017 | 1000 | 
+Reykjavik | Cancun | 
+11-09-2024 | 15-12-2023 | 
+t05 , | t94 , | 
+18-09-2024 , | 20-12-2023 , | 
+Platinum , | Gold , | 
+1 , | 1 , | 
 1011 | 1019 | 1004 | 
 ---
 yzab1
@@ -116,7 +164,13 @@ sunshine123
 Female
 123 Pineapple Lane | California | 66472 | 
 +4089991111
-[ 1012 , Kyoto , 05-04-2024 | 12-04-2024 | , 1 , Gold , ] <> 
+1012 | 
+Kyoto | 
+05-04-2024 | 
+t77 , | 
+12-04-2024 , | 
+Gold , | 
+1 , | 
 No Trips History
 ---
 cde78
@@ -127,7 +181,13 @@ traveler456
 Male
 456 Cedar Street | Texas | 17389 | 
 +5126667777
-[ 1004 , Tokyo , 07-02-2024 | 14-02-2024 | , 1 , Platinum , ] <> 
+1004 | 
+Tokyo | 
+07-02-2024 | 
+t63 , | 
+14-02-2024 , | 
+Platinum , | 
+2 , | 
 No Trips History
 ---
 def45
@@ -138,7 +198,13 @@ exploreNature
 Female
 789 Maple Avenue | Florida | 17381 | 
 +3052223333
-[ 1019 , Vancouver , 05-05-2024 | 12-05-2024 | , 1 , Silver , ] <> 
+1019 | 
+Vancouver | 
+05-05-2024 | 
+t82 , | 
+12-05-2024 , | 
+Silver , | 
+1 , | 
 1005 | 1002 | 1004 | 1008 | 
 ---
 fgh67
@@ -149,7 +215,13 @@ adventureTime
 Male
 890 Cedar Avenue | Arizona | 43571 | 
 +6238889999
-[ 1015 , Cape Town , 18-01-2024 | 25-01-2024 | , 4 , Silver , ] <> 
+1015 | 
+Cape Town | 
+18-01-2024 | 
+t34 , | 
+25-01-2024 , | 
+Silver , | 
+4 , | 
 No Trips History
 ---
 hij89
@@ -160,7 +232,13 @@ winterWonder
 Female
 678 Birch Street | Nevada | 27491 | 
 +7753334444
-[ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> 
+1016 | 1018 | 
+Hanoi | Marrakech | 
+22-06-2024 | 09-11-2024 | 
+t09 , t95 , | t06 , | 
+29-06-2024 , 29-06-2024 , | 16-11-2024 , | 
+Silver , Gold , | Silver , | 
+2 , 1 , | 1 , | 
 1005 | 
 ---
 klm12
@@ -182,7 +260,13 @@ dreamer45
 Female
 890 Oakwood Drive | Oregon | 76771 | 
 +5415556666
-[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 2 , Gold , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Silver , ] <> 
+1018 | 
+Marrakech | 
+09-11-2024 | 
+t08 , t37 , | 
+16-11-2024 , 16-11-2024 , | 
+Gold , Silver , | 
+2 , 1 , | 
 1008 | 1010 | 
 ---
 opq56
@@ -193,17 +277,6 @@ adventure123
 Female
 567 Magnolia Avenue | Hawaii | 89133 | 
 +8083335555
-[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Platinum , ] <> [ 1016 , Hanoi , 22-06-2024 | 29-06-2024 | , 1 , Silver , ] <> 
+No Booked Trips
 1003 | 
----
-rtg
-Sophia Adams
-sophia_a
-dreamer45
-27
-Female
-890 Oakwood Drive | Oregon | 76771 | 
-+5415556666
-[ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 2 , Gold , ] <> [ 1018 , Marrakech , 09-11-2024 | 16-11-2024 | , 1 , Silver , ] <> 
-1008 | 1010 | 
 ---

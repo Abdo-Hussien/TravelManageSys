@@ -12,6 +12,10 @@ import java.util.Date;
  */
 public class GeneralTours extends Trip {
 
+    public GeneralTours() {
+        super();
+    }
+
     public GeneralTours(String tripId, String title, String tripType, double initPrice, Date[] startDate,
             Date[] endDate,
             String Description, String tourGuide, int Capacity, String activities[], String hotelName,

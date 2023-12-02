@@ -12,10 +12,13 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.print.attribute.standard.MediaSize.NA;
+
 import AccountManagement.Customers;
 import TravelManagement.*;
 
 public class fileManipulation {
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     // Function to get all Trips from the file
     public static ArrayList<Trip> getAllTrips() {
@@ -38,7 +41,6 @@ public class fileManipulation {
 
     // Function to convert String to Trip
     private static Trip parseTrip(String tripString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String[] trip = tripString.split(System.lineSeparator());
         Date[] start_date = Arrays.stream(trip[4].split("\\s+\\|\\s+")).map(date_str -> {
             try {
@@ -81,11 +83,17 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
+                String[] TripHistory = customer[8].equalsIgnoreCase("No Booked Trips")
+                        ? (customer[9].equalsIgnoreCase("No Trips History") ? null
+                                : customer[9].split("\\s+\\|\\s+"))
+                        : (customer[15].equalsIgnoreCase("No Trips History") ? null
+                                : customer[15].split("\\s+\\|\\s+"));
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
-                        : parseBookedTrip(customer[8].split("\\s+<>\\s+"));
+                        : parseBookedTrip(Arrays.copyOfRange(customer, 8, 15));
+
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
-                        customer[8].equalsIgnoreCase("No Trips History") ? null : customer[8].split("\\s+\\|\\s+")));
+                        TripHistory));
             }
             return AllCustomers;
         } catch (Exception e) {
@@ -97,28 +105,61 @@ public class fileManipulation {
     // Function to convert String to BookedTravels
     public static ArrayList<BookedTravels> parseBookedTrip(String[] BookedTripsLine) throws ParseException {
         ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String regex = "\\[\\s*(.*?)\\s*\\]";
-        String content = new String("");
-        Pattern pattern = Pattern.compile(regex);
-        for (int index = 0; index < BookedTripsLine.length; index++) {
-            Matcher matcher = pattern.matcher(BookedTripsLine[index]);
-            if (matcher.find()) {
-                content = matcher.group(1);
-            } else {
-                System.out.println("No match found.");
-                content = null;
+        ArrayList<Ticket> CustomerTickets = new ArrayList<>();
+        String[] IDs = BookedTripsLine[0].split("\\s*\\|\\s*");
+        String[] Names = BookedTripsLine[1].split("\\s*\\|\\s*");
+        String[] StartDates = BookedTripsLine[2].split("\\s*\\|\\s*");
+        String[] TicketIDs = BookedTripsLine[3].split("\\s*\\|\\s*");
+        String[] TicketExpDates = BookedTripsLine[4].split("\\s*\\|\\s*");
+        String[] TicketTypes = BookedTripsLine[5].split("\\s*\\|\\s*");
+        String[] TicketCounter = BookedTripsLine[6].split("\\s*\\|\\s*");
+        for (int i = 0; i < IDs.length; i++) {
+            String[] TripTicketIDs = TicketIDs[i].split("\\s*,\\s*");
+            String[] TripTicketExpDates = TicketExpDates[i].split("\\s*,\\s*");
+            String[] TripTicketTypes = TicketTypes[i].split("\\s*,\\s*");
+            String[] TripTicketCounter = TicketCounter[i].split("\\s*,\\s*");
+            for (int j = 0; j < TripTicketTypes.length; j++) {
+                if (TripTicketTypes[j].equalsIgnoreCase("silver"))
+                    CustomerTickets.add(new Silver(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                            TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
+                else if (TripTicketTypes[j].equalsIgnoreCase("gold"))
+                    CustomerTickets.add(new Gold(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                            TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
+                else if (TripTicketTypes[j].equalsIgnoreCase("platinum"))
+                    CustomerTickets.add(new Platinum(TripTicketIDs[j], dateFormat.parse(TripTicketExpDates[j]),
+                            TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
-            String bookedTripArr[] = content == null ? null : content.split("\\s*,\\s*");
-            String dates[] = content == null ? null : bookedTripArr[2].split("\\s+\\|\\s+");
-            if (bookedTripArr == null && dates == null)
-                continue;
+
+        }
+        for (int i = 0; i < IDs.length; i++) {
             CustomerBookedTrips
-                    .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1], dateFormat.parse(dates[0]),
-                            dateFormat.parse(dates[1]),
-                            null));
+                    .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
+                            dateFormat.parse(TicketExpDates[i]), CustomerTickets));
         }
         return CustomerBookedTrips;
+        //
+        // String regex = "\\[\\s*(.*?)\\s*\\]";
+        // String content = new String("");
+        // Pattern pattern = Pattern.compile(regex);
+        // for (int index = 0; index < BookedTripsLine.length; index++) {
+        // Matcher matcher = pattern.matcher(BookedTripsLine[index]);
+        // if (matcher.find()) {
+        // content = matcher.group(1);
+        // } else {
+        // System.out.println("No match found.");
+        // content = null;
+        // }
+        // String bookedTripArr[] = content == null ? null : content.split("\\s*,\\s*");
+        // String dates[] = content == null ? null :
+        // bookedTripArr[2].split("\\s+\\|\\s+");
+        // if (bookedTripArr == null && dates == null)
+        // continue;
+        // CustomerBookedTrips
+        // .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1],
+        // dateFormat.parse(dates[0]),
+        // dateFormat.parse(dates[1]),
+        // null));
+        // }
     }
 
     // Function to get all TourGuides from the file

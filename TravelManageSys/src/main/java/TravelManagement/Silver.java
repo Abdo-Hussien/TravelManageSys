@@ -4,6 +4,7 @@
  */
 package TravelManagement;
 
+import java.util.Date;
 
 import AccountManagement.RandIDGenerator;
 
@@ -14,6 +15,13 @@ import AccountManagement.RandIDGenerator;
 public class Silver extends Ticket {
     int Scounter;
 
+    public Silver(String TicketID, Date ExpDate, String TicketType, int TicketCounter) {
+        ticketId = TicketID;
+        ticketExpiration = ExpDate;
+        type = TicketType;
+        Scounter = TicketCounter;
+    }
+
     public Silver() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
         // function
@@ -23,7 +31,7 @@ public class Silver extends Ticket {
         generator.generateRandID();
         ticketId = generator.getRandID();
     }
-    
+
     @Override
     public double Ticket_Price() {
         return 0.05;

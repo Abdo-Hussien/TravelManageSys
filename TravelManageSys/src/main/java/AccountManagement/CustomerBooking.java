@@ -17,6 +17,7 @@ import com.asu.main.TravelManageSys;
 
 import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
+import TravelManagement.GeneralTours;
 import TravelManagement.Trip;
 
 /**
@@ -43,7 +44,7 @@ public class CustomerBooking {
                 .limit(3)
                 .collect(Collectors.toCollection(ArrayList::new));
         char Ans;
-        Trip ChosenTrip = null;
+        Trip ChosenTrip = new GeneralTours();
         Scanner input = new Scanner(System.in);
         Trip.displayTrips(FeaturedTrips);
         System.out.println("\nA. Search for a trip(s)");
@@ -85,9 +86,13 @@ public class CustomerBooking {
                 ChosenTrip = ChosenTrip.getTrip(tripsList, input.next());
                 if (ChosenTrip == null)
                     ErrorMessage("No Trips Found!", 2000);
-                addBookingTrip(ChosenTrip);
+                int dateIndex = 0;
+                if (ChosenTrip.getStartDate().length > 1) {
+                    dateIndex = CustomerChooseDate(ChosenTrip);
+                }
+                addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
-                System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
+                ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 3000);
                 break;
             case 'c':
                 ShowTripDetails(ChosenTrip, Ans);
@@ -118,12 +123,13 @@ public class CustomerBooking {
         Ans = Character.toLowerCase(input.next().charAt(0));
         switch (Ans) {
             case 'a':
-                // bk.ticketMenu(CustomerBookedTrips, ChosenTrip);
-                addBookingTrip(ChosenTrip);
-                // CustomerBookedTrips
-                // Should be in the TicketMenu: -> addBookingTrip(ChosenTrip, bk);
+                int dateIndex = 0;
+                if (ChosenTrip.getStartDate().length > 1) {
+                    dateIndex = CustomerChooseDate(ChosenTrip);
+                }
+                addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
-                System.out.println("You successfully booked " + ChosenTrip.getTitle() + " Trip");
+                ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 3000);
                 break;
             case 'b':
                 mainCustomer();
@@ -135,9 +141,20 @@ public class CustomerBooking {
         input.close();
     }
 
-    private void addBookingTrip(Trip ChosenTrip) {
+    private int CustomerChooseDate(Trip ChosenTrip) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Which Date Do you want to Book?");
+        for (int i = 0; i < ChosenTrip.getStartDate().length; i++)
+            System.out.println(i + 1 + ". " + ChosenTrip.getStartDate()[i]);
+        int index = input.nextInt() - 1;
+        input.close();
+        return index;
+    }
+
+    private void addBookingTrip(Trip ChosenTrip, int dateIndex) {
         CustomerBookedTrips
-                .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(), null, null, null));
+                .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(),
+                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex], null));
     }
 
     private void ErrorMessage(String message, int timeout) {

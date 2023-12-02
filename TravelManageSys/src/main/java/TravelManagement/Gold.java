@@ -4,6 +4,8 @@
  */
 package TravelManagement;
 
+import java.util.Date;
+
 import AccountManagement.RandIDGenerator;
 
 /**
@@ -12,6 +14,13 @@ import AccountManagement.RandIDGenerator;
  */
 public class Gold extends Ticket {
     int Gcounter;
+
+    public Gold(String TicketID, Date ExpDate, String TicketType, int TicketCounter) {
+        ticketId = TicketID;
+        ticketExpiration = ExpDate;
+        type = TicketType;
+        Gcounter = TicketCounter;
+    }
 
     public Gold() {
         // super.ticketExpiration=; the date the user will choose from the bookoing
