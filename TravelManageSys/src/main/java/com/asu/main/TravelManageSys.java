@@ -5,6 +5,7 @@ package com.asu.main;
 
 import java.util.ArrayList;
 
+import AccountManagement.Admin;
 import AccountManagement.Customers;
 import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
@@ -28,7 +29,7 @@ public class TravelManageSys {
         chosenTrip.setTripName("dahbah");
         chosenTrip.setTripId("1000");
         BookingTickets b = new BookingTickets();
-        b.ticketMenu(bookedTravels, chosenTrip,);
+        b.ticketMenu(bookedTravels, chosenTrip, trips);
         TravelItineraries t = new TravelItineraries();
         t.dashboard(bookedTravels, trips);
 
