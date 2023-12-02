@@ -98,8 +98,8 @@ public class BookingTickets {
                 System.out.println(bookedTravels.get(i).tripId);
                 System.out.println(bookedTravels.get(i).tripName);
                 for (int j = 0; j < bookedTravels.get(i).Bookedticket.size(); j++) {
-                    System.out.println(bookedTravels.get(i).Bookedticket.get(i).getCounter() + " "
-                            + bookedTravels.get(i).Bookedticket.get(i).getType());
+                    System.out.println(bookedTravels.get(i).Bookedticket.get(j).getCounter() + " "
+                            + bookedTravels.get(i).Bookedticket.get(j).getType());
                 }
             }
             int size = bookedTravels.size();

@@ -6,6 +6,11 @@ package com.asu.main;
 import java.util.ArrayList;
 
 import AccountManagement.Customers;
+import TravelManagement.BookedTravels;
+import TravelManagement.BookingTickets;
+import TravelManagement.FamilyTours;
+import TravelManagement.TravelItineraries;
+import TravelManagement.Trip;
 import data.fileManipulation;
 
 /**
@@ -14,8 +19,18 @@ import data.fileManipulation;
  */
 public class TravelManageSys {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         System.out.println("Main Class is called 'TravelManageSys' is in the 'main' package");
+        ArrayList<BookedTravels> bookedTravels = new ArrayList<BookedTravels>();
+        Trip chosenTrip = new FamilyTours();
+        ArrayList<Trip> trips = new ArrayList<Trip>(fileManipulation.getAllTrips());
+        chosenTrip.setTitle("dahbah");
+        chosenTrip.setTripId("1000");
+        BookingTickets b = new BookingTickets();
+        b.ticketMenu(bookedTravels, chosenTrip);
+        TravelItineraries t = new TravelItineraries();
+        t.dashboard(bookedTravels, trips);
 
+        // m7dsh ysheel el maaaaaaaaaaaiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnn
     }
 }

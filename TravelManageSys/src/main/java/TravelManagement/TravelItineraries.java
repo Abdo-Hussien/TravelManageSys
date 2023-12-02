@@ -7,6 +7,8 @@ package TravelManagement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.w3c.dom.Attr;
+
 import AccountManagement.Customers;
 
 /**
@@ -21,7 +23,7 @@ public class TravelItineraries {
     protected char choice;
     protected boolean checked = false;
 
-    public void dashboard(ArrayList<BookedTravels> bookedTravel) {
+    public void dashboard(ArrayList<BookedTravels> bookedTravel, ArrayList<Trip> AllTrip) {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Dashboard");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -30,10 +32,14 @@ public class TravelItineraries {
         for (int i = 0; i < bookedTravel.size(); i++) {
             System.out.println("Trip name: " + bookedTravel.get(i).getTripName());
             System.out.println("Trip ID: " + bookedTravel.get(i).getTripId());
-            System.out.println("Trip will start at: " + bookedTravel.get(i).getStartDate());
-            System.out.println("Trip will end at : " + bookedTravel.get(i).getEnDate());
+            // System.out.println("Trip will start at: " +
+            // bookedTravel.get(i).getStartDate());
+            // System.out.println("Trip will end at : " + bookedTravel.get(i).getEnDate());
             System.out.println("your tickets:");
-            bookedTravel.get(i).getBookedticket();
+            for (int j = 0; j < bookedTravel.get(i).Bookedticket.size(); j++) {
+                System.out.println(bookedTravel.get(i).Bookedticket.get(j).getCounter() + " "
+                        + bookedTravel.get(i).Bookedticket.get(j).getType());
+            }
         }
         do {
             System.out.println("******************************");
@@ -45,9 +51,9 @@ public class TravelItineraries {
             if (choice == '1') {
                 checkOut(bookedTravel, null);
             } else if (choice == '2') {
-                showDetails(null);
+                showDetails(AllTrip);
             } else if (choice == '3') {
-                reschedul(bookedTravel, null);
+                reschedul(bookedTravel, AllTrip);
             } else if (choice == '4') {
                 DelteTrip(bookedTravel);
             } else {
@@ -65,7 +71,14 @@ public class TravelItineraries {
     public void showDetails(ArrayList<Trip> AllTrip) {
         System.out.println("Enter the trip ID you want to show details about");
         input = in.next();
-        // show details about the trip
+        for (int i = 0; i < AllTrip.size(); i++) {
+            if (AllTrip.get(i).getTripId().equals(input)) {
+                System.out.println(AllTrip.get(i).getTitle());
+                System.out.println(AllTrip.get(i).getInitPrice());
+                System.out.println(AllTrip.get(i).getTripId());
+                System.out.println(AllTrip.get(i).getCapacity());
+            }
+        }
     }
 
     public void reschedul(ArrayList<BookedTravels> bookedTravel, ArrayList<Trip> AllTrip) {
