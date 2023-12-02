@@ -35,7 +35,7 @@ public class Customers extends Person {
     Person u = new Person();
     // keeps track of user's trip history
     public ArrayList<String> tripsHistory = new ArrayList<>();
-    // private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
+    private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
     // user address attributes
     Matcher matcher = null;
     boolean logged_in = false; // used in edit account for user

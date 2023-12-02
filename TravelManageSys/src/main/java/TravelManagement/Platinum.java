@@ -4,7 +4,6 @@
  */
 package TravelManagement;
 
-import java.util.Date;
 
 import AccountManagement.RandIDGenerator;
 
@@ -15,9 +14,8 @@ import AccountManagement.RandIDGenerator;
 public class Platinum extends Ticket {
     int Pcounter;
 
-    public Platinum(String TicketID, Date ExpDate, String TicketType, int TicketCounter) {
+    public Platinum(String TicketID,String TicketType, int TicketCounter) {
         ticketId = TicketID;
-        ticketExpiration = ExpDate;
         type = TicketType;
         Pcounter = TicketCounter;
     }

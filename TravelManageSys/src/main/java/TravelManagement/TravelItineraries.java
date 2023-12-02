@@ -71,14 +71,8 @@ public class TravelItineraries {
     public void showDetails(ArrayList<Trip> AllTrip) {
         System.out.println("Enter the trip ID you want to show details about");
         input = in.next();
-        for (int i = 0; i < AllTrip.size(); i++) {
-            if (AllTrip.get(i).getTripId().equals(input)) {
-                System.out.println(AllTrip.get(i).getTitle());
-                System.out.println(AllTrip.get(i).getInitPrice());
-                System.out.println(AllTrip.get(i).getTripId());
-                System.out.println(AllTrip.get(i).getCapacity());
-            }
-        }
+        Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
+        trip.displayTripDetails(trip);
     }
 
     public void reschedul(ArrayList<BookedTravels> bookedTravel, ArrayList<Trip> AllTrip) {

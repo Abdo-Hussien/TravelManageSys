@@ -83,14 +83,13 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                String[] TripHistory = customer[8].equalsIgnoreCase("No Booked Trips")
+                ArrayList<String>[] TripHistory = customer[8].equalsIgnoreCase("No Booked Trips")
                         ? (customer[9].equalsIgnoreCase("No Trips History") ? null
                                 : customer[9].split("\\s+\\|\\s+"))
                         : (customer[15].equalsIgnoreCase("No Trips History") ? null
                                 : customer[15].split("\\s+\\|\\s+"));
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
                         : parseBookedTrip(Arrays.copyOfRange(customer, 8, 15));
-
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
                         TripHistory));

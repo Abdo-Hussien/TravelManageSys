@@ -250,4 +250,8 @@ public abstract class Trip {
                 return tourGuide;
         return null;
     }
+
+    public void setTicketCounter(int TicketCounter) {
+        this.TicketCounter = TicketCounter;
+    }
 }

@@ -1,9 +1,9 @@
 package TravelManagement;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class ChosenTrip {
-    private String tripType;
+    private String tripName;
     private String tripId;
     private Date starDate;
     private Date endDate;
@@ -12,18 +12,18 @@ public class ChosenTrip {
     }
 
     public ChosenTrip(String tripType, String tripId, Date starDate, Date endDate) {
-        this.tripType = tripType;
+        this.tripName = tripType;
         this.tripId = tripId;
         this.starDate = starDate;
         this.endDate = endDate;
     }
 
-    public String getTripType() {
-        return this.tripType;
+    public String getTripName() {
+        return this.tripName;
     }
 
-    public void setTripType(String tripType) {
-        this.tripType = tripType;
+    public void setTripName(String tripType) {
+        this.tripName = tripType;
     }
 
     public String getTripId() {

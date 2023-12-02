@@ -366,7 +366,8 @@ public class Admin implements Administration {
                 while (checked == true) {
                     System.out.println("Enter The trip ID:");
                     input = in.next();
-                    AllTrip.get(0).getTrip(AllTrip, input);
+                    Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
+                    trip.displayTripDetails(trip);
                     if (checked == false) {
                         System.out.println("invalid input! please try again");
                     }

@@ -4,7 +4,6 @@
  */
 package TravelManagement;
 
-import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -14,7 +13,6 @@ import java.util.Scanner;
 public abstract class Ticket {
 
     protected String ticketId;
-    protected Date ticketExpiration; // Ticket expiration from mohamed booking function
     protected Scanner in = new Scanner(System.in);
     protected int addeddTicket, deletedTicket;
     protected String type;
