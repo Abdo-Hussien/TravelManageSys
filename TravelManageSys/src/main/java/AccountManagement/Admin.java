@@ -72,19 +72,26 @@ public class Admin implements Administration {
     }
 
     public void displayAllCustomersinfo(ArrayList<Customers> AllCustomers) {
-        System.out.println("Please enter the customer id: ");
-        input = in.next();
-        for (int i = 0; i < AllCustomers.size(); i++) {
-            if (AllCustomers.get(i).account_id.equals(input)) {
-                System.out.println("id: " + AllCustomers.get(i).account_id);
-                System.out.println("full name: " + AllCustomers.get(i).first_name + " "
-                        + AllCustomers.get(i).last_name);
-                System.out.println("age: " + AllCustomers.get(i).age);
-                System.out.println("username: " + AllCustomers.get(i).username);
-                System.out.println("password: " + AllCustomers.get(i).password);
-                System.out.println("address: " + AllCustomers.get(i).address);
-                System.out.println("phone number: " + AllCustomers.get(i).phone_number);
-                index = i;
+        while (checked == false) {
+            System.out.println("Please enter the customer id: ");
+            input = in.next();
+            for (int i = 0; i < AllCustomers.size(); i++) {
+                if (AllCustomers.get(i).account_id.equals(input)) {
+                    checked = true;
+                    index = i;
+                }
+            }
+            if (checked==true) {
+                System.out.println("id: " + AllCustomers.get(index).account_id);
+                System.out.println("full name: " + AllCustomers.get(index).first_name + " "
+                        + AllCustomers.get(index).last_name);
+                System.out.println("age: " + AllCustomers.get(index).age);
+                System.out.println("username: " + AllCustomers.get(index).username);
+                System.out.println("password: " + AllCustomers.get(index).password);
+                System.out.println("address: " + AllCustomers.get(index).address);
+                System.out.println("phone number: " + AllCustomers.get(index).phone_number);
+            } else {
+                System.out.println("invalid customer ID entered! please try again");
             }
         }
         System.out.println("1-Edit" +
@@ -176,7 +183,7 @@ public class Admin implements Administration {
                 index = i;
             }
         }
-        if (checked) {
+        if (checked==true) {
             AllCustomers.remove(index);
             System.out.println("Account removed successfully!");
         }
@@ -235,24 +242,32 @@ public class Admin implements Administration {
     }
 
     public void displayAllTourGuideinfo(ArrayList<TourGuide> AllTourGuide) {
-        System.out.println("Please enter the Tour guide id: ");
-        input = in.next();
-        for (int i = 0; i < AllTourGuide.size(); i++) {
-            if (AllTourGuide.get(i).account_id.equals(input)) {
-                System.out.println("id: " + AllTourGuide.get(i).account_id);
-                System.out.println("full name: " + AllTourGuide.get(i).first_name + " "
-                        + AllTourGuide.get(i).last_name);
-                System.out.println("age: " + AllTourGuide.get(i).age);
-                System.out.println("username: " + AllTourGuide.get(i).username);
-                System.out.println("password: " + AllTourGuide.get(i).password);
-                System.out.println("address: " + AllTourGuide.get(i).address);
-                System.out.println("phone number: " + AllTourGuide.get(i).phone_number);
-                index = i;
+        while (checked == false) {
+
+            System.out.println("Please enter the Tour guide id: ");
+            input = in.next();
+            for (int i = 0; i < AllTourGuide.size(); i++) {
+                if (AllTourGuide.get(i).account_id.equals(input)) {
+                    checked = true;
+                    index = i;
+                }
+            }
+            if (checked == true) {
+                System.out.println("id: " + AllTourGuide.get(index).account_id);
+                System.out.println("full name: " + AllTourGuide.get(index).first_name + " "
+                        + AllTourGuide.get(index).last_name);
+                System.out.println("age: " + AllTourGuide.get(index).age);
+                System.out.println("username: " + AllTourGuide.get(index).username);
+                System.out.println("password: " + AllTourGuide.get(index).password);
+                System.out.println("address: " + AllTourGuide.get(index).address);
+                System.out.println("phone number: " + AllTourGuide.get(index).phone_number);
+            } else {
+                System.out.println("invalid tour guide ID entered! please try again");
             }
         }
-        System.out.println("1-Edit" +
-                "2-delete" +
-                "3-Go back");
+        System.out.println("1-Edit \n" +
+                "2-delete\n" +
+                "3-Go back\n");
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
@@ -335,9 +350,10 @@ public class Admin implements Administration {
                 index = i;
             }
         }
-        if (checked) {
+        if (checked==true) {
             AllTourGuide.remove(index);
             System.out.println("Account removed successfully!");
+            
         }
         if (checked == false) {
             System.out.println("Wrong input! Please try again..");
@@ -353,8 +369,8 @@ public class Admin implements Administration {
         for (int i = 0; i < AllTrip.size(); i++) {
             System.out.println("Trip ID: " + AllTrip.get(i).getTripId());
             System.out.println("Trip Name: " + AllTrip.get(i).getTitle());
-            System.out.println("Trip capacity: " + AllTrip.get(i).getCapacity());
-            // availbaltiy ticket variable here
+            System.out.println(
+                    "Trip availability: " + AllTrip.get(i).getTicketCounter() + "/" + AllTrip.get(i).getCapacity());
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
         while (choice != '1' || choice != '2') {
@@ -379,4 +395,5 @@ public class Admin implements Administration {
             }
         }
     }
+    
 }

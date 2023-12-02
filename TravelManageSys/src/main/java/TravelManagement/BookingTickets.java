@@ -41,7 +41,7 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).setType();
 
             }
-            TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+            TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
         } else if (choice == '2') {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
@@ -56,7 +56,7 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).Add();
                 ticketList.get(ticketList.size() - 1).setType();
             }
-            TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+            TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
 
         } else if (choice == '3') {
             for (int i = 0; i < ticketList.size(); i++) {
@@ -73,10 +73,10 @@ public class BookingTickets {
                 ticketList.get(ticketList.size() - 1).setType();
 
             }
-            TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+            TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
         } else {
             System.out.println("invalid input! please try again");
-            ticketMenu(bookedTravels, ChosenTrip,AllTrip);
+            ticketMenu(bookedTravels, ChosenTrip, AllTrip);
         }
 
     }
@@ -89,11 +89,11 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
         choice = in.next().charAt(0);
         if (choice == '1') {
-            ticketMenu(bookedTravels, ChosenTrip,AllTrip);
+            ticketMenu(bookedTravels, ChosenTrip, AllTrip);
         } else if (choice == '2') {
-            DeleteTicket(bookedTravels, ChosenTrip,AllTrip);
+            DeleteTicket(bookedTravels, ChosenTrip, AllTrip);
         } else if (choice == '3') {
-            confirmTicket(bookedTravels, ChosenTrip,AllTrip);
+            confirmTicket(bookedTravels, ChosenTrip, AllTrip);
             for (int i = 0; i < bookedTravels.size(); i++) {
                 System.out.println(bookedTravels.get(i).tripId);
                 System.out.println(bookedTravels.get(i).tripName);
@@ -106,7 +106,7 @@ public class BookingTickets {
             System.out.println(size);
         } else {
             System.out.println("Invalid Input, Please Try Again.");
-            TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+            TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
         }
     }
 
@@ -123,28 +123,28 @@ public class BookingTickets {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("silver")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+                    TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("gold")) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+                    TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("platinum")) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("platinum")) {
                     ticketList.get(i).Delete();
-                    TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+                    TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
                 }
             }
         } else if (ans.toLowerCase().equals("back")) {
-            TicketEditMenu(bookedTravels, ChosenTrip,AllTrip);
+            TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
         } else {
             System.out.println("Invalid input! please try again");
-            DeleteTicket(bookedTravels, ChosenTrip,AllTrip);
+            DeleteTicket(bookedTravels, ChosenTrip, AllTrip);
         }
     };
 
@@ -164,7 +164,9 @@ public class BookingTickets {
                 ticketList);
         bookedTravels.add(oldBookedTravels);
         for (int i = 0; i < AllTrip.size(); i++) {
-            
+            if (AllTrip.get(i).getTripId().equals(ChosenTrip.getTripId())) {
+                AllTrip.get(i).setTicketCounter(totalTickets);
+            }
         }
         return bookedTravels;
     }
