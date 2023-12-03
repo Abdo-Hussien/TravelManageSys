@@ -40,8 +40,7 @@ public class CustomerBooking {
         ArrayList<Trip> FeaturedTrips = new ArrayList<>();
         tripsList = fileManipulation.getAllTrips();
         FeaturedTrips = tripsList.stream()
-                .limit(3)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .limit(3).collect(Collectors.toCollection(ArrayList::new));
         char Ans = ' ';
         Trip ChosenTrip = new GeneralTours();
         Scanner input = new Scanner(System.in);
@@ -62,7 +61,7 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-        
+
     }
 
     private void SearchTrips(char Ans, Trip ChosenTrip) {
@@ -88,18 +87,16 @@ public class CustomerBooking {
                 if (ChosenTrip == null)
                     ErrorMessage("No Trips Found!", 2000);
                 int dateIndex = 0;
-                if (ChosenTrip.getStartDate().length > 1) {
+                if (ChosenTrip.getStartDates().length > 1) {
                     dateIndex = CustomerChooseDate(ChosenTrip);
                 }
                 if (dateIndex == -1) {
                     ErrorMessage("No dates available with the given information!", 2000);
                     mainCustomer();
-                    
                     return;
                 }
-                
                 ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
-                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex]);
+                        ChosenTrip.getStartDates()[dateIndex], ChosenTrip.getEndDates()[dateIndex]);
                 bk.ticketMenu(CustomerBookedTrips, trip, tripsList);
                 // addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
@@ -115,7 +112,6 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-        
     }
 
     private void ShowTripDetails(Trip ChosenTrip, char Ans) {
@@ -136,18 +132,16 @@ public class CustomerBooking {
         switch (Ans) {
             case 'a':
                 int dateIndex = 0;
-                if (ChosenTrip.getStartDate().length > 1) {
+                if (ChosenTrip.getStartDates().length > 1) {
                     dateIndex = CustomerChooseDate(ChosenTrip);
                 }
                 if (dateIndex == -1) {
                     ErrorMessage("No dates available with the given information!", 2000);
                     mainCustomer();
-                    
                     return;
                 }
-                
                 ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
-                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex]);
+                        ChosenTrip.getStartDates()[dateIndex], ChosenTrip.getEndDates()[dateIndex]);
                 bk.ticketMenu(CustomerBookedTrips, trip, tripsList);
                 // addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
@@ -160,27 +154,28 @@ public class CustomerBooking {
                 ErrorMessage("Wrong Input.. Try again!", 2000);
                 break;
         }
-        
+
     }
 
     private int CustomerChooseDate(Trip ChosenTrip) {
         Scanner input = new Scanner(System.in);
         System.out.println("Which Date Do you want to Book?");
-        for (int i = 0; i < ChosenTrip.getStartDate().length; i++)
-            System.out.println(i + 1 + ". " + ChosenTrip.getStartDate()[i]);
+        for (int i = 0; i < ChosenTrip.getStartDates().length; i++)
+            System.out.println(i + 1 + ". " + ChosenTrip.getStartDates()[i]);
         int index = input.nextInt() - 1;
-        
-        if (index > ChosenTrip.getStartDate().length || index < 0)
+
+        if (index > ChosenTrip.getStartDates().length || index < 0)
             return -1;
 
         return index;
     }
 
-    private void addBookingTrip(Trip ChosenTrip, int dateIndex) {
-        CustomerBookedTrips
-                .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(),
-                        ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex], null));
-    }
+    // private void addBookingTrip(Trip ChosenTrip, int dateIndex) {
+    // CustomerBookedTrips
+    // .add(new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTitle(),
+    // ChosenTrip.getStartDate()[dateIndex], ChosenTrip.getEndDate()[dateIndex],
+    // null));
+    // }
 
     private void ErrorMessage(String message, int timeout) {
         try {
@@ -221,8 +216,6 @@ public class CustomerBooking {
         } else if (filteredTrips.isEmpty())
             ErrorMessage("\nNo Trip Found with these preferences..", 3000);
         return filteredTrips;
-        // Checkout no cancellation - Save in a file.
-        // Booking Save in runtime variables (Array List) - Not save in a file.
     }
 
     private void setFilters(String[] Filters) {
@@ -267,8 +260,8 @@ public class CustomerBooking {
             start_date = dateFormat.parse(search_start_date);
         if (search_end_date != null)
             end_date = dateFormat.parse(search_end_date);
-        Date tripStartDates[] = trip.getStartDate();
-        Date tripEndDates[] = trip.getEndDate();
+        Date tripStartDates[] = trip.getStartDates();
+        Date tripEndDates[] = trip.getEndDates();
         Boolean FoundStartDate = false;
         Boolean FoundEndDate = false;
 
