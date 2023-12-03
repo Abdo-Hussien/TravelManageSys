@@ -81,7 +81,7 @@ public class Admin implements Administration {
                     index = i;
                 }
             }
-            if (checked==true) {
+            if (checked == true) {
                 System.out.println("id: " + AllCustomers.get(index).account_id);
                 System.out.println("full name: " + AllCustomers.get(index).first_name + " "
                         + AllCustomers.get(index).last_name);
@@ -120,58 +120,67 @@ public class Admin implements Administration {
         if (status.equals("new")) {
 
             displayAllCustomersinfo(AllCustomers);
-        }
-
-        System.out.println("what filed you want to edit: " +
-                "1-username" +
-                "2-password" +
-                "3-firstname" +
-                "4-lastname" +
-                "5-address" +
-                "6-phone number");
-        choice = in.next().charAt(0);
-        if (choice == '1') {
-            System.out.println("enter new username: ");
-            input = in.next();
-            AllCustomers.get(index).username = input;
-            System.out.println("username updated successfully");
-        } else if (choice == '2') {
-            System.out.println("enter old password: ");
-            input = in.next();
-            if (AllCustomers.get(index).password.equals(input)) {
-                System.out.println("enter new password: ");
-                input = in.next();
-                AllCustomers.get(index).password = input;
-                System.out.println("password updated successfully");
-            } else {
-                System.out.println("wrong password please try again");
-            }
-        } else if (choice == '3') {
-            System.out.println("enter new firstname: ");
-            input = in.next();
-            AllCustomers.get(index).first_name = input;
-            System.out.println("firstname updated successfully");
-        } else if (choice == '4') {
-            System.out.println("enter new lastname: ");
-            input = in.next();
-            AllCustomers.get(index).last_name = input;
-            System.out.println("lastname updated successfully");
-        } else if (choice == '5') {
-            System.out.println("enter new address: ");
-            in.nextLine();
-            input = in.nextLine();
-            AllCustomers.get(index).address = input;
-            System.out.println("address updated successfully");
-        } else if (choice == '6') {
-            System.out.println("enter new phone number: ");
-            input = in.next();
-            AllCustomers.get(index).phone_number = input;
-            System.out.println("phone number updated successfully");
         } else {
-            System.out.println("invalid input! please try again..");
-
+            System.out.println("what filed you want to edit: " +
+                    "1-username" +
+                    "2-password" +
+                    "3-firstname" +
+                    "4-lastname" +
+                    "5-address" +
+                    "6-phone number");
+            choice = in.next().charAt(0);
+            if (choice == '1') {
+                System.out.println("enter new username: ");
+                input = in.next();
+                AllCustomers.get(index).username = input;
+                System.out.println("username updated successfully");
+            } else if (choice == '2') {
+                System.out.println("enter old password: ");
+                input = in.next();
+                if (AllCustomers.get(index).password.equals(input)) {
+                    System.out.println("enter new password: ");
+                    input = in.next();
+                    AllCustomers.get(index).password = input;
+                    System.out.println("password updated successfully");
+                } else {
+                    System.out.println("wrong password please try again");
+                }
+            } else if (choice == '3') {
+                System.out.println("enter new firstname: ");
+                input = in.next();
+                AllCustomers.get(index).first_name = input;
+                System.out.println("firstname updated successfully");
+            } else if (choice == '4') {
+                System.out.println("enter new lastname: ");
+                input = in.next();
+                AllCustomers.get(index).last_name = input;
+                System.out.println("lastname updated successfully");
+            } else if (choice == '5') {
+                System.out.println("enter new address: ");
+                in.nextLine();
+                input = in.nextLine();
+                AllCustomers.get(index).address = input;
+                System.out.println("address updated successfully");
+            } else if (choice == '6') {
+                System.out.println("enter new phone number: ");
+                input = in.next();
+                AllCustomers.get(index).phone_number = input;
+                System.out.println("phone number updated successfully");
+            } else {
+                System.out.println("invalid input! please try again..");
+            }
         }
-        editCustomerInformations("null", AllCustomers);
+        do {
+            System.out.println("countinue edting?  'y/n' ");
+            input = in.next();
+            if (input.toLowerCase().equals("y")) {
+                editCustomerInformations("null", AllCustomers);
+            } else if (input.toLowerCase().equals("n")) {
+                editCustomerInformations("null", AllCustomers);
+            } else {
+                System.out.println("invalid input! please try again");
+            }
+        } while (input != "y" || input != "n");
     }
 
     public void DeleteCustomer(ArrayList<Customers> AllCustomers) {
@@ -183,7 +192,7 @@ public class Admin implements Administration {
                 index = i;
             }
         }
-        if (checked==true) {
+        if (checked == true) {
             AllCustomers.remove(index);
             System.out.println("Account removed successfully!");
         }
@@ -208,9 +217,11 @@ public class Admin implements Administration {
         }
         System.out.println("total number of TOUR GUIDES: " + AllTourGuide.size());
         do {
+            System.out.println();
             System.out.println("chooce your operation:");
+            System.out.println();
             System.out.println(
-                    "1- display all information about Tour guide \n 2-edit Tour guide account \n 3- delete Tour guide account \n 4-add new Tour guide account \n 5-sign out");
+                    " 1-display all information about Tour guide \n 2-edit Tour guide account \n 3-delete Tour guide account \n 4-add new Tour guide account \n 5-sign out");
             choice = in.next().charAt(0);
             switch (choice) {
                 case '1':
@@ -243,7 +254,6 @@ public class Admin implements Administration {
 
     public void displayAllTourGuideinfo(ArrayList<TourGuide> AllTourGuide) {
         while (checked == false) {
-
             System.out.println("Please enter the Tour guide id: ");
             input = in.next();
             for (int i = 0; i < AllTourGuide.size(); i++) {
@@ -265,7 +275,7 @@ public class Admin implements Administration {
                 System.out.println("invalid tour guide ID entered! please try again");
             }
         }
-        System.out.println("1-Edit \n" +
+        System.out.println("1-Edit\n" +
                 "2-delete\n" +
                 "3-Go back\n");
         choice = in.next().charAt(0);
@@ -288,57 +298,67 @@ public class Admin implements Administration {
 
     public void editTourguideInformations(String status, ArrayList<TourGuide> AllTourGuide) {
         if (status.equals("new")) {
-
             displayAllTourGuideinfo(AllTourGuide);
-        }
-
-        System.out.println("what filed you want to edit: " +
-                "1-username" +
-                "2-password" +
-                "3-firstname" +
-                "4-lastname" +
-                "5-address" +
-                "6-phone number");
-        choice = in.next().charAt(0);
-        if (choice == '1') {
-            System.out.println("enter new username: ");
-            input = in.next();
-            AllTourGuide.get(index).username = input;
-            System.out.println("username updated successfully");
-        } else if (choice == '2') {
-            System.out.println("enter old password: ");
-            input = in.next();
-            if (AllTourGuide.get(index).password.equals(input)) {
-                System.out.println("enter new password: ");
-                input = in.next();
-                AllTourGuide.get(index).password = input;
-                System.out.println("password updated successfully");
-            }
-        } else if (choice == '3') {
-            System.out.println("enter new firstname: ");
-            input = in.next();
-            AllTourGuide.get(index).first_name = input;
-            System.out.println("firstname updated successfully");
-        } else if (choice == '4') {
-            System.out.println("enter new lastname: ");
-            input = in.next();
-            AllTourGuide.get(index).last_name = input;
-            System.out.println("lastname updated successfully");
-        } else if (choice == '5') {
-            System.out.println("enter new address: ");
-            in.nextLine();
-            input = in.nextLine();
-            AllTourGuide.get(index).address = input;
-            System.out.println("address updated successfully");
-        } else if (choice == '6') {
-            System.out.println("enter new phone number: ");
-            input = in.next();
-            AllTourGuide.get(index).phone_number = input;
-            System.out.println("phone number updated successfully");
         } else {
-            System.out.println("invalid input! please try again..");
+            System.out.println("what filed you want to edit: " +
+                    "1-username\n" +
+                    "2-password\n" +
+                    "3-firstname\n" +
+                    "4-lastname\n" +
+                    "5-address\n" +
+                    "6-phone number\n");
+            choice = in.next().charAt(0);
+            if (choice == '1') {
+                System.out.println("enter new username: ");
+                input = in.next();
+                AllTourGuide.get(index).username = input;
+                System.out.println("username updated successfully");
+            } else if (choice == '2') {
+                System.out.println("enter old password: ");
+                input = in.next();
+                if (AllTourGuide.get(index).password.equals(input)) {
+                    System.out.println("enter new password: ");
+                    input = in.next();
+                    AllTourGuide.get(index).password = input;
+                    System.out.println("password updated successfully");
+                }
+            } else if (choice == '3') {
+                System.out.println("enter new firstname: ");
+                input = in.next();
+                AllTourGuide.get(index).first_name = input;
+                System.out.println("firstname updated successfully");
+            } else if (choice == '4') {
+                System.out.println("enter new lastname: ");
+                input = in.next();
+                AllTourGuide.get(index).last_name = input;
+                System.out.println("lastname updated successfully");
+            } else if (choice == '5') {
+                System.out.println("enter new address: ");
+                in.nextLine();
+                input = in.nextLine();
+                AllTourGuide.get(index).address = input;
+                System.out.println("address updated successfully");
+            } else if (choice == '6') {
+                System.out.println("enter new phone number: ");
+                input = in.next();
+                AllTourGuide.get(index).phone_number = input;
+                System.out.println("phone number updated successfully");
+            } else {
+                System.out.println("invalid input! please try again..");
+            }
         }
-        editTourguideInformations("null", AllTourGuide);
+        do {
+            System.out.println("countinue edting?  'y/n' ");
+            input = in.next();
+            if (input.toLowerCase().equals("y")) {
+                editTourguideInformations("null", AllTourGuide);
+            } else if (input.toLowerCase().equals("n")) {
+                tourGuideManipulation(AllTourGuide);
+            } else {
+                System.out.println("invalid input! please try again");
+            }
+        } while (input != "y" || input != "n");
+
     }
 
     public void DeleteTourGuide(ArrayList<TourGuide> AllTourGuide) {
@@ -350,10 +370,11 @@ public class Admin implements Administration {
                 index = i;
             }
         }
-        if (checked==true) {
+        if (checked == true) {
             AllTourGuide.remove(index);
             System.out.println("Account removed successfully!");
-            
+            tourGuideManipulation(AllTourGuide);
+
         }
         if (checked == false) {
             System.out.println("Wrong input! Please try again..");
@@ -395,5 +416,5 @@ public class Admin implements Administration {
             }
         }
     }
-    
+
 }
