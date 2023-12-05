@@ -43,13 +43,14 @@ public class TravelItineraries {
         }
         do {
             System.out.println("******************************");
-            System.out.println("1-check out" +
-                    "2-show details" +
-                    "3-reschedul trip" +
-                    "4-cancel trip");
+            System.out.println("1-check out\n" +
+                    "2-show details\n" +
+                    "3-reschedul trip\n" +
+                    "4-cancel trip\n");
             choice = in.next().charAt(0);
             if (choice == '1') {
-                checkOut(bookedTravel, null);
+                // checkOut(bookedTravel, null);
+                break;
             } else if (choice == '2') {
                 showDetails(AllTrip);
             } else if (choice == '3') {

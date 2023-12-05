@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BookingTickets {
 
-    char choice;
+    int choice;
     Scanner in = new Scanner(System.in);
     int totalTickets = 0;
     ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
@@ -24,9 +24,9 @@ public class BookingTickets {
         System.out.println("2. Gold Ticket ");
         System.out.println("3. Platinum Ticket ");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        choice = in.next().charAt(0);
+        choice = in.nextInt();
 
-        if (choice == '1') {
+        if (choice == 1) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("silver")) {
                     Typeisfound = true;
@@ -42,7 +42,7 @@ public class BookingTickets {
 
             }
             TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
-        } else if (choice == '2') {
+        } else if (choice == 2) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("gold")) {
                     Typeisfound = true;
@@ -58,7 +58,7 @@ public class BookingTickets {
             }
             TicketEditMenu(bookedTravels, ChosenTrip, AllTrip);
 
-        } else if (choice == '3') {
+        } else if (choice == 3) {
             for (int i = 0; i < ticketList.size(); i++) {
                 if (ticketList.get(i).getType().equals("platinum")) {
                     Typeisfound = true;
@@ -87,12 +87,13 @@ public class BookingTickets {
         System.out.println("2. Delete Ticket");
         System.out.println("3. Confirm Your Tickets");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        choice = in.next().charAt(0);
-        if (choice == '1') {
+        choice = in.nextInt();
+
+        if (choice == 1) {
             ticketMenu(bookedTravels, ChosenTrip, AllTrip);
-        } else if (choice == '2') {
+        } else if (choice == 2) {
             DeleteTicket(bookedTravels, ChosenTrip, AllTrip);
-        } else if (choice == '3') {
+        } else if (choice == 3) {
             confirmTicket(bookedTravels, ChosenTrip, AllTrip);
             for (int i = 0; i < bookedTravels.size(); i++) {
                 System.out.println(bookedTravels.get(i).tripId);

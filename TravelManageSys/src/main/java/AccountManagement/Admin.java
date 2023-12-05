@@ -25,9 +25,14 @@ public class Admin implements Administration {
             System.out.println(AllCustomers.get(i).account_id);
             System.out.println(AllCustomers.get(i).first_name + " " + AllCustomers.get(i).last_name);
             System.out.println(AllCustomers.get(i).username);
+            if (AllCustomers.get(i).getTripHistoryCounter() > 2) {
+                System.out.println("Dicsount state:True");
+            } else {
+                System.out.println("Dicsount state:False");
+            }
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
         }
-        System.out.println("total number of TOUR GUIDES: " + AllCustomers.size());
+        System.out.println("total number of CUSTOMERS: " + AllCustomers.size());
         do {
             System.out.println();
             System.out.println("chooce your operation:");
@@ -195,7 +200,7 @@ public class Admin implements Administration {
 
     public void DeleteCustomer(ArrayList<Customers> AllCustomers, String status) {
         if (status == "new") {
-            System.out.println("Please enter the Tour guide id you want to delete: ");
+            System.out.println("Please enter the customer id you want to delete: ");
             input = in.next();
             for (int i = 0; i < AllCustomers.size(); i++) {
                 if (AllCustomers.get(i).account_id.equals(input)) {
@@ -460,27 +465,55 @@ public class Admin implements Administration {
                     "Trip availability: " + AllTrip.get(i).getTicketCounter() + "/" + AllTrip.get(i).getCapacity());
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
-        while (choice != '1' || choice != '2') {
+        do {
             System.out.println("*****************************************");
             System.out.println("1-To show more details about tip");
             System.out.println("2-To get back");
             choice = in.next().charAt(0);
             if (choice == '1') {
-                while (checked == true) {
-                    System.out.println("Enter The trip ID:");
+                // do {
+                System.out.println("Enter The trip ID:");
+                input = in.next();
+                Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
+                trip.displayTripDetails(trip);
+                do {
+                    System.out.println("Go back y/n");
                     input = in.next();
-                    Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
-                    trip.displayTripDetails(trip);
-                    if (checked == false) {
-                        System.out.println("invalid input! please try again");
+                    if (input.toLowerCase().equals("y")) {
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        tripsAvalability(AllTrip);
+                    } else if (input.toLowerCase().equals("n")) {
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        trip.displayTripDetails(trip);
+
+                    } else {
+                        System.out.println("wrong input!please try agin.");
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
+                } while (!input.toLowerCase().equals("y") || !input.toLowerCase().equals("n"));
+                // if (checked == false) {
+                // System.out.println("invalid input! please try again");
+                // }
+                // } while (checked == true);
             } else if (choice == '2') {
-                // main menu
+                tripsAvalability(AllTrip);
             } else {
                 System.out.println("invaild input! please try again");
+
             }
-        }
+        } while (choice != '1' || choice != '2');
     }
 
 }

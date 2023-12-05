@@ -245,6 +245,6 @@ public abstract class Trip {
     }
 
     public void setTicketCounter(int TicketCounter) {
-        this.TicketCounter = TicketCounter;
+        this.TicketCounter += TicketCounter;
     }
 }
