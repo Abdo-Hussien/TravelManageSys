@@ -5,6 +5,7 @@
 package TravelManagement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -35,20 +36,24 @@ public class TourGuide extends Person {
     }
 
     public double CalculateSalary(ArrayList<Trip> Trips, String TourGuideID, int Month) {
-        int numoftrip = 0;
-        for (Trip trip : Trips) {
-            if (trip.getTourGuideID().equals(TourGuideID)) {
-                for (Date date : trip.getStartDate())
-                    if (getMonthFromDate(date) + 1 == Month)
-                    numoftrip++;
-            }
-        }
-        salary = numoftrip * 2173.43;
+        int tripsInMonth = (int) Trips.stream()
+                .filter(trip -> trip.getTourGuideID().equals(TourGuideID))
+                .flatMap(trip -> Arrays.stream(trip.getStartDates()))
+                .filter(date -> getMonthFromDate(date) + 1 == Month)
+                .count();
+        // for (Trip trip : Trips) {
+        //     if (trip.getTourGuideID().equals(TourGuideID)) {
+        //         for (Date date : trip.getStartDate())
+        //             if (getMonthFromDate(date) + 1 == Month)
+        //                 numoftrip++;
+        //     }
+        // }
+        System.out.println(tripsInMonth);
+        salary = tripsInMonth * 2173.43;
         return salary;
     }
 
     private static int getMonthFromDate(Date date) {
-        // Since getMonth() is deprecated, use Calendar
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(java.util.Calendar.MONTH);

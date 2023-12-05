@@ -4,13 +4,9 @@
  */
 package TravelManagement;
 
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-// In need for a Date checker to check if the start and end date are after the current date for the availability of the trip.
-import java.util.stream.Collectors;
 
 /**
  *
@@ -21,13 +17,13 @@ public abstract class Trip {
     private String title;
     private String tripType;
     private double initPrice;
-    private Date startDate[];
-    private Date endDate[];
+    private Date[] startDates;
+    private Date[] endDates;
     private String Description;
     private String tourGuideID;
     private final int Capacity;
     private int TicketCounter;
-    private String activities[];
+    private String[] activities;
     private String hotelName; // mandatory
     private String transportID;
 
@@ -39,8 +35,8 @@ public abstract class Trip {
             String Description, String tourGuideID, int Capacity,
             String activities[], String hotelName, String transportID) {
         this.tripId = tripId;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDates = startDate;
+        this.endDates = endDate;
         this.tripType = tripType;
         this.title = title;
         this.Description = Description;
@@ -59,8 +55,8 @@ public abstract class Trip {
         System.out.println("");
         System.out.println("-------------------------------");
         for (Trip trip : trips) {
-            startDates = trip.getStartDate();
-            endDates = trip.getEndDate();
+            startDates = trip.getStartDates();
+            endDates = trip.getEndDates();
             System.out.println(trip.getTripId());
             System.out.println(trip.getTitle());
             System.out.println("For " + trip.getTripType() + " touring");
@@ -97,8 +93,8 @@ public abstract class Trip {
         // Cannot retrieve rate of ticket price from Silver class
         // System.out.println("$" + 1299.99 + "/person");
         for (Trip trip : trips) {
-            startDates = trip.getStartDate();
-            endDates = trip.getEndDate();
+            startDates = trip.getStartDates();
+            endDates = trip.getEndDates();
             System.out.print(
                     "\t\t\t\t" + dateFormat.format(startDates[0]) + "  " + dateFormat.format(endDates[0]));
         }
@@ -113,8 +109,8 @@ public abstract class Trip {
         Date[] startDates;
         Date[] endDates;
         ArrayList<Transportation> allTranports = new ArrayList<>();
-        startDates = trip.getStartDate();
-        endDates = trip.getEndDate();
+        startDates = trip.getStartDates();
+        endDates = trip.getEndDates();
         String[] Activities = trip.getActivities();
         System.out.println("**********************************");
         System.out.println("Explore the Beauty of " + trip.getTitle() + ".");
@@ -198,12 +194,12 @@ public abstract class Trip {
         this.initPrice = initPrice;
     }
 
-    public Date[] getStartDate() {
-        return this.startDate;
+    public Date[] getStartDates() {
+        return this.startDates;
     }
 
-    public Date[] getEndDate() {
-        return this.endDate;
+    public Date[] getEndDates() {
+        return this.endDates;
     }
 
     public String getDescription() {

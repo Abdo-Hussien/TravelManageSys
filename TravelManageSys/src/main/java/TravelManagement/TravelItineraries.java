@@ -94,8 +94,8 @@ public class TravelItineraries {
         if (checked == true) {
             System.out.println(AllTrip.get(index).getTitle());
             System.out.println("Available dates:");
-            System.out.println("Start dates: " + AllTrip.get(index).getStartDate());
-            System.out.println("End dates: " + AllTrip.get(index).getEndDate());
+            System.out.println("Start dates: " + AllTrip.get(index).getStartDates());
+            System.out.println("End dates: " + AllTrip.get(index).getEndDates());
             System.out.println("Enter start date: ");
             input = in.next();
             bookedTravel.get(BookedTravelsindex).setStartDate(null);

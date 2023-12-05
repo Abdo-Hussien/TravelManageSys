@@ -1,6 +1,5 @@
 package data;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.print.attribute.standard.MediaSize.NA;
 
 import AccountManagement.Customers;
 import TravelManagement.*;
@@ -142,29 +137,6 @@ public class fileManipulation {
                             dateFormat.parse(TicketExpDates[i]), CustomerTickets));
         }
         return CustomerBookedTrips;
-        //
-        // String regex = "\\[\\s*(.*?)\\s*\\]";
-        // String content = new String("");
-        // Pattern pattern = Pattern.compile(regex);
-        // for (int index = 0; index < BookedTripsLine.length; index++) {
-        // Matcher matcher = pattern.matcher(BookedTripsLine[index]);
-        // if (matcher.find()) {
-        // content = matcher.group(1);
-        // } else {
-        // System.out.println("No match found.");
-        // content = null;
-        // }
-        // String bookedTripArr[] = content == null ? null : content.split("\\s*,\\s*");
-        // String dates[] = content == null ? null :
-        // bookedTripArr[2].split("\\s+\\|\\s+");
-        // if (bookedTripArr == null && dates == null)
-        // continue;
-        // CustomerBookedTrips
-        // .add(new BookedTravels(bookedTripArr[0], bookedTripArr[1],
-        // dateFormat.parse(dates[0]),
-        // dateFormat.parse(dates[1]),
-        // null));
-        // }
     }
 
     // Function to get all TourGuides from the file
