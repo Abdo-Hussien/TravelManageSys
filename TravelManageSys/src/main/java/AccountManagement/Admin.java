@@ -25,19 +25,15 @@ public class Admin implements Administration {
             System.out.println(AllCustomers.get(i).account_id);
             System.out.println(AllCustomers.get(i).first_name + " " + AllCustomers.get(i).last_name);
             System.out.println(AllCustomers.get(i).username);
-            if (AllCustomers.get(i).getTripHistoryCounter() > 2) {
-                System.out.println("Discount status: True");
-            } else {
-                System.out.println("Discount status: False");
-            }
-
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
         }
-        System.out.println("total number of customers: " + AllCustomers.size());
+        System.out.println("total number of TOUR GUIDES: " + AllCustomers.size());
         do {
+            System.out.println();
             System.out.println("chooce your operation:");
+            System.out.println();
             System.out.println(
-                    "1- display all information about customer \n 2-edit customer account \n 3- delete customer account \n 4-add new customer account \n 5-sing out");
+                    " 1-display all information about Customer \n 2-edit Customer account \n 3-delete Customer account \n 4-add new Customer account \n 5-sign out");
             choice = in.next().charAt(0);
             switch (choice) {
                 case '1':
@@ -47,7 +43,7 @@ public class Admin implements Administration {
                     editCustomerInformations("new", AllCustomers);
                     break;
                 case '3':
-                    DeleteCustomer(AllCustomers);
+                    DeleteCustomer(AllCustomers, "new");
                     break;
                 case '4':
                     try {
@@ -57,24 +53,27 @@ public class Admin implements Administration {
                     }
                     break;
                 case '5':
-                    // sign out
+                    System.exit(0);
                     break;
 
                 default:
                     System.out.println("invalid input! please try again...");
+                    customerManipulation(AllCustomers);
                     break;
             }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');
-
-        System.out.println("Please enter the customer id: ");
-        input = in.next();
-
     }
 
     public void displayAllCustomersinfo(ArrayList<Customers> AllCustomers) {
         while (checked == false) {
-            System.out.println("Please enter the customer id: ");
+            System.out.println("Please enter the Customer id: ");
             input = in.next();
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < AllCustomers.size(); i++) {
                 if (AllCustomers.get(i).account_id.equals(input)) {
                     checked = true;
@@ -90,22 +89,29 @@ public class Admin implements Administration {
                 System.out.println("password: " + AllCustomers.get(index).password);
                 System.out.println("address: " + AllCustomers.get(index).address);
                 System.out.println("phone number: " + AllCustomers.get(index).phone_number);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             } else {
-                System.out.println("invalid customer ID entered! please try again");
+                System.out.println("invalid Customer ID entered! please try again");
             }
         }
-        System.out.println("1-Edit" +
-                "2-delete" +
-                "3-Go back");
+        checked = false;
+        System.out.println("1-Edit\n" +
+                "2-delete\n" +
+                "3-Go back\n");
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
                 editCustomerInformations("null", AllCustomers);
                 break;
             case '2':
-                DeleteCustomer(AllCustomers);
+                DeleteCustomer(AllCustomers, "old");
                 break;
             case '3':
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 customerManipulation(AllCustomers);
                 break;
             default:
@@ -113,21 +119,19 @@ public class Admin implements Administration {
                 displayAllCustomersinfo(AllCustomers);
                 break;
         }
-
     }
 
     public void editCustomerInformations(String status, ArrayList<Customers> AllCustomers) {
         if (status.equals("new")) {
-
             displayAllCustomersinfo(AllCustomers);
         } else {
-            System.out.println("what filed you want to edit: " +
-                    "1-username" +
-                    "2-password" +
-                    "3-firstname" +
-                    "4-lastname" +
-                    "5-address" +
-                    "6-phone number");
+            System.out.println("what filed you want to edit: \n" +
+                    "1-username\n" +
+                    "2-password\n" +
+                    "3-firstname\n" +
+                    "4-lastname\n" +
+                    "5-address\n" +
+                    "6-phone number\n");
             choice = in.next().charAt(0);
             if (choice == '1') {
                 System.out.println("enter new username: ");
@@ -135,16 +139,10 @@ public class Admin implements Administration {
                 AllCustomers.get(index).username = input;
                 System.out.println("username updated successfully");
             } else if (choice == '2') {
-                System.out.println("enter old password: ");
+                System.out.println("enter new password: ");
                 input = in.next();
-                if (AllCustomers.get(index).password.equals(input)) {
-                    System.out.println("enter new password: ");
-                    input = in.next();
-                    AllCustomers.get(index).password = input;
-                    System.out.println("password updated successfully");
-                } else {
-                    System.out.println("wrong password please try again");
-                }
+                AllCustomers.get(index).password = input;
+                System.out.println("password updated successfully");
             } else if (choice == '3') {
                 System.out.println("enter new firstname: ");
                 input = in.next();
@@ -174,31 +172,62 @@ public class Admin implements Administration {
             System.out.println("countinue edting?  'y/n' ");
             input = in.next();
             if (input.toLowerCase().equals("y")) {
-                editCustomerInformations("null", AllCustomers);
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                editCustomerInformations("old", AllCustomers);
             } else if (input.toLowerCase().equals("n")) {
-                editCustomerInformations("null", AllCustomers);
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                customerManipulation(AllCustomers);
+
             } else {
                 System.out.println("invalid input! please try again");
             }
         } while (input != "y" || input != "n");
+
     }
 
-    public void DeleteCustomer(ArrayList<Customers> AllCustomers) {
-        System.out.println("Please enter the customer id you want to delete: ");
-        input = in.next();
-        for (int i = 0; i < AllCustomers.size(); i++) {
-            if (AllCustomers.get(i).account_id.equals(input)) {
-                checked = true;
-                index = i;
+    public void DeleteCustomer(ArrayList<Customers> AllCustomers, String status) {
+        if (status == "new") {
+            System.out.println("Please enter the Tour guide id you want to delete: ");
+            input = in.next();
+            for (int i = 0; i < AllCustomers.size(); i++) {
+                if (AllCustomers.get(i).account_id.equals(input)) {
+                    checked = true;
+                    index = i;
+                }
             }
-        }
-        if (checked == true) {
+            if (checked == true) {
+                AllCustomers.remove(index);
+                System.out.println("Account removed successfully!");
+                checked = false;
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                customerManipulation(AllCustomers);
+
+            }
+            if (checked == false) {
+                System.out.println("Wrong input! Please try again..");
+                DeleteCustomer(AllCustomers, "new");
+            }
+        } else {
             AllCustomers.remove(index);
             System.out.println("Account removed successfully!");
-        }
-        if (checked == false) {
-            System.out.println("Wrong input! Please try again..");
-            DeleteCustomer(AllCustomers);
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            customerManipulation(AllCustomers);
         }
 
     }
@@ -231,7 +260,7 @@ public class Admin implements Administration {
                     editTourguideInformations("new", AllTourGuide);
                     break;
                 case '3':
-                    DeleteTourGuide(AllTourGuide);
+                    DeleteTourGuide(AllTourGuide, "new");
                     break;
                 case '4':
                     try {
@@ -241,7 +270,7 @@ public class Admin implements Administration {
                     }
                     break;
                 case '5':
-                    // sign out
+                    System.exit(0);
                     break;
 
                 default:
@@ -256,6 +285,12 @@ public class Admin implements Administration {
         while (checked == false) {
             System.out.println("Please enter the Tour guide id: ");
             input = in.next();
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             for (int i = 0; i < AllTourGuide.size(); i++) {
                 if (AllTourGuide.get(i).account_id.equals(input)) {
                     checked = true;
@@ -271,10 +306,12 @@ public class Admin implements Administration {
                 System.out.println("password: " + AllTourGuide.get(index).password);
                 System.out.println("address: " + AllTourGuide.get(index).address);
                 System.out.println("phone number: " + AllTourGuide.get(index).phone_number);
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             } else {
                 System.out.println("invalid tour guide ID entered! please try again");
             }
         }
+        checked = false;
         System.out.println("1-Edit\n" +
                 "2-delete\n" +
                 "3-Go back\n");
@@ -284,9 +321,14 @@ public class Admin implements Administration {
                 editTourguideInformations("null", AllTourGuide);
                 break;
             case '2':
-                DeleteTourGuide(AllTourGuide);
+                DeleteTourGuide(AllTourGuide, "old");
                 break;
             case '3':
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 tourGuideManipulation(AllTourGuide);
                 break;
             default:
@@ -300,7 +342,7 @@ public class Admin implements Administration {
         if (status.equals("new")) {
             displayAllTourGuideinfo(AllTourGuide);
         } else {
-            System.out.println("what filed you want to edit: " +
+            System.out.println("what filed you want to edit: \n" +
                     "1-username\n" +
                     "2-password\n" +
                     "3-firstname\n" +
@@ -314,14 +356,10 @@ public class Admin implements Administration {
                 AllTourGuide.get(index).username = input;
                 System.out.println("username updated successfully");
             } else if (choice == '2') {
-                System.out.println("enter old password: ");
+                System.out.println("enter new password: ");
                 input = in.next();
-                if (AllTourGuide.get(index).password.equals(input)) {
-                    System.out.println("enter new password: ");
-                    input = in.next();
-                    AllTourGuide.get(index).password = input;
-                    System.out.println("password updated successfully");
-                }
+                AllTourGuide.get(index).password = input;
+                System.out.println("password updated successfully");
             } else if (choice == '3') {
                 System.out.println("enter new firstname: ");
                 input = in.next();
@@ -351,9 +389,20 @@ public class Admin implements Administration {
             System.out.println("countinue edting?  'y/n' ");
             input = in.next();
             if (input.toLowerCase().equals("y")) {
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 editTourguideInformations("null", AllTourGuide);
             } else if (input.toLowerCase().equals("n")) {
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 tourGuideManipulation(AllTourGuide);
+
             } else {
                 System.out.println("invalid input! please try again");
             }
@@ -361,24 +410,41 @@ public class Admin implements Administration {
 
     }
 
-    public void DeleteTourGuide(ArrayList<TourGuide> AllTourGuide) {
-        System.out.println("Please enter the Tour guide id you want to delete: ");
-        input = in.next();
-        for (int i = 0; i < AllTourGuide.size(); i++) {
-            if (AllTourGuide.get(i).account_id.equals(input)) {
-                checked = true;
-                index = i;
+    public void DeleteTourGuide(ArrayList<TourGuide> AllTourGuide, String status) {
+        if (status == "new") {
+            System.out.println("Please enter the Tour guide id you want to delete: ");
+            input = in.next();
+            for (int i = 0; i < AllTourGuide.size(); i++) {
+                if (AllTourGuide.get(i).account_id.equals(input)) {
+                    checked = true;
+                    index = i;
+                }
             }
-        }
-        if (checked == true) {
+            if (checked == true) {
+                AllTourGuide.remove(index);
+                System.out.println("Account removed successfully!");
+                checked = false;
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                tourGuideManipulation(AllTourGuide);
+
+            }
+            if (checked == false) {
+                System.out.println("Wrong input! Please try again..");
+                DeleteTourGuide(AllTourGuide, "new");
+            }
+        } else {
             AllTourGuide.remove(index);
             System.out.println("Account removed successfully!");
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             tourGuideManipulation(AllTourGuide);
-
-        }
-        if (checked == false) {
-            System.out.println("Wrong input! Please try again..");
-            DeleteTourGuide(AllTourGuide);
         }
 
     }
