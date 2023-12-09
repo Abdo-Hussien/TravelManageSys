@@ -14,7 +14,6 @@ public class Admin implements Administration {
     protected boolean checked = false;
     int index;
     protected Customers addAccount = new Customers();
-
     @Override
     public void customerManipulation(ArrayList<Customers> AllCustomers) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -51,11 +50,7 @@ public class Admin implements Administration {
                     DeleteCustomer(AllCustomers, "new");
                     break;
                 case '4':
-                    try {
-                        addAccount.create_acc();
-                    } catch (IOException e) {
-                        System.out.println("invaild path");
-                    }
+                    addAccount.create_acc("Customer", AllCustomers);
                     break;
                 case '5':
                     System.exit(0);
@@ -268,11 +263,7 @@ public class Admin implements Administration {
                     DeleteTourGuide(AllTourGuide, "new");
                     break;
                 case '4':
-                    try {
-                        addAccount.create_acc();
-                    } catch (IOException e) {
-                        System.out.println("invaild path");
-                    }
+                    addAccount.create_acc("TourGuide", AllTourGuide);
                     break;
                 case '5':
                     System.exit(0);

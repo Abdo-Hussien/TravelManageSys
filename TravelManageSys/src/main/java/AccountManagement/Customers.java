@@ -2,28 +2,13 @@
 package AccountManagement;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.sound.midi.SysexMessage;
-
-import data.fileManipulation;
-
 import TravelManagement.BookedTravels;
-import TravelManagement.Trip;
+import TravelManagement.TourGuide;
 
-import java.util.Random;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 
 //contains method for genrating a random ID
 
@@ -32,21 +17,21 @@ public class Customers extends Person {
     private CustomerBooking BookingManipulations = new CustomerBooking();
 
     Scanner scanner = new Scanner(System.in);
-    Person u = new Person();
+    Person u;
     // keeps track of user's trip history
     public ArrayList<String> tripsHistory = new ArrayList<>();
     private ArrayList<BookedTravels> BookedTravels = new ArrayList<>();
     // user address attributes
     Matcher matcher = null;
     boolean logged_in = false; // used in edit account for user
-    private ArrayList<Customers> allcustomer1 = new ArrayList<Customers>();
     int index;
 
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
             ArrayList<String> tripHistory) {
         super(first_name, last_name, username, age, phone_number, address, password, gender, account_id);
-        matcher = Pattern.compile("\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|").matcher(address);
+        matcher = Pattern.compile("\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|\\s*([\\s\\S]*?)\\s*\\|")
+                .matcher(address);
         if (matcher.find()) {
             streetAddress = matcher.group(1);
             stateAddress = matcher.group(2);
@@ -69,7 +54,7 @@ public class Customers extends Person {
     }
 
     // create an account
-    public void create_acc() throws IOException {
+    public Person create_acc(String object, ArrayList ArrayList) {
         System.out.println("\n");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("");
@@ -77,6 +62,11 @@ public class Customers extends Person {
         System.out.println("");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\n");
+        if (object.equals("TourGuide")) {
+            u = new TourGuide();
+        } else if (object.equals("Customer")) {
+            u = new Customers();
+        }
 
         while (true) {
 
@@ -294,38 +284,14 @@ public class Customers extends Person {
         generator.generateRandID();
         u.account_id = generator.getRandID();
 
-        // input data into text file
-        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true), true)) {
-
-            writer.println(u.first_name + " " + u.last_name);
-            writer.println(u.age);
-            writer.println(u.gender.toLowerCase());
-            writer.println(u.phone_number);
-            writer.println(u.address);
-            writer.println(u.username);
-            writer.println(u.password);
-            writer.println(u.account_id);
-            writer.println();
-
-        }
-
         System.out.println("Successfully created the account : " + u.username);
-        System.out.println("Would you wish to create an another account? (yes/no) ");
-        String choice = scanner.next();
-        if (choice.toLowerCase().equals("yes") || choice.toLowerCase().equals("y")) {
-            create_acc();
-        }
-
-        else {
-
-            userMenu();
-        }
+        userMenu(ArrayList);
+        return u;
 
     }
 
     // login into account
-    public void login(ArrayList<Customers> allCustomers) throws FileNotFoundException, IOException {
+    public void login(ArrayList<Customers> allCustomers) {
 
         int counter = 0;
         boolean checked = false;
@@ -377,206 +343,8 @@ public class Customers extends Person {
         }
     }
 
-    // user can edit his account information
-    public void edit_acc() throws FileNotFoundException, IOException {
-
-        String line;
-        File filePath = new File("TravelManageSys//TravelManageSys//src//main//java//data//customers.txt");
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        StringBuilder content = new StringBuilder();
-
-        String new_phoneNumber = "";
-        String prev_phoneNumber = "";
-        String prev_userName = "";
-        String new_userName = "";
-        String prev_password = "";
-        String new_password = "";
-        String userInput;
-
-        if (1 == 0/* logged_in == false */) {
-            System.out.println("");
-            System.out.println("---------------------------------------------");
-            System.out.println("You have to logged in to edit your account.");
-            System.out.println("---------------------------------------------");
-
-            login(allcustomer1);
-        }
-
-        else {
-
-            System.out.println("What field would you wish to edit ? ");
-            System.out.println("");
-            System.out.println("------------------------------------------------- ");
-            System.out.println("1) Phone number");
-            System.out.println("2) Username ");
-            System.out.println("3) Password");
-            System.out.println("4) Go back to menu");
-            System.out.println("------------------------------------------------- ");
-
-            userInput = scanner.next();
-            System.out.println("");
-
-            if (userInput.equals("1")) {
-
-                while (true) {
-                    System.out.println("Enter your previous phone number : ");
-                    System.out.println("the state code (+20) is added.");
-                    prev_phoneNumber = scanner.next();
-
-                    System.out.println("");
-                    if (prev_phoneNumber.length() == 10) {
-                        prev_phoneNumber = "+20" + prev_phoneNumber;
-                        break;
-                    } else {
-                        System.out.println("Invalid phone number, the phone number should be 10 numbers !");
-                        continue;
-
-                    }
-                }
-
-                while (true) {
-                    System.out.println("Enter the phone number you want to be added : ");
-                    System.out.println("the state code (+20) is added.");
-                    new_phoneNumber = scanner.next();
-
-                    System.out.println("");
-                    if (new_phoneNumber.length() == 10) {
-                        new_phoneNumber = "+20" + new_phoneNumber;
-                        break;
-                    } else {
-                        System.out.println("Invalid phone number, the phone number should be 10 numbers !");
-                        continue;
-
-                    }
-                }
-
-                while ((line = reader.readLine()) != null) {
-                    // Replace the old value with the new value
-                    line = line.replace(prev_phoneNumber, new_phoneNumber);
-                    content.append(line).append("\n");
-                }
-                reader.close();
-
-                // Write the updated content back to the file
-
-                System.out.println("Successfully changed phone number to : " + new_phoneNumber);
-                writer.write(content.toString());
-                writer.close();
-
-            }
-
-            // change username
-            if (userInput.equals("2")) {
-
-                while (true) {
-                    System.out.println("Enter your previous username : ");
-                    prev_userName = scanner.next();
-
-                    System.out.println("");
-                    if (prev_userName.length() < 7) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    }
-                    if (prev_userName.length() > 14) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    } else {
-                        break;
-                    }
-
-                }
-
-                while (true) {
-                    System.out.println("Enter your new username : ");
-                    new_userName = scanner.next();
-
-                    System.out.println("");
-                    if (new_userName.length() < 7) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    }
-                    if (new_userName.length() > 14) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    } else {
-                        break;
-                    }
-
-                }
-
-                while ((line = reader.readLine()) != null) {
-                    line = line.replace(prev_userName, new_userName);
-                    content.append(line).append("\n");
-                }
-                reader.close();
-
-                System.out.println("Successfully changed  your username to :" + new_userName);
-                writer.write(content.toString());
-                writer.close();
-            }
-
-            // change password
-            if (userInput.equals("3")) {
-
-                while (true) {
-                    System.out.println("Enter your previous username : ");
-                    prev_userName = scanner.next();
-
-                    System.out.println("");
-                    if (prev_userName.length() < 7) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    }
-                    if (prev_userName.length() > 14) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    } else {
-                        break;
-                    }
-
-                }
-
-                while (true) {
-                    System.out.println("Enter your new username : ");
-                    new_userName = scanner.next();
-
-                    System.out.println("");
-                    if (new_userName.length() < 7) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    }
-                    if (new_userName.length() > 14) {
-                        System.out.println("Your username should be a minimum of 7 characters.");
-                        continue;
-                    } else {
-                        break;
-                    }
-
-                }
-
-                while ((line = reader.readLine()) != null) {
-                    line = line.replace(prev_userName, new_userName);
-                    content.append(line).append("\n");
-                }
-                reader.close();
-
-                System.out.println("Successfully changed  your username to :" + new_userName);
-                writer.write(content.toString());
-                writer.close();
-            }
-
-            // return back to usermenu
-            if (userInput.equals("4")) {
-                userMenu();
-            }
-
-        } // else
-
-    } // func
-
     // user interface menu
-    public void userMenu() throws IOException {
+    public void userMenu(ArrayList<Customers> AllCustomers) {
 
         while (true) {
 
@@ -596,18 +364,19 @@ public class Customers extends Person {
             System.out.println("");
 
             if (userInput.equals("1")) {
-                create_acc();
+                AllCustomers.add((Customers) create_acc("Customer", AllCustomers));
                 break;
             }
 
             if (userInput.equals("2")) {
-                login(allcustomer1);
+                login(AllCustomers);
                 break;
             }
 
             if (userInput.equals("3")) {
+                Admin admin = new Admin();
+                admin.editCustomerInformations("null", AllCustomers);
 
-                edit_acc();
                 break;
 
             }
@@ -619,24 +388,6 @@ public class Customers extends Person {
 
         }
 
-    }
-
-    // diplay all users accounts and their information (for admin usage only)
-    public void display_all_users() throws FileNotFoundException, IOException {
-        String filePath = "TravelManageSys\\TravelManageSys\\src\\main\\java\\data\\customers.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-
-            // Read each line from the file until the end of the file is reached
-            System.out.println("\n");
-            System.out.println("Users accounts : ");
-            System.out.println("==============================");
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-
-            }
-
-        }
     }
 
 }

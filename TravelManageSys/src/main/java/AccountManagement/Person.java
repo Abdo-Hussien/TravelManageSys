@@ -68,5 +68,5 @@ public class Person {
     public String getAccount_id() {
         return this.account_id;
     }
-
+    
 }
