@@ -3,6 +3,7 @@ package AccountManagement;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
 
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
@@ -14,6 +15,7 @@ public class Admin implements Administration {
     protected boolean checked = false;
     int index;
     protected Customers addAccount = new Customers();
+
     @Override
     public void customerManipulation(ArrayList<Customers> AllCustomers) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -50,7 +52,7 @@ public class Admin implements Administration {
                     DeleteCustomer(AllCustomers, "new");
                     break;
                 case '4':
-                    addAccount.create_acc("Customer", AllCustomers);
+                    AllCustomers.add((Customers) create_acc("Customer"));
                     break;
                 case '5':
                     System.exit(0);
@@ -263,7 +265,7 @@ public class Admin implements Administration {
                     DeleteTourGuide(AllTourGuide, "new");
                     break;
                 case '4':
-                    addAccount.create_acc("TourGuide", AllTourGuide);
+                    AllTourGuide.add((TourGuide) create_acc("TourGuide"));
                     break;
                 case '5':
                     System.exit(0);
@@ -507,4 +509,39 @@ public class Admin implements Administration {
         } while (choice != '1' || choice != '2');
     }
 
+    public Person create_acc(String Account_Type) {
+        Person person = null;
+        if (Account_Type.equals("TourGuide"))
+            person = new TourGuide();
+        else if (Account_Type.equals("Customer"))
+            person = new Customers();
+        System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+        System.out.println("\t\tCreate Account ");
+        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
+        person.first_name = Validations.NameValidation("First Name", 3, 14);
+        System.out.println("--------------------------------------");
+        person.last_name = Validations.NameValidation("Last Name", 3, 14);
+        System.out.println("--------------------------------------");
+        person.username = Validations.NameValidation("Username", 7, 14);
+        System.out.println("--------------------------------------");
+        person.phone_number = Validations.PhoneValidation();
+        System.out.println("--------------------------------------");
+        person.age = Validations.AgeValidation();
+        System.out.println("--------------------------------------");
+        person.gender = Validations.GenderValidation();
+        System.out.println("--------------------------------------");
+        String[] address = Validations.AddressValidation();
+        person.streetAddress = address[0];
+        person.stateAddress = address[1];
+        person.zipAddress = address[2];
+        System.out.println("--------------------------------------");
+        person.password = Validations.PasswordValidation();
+        System.out.println("--------------------------------------");
+        RandIDGenerator generator = new RandIDGenerator();
+        generator.setItemCount(5);
+        generator.generateRandID();
+        person.account_id = generator.getRandID();
+        System.out.println("Successfully created the account: " + person.username);
+        return person;
+    }
 }

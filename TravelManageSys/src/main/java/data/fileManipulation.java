@@ -37,14 +37,14 @@ public class fileManipulation {
     // Function to convert String to Trip
     private static Trip parseTrip(String tripString) {
         String[] trip = tripString.split(System.lineSeparator());
-        Date[] start_date = Arrays.stream(trip[4].split("\\s+\\|\\s+")).map(date_str -> {
+        Date[] start_date = Arrays.stream(trip[4].split("\\s*\\|\\s*")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
                 return null;
             }
         }).toArray(Date[]::new);
-        Date[] end_date = Arrays.stream(trip[5].split("\\s+\\|\\s+")).map(date_str -> {
+        Date[] end_date = Arrays.stream(trip[5].split("\\s*\\|\\s*")).map(date_str -> {
             try {
                 return dateFormat.parse(date_str);
             } catch (ParseException e) {
@@ -53,15 +53,15 @@ public class fileManipulation {
         }).toArray(Date[]::new);
         if (trip[2].toLowerCase().equals("family")) {
             return new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
                     trip[10], trip[11]);
         } else if (trip[2].toLowerCase().equals("general")) {
             return new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
                     trip[10], trip[11]);
         } else if (trip[2].toLowerCase().equals("couple")) {
             return new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s+\\|\\s+"),
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
                     trip[10], trip[11]);
         } else
             return null;
@@ -78,17 +78,21 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                ArrayList<String> TripHistory = new ArrayList<>(Arrays.asList());
+                ArrayList<String> TripHistory = null;
                 if (customer[8].equalsIgnoreCase("No Booked Trips")) {
                     if (customer[9].equalsIgnoreCase("No Trips History"))
                         TripHistory = null;
-                    else
-                        TripHistory = (ArrayList<String>) Arrays.asList(customer[9].split("\\s+\\|\\s+"));
+                    else {
+                        String[] strTripHistory = customer[9].split("\\s*\\|\\s*");
+                        TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
+                    }
                 } else {
                     if (customer[15].equalsIgnoreCase("No Trips History"))
                         TripHistory = null;
-                    else
-                        TripHistory = (ArrayList<String>) Arrays.asList(customer[15].split("\\s+\\|\\s+"));
+                    else {
+                        String[] strTripHistory = customer[15].split("\\s*\\|\\s*");
+                        TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
+                    }
                 }
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
                         : parseBookedTrip(Arrays.copyOfRange(customer, 8, 15));

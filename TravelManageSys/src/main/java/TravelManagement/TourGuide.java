@@ -21,7 +21,8 @@ public class TourGuide extends Person {
 
     protected double salary;
 
-    public TourGuide(){};
+    public TourGuide() {
+    };
 
     public TourGuide(String account_id, String first_name, String last_name, String username, String password,
             int age, String gender, String address, String phone_number) {
@@ -43,13 +44,15 @@ public class TourGuide extends Person {
                 .flatMap(trip -> Arrays.stream(trip.getStartDates()))
                 .filter(date -> getMonthFromDate(date) + 1 == Month)
                 .count();
-        // for (Trip trip : Trips) {
-        // if (trip.getTourGuideID().equals(TourGuideID)) {
-        // for (Date date : trip.getStartDate())
-        // if (getMonthFromDate(date) + 1 == Month)
-        // numoftrip++;
-        // }
-        // }
+        /* 
+        for (Trip trip : Trips) {
+            if (trip.getTourGuideID().equals(TourGuideID)) {
+                for (Date date : trip.getStartDate())
+                    if (getMonthFromDate(date) + 1 == Month)
+                        numoftrip++;
+            }
+        }
+        */
         System.out.println(tripsInMonth);
         salary = tripsInMonth * 2173.43;
         return salary;

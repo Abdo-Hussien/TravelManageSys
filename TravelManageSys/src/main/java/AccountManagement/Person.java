@@ -2,6 +2,8 @@ package AccountManagement;
 
 import java.util.Objects;
 
+import TravelManagement.TourGuide;
+
 public class Person {
 
     protected String first_name;
@@ -68,5 +70,5 @@ public class Person {
     public String getAccount_id() {
         return this.account_id;
     }
-    
+
 }
