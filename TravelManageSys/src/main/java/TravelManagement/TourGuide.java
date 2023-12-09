@@ -44,15 +44,15 @@ public class TourGuide extends Person {
                 .flatMap(trip -> Arrays.stream(trip.getStartDates()))
                 .filter(date -> getMonthFromDate(date) + 1 == Month)
                 .count();
-        /* 
-        for (Trip trip : Trips) {
-            if (trip.getTourGuideID().equals(TourGuideID)) {
-                for (Date date : trip.getStartDate())
-                    if (getMonthFromDate(date) + 1 == Month)
-                        numoftrip++;
-            }
-        }
-        */
+        /*
+         * for (Trip trip : Trips) {
+         * if (trip.getTourGuideID().equals(TourGuideID)) {
+         * for (Date date : trip.getStartDate())
+         * if (getMonthFromDate(date) + 1 == Month)
+         * numoftrip++;
+         * }
+         * }
+         */
         System.out.println(tripsInMonth);
         salary = tripsInMonth * 2173.43;
         return salary;
@@ -72,4 +72,7 @@ public class TourGuide extends Person {
         this.salary = salary;
     }
 
+    public void showDetails(int index, ArrayList<TourGuide> allTourGuides, ArrayList<Trip> allTrips) {
+        
+    }
 }
