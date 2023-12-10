@@ -53,16 +53,16 @@ public class fileManipulation {
         }).toArray(Date[]::new);
         if (trip[2].toLowerCase().equals("family")) {
             return new FamilyTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
-                    trip[10], trip[11]);
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), Integer.parseInt(trip[9]),
+                    trip[10].split("\\s*\\|\\s*"), trip[11], trip[12]);
         } else if (trip[2].toLowerCase().equals("general")) {
             return new GeneralTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
-                    trip[10], trip[11]);
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), Integer.parseInt(trip[9]),
+                    trip[10].split("\\s*\\|\\s*"), trip[11], trip[12]);
         } else if (trip[2].toLowerCase().equals("couple")) {
             return new CoupleTours(trip[0], trip[1], trip[2], Double.parseDouble(trip[3]),
-                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), trip[9].split("\\s*\\|\\s*"),
-                    trip[10], trip[11]);
+                    start_date, end_date, trip[6], trip[7], Integer.parseInt(trip[8]), Integer.parseInt(trip[9]),
+                    trip[10].split("\\s*\\|\\s*"), trip[11], trip[12]);
         } else
             return null;
     }

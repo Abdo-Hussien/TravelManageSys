@@ -17,9 +17,9 @@ public class FamilyTours extends Trip {
     }
 
     public FamilyTours(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
-            String Description, String tourGuide, int Capacity, String activities[], String hotelName,
-            String transportID) {
-        super(tripId, title, tripType, initPrice, startDate, endDate, Description, tourGuide, Capacity, activities,
+    String Description, String tourGuideID, int Capacity, int TicketCounter,
+    String activities[], String hotelName, String transportID) {
+        super(tripId, title, tripType, initPrice, startDate, endDate, Description, tourGuideID, Capacity, TicketCounter, activities,
                 hotelName, transportID);
     }
 

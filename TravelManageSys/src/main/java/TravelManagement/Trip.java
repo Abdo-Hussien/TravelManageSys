@@ -32,7 +32,7 @@ public abstract class Trip {
     }
 
     public Trip(String tripId, String title, String tripType, double initPrice, Date[] startDate, Date[] endDate,
-            String Description, String tourGuideID, int Capacity,
+            String Description, String tourGuideID, int Capacity, int TicketCounter,
             String activities[], String hotelName, String transportID) {
         this.tripId = tripId;
         this.startDates = startDate;
@@ -45,6 +45,7 @@ public abstract class Trip {
         this.tourGuideID = tourGuideID;
         this.activities = activities;
         this.Capacity = Capacity;
+        this.TicketCounter = TicketCounter;
         this.transportID = transportID;
     }
 
