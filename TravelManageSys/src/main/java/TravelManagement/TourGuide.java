@@ -10,18 +10,22 @@ import java.util.Date;
 import java.util.Scanner;
 
 import AccountManagement.Person;
+import AccountManagement.Personsinterface;
 
 /**
  *
  * @author bmood
  */
-public class TourGuide extends Person {
+public class TourGuide extends Person implements Personsinterface {
 
     protected double salary;
     protected String answer;
     protected int month;
 
     protected Scanner in = new Scanner(System.in);
+
+    public TourGuide() {
+    };
 
     public TourGuide(String account_id, String first_name, String last_name, String username, String password,
             int age, String gender, String address, String phone_number) {
@@ -91,7 +95,7 @@ public class TourGuide extends Person {
         System.out.println("\t\t\t\t\t\t\t\t\t  **********************************");
         System.out.println("Want to know the  trips you are responsible for in month? y/n");
         answer = in.next();
-        if (answer == "y") {
+        if (answer.toLowerCase().equals("y")) {
 
             System.out.println("Enter month:");
             month = in.nextInt();
@@ -116,7 +120,7 @@ public class TourGuide extends Person {
             } else {
                 System.out.println("wrong input! please try again.");
             }
-        } else if (answer == "n") {
+        } else if (answer.toLowerCase().equals("n")) {
 
         }
 
@@ -128,5 +132,10 @@ public class TourGuide extends Person {
         System.out.println("");
         System.out.println("\t\t\t\t\t\t\t\t\t  **********************************");
 
+    }
+
+    @Override
+    public int getTripHistoryCounter() {
+        return 0;
     }
 }

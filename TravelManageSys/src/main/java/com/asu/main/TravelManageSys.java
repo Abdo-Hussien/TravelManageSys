@@ -26,20 +26,15 @@ public class TravelManageSys {
     public static void main(String[] args) {
         int choice;
         Scanner in = new Scanner(System.in);
-        ArrayList<Customers> allCustomers = new ArrayList<Customers>();
-        ArrayList<TourGuide> allTourGuides = new ArrayList<TourGuide>();
-        ArrayList<Car> allCars = new ArrayList<Car>();
-        ArrayList<Trip> allTrips = new ArrayList<Trip>();
-        ArrayList<Transportation> allTransportations = new ArrayList<Transportation>();
-        ArrayList<Hotels> allHotels = new ArrayList<Hotels>();
+        ArrayList<Customers> allCustomers = new ArrayList<Customers>(fileManipulation.getAllCustomers());
+        ArrayList<TourGuide> allTourGuides = new ArrayList<TourGuide>(fileManipulation.getAllTourGuides());
+        ArrayList<Car> allCars = new ArrayList<Car>(fileManipulation.getAllCars());
+        ArrayList<Trip> allTrips = new ArrayList<Trip>(fileManipulation.getAllTrips());
+        ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
+                fileManipulation.getAllTransportations());
+        ArrayList<Hotels> allHotels = new ArrayList<Hotels>(fileManipulation.getAllHotels());
         ArrayList<BookedTravels> allBookedTravels = new ArrayList<BookedTravels>();
         ArrayList<String> TravelHistory = new ArrayList<String>();
-        allCustomers = fileManipulation.getAllCustomers();
-        allTourGuides = fileManipulation.getAllTourGuides();
-        allCars = fileManipulation.getAllCars();
-        allTrips = fileManipulation.getAllTrips();
-        allTransportations = fileManipulation.getAllTransportations();
-        allHotels = fileManipulation.getAllHotels();
 
         Admin admin = new Admin();
         TravelItineraries dashboard = new TravelItineraries();
@@ -55,13 +50,17 @@ public class TravelManageSys {
                 System.out.println("Enter Admin password: ");
                 String password = in.next();
                 if (username.equals("admin") && password.equals("admin")) {
-                    // Admin
+                    admin.Manipulation(allCustomers, "Customers");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                    admin.Manipulation(allTourGuides, "Tourguide");
                 }
 
             } else if (choice == 2) {
-                allCustomers.add((Customers) admin.create_acc("Customer"));
+                admin.userMenu(allCustomers, "Customer");
+                // the main system
             } else if (choice == 3) {
-                allTourGuides.add((TourGuide) admin.create_acc("TourGuide"));
+                admin.userMenu(allTourGuides, "TourGuide");
+                allTourGuides.get(1).showDetails(admin.index, allTourGuides, allTrips);
             } else {
                 System.out.println("wrong input! please try again.");
                 continue;

@@ -6,7 +6,7 @@ package AccountManagement;
 
 import java.util.ArrayList;
 
-import TravelManagement.TourGuide;
+
 import TravelManagement.Trip;
 
 /**
@@ -15,9 +15,7 @@ import TravelManagement.Trip;
  */
 public interface Administration {
 
-    void customerManipulation(ArrayList<Customers> AllCustomers);
-
-    void tourGuideManipulation(ArrayList<TourGuide> AllTourGuide);
+    <T extends Personsinterface> void Manipulation(ArrayList<T> AllUsers,String type);
 
     void tripsAvalability(ArrayList<Trip> AllTrip);
 

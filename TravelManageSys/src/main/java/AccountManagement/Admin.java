@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.PatternSyntaxException;
 
+import javax.sound.sampled.AudioFileFormat.Type;
+
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
 
@@ -13,46 +15,51 @@ public class Admin implements Administration {
     protected String input;
     protected char choice;
     protected boolean checked = false;
-    int index;
+    public int index;
     protected Customers addAccount = new Customers();
 
     @Override
-    public void customerManipulation(ArrayList<Customers> AllCustomers) {
+    public <T extends Personsinterface> void Manipulation(ArrayList<T> AllUsers, String type) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t       CUSTOMERS");
+        System.out.println("\t\t\t\t\t\t\t" + type.toUpperCase());
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
-        for (int i = 0; i < AllCustomers.size(); i++) {
-            System.out.println(AllCustomers.get(i).account_id);
-            System.out.println(AllCustomers.get(i).first_name + " " + AllCustomers.get(i).last_name);
-            System.out.println(AllCustomers.get(i).username);
-            if (AllCustomers.get(i).getTripHistoryCounter() > 2) {
-                System.out.println("Dicsount state:True");
-            } else {
-                System.out.println("Dicsount state:False");
+        for (int i = 0; i < AllUsers.size(); i++) {
+            System.out.println(AllUsers.get(i).getAccount_id());
+            System.out.println(AllUsers.get(i).getFirst_name() + " " + AllUsers.get(i).getLast_name());
+            System.out.println(AllUsers.get(i).getUsername());
+            if (type.equals("Customers")) {
+                if (AllUsers.get(i).getTripHistoryCounter() > 2) {
+                    System.out.println("Dicsount state:True");
+                } else {
+                    System.out.println("Dicsount state:False");
+                }
             }
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
         }
-        System.out.println("total number of CUSTOMERS: " + AllCustomers.size());
+        System.out.println("total number of " + type.toUpperCase() + ":" + AllUsers.size());
+
         do {
             System.out.println();
             System.out.println("chooce your operation:");
             System.out.println();
             System.out.println(
-                    " 1-display all information about Customer \n 2-edit Customer account \n 3-delete Customer account \n 4-add new Customer account \n 5-sign out");
+                    " 1-display all information about " + type.toUpperCase() + " \n 2-edit " + type.toUpperCase()
+                            + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" + type.toUpperCase()
+                            + " account \n 5-sign out");
             choice = in.next().charAt(0);
             switch (choice) {
                 case '1':
-                    displayAllCustomersinfo(AllCustomers);
+                    displayinfo(AllUsers, type);
                     break;
                 case '2':
-                    editCustomerInformations("new", AllCustomers);
+                    editInformations("new", AllUsers, type);
                     break;
                 case '3':
-                    DeleteCustomer(AllCustomers, "new");
+                    DeleteUsers(AllUsers, "new", type);
                     break;
                 case '4':
-                    AllCustomers.add((Customers) create_acc("Customer"));
+                    // AllUsers.add((Customers) create_acc("Customer"));
                     break;
                 case '5':
                     System.exit(0);
@@ -60,15 +67,15 @@ public class Admin implements Administration {
 
                 default:
                     System.out.println("invalid input! please try again...");
-                    customerManipulation(AllCustomers);
+                    // customerManipulation(AllCustomers);
                     break;
             }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');
     }
 
-    public void displayAllCustomersinfo(ArrayList<Customers> AllCustomers) {
+    public <T extends Personsinterface> void displayinfo(ArrayList<T> AllUsers, String type) {
         while (checked == false) {
-            System.out.println("Please enter the Customer id: ");
+            System.out.println("Please enter the " + type.toUpperCase() + " id: ");
             input = in.next();
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             try {
@@ -76,21 +83,21 @@ public class Admin implements Administration {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            for (int i = 0; i < AllCustomers.size(); i++) {
-                if (AllCustomers.get(i).account_id.equals(input)) {
+            for (int i = 0; i < AllUsers.size(); i++) {
+                if (AllUsers.get(i).getAccount_id().equals(input)) {
                     checked = true;
                     index = i;
                 }
             }
             if (checked == true) {
-                System.out.println("id: " + AllCustomers.get(index).account_id);
-                System.out.println("full name: " + AllCustomers.get(index).first_name + " "
-                        + AllCustomers.get(index).last_name);
-                System.out.println("age: " + AllCustomers.get(index).age);
-                System.out.println("username: " + AllCustomers.get(index).username);
-                System.out.println("password: " + AllCustomers.get(index).password);
-                System.out.println("address: " + AllCustomers.get(index).address);
-                System.out.println("phone number: " + AllCustomers.get(index).phone_number);
+                System.out.println("id: " + AllUsers.get(index).getAccount_id());
+                System.out.println("full name: " + AllUsers.get(index).getFirst_name() + " "
+                        + AllUsers.get(index).getLast_name());
+                System.out.println("age: " + AllUsers.get(index).getAge());
+                System.out.println("username: " + AllUsers.get(index).getUsername());
+                System.out.println("password: " + AllUsers.get(index).getPassword());
+                System.out.println("address: " + AllUsers.get(index).getAddress());
+                System.out.println("phone number: " + AllUsers.get(index).getPhone_number());
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             } else {
                 System.out.println("invalid Customer ID entered! please try again");
@@ -103,10 +110,10 @@ public class Admin implements Administration {
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
-                editCustomerInformations("null", AllCustomers);
+                editInformations("null", AllUsers, type);
                 break;
             case '2':
-                DeleteCustomer(AllCustomers, "old");
+                // DeleteCustomer(AllUsers, "old");
                 break;
             case '3':
                 try {
@@ -114,99 +121,101 @@ public class Admin implements Administration {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                customerManipulation(AllCustomers);
+                Manipulation(AllUsers, "Customers");
                 break;
             default:
                 System.out.println("wrong input! please try again");
-                displayAllCustomersinfo(AllCustomers);
+                displayinfo(AllUsers, type);
                 break;
         }
     }
 
-    public void editCustomerInformations(String status, ArrayList<Customers> AllCustomers) {
-        if (status.equals("new")) {
-            displayAllCustomersinfo(AllCustomers);
-        } else {
-            System.out.println("what filed you want to edit: \n" +
-                    "1-username\n" +
-                    "2-password\n" +
-                    "3-firstname\n" +
-                    "4-lastname\n" +
-                    "5-address\n" +
-                    "6-phone number\n");
-            choice = in.next().charAt(0);
-            if (choice == '1') {
-                System.out.println("enter new username: ");
-                input = in.next();
-                AllCustomers.get(index).username = input;
-                System.out.println("username updated successfully");
-            } else if (choice == '2') {
-                System.out.println("enter new password: ");
-                input = in.next();
-                AllCustomers.get(index).password = input;
-                System.out.println("password updated successfully");
-            } else if (choice == '3') {
-                System.out.println("enter new firstname: ");
-                input = in.next();
-                AllCustomers.get(index).first_name = input;
-                System.out.println("firstname updated successfully");
-            } else if (choice == '4') {
-                System.out.println("enter new lastname: ");
-                input = in.next();
-                AllCustomers.get(index).last_name = input;
-                System.out.println("lastname updated successfully");
-            } else if (choice == '5') {
-                System.out.println("enter new address: ");
-                in.nextLine();
-                input = in.nextLine();
-                AllCustomers.get(index).address = input;
-                System.out.println("address updated successfully");
-            } else if (choice == '6') {
-                System.out.println("enter new phone number: ");
-                input = in.next();
-                AllCustomers.get(index).phone_number = input;
-                System.out.println("phone number updated successfully");
+    public <T extends Personsinterface> void editInformations(String status, ArrayList<T> AllUsers, String type) {
+        {
+            if (status.equals("new")) {
+                displayinfo(AllUsers, type);
             } else {
-                System.out.println("invalid input! please try again..");
+                System.out.println("what filed you want to edit: \n" +
+                        "1-username\n" +
+                        "2-password\n" +
+                        "3-firstname\n" +
+                        "4-lastname\n" +
+                        "5-address\n" +
+                        "6-phone number\n");
+                choice = in.next().charAt(0);
+                if (choice == '1') {
+                    System.out.println("enter new username: ");
+                    input = in.next();
+                    AllUsers.get(index).setUsername(input);
+                    System.out.println("username updated successfully");
+                } else if (choice == '2') {
+                    System.out.println("enter new password: ");
+                    input = in.next();
+                    AllUsers.get(index).setPassword(input);
+                    System.out.println("password updated successfully");
+                } else if (choice == '3') {
+                    System.out.println("enter new firstname: ");
+                    input = in.next();
+                    AllUsers.get(index).setFirst_name(input);
+                    System.out.println("firstname updated successfully");
+                } else if (choice == '4') {
+                    System.out.println("enter new lastname: ");
+                    input = in.next();
+                    AllUsers.get(index).setLast_name(input);
+                    System.out.println("lastname updated successfully");
+                } else if (choice == '5') {
+                    System.out.println("enter new address: ");
+                    in.nextLine();
+                    input = in.nextLine();
+                    AllUsers.get(index).setAddress(input);
+                    System.out.println("address updated successfully");
+                } else if (choice == '6') {
+                    System.out.println("enter new phone number: ");
+                    input = in.next();
+                    AllUsers.get(index).setPhone_number(input);
+                    System.out.println("phone number updated successfully");
+                } else {
+                    System.out.println("invalid input! please try again..");
+                }
             }
-        }
-        do {
-            System.out.println("countinue edting?  'y/n' ");
-            input = in.next();
-            if (input.toLowerCase().equals("y")) {
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                editCustomerInformations("old", AllCustomers);
-            } else if (input.toLowerCase().equals("n")) {
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                customerManipulation(AllCustomers);
+            do {
+                System.out.println("countinue edting?  'y/n' ");
+                input = in.next();
+                if (input.toLowerCase().equals("y")) {
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    editInformations("old", AllUsers, type);
+                } else if (input.toLowerCase().equals("n")) {
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Manipulation(AllUsers, type);
 
-            } else {
-                System.out.println("invalid input! please try again");
-            }
-        } while (input != "y" || input != "n");
+                } else {
+                    System.out.println("invalid input! please try again");
+                }
+            } while (input != "y" || input != "n");
+        }
 
     }
 
-    public void DeleteCustomer(ArrayList<Customers> AllCustomers, String status) {
+    public <T extends Personsinterface> void DeleteUsers(ArrayList<T> AllUsers, String status, String type) {
         if (status == "new") {
-            System.out.println("Please enter the customer id you want to delete: ");
+            System.out.println("Please enter the " + type.toUpperCase() + " id you want to delete: ");
             input = in.next();
-            for (int i = 0; i < AllCustomers.size(); i++) {
-                if (AllCustomers.get(i).account_id.equals(input)) {
+            for (int i = 0; i < AllUsers.size(); i++) {
+                if (AllUsers.get(i).getAccount_id().equals(input)) {
                     checked = true;
                     index = i;
                 }
             }
             if (checked == true) {
-                AllCustomers.remove(index);
+                AllUsers.remove(index);
                 System.out.println("Account removed successfully!");
                 checked = false;
                 try {
@@ -214,235 +223,22 @@ public class Admin implements Administration {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                customerManipulation(AllCustomers);
+                Manipulation(AllUsers, type);
 
             }
             if (checked == false) {
                 System.out.println("Wrong input! Please try again..");
-                DeleteCustomer(AllCustomers, "new");
+                DeleteUsers(AllUsers, "new", type);
             }
         } else {
-            AllCustomers.remove(index);
+            AllUsers.remove(index);
             System.out.println("Account removed successfully!");
             try {
                 Thread.sleep(400);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            customerManipulation(AllCustomers);
-        }
-
-    }
-
-    @Override
-    public void tourGuideManipulation(ArrayList<TourGuide> AllTourGuide) {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t       TOUR GUIDES");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println();
-        for (int i = 0; i < AllTourGuide.size(); i++) {
-            System.out.println(AllTourGuide.get(i).account_id);
-            System.out.println(AllTourGuide.get(i).first_name + " " + AllTourGuide.get(i).last_name);
-            System.out.println(AllTourGuide.get(i).username);
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
-        }
-        System.out.println("total number of TOUR GUIDES: " + AllTourGuide.size());
-        do {
-            System.out.println();
-            System.out.println("chooce your operation:");
-            System.out.println();
-            System.out.println(
-                    " 1-display all information about Tour guide \n 2-edit Tour guide account \n 3-delete Tour guide account \n 4-add new Tour guide account \n 5-sign out");
-            choice = in.next().charAt(0);
-            switch (choice) {
-                case '1':
-                    displayAllTourGuideinfo(AllTourGuide);
-                    break;
-                case '2':
-                    editTourguideInformations("new", AllTourGuide);
-                    break;
-                case '3':
-                    DeleteTourGuide(AllTourGuide, "new");
-                    break;
-                case '4':
-                    AllTourGuide.add((TourGuide) create_acc("TourGuide"));
-                    break;
-                case '5':
-                    System.exit(0);
-                    break;
-
-                default:
-                    System.out.println("invalid input! please try again...");
-                    tourGuideManipulation(AllTourGuide);
-                    break;
-            }
-        } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');
-    }
-
-    public void displayAllTourGuideinfo(ArrayList<TourGuide> AllTourGuide) {
-        while (checked == false) {
-            System.out.println("Please enter the Tour guide id: ");
-            input = in.next();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            for (int i = 0; i < AllTourGuide.size(); i++) {
-                if (AllTourGuide.get(i).account_id.equals(input)) {
-                    checked = true;
-                    index = i;
-                }
-            }
-            if (checked == true) {
-                System.out.println("id: " + AllTourGuide.get(index).account_id);
-                System.out.println("full name: " + AllTourGuide.get(index).first_name + " "
-                        + AllTourGuide.get(index).last_name);
-                System.out.println("age: " + AllTourGuide.get(index).age);
-                System.out.println("username: " + AllTourGuide.get(index).username);
-                System.out.println("password: " + AllTourGuide.get(index).password);
-                System.out.println("address: " + AllTourGuide.get(index).address);
-                System.out.println("phone number: " + AllTourGuide.get(index).phone_number);
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            } else {
-                System.out.println("invalid tour guide ID entered! please try again");
-            }
-        }
-        checked = false;
-        System.out.println("1-Edit\n" +
-                "2-delete\n" +
-                "3-Go back\n");
-        choice = in.next().charAt(0);
-        switch (choice) {
-            case '1':
-                editTourguideInformations("null", AllTourGuide);
-                break;
-            case '2':
-                DeleteTourGuide(AllTourGuide, "old");
-                break;
-            case '3':
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                tourGuideManipulation(AllTourGuide);
-                break;
-            default:
-                System.out.println("wrong input! please try again");
-                displayAllTourGuideinfo(AllTourGuide);
-                break;
-        }
-    }
-
-    public void editTourguideInformations(String status, ArrayList<TourGuide> AllTourGuide) {
-        if (status.equals("new")) {
-            displayAllTourGuideinfo(AllTourGuide);
-        } else {
-            System.out.println("what filed you want to edit: \n" +
-                    "1-username\n" +
-                    "2-password\n" +
-                    "3-firstname\n" +
-                    "4-lastname\n" +
-                    "5-address\n" +
-                    "6-phone number\n");
-            choice = in.next().charAt(0);
-            if (choice == '1') {
-                System.out.println("enter new username: ");
-                input = in.next();
-                AllTourGuide.get(index).username = input;
-                System.out.println("username updated successfully");
-            } else if (choice == '2') {
-                System.out.println("enter new password: ");
-                input = in.next();
-                AllTourGuide.get(index).password = input;
-                System.out.println("password updated successfully");
-            } else if (choice == '3') {
-                System.out.println("enter new firstname: ");
-                input = in.next();
-                AllTourGuide.get(index).first_name = input;
-                System.out.println("firstname updated successfully");
-            } else if (choice == '4') {
-                System.out.println("enter new lastname: ");
-                input = in.next();
-                AllTourGuide.get(index).last_name = input;
-                System.out.println("lastname updated successfully");
-            } else if (choice == '5') {
-                System.out.println("enter new address: ");
-                in.nextLine();
-                input = in.nextLine();
-                AllTourGuide.get(index).address = input;
-                System.out.println("address updated successfully");
-            } else if (choice == '6') {
-                System.out.println("enter new phone number: ");
-                input = in.next();
-                AllTourGuide.get(index).phone_number = input;
-                System.out.println("phone number updated successfully");
-            } else {
-                System.out.println("invalid input! please try again..");
-            }
-        }
-        do {
-            System.out.println("countinue edting?  'y/n' ");
-            input = in.next();
-            if (input.toLowerCase().equals("y")) {
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                editTourguideInformations("null", AllTourGuide);
-            } else if (input.toLowerCase().equals("n")) {
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                tourGuideManipulation(AllTourGuide);
-
-            } else {
-                System.out.println("invalid input! please try again");
-            }
-        } while (input != "y" || input != "n");
-
-    }
-
-    public void DeleteTourGuide(ArrayList<TourGuide> AllTourGuide, String status) {
-        if (status == "new") {
-            System.out.println("Please enter the Tour guide id you want to delete: ");
-            input = in.next();
-            for (int i = 0; i < AllTourGuide.size(); i++) {
-                if (AllTourGuide.get(i).account_id.equals(input)) {
-                    checked = true;
-                    index = i;
-                }
-            }
-            if (checked == true) {
-                AllTourGuide.remove(index);
-                System.out.println("Account removed successfully!");
-                checked = false;
-                try {
-                    Thread.sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                tourGuideManipulation(AllTourGuide);
-
-            }
-            if (checked == false) {
-                System.out.println("Wrong input! Please try again..");
-                DeleteTourGuide(AllTourGuide, "new");
-            }
-        } else {
-            AllTourGuide.remove(index);
-            System.out.println("Account removed successfully!");
-            try {
-                Thread.sleep(400);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            tourGuideManipulation(AllTourGuide);
+            Manipulation(AllUsers, type);
         }
 
     }
@@ -544,4 +340,86 @@ public class Admin implements Administration {
         System.out.println("Successfully created the account: " + person.username);
         return person;
     }
+
+    public <T extends loginable> void login(ArrayList<T> allusers) {
+        int counter = 0;
+        boolean checked = false;
+        Scanner in = new Scanner(System.in);
+        System.out.println("\n");
+        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+        System.out.println("");
+        System.out.println("Login");
+        System.out.println("");
+        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+        System.out.println("\n");
+        while (counter != 3) {
+            System.out.println("Enter your username : ");
+            System.out.println("");
+            String userName = in.next();
+
+            System.out.println("\n");
+            System.out.println("--------------------------------------");
+            System.out.println("\n");
+
+            System.out.println("Enter your password : ");
+            System.out.println("");
+            String pass = in.next();
+            System.out.println("\n");
+            System.out.println("--------------------------------------");
+            System.out.println("\n");
+
+            for (int i = 0; i < allusers.size(); i++) {
+                T customer = allusers.get(i);
+                if (customer.getUsername().equals(userName)) {
+                    if (customer.getPassword().equals(pass)) {
+                        index = i;
+                        checked = true;
+                    }
+                }
+            }
+            if (checked == false) {
+                counter++;
+                System.out.println("you have " + counter + "/3 attempts left");
+            } else if (checked == true) {
+                System.out.println("login successful!");
+                break;
+                // main
+            }
+            if (counter == 3) {
+                System.out.println("unfortunately you can't login...you have been timed out temporarily!");
+                System.exit(0);
+            }
+        }
+    }
+
+    public <T extends loginable> void userMenu(ArrayList<T> users, String Account_Type) {
+
+        while (true) {
+            System.out.println("\nChoose an action you want to perfom: ");
+            System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
+            System.out.println("\n1.) Create account");
+            System.out.println("\n2.) Login");
+            System.out.println("\n.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.\n\n");
+            String userInput = in.next();
+            System.out.println("");
+
+            if (userInput.equals("1")) {
+                users.add((T) create_acc(Account_Type));
+                break;
+            }
+
+            else if (userInput.equals("2")) {
+                login(users);
+                break;
+            }
+
+            else {
+                System.out.println("Invalid input! please choose only from the following options.");
+                continue;
+            }
+
+        }
+
+    }
+
 }
