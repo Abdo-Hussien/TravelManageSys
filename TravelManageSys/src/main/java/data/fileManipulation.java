@@ -78,17 +78,17 @@ public class fileManipulation {
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                ArrayList<String> TripHistory = null;
+                ArrayList<String> TripHistory = new ArrayList<>();
                 if (customer[8].equalsIgnoreCase("No Booked Trips")) {
                     if (customer[9].equalsIgnoreCase("No Trips History"))
-                        TripHistory = null;
+                        TripHistory.clear();
                     else {
                         String[] strTripHistory = customer[9].split("\\s*\\|\\s*");
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
                 } else {
                     if (customer[15].equalsIgnoreCase("No Trips History"))
-                        TripHistory = null;
+                        TripHistory.clear();
                     else {
                         String[] strTripHistory = customer[15].split("\\s*\\|\\s*");
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
