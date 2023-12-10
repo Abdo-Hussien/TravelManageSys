@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import TravelManagement.TourGuide;
 
-public class Person implements loginable {
+public class Person {
 
     protected String first_name;
     protected String last_name;
@@ -70,21 +70,27 @@ public class Person implements loginable {
     public String getAccount_id() {
         return this.account_id;
     }
+
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
+
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public void setAge(int age) {
         this.age = age;
     }
+
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -112,9 +118,11 @@ public class Person implements loginable {
     public void setZipAddress(String zipAddress) {
         this.zipAddress = zipAddress;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public void setGender(String gender) {
         this.gender = gender;
     }

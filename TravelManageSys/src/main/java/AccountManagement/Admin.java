@@ -40,37 +40,40 @@ public class Admin implements Administration {
         System.out.println("total number of " + type.toUpperCase() + ":" + AllUsers.size());
 
         do {
-            System.out.println();
-            System.out.println("chooce your operation:");
-            System.out.println();
-            System.out.println(
-                    " 1-display all information about " + type.toUpperCase() + " \n 2-edit " + type.toUpperCase()
-                            + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" + type.toUpperCase()
-                            + " account \n 5-sign out");
-            choice = in.next().charAt(0);
-            switch (choice) {
-                case '1':
-                    displayinfo(AllUsers, type);
-                    break;
-                case '2':
-                    editInformations("new", AllUsers, type);
-                    break;
-                case '3':
-                    DeleteUsers(AllUsers, "new", type);
-                    break;
-                case '4':
-                    // AllUsers.add((Customers) create_acc("Customer"));
-                    break;
-                case '5':
-                    System.exit(0);
-                    break;
+        System.out.println();
+        System.out.println("chooce your operation:");
+        System.out.println();
+        System.out.println(
+        " 1-display all information about " + type.toUpperCase() + " \n 2-edit " +
+        type.toUpperCase()
+        + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" +
+        type.toUpperCase()
+        + " account \n 5-sign out");
+        choice = in.next().charAt(0);
+        switch (choice) {
+        case '1':
+        displayinfo(AllUsers, type);
+        break;
+        case '2':
+        editInformations("new", AllUsers, type);
+        break;
+        case '3':
+        DeleteUsers(AllUsers, "new", type);
+        break;
+        case '4':
+        // AllUsers.add((Customers) create_acc("Customer"));
+        break;
+        case '5':
+        System.exit(0);
+        break;
 
-                default:
-                    System.out.println("invalid input! please try again...");
-                    // customerManipulation(AllCustomers);
-                    break;
-            }
-        } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');
+        default:
+        System.out.println("invalid input! please try again...");
+        Manipulation(AllUsers, type);
+        break;
+        }
+        } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' ||
+        choice != '5');
     }
 
     public <T extends Personsinterface> void displayinfo(ArrayList<T> AllUsers, String type) {
@@ -341,7 +344,7 @@ public class Admin implements Administration {
         return person;
     }
 
-    public <T extends loginable> void login(ArrayList<T> allusers) {
+    public <T extends Personsinterface> void login(ArrayList<T> allusers) {
         int counter = 0;
         boolean checked = false;
         Scanner in = new Scanner(System.in);
@@ -392,7 +395,7 @@ public class Admin implements Administration {
         }
     }
 
-    public <T extends loginable> void userMenu(ArrayList<T> users, String Account_Type) {
+    public <T extends Personsinterface> void userMenu(ArrayList<T> users, String Account_Type) {
 
         while (true) {
             System.out.println("\nChoose an action you want to perfom: ");
@@ -405,6 +408,7 @@ public class Admin implements Administration {
 
             if (userInput.equals("1")) {
                 users.add((T) create_acc(Account_Type));
+                login(users);
                 break;
             }
 

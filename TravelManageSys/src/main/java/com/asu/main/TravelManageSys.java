@@ -5,7 +5,6 @@ package com.asu.main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import AccountManagement.Admin;
 import AccountManagement.Customers;
 import TravelManagement.BookedTravels;
@@ -54,7 +53,6 @@ public class TravelManageSys {
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     admin.Manipulation(allTourGuides, "Tourguide");
                 }
-
             } else if (choice == 2) {
                 admin.userMenu(allCustomers, "Customer");
                 // the main system
