@@ -40,40 +40,40 @@ public class Admin implements Administration {
         System.out.println("total number of " + type.toUpperCase() + ":" + AllUsers.size());
 
         do {
-        System.out.println();
-        System.out.println("chooce your operation:");
-        System.out.println();
-        System.out.println(
-        " 1-display all information about " + type.toUpperCase() + " \n 2-edit " +
-        type.toUpperCase()
-        + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" +
-        type.toUpperCase()
-        + " account \n 5-sign out");
-        choice = in.next().charAt(0);
-        switch (choice) {
-        case '1':
-        displayinfo(AllUsers, type);
-        break;
-        case '2':
-        editInformations("new", AllUsers, type);
-        break;
-        case '3':
-        DeleteUsers(AllUsers, "new", type);
-        break;
-        case '4':
-        // AllUsers.add((Customers) create_acc("Customer"));
-        break;
-        case '5':
-        System.exit(0);
-        break;
+            System.out.println();
+            System.out.println("chooce your operation:");
+            System.out.println();
+            System.out.println(
+                    " 1-display all information about " + type.toUpperCase() + " \n 2-edit " +
+                            type.toUpperCase()
+                            + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" +
+                            type.toUpperCase()
+                            + " account \n 5-sign out");
+            choice = in.next().charAt(0);
+            switch (choice) {
+                case '1':
+                    displayinfo(AllUsers, type);
+                    break;
+                case '2':
+                    editInformations("new", AllUsers, type);
+                    break;
+                case '3':
+                    DeleteUsers(AllUsers, "new", type);
+                    break;
+                case '4':
+                    // AllUsers.add((Customers) create_acc("Customer"));
+                    break;
+                case '5':
+                    System.exit(0);
+                    break;
 
-        default:
-        System.out.println("invalid input! please try again...");
-        Manipulation(AllUsers, type);
-        break;
-        }
+                default:
+                    System.out.println("invalid input! please try again...");
+                    Manipulation(AllUsers, type);
+                    break;
+            }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' ||
-        choice != '5');
+                choice != '5');
     }
 
     public <T extends Personsinterface> void displayinfo(ArrayList<T> AllUsers, String type) {
@@ -255,6 +255,7 @@ public class Admin implements Administration {
             System.out.println("Trip Name: " + AllTrip.get(i).getTitle());
             System.out.println(
                     "Trip availability: " + AllTrip.get(i).getTicketCounter() + "/" + AllTrip.get(i).getCapacity());
+            System.out.println("available: " + (AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter()));
             System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         }
         do {
