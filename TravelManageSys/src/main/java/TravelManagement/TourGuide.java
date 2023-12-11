@@ -102,6 +102,8 @@ public class TourGuide extends Person implements Personsinterface {
             if (month >= 1 || month < 13) {
                 System.out.println("the total of trips:"
                         + allTourGuides.get(index).Calculatetripinmouth(allTrips, account_id, month));
+                System.out
+                        .println("The salary in this month = " + CalculateSalary(allTrips, account_id, index));
                 System.out.println("These are all the trips you have:");
                 for (int i = 0; i < allTrips.size(); i++) {
                     if (allTourGuides.get(index).account_id.equals(allTrips.get(i).getTourGuideID())) {
