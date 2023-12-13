@@ -225,12 +225,13 @@ public class Admin implements Administration {
         System.out.println("All available Trips!:");
         System.out.println("*****************************************");
         for (int i = 0; i < AllTrip.size(); i++) {
-            System.out.println("Trip ID: " + AllTrip.get(i).getTripId());
-            System.out.println("Trip Name: " + AllTrip.get(i).getTitle());
-            System.out.println(
-                    "Trip availability: " + AllTrip.get(i).getTicketCounter() + "/" + AllTrip.get(i).getCapacity());
-            System.out.println("available: " + (AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter()));
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.printf("Trip ID: %-5s | Trip Name: %-25s | Availability: %d/%d  ->(Remaining: %d)\n",
+                    AllTrip.get(i).getTripId(),
+                    AllTrip.get(i).getTitle(),
+                    AllTrip.get(i).getTicketCounter(),
+                    AllTrip.get(i).getCapacity(),
+                    AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter());
+
         }
         do {
             System.out.println("*****************************************");
