@@ -151,16 +151,19 @@ public abstract class Trip {
     }
 
     public static void displayAdminTrips(ArrayList<Trip> AllTrip) {
-        System.out.println("All available Trips!:");
-        System.out.println("*****************************************");
-        AllTrip.stream().forEach(trip -> {
-            System.out.printf("Trip ID: %-5s | Trip Name: %-25s | Availability: %d/%d -> (Remaining: %d)%n",
-                    trip.getTripId(),
-                    trip.getTitle(),
-                    trip.getTicketCounter(),
-                    trip.getCapacity(),
-                    trip.getCapacity() - trip.getTicketCounter());
-        });
+        System.out.println("All available Trips!: " + AllTrip.size());
+        System.out.println("_________________________________________________________________\n");
+        System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
+        System.out.println("_________________________________________________________________");
+
+        for (int i = 0; i < AllTrip.size(); i++) {
+            System.out.printf("%-10s | %-25s | %d/%-13s -> (%d)\n",
+                    AllTrip.get(i).getTripId(),
+                    AllTrip.get(i).getTitle(),
+                    AllTrip.get(i).getTicketCounter(),
+                    AllTrip.get(i).getCapacity(),
+                    AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter());
+        }
     }
 
     public double TripPrice(double rate) {
