@@ -13,7 +13,7 @@ import TravelManagement.Trip;
 
 public class Customers extends Person implements Personsinterface {
 
-    private static CustomerBooking BookingManipulations = new CustomerBooking();
+    private static CustomerBooking BookingManipulations;
     private ArrayList<String> tripsHistory;
     static int choice;
     protected static Scanner in = new Scanner(System.in);
@@ -30,12 +30,14 @@ public class Customers extends Person implements Personsinterface {
             stateAddress = matcher.group(1);
         if (matcher.find())
             zipAddress = matcher.group(1);
-        this.BookingManipulations.CustomerBookedTrips = oldBookingTrips;
+        BookingManipulations = new CustomerBooking();
+        Customers.BookingManipulations.CustomerBookedTrips = oldBookingTrips;
         this.tripsHistory = tripHistory;
     }
 
     public Customers() {
         tripsHistory = new ArrayList<>();
+        BookingManipulations = new CustomerBooking();
     }
 
     public int getTripHistoryCounter() {
@@ -83,12 +85,12 @@ public class Customers extends Person implements Personsinterface {
 
     public static void UserMainMenu(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers,
             BookingTickets bookingTickets, Admin edit, TravelItineraries dashboard, ArrayList<BookedTravels> booking) {
-        System.out.println("welcome..!!");
+        System.out.println("Welcome..!!");
         while (true) {
-            System.out.println("1-profile settings.\n2-Trip.\n3-Cart.\n4-sing out.");
+            System.out.println("1- Profile settings.\n2- Trip.\n3- Cart.\n4- Sign out.");
             choice = in.nextInt();
             if (choice == 1) {
-                showinfo(edit.index, allCustomers, allTrips, bookingTickets, edit);
+                showinfo(Admin.index, allCustomers, allTrips, bookingTickets, edit);
             } else if (choice == 2) {
                 BookingManipulations.mainCustomer(allCustomers);
                 dashboard.dashboard(BookingManipulations.mainCustomer(allCustomers), allTrips);

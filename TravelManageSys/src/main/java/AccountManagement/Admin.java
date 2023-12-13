@@ -308,7 +308,6 @@ public class Admin implements Administration {
 
     public <T extends Personsinterface> void login(ArrayList<T> allusers) {
         int counter = 0;
-        int userindex = -1;
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tLogin");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
@@ -321,10 +320,14 @@ public class Admin implements Administration {
             String pass = in.next();
             in.nextLine();
             System.out.println("--------------------------------------");
-            for (; userindex < allusers.size(); userindex++) {
+            for (int userindex = 0; userindex < allusers.size(); userindex++) {
                 T customer = allusers.get(userindex);
-                if (customer.getUsername().equals(userName) && customer.getPassword().equals(pass))
+                if (customer.getUsername().equals(userName) && customer.getPassword().equals(pass)){
                     index = userindex;
+                    break;
+                }
+                else
+                    index = -1;
             }
             if (index == -1) {
                 counter++;
