@@ -2,15 +2,21 @@
 package AccountManagement;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import TravelManagement.BookedTravels;
+import TravelManagement.BookingTickets;
+import TravelManagement.TravelItineraries;
+import TravelManagement.Trip;
 
 public class Customers extends Person implements Personsinterface {
 
-    private CustomerBooking BookingManipulations = new CustomerBooking();
+    private static CustomerBooking BookingManipulations = new CustomerBooking();
     private ArrayList<String> tripsHistory;
+    static int choice;
+    protected static Scanner in = new Scanner(System.in);
 
     public Customers(String account_id, String first_name, String last_name, String username, String password, int age,
             String gender, String address, String phone_number, ArrayList<BookedTravels> oldBookingTrips,
@@ -41,4 +47,58 @@ public class Customers extends Person implements Personsinterface {
         }
     }
 
+    public static void showinfo(int index, ArrayList<Customers> allCustomers, ArrayList<Trip> allTrips,
+            BookingTickets bookingTickets, Admin edit) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Your information:");
+        System.out.println("id: " + allCustomers.get(index).getAccount_id());
+        System.out.println("full name: " + allCustomers.get(index).getFirst_name() + " "
+                + allCustomers.get(index).getLast_name());
+        System.out.println("age: " + allCustomers.get(index).getAge());
+        System.out.println("username: " + allCustomers.get(index).getUsername());
+        System.out.println("password: " + allCustomers.get(index).getPassword());
+        System.out.println("address: " + allCustomers.get(index).getAddress());
+        System.out.println("phone number: " + allCustomers.get(index).getPhone_number());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        while (true) {
+
+            System.out.println("1-Edit your information\n2-Go back");
+            int choice = in.next().charAt(0);
+            switch (choice) {
+                case '1':
+                    Admin admin = new Admin();
+                    admin.editInformations("old", allCustomers, "Customers", "Customer");
+                    break;
+                case '2':
+                    UserMainMenu(allTrips, allCustomers, bookingTickets, edit, null, null);
+                    break;
+
+                default:
+                    System.out.println("wrong input! please try again..");
+                    continue;
+            }
+        }
+    }
+
+    public static void UserMainMenu(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers,
+            BookingTickets bookingTickets, Admin edit, TravelItineraries dashboard, ArrayList<BookedTravels> booking) {
+        System.out.println("welcome..!!");
+        while (true) {
+            System.out.println("1-profile settings.\n2-Trip.\n3-Cart.\n4-sing out.");
+            choice = in.nextInt();
+            if (choice == 1) {
+                showinfo(edit.index, allCustomers, allTrips, bookingTickets, edit);
+            } else if (choice == 2) {
+                BookingManipulations.mainCustomer(allCustomers);
+                dashboard.dashboard(BookingManipulations.mainCustomer(allCustomers), allTrips);
+            } else if (choice == 3) {
+                dashboard.dashboard(booking, allTrips);
+            } else if (choice == 4) {
+                break;
+            } else {
+                System.out.println("Invalid input! please choose only from the following options.");
+                continue;
+            }
+        }
+    }
 }
