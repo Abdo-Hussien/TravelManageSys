@@ -224,8 +224,12 @@ public class Admin implements Administration {
             ArrayList<TourGuide> tourGuide) {
         System.out.println("All available Trips!:");
         System.out.println("*****************************************");
+        System.out.println();
+        System.out.println("___________________________________________________");
+        System.out.println("Trip ID:  | Trip Name:  | Availability: ->(Remaining: )");
+        System.out.println("___________________________________________________");
         for (int i = 0; i < AllTrip.size(); i++) {
-            System.out.printf("Trip ID: %-5s | Trip Name: %-25s | Availability: %d/%d  ->(Remaining: %d)\n",
+            System.out.printf("%-5s | %-25s |  %d/%d  ->( %d)\n",
                     AllTrip.get(i).getTripId(),
                     AllTrip.get(i).getTitle(),
                     AllTrip.get(i).getTicketCounter(),
