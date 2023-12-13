@@ -49,28 +49,28 @@ public class Person {
     }
 
     public static <T extends Personsinterface> void DisplayAllUsers(ArrayList<T> AllUsers, String type) {
-        if (type.toLowerCase().equals("customers"))
-            System.out.printf("%-5s | %-15s | %-25s | %-15s | %-20s |%n", "Index", "Account ID", "Full Name",
+        if (type.toLowerCase().equals("customer"))
+            System.out.printf("%-5s | %-15s | %-25s | %-25s | %-20s |%n", "Index", "Account ID", "Full Name",
                     "Username", "Discount Status");
         else
-            System.out.printf("%-5s | %-15s | %-25s | %-20s |%n", "Index", "Account ID", "Full Name", "Username");
+            System.out.printf("%-5s | %-15s | %-25s | %-25s |%n", "Index", "Account ID", "Full Name", "Username");
         System.out.println("-----------------------------------------------------------------------"
-                + (type.toLowerCase().equals("customers") ? "---------------------" : ""));
+                + (type.toLowerCase().equals("customer") ? "---------------------" : ""));
         int[] count = { 1 };
         AllUsers.forEach(user -> {
 
             String fullName = user.getFirst_name() + " " + user.getLast_name();
-            if (type.toLowerCase().equals("customers")) {
+            if (type.toLowerCase().equals("customer")) {
                 String discountStatus = (user.getTripHistoryCounter() > 2) ? "True" : "False";
-                System.out.printf("%-5s | %-15s | %-25s | %-15s | %-20s |%n",
+                System.out.printf("%-5s | %-15s | %-25s | %-25s | %-20s |%n",
                         count[0], user.getAccount_id(), fullName, user.getUsername(), discountStatus);
             } else
-                System.out.printf("%-5s | %-15s | %-25s | %-20s |%n",
+                System.out.printf("%-5s | %-15s | %-25s | %-25s |%n",
                         count[0], user.getAccount_id(), fullName, user.getUsername());
             count[0]++;
         });
         System.out.println("-----------------------------------------------------------------------"
-                + (type.toLowerCase().equals("customers") ? "---------------------" : ""));
+                + (type.toLowerCase().equals("customer") ? "---------------------" : ""));
         System.out.println("Total number of " + type.toLowerCase() + ": " + AllUsers.size());
     }
 

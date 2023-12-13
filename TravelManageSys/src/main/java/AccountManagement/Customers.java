@@ -35,10 +35,11 @@ public class Customers extends Person implements Personsinterface {
     }
 
     public Customers() {
+        tripsHistory = new ArrayList<>();
     }
 
     public int getTripHistoryCounter() {
-        return tripsHistory.size();
+        return tripsHistory.isEmpty() ? 0 : tripsHistory.size();
     }
 
     public void settripHistory(ArrayList<BookedTravels> bookedTravels) {

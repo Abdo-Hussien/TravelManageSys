@@ -48,7 +48,7 @@ public class TravelManageSys {
                     System.out.println("wrong username or password! please try again");
                 }
             } else if (choice == 2) {
-                admin.userMenu(allCustomers, "Customers");
+                admin.userMenu(allCustomers, "Customer");
                 Customers.UserMainMenu(allTrips, allCustomers, allBookTickets, admin, dashboard,
                         allBookTravels);
                 continue;

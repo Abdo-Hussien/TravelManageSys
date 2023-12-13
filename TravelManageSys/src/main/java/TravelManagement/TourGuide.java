@@ -28,7 +28,7 @@ public class TourGuide extends Person implements Personsinterface {
     };
 
     public TourGuide(String account_id, String first_name, String last_name, String username, String password,
-            int age, String gender, String address, String phone_number) {
+            int age, String gender, String[] address, String phone_number) {
         this.account_id = account_id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -36,7 +36,10 @@ public class TourGuide extends Person implements Personsinterface {
         this.password = password;
         this.age = age;
         this.gender = gender;
-        this.address = address;
+        this.streetAddress = address[0];
+        this.stateAddress = address[1];
+        this.zipAddress = address[2];
+        setAddress(this.streetAddress, this.stateAddress, this.zipAddress);
         this.phone_number = phone_number;
 
     }

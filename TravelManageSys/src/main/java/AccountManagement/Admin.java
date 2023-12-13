@@ -2,6 +2,7 @@ package AccountManagement;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
 
@@ -30,10 +31,10 @@ public class Admin implements Administration {
             System.out.print("Enter your operation: ");
             choice = in.next().charAt(0);
             if (choice == '1') {
-                Manipulation(allCustomers, "Customers");
+                Manipulation(allCustomers, "Customer");
                 break;
             } else if (choice == '2') {
-                Manipulation(allTourGuides, "Tour Guide");
+                Manipulation(allTourGuides, "TourGuide");
                 break;
             } else if (choice == '3') {
                 tripsAvalability(allTrips, allCustomers, allTourGuides);
@@ -60,13 +61,13 @@ public class Admin implements Administration {
         System.out.println("\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
         Person.DisplayAllUsers(AllUsers, type);
-        String text = type.toLowerCase().equals("customers") ? "a customer"
+        String text = type.toLowerCase().equals("customer") ? "a customer"
                 : "a tourguide";
         do {
             System.out.println("\nChoose your operation: \n");
             System.out.println(
                     "1- Display all information about " + text + " \n2- Edit " + text + " Account \n3- Delete "
-                            + text + " account \n4- Add " + text + " account \n5-Go back");
+                            + text + " account \n4- Add " + text + " account \n5- Go back");
             choice = in.next().charAt(0);
             if (choice == '1') {
                 displayinfo(AllUsers, type);
@@ -76,6 +77,8 @@ public class Admin implements Administration {
                 DeleteUsers(AllUsers, "new", type);
             } else if (choice == '4') {
                 AllUsers.add((T) create_acc(type));
+                Manipulation(AllUsers, type);
+                break;
             } else if (choice == '5') {
                 AdminMenu(allCustomers, allTourGuides, allTrips);
                 return;
@@ -85,10 +88,11 @@ public class Admin implements Administration {
             }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' ||
                 choice != '5');
+
     }
 
     public <T extends Personsinterface> void displayinfo(ArrayList<T> AllUsers, String type) {
-        String text = type.toLowerCase().equals("customers") ? "the customer's"
+        String text = type.toLowerCase().equals("customer") ? "the customer's"
                 : "the tourguide's";
         while (true) {
             System.out.print("Use the index to display " + text + " details: ");
@@ -112,7 +116,7 @@ public class Admin implements Administration {
                 editInformations("null", AllUsers, type, "Admin");
                 break;
             case '2':
-                DeleteUsers(AllUsers, "old", "Customers");
+                DeleteUsers(AllUsers, "old", "Customer");
                 break;
             case '3':
                 try {
@@ -120,7 +124,7 @@ public class Admin implements Administration {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Manipulation(AllUsers, "Customers");
+                Manipulation(AllUsers, "Customer");
                 break;
             default:
                 System.out.println("Wrong input! please try again");
@@ -184,7 +188,7 @@ public class Admin implements Administration {
 
     public <T extends Personsinterface> void DeleteUsers(ArrayList<T> AllUsers, String status, String type) {
         if (status == "new") {
-            String text = type.toLowerCase().equals("customers") ? "a customer"
+            String text = type.toLowerCase().equals("customer") ? "a customer"
                     : "a tourguide";
             while (true) {
                 System.out.print("Use the index to delete " + text + ": ");
@@ -222,73 +226,55 @@ public class Admin implements Administration {
     @Override
     public void tripsAvalability(ArrayList<Trip> AllTrip, ArrayList<Customers> customers,
             ArrayList<TourGuide> tourGuide) {
-        System.out.println("All available Trips!:");
+        Trip.displayAdminTrips(AllTrip);
         System.out.println("*****************************************");
-        for (int i = 0; i < AllTrip.size(); i++) {
-            System.out.printf("Trip ID: %-5s | Trip Name: %-25s | Availability: %d/%d  ->(Remaining: %d)\n",
-                    AllTrip.get(i).getTripId(),
-                    AllTrip.get(i).getTitle(),
-                    AllTrip.get(i).getTicketCounter(),
-                    AllTrip.get(i).getCapacity(),
-                    AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter());
-
-        }
-        do {
-            System.out.println("*****************************************");
-            System.out.println("1-To show more details about trip");
-            System.out.println("2-To get back");
-            choice = in.next().charAt(0);
-            if (choice == '1') {
-                // do {
-                System.out.println("Enter The trip ID:");
-                input = in.next();
-                Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
-                trip.displayTripDetails(trip);
-                do {
-                    System.out.println("Go back y/n");
-                    input = in.next();
-                    if (input.toLowerCase().equals("y")) {
-                        try {
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        tripsAvalability(AllTrip, customers, tourGuide);
-                    } else if (input.toLowerCase().equals("n")) {
-                        try {
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        trip.displayTripDetails(trip);
-
-                    } else {
-                        System.out.println("wrong input!please try agin.");
-                        try {
-                            Thread.sleep(300);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } while (!input.toLowerCase().equals("y") || !input.toLowerCase().equals("n"));
-                // if (checked == false) {
-                // System.out.println("invalid input! please try again");
-                // }
-                // } while (checked == true);
-            } else if (choice == '2') {
-                AdminMenu(customers, tourGuide, AllTrip);
-                break;
-            } else {
-                System.out.println("invaild input! please try again");
+        System.out.println("1-To show more details about trip");
+        System.out.println("2-To get back");
+        choice = in.next().charAt(0);
+        Trip trip;
+        int tripindex = 0;
+        if (choice == '1') {
+            System.out.println("Enter The trip ID:");
+            input = in.next();
+            in.nextLine();
+            try {
+                tripindex = Integer.parseInt(input) - 1000;
+                if (tripindex > AllTrip.size() || tripindex < 0)
+                    throw new IndexOutOfBoundsException("Invalid Trip ID! please try again..");
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e2) {
+                    e2.printStackTrace();
+                }
+                tripsAvalability(AllTrip, customers, tourGuide);
             }
-        } while (choice != '1' || choice != '2');
+            trip = AllTrip.get(tripindex);
+            trip.displayTripDetails(trip);
+            System.out.println("Press any key (followed by Enter key) to go back...");
+            input = in.next();
+            in.nextLine();
+            tripsAvalability(AllTrip, customers, tourGuide);
+        } else if (choice == '2') {
+            AdminMenu(customers, tourGuide, AllTrip);
+            return;
+        } else {
+            System.out.println("invaild input! please try again");
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tripsAvalability(AllTrip, customers, tourGuide);
+        }
     }
 
     public Person create_acc(String Account_Type) {
         Person person = null;
-        if (Account_Type.equals("TourGuide"))
+        if (Account_Type.equalsIgnoreCase("TourGuide"))
             person = new TourGuide();
-        else if (Account_Type.equals("Customer"))
+        else if (Account_Type.equalsIgnoreCase("Customer"))
             person = new Customers();
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tCreate Account ");
@@ -322,89 +308,59 @@ public class Admin implements Administration {
 
     public <T extends Personsinterface> void login(ArrayList<T> allusers) {
         int counter = 0;
-        boolean checked = false;
-        Scanner in = new Scanner(System.in);
-        System.out.println("\n");
-        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
-        System.out.println("");
-        System.out.println("Login");
-        System.out.println("");
-        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
-        System.out.println("\n");
+        int userindex = -1;
+        System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+        System.out.println("\t\tLogin");
+        System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
         while (counter != 3) {
-            System.out.println("Enter your username : ");
-            System.out.println("");
+            System.out.print("Enter your username: ");
             String userName = in.next();
-
-            System.out.println("\n");
+            in.nextLine();
             System.out.println("--------------------------------------");
-            System.out.println("\n");
-
-            System.out.println("Enter your password : ");
-            System.out.println("");
+            System.out.print("Enter your password: ");
             String pass = in.next();
-            System.out.println("\n");
+            in.nextLine();
             System.out.println("--------------------------------------");
-            System.out.println("\n");
-
-            for (int i = 0; i < allusers.size(); i++) {
-                T customer = allusers.get(i);
-                if (customer.getUsername().equals(userName)) {
-                    if (customer.getPassword().equals(pass)) {
-                        index = i;
-                        checked = true;
-                    }
-                }
+            for (; userindex < allusers.size(); userindex++) {
+                T customer = allusers.get(userindex);
+                if (customer.getUsername().equals(userName) && customer.getPassword().equals(pass))
+                    index = userindex;
             }
-            if (checked == false) {
+            if (index == -1) {
                 counter++;
-                System.out.println("you have " + counter + "/3 attempts left");
-            } else if (checked == true) {
-                System.out.println("login successful!");
+                System.out.println("You have " + counter + "/3 attempts left...");
+            } else if (index != -1) {
+                System.out.println("Login successful!");
                 break;
-                // main
             }
             if (counter == 3) {
-                System.out.println("unfortunately you can't login...you have been timed out temporarily!");
+                System.out.println("Unfortunately you can't login... you have been timed out temporarily!");
                 System.exit(0);
             }
         }
     }
 
     public <T extends Personsinterface> void userMenu(ArrayList<T> users, String Account_Type) {
-
-        while (true) {
-            System.out.println("\nChoose an action you want to perfom: ");
-            System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
-            System.out.println("\n1.) Create account.");
-            System.out.println("\n2.) Login.");
-            System.out.println("\n.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.\n\n");
-            String userInput = in.next();
-            System.out.println("");
-
-            if (userInput.equals("1")) {
-                users.add((T) create_acc(Account_Type));
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                login(users);
-                break;
+        System.out.println("Choose an action you want to perfom.");
+        System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
+        System.out.println("1.) Create account.");
+        System.out.println("2.) Login.");
+        System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
+        String userInput = in.next();
+        in.nextLine();
+        if (userInput.equals("1")) {
+            users.add((T) create_acc(Account_Type));
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-            else if (userInput.equals("2")) {
-                login(users);
-                break;
-            }
-
-            else {
-                System.out.println("Invalid input! please choose only from the following options.");
-                continue;
-            }
-
+            login(users);
+        } else if (userInput.equals("2"))
+            login(users);
+        else {
+            System.out.println("Invalid input! please choose only from the following options.");
+            userMenu(users, Account_Type);
         }
-
     }
-
 }

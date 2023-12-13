@@ -4,7 +4,7 @@ ahmed.essam123
 pass123
 23
 Male
-2476 Gnatty Creek Road | New York
+2476 Gnatty Creek Road | New York | 11234 | 
 +20624013263
 ---
 yab67
@@ -13,7 +13,7 @@ Mohamed.essam123
 pass555
 2
 Male
-1978 Elm Drive Road | New York
+1978 Elm Drive Road | New York | 23413 | 
 +2066223196 
 ---
 erts2
@@ -22,7 +22,7 @@ Mohamed.essam224
 pass223
 25
 Male
-70 Douglas Dairy Road | New Jersey
+70 Douglas Dairy Road | New Jersey | 55213 | 
 +2027955811
 ---
 abc45
@@ -31,7 +31,7 @@ Huda.essam123
 pass343
 23
 Female
-2993 Randall Drive Road | Hawaii
+2993 Randall Drive Road | Hawaii | 80771 | 
 +2024180205 
 ---
 xyz78
@@ -40,7 +40,7 @@ Hussein.essam123
 pass545
 27
 Male
-1624 Center Avenue Road | California
+1624 Center Avenue Road | California | 10112 | 
 +2023358272
 ---
 tg001
@@ -49,7 +49,7 @@ john.doe_tg
 tgpass123
 32
 Male
-123 Main Street | California
+123 Main Street | California | 42551 | 
 +1234567890
 ---
 tg002
@@ -58,7 +58,7 @@ jane.smith_tg
 tgpass456
 28
 Female
-456 Oak Avenue | New York
+456 Oak Avenue | New York | 80881 | 
 +9876543210
 ---
 tg003
@@ -67,6 +67,6 @@ mike.johnson_tg
 tgpass789
 35
 Male
-789 Pine Lane | Texas
+789 Pine Lane | Texas | 45222 | 
 +1112223333
 ---

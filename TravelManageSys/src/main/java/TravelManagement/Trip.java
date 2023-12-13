@@ -150,6 +150,19 @@ public abstract class Trip {
         return null;
     }
 
+    public static void displayAdminTrips(ArrayList<Trip> AllTrip) {
+        System.out.println("All available Trips!:");
+        System.out.println("*****************************************");
+        AllTrip.stream().forEach(trip -> {
+            System.out.printf("Trip ID: %-5s | Trip Name: %-25s | Availability: %d/%d -> (Remaining: %d)%n",
+                    trip.getTripId(),
+                    trip.getTitle(),
+                    trip.getTicketCounter(),
+                    trip.getCapacity(),
+                    trip.getCapacity() - trip.getTicketCounter());
+        });
+    }
+
     public double TripPrice(double rate) {
         Double GeneralPrice = initPrice + rate * initPrice;
         return Math.round(GeneralPrice * 100.0) / 100.0;

@@ -80,16 +80,12 @@ public class fileManipulation {
                 String[] Fullname = customer[1].split(" ");
                 ArrayList<String> TripHistory = new ArrayList<>();
                 if (customer[8].equalsIgnoreCase("No Booked Trips")) {
-                    if (customer[9].equalsIgnoreCase("No Trips History"))
-                        TripHistory.clear();
-                    else {
+                    if (!customer[9].equalsIgnoreCase("No Trips History")) {
                         String[] strTripHistory = customer[9].split("\\s*\\|\\s*");
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
                 } else {
-                    if (customer[15].equalsIgnoreCase("No Trips History"))
-                        TripHistory.clear();
-                    else {
+                    if (!customer[15].equalsIgnoreCase("No Trips History")) {
                         String[] strTripHistory = customer[15].split("\\s*\\|\\s*");
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
@@ -154,7 +150,7 @@ public class fileManipulation {
                 String[] tourguide = t.split(System.lineSeparator());
                 String[] Fullname = tourguide[1].split(" ");
                 AllTourGuides.add(new TourGuide(tourguide[0], Fullname[0], Fullname[1], tourguide[2], tourguide[3],
-                        Integer.parseInt(tourguide[4]), tourguide[5], tourguide[6], tourguide[7]));
+                        Integer.parseInt(tourguide[4]), tourguide[5], tourguide[6].split("\\s*\\|\\s*"), tourguide[7]));
 
             }
             return AllTourGuides;
