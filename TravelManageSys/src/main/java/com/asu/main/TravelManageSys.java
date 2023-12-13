@@ -5,18 +5,8 @@ package com.asu.main;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import AccountManagement.Admin;
-import AccountManagement.CustomerBooking;
-import AccountManagement.Customers;
-import AccountManagement.Person;
-import TravelManagement.BookedTravels;
-import TravelManagement.BookingTickets;
-import TravelManagement.Car;
-import TravelManagement.Hotels;
-import TravelManagement.TourGuide;
-import TravelManagement.Transportation;
-import TravelManagement.TravelItineraries;
-import TravelManagement.Trip;
+import AccountManagement.*;
+import TravelManagement.*;
 import data.fileManipulation;
 
 /**
@@ -59,12 +49,12 @@ public class TravelManageSys {
                 }
             } else if (choice == 2) {
                 admin.userMenu(allCustomers, "Customers");
-                allCustomers.get(1).UserMainMenu(allTrips, allCustomers, allBookTickets, admin, dashboard,
+                Customers.UserMainMenu(allTrips, allCustomers, allBookTickets, admin, dashboard,
                         allBookTravels);
                 continue;
             } else if (choice == 3) {
                 admin.userMenu(allTourGuides, "TourGuide");
-                allTourGuides.get(1).showDetails(admin.index, allTourGuides, allTrips);
+                allTourGuides.get(1).showDetails(Admin.index, allTourGuides, allTrips);
             } else {
                 System.out.println("wrong input! please try again.");
                 continue;

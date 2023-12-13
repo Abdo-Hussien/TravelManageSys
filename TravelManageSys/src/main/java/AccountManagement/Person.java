@@ -1,5 +1,6 @@
 package AccountManagement;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import TravelManagement.TourGuide;
@@ -33,6 +34,44 @@ public class Person {
     }
 
     public Person() {
+    }
+
+    public static <T extends Personsinterface> void DisplayUserDetails(T user) {
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("ID: " + user.getAccount_id());
+        System.out.println("Full Name: " + user.getFirst_name() + " " + user.getLast_name());
+        System.out.println("Age: " + user.getAge());
+        System.out.println("Username: " + user.getUsername());
+        System.out.println("Password: " + user.getPassword());
+        System.out.println("Address: " + user.getAddress());
+        System.out.println("Phone Number: " + user.getPhone_number());
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public static <T extends Personsinterface> void DisplayAllUsers(ArrayList<T> AllUsers, String type) {
+        if (type.toLowerCase().equals("customers"))
+            System.out.printf("%-5s | %-15s | %-25s | %-15s | %-20s |%n", "Index", "Account ID", "Full Name",
+                    "Username", "Discount Status");
+        else
+            System.out.printf("%-5s | %-15s | %-25s | %-20s |%n", "Index", "Account ID", "Full Name", "Username");
+        System.out.println("-----------------------------------------------------------------------"
+                + (type.toLowerCase().equals("customers") ? "---------------------" : ""));
+        int[] count = { 1 };
+        AllUsers.forEach(user -> {
+
+            String fullName = user.getFirst_name() + " " + user.getLast_name();
+            if (type.toLowerCase().equals("customers")) {
+                String discountStatus = (user.getTripHistoryCounter() > 2) ? "True" : "False";
+                System.out.printf("%-5s | %-15s | %-25s | %-15s | %-20s |%n",
+                        count[0], user.getAccount_id(), fullName, user.getUsername(), discountStatus);
+            } else
+                System.out.printf("%-5s | %-15s | %-25s | %-20s |%n",
+                        count[0], user.getAccount_id(), fullName, user.getUsername());
+            count[0]++;
+        });
+        System.out.println("-----------------------------------------------------------------------"
+                + (type.toLowerCase().equals("customers") ? "---------------------" : ""));
+        System.out.println("Total number of " + type.toLowerCase() + ": " + AllUsers.size());
     }
 
     public String getFirst_name() {
@@ -91,8 +130,8 @@ public class Person {
         this.phone_number = phone_number;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String street, String state, String zip) {
+        this.address = street + ", " + state + ", " + zip;
     }
 
     public String getStreetAddress() {

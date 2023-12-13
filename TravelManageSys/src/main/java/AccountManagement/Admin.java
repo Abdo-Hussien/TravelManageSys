@@ -1,14 +1,7 @@
 package AccountManagement;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.PatternSyntaxException;
-
-import javax.sound.sampled.AudioFileFormat.Type;
-
-import TravelManagement.BookedTravels;
-import TravelManagement.BookingTickets;
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
 
@@ -33,8 +26,8 @@ public class Admin implements Administration {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
         while (true) {
-            System.out.println("1-Customer Management\n2-Tour guide Management\n3-Trip Management\n4-sign out");
-            System.out.println("Enter your operation");
+            System.out.println("1- Customer Management\n2- Tour guide Management\n3- Trip Management\n4- Sign out");
+            System.out.print("Enter your operation: ");
             choice = in.next().charAt(0);
             if (choice == '1') {
                 Manipulation(allCustomers, "Customers");
@@ -46,7 +39,7 @@ public class Admin implements Administration {
                 tripsAvalability(allTrips, allCustomers, allTourGuides);
                 break;
             } else if (choice == '4') {
-                System.out.println("sign out successfully");
+                System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);
                 } catch (InterruptedException e) {
@@ -62,35 +55,18 @@ public class Admin implements Administration {
 
     @Override
     public <T extends Personsinterface> void Manipulation(ArrayList<T> AllUsers, String type) {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t\t" + type.toUpperCase());
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("\t\t\t\t\t" + type.toUpperCase());
+        System.out.println("\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println();
-        for (int i = 0; i < AllUsers.size(); i++) {
-            System.out.println(AllUsers.get(i).getAccount_id());
-            System.out.println(AllUsers.get(i).getFirst_name() + " " + AllUsers.get(i).getLast_name());
-            System.out.println(AllUsers.get(i).getUsername());
-            if (type.equals("Customers")) {
-                if (AllUsers.get(i).getTripHistoryCounter() > 2) {
-                    System.out.println("Dicsount state:True");
-                } else {
-                    System.out.println("Dicsount state:False");
-                }
-            }
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~");
-        }
-        System.out.println("total number of " + type.toUpperCase() + ":" + AllUsers.size());
-
+        Person.DisplayAllUsers(AllUsers, type);
+        String text = type.toLowerCase().equals("customers") ? "a customer"
+                : "a tourguide";
         do {
-            System.out.println();
-            System.out.println("chooce your operation:");
-            System.out.println();
+            System.out.println("\nChoose your operation: \n");
             System.out.println(
-                    " 1-display all information about " + type.toUpperCase() + " \n 2-edit " +
-                            type.toUpperCase()
-                            + " account \n 3-delete" + type.toUpperCase() + " account \n 4-add new" +
-                            type.toUpperCase()
-                            + " account \n 5-Go back");
+                    "1- Display all information about " + text + " \n2- Edit " + text + " Account \n3- Delete "
+                            + text + " account \n4- Add " + text + " account \n5-Go back");
             choice = in.next().charAt(0);
             if (choice == '1') {
                 displayinfo(AllUsers, type);
@@ -112,39 +88,24 @@ public class Admin implements Administration {
     }
 
     public <T extends Personsinterface> void displayinfo(ArrayList<T> AllUsers, String type) {
-        while (checked == false) {
-            System.out.println("Please enter the " + type.toUpperCase() + " id: ");
+        String text = type.toLowerCase().equals("customers") ? "the customer's"
+                : "the tourguide's";
+        while (true) {
+            System.out.print("Use the index to display " + text + " details: ");
             input = in.next();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            in.nextLine();
             try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                index = Integer.parseInt(input) - 1;
+                Person.DisplayUserDetails(AllUsers.get(index));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                System.out.println("Invalid Customer ID entered! please try again");
+                continue;
             }
-            for (int i = 0; i < AllUsers.size(); i++) {
-                if (AllUsers.get(i).getAccount_id().equals(input)) {
-                    checked = true;
-                    index = i;
-                }
-            }
-            if (checked == true) {
-                System.out.println("id: " + AllUsers.get(index).getAccount_id());
-                System.out.println("full name: " + AllUsers.get(index).getFirst_name() + " "
-                        + AllUsers.get(index).getLast_name());
-                System.out.println("age: " + AllUsers.get(index).getAge());
-                System.out.println("username: " + AllUsers.get(index).getUsername());
-                System.out.println("password: " + AllUsers.get(index).getPassword());
-                System.out.println("address: " + AllUsers.get(index).getAddress());
-                System.out.println("phone number: " + AllUsers.get(index).getPhone_number());
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            } else {
-                System.out.println("invalid Customer ID entered! please try again");
-            }
+            break;
         }
-        checked = false;
-        System.out.println("1-Edit\n" +
-                "2-delete\n" +
-                "3-Go back\n");
+        System.out.println("1- Edit\n" +
+                "2- Delete\n" +
+                "3- Go back\n");
         choice = in.next().charAt(0);
         switch (choice) {
             case '1':
@@ -162,7 +123,7 @@ public class Admin implements Administration {
                 Manipulation(AllUsers, "Customers");
                 break;
             default:
-                System.out.println("wrong input! please try again");
+                System.out.println("Wrong input! please try again");
                 displayinfo(AllUsers, type);
                 break;
         }
@@ -170,115 +131,92 @@ public class Admin implements Administration {
 
     public <T extends Personsinterface> void editInformations(String status, ArrayList<T> AllUsers, String type,
             String callingfrom) {
-        {
+
+        do {
             if (status.equals("new")) {
                 displayinfo(AllUsers, type);
             } else {
-                System.out.println("what filed you want to edit: \n" +
-                        "1-username\n" +
-                        "2-password\n" +
-                        "3-firstname\n" +
-                        "4-lastname\n" +
-                        "5-address\n" +
-                        "6-phone number\n");
+                System.out.println("Choose what field to edit: \n" +
+                        "1- Username\n" +
+                        "2- Password\n" +
+                        "3- First Name\n" +
+                        "4- Last Name\n" +
+                        "5- Address\n" +
+                        "6- Phone number\n");
                 choice = in.next().charAt(0);
                 if (choice == '1') {
-                    System.out.println("enter new username: ");
-                    input = in.next();
-                    AllUsers.get(index).setUsername(input);
-                    System.out.println("username updated successfully");
+                    System.out.println("Enter new username: ");
+                    AllUsers.get(index).setUsername(Validations.NameValidation("new Username", 8, 22));
+                    System.out.println("Username updated successfully");
                 } else if (choice == '2') {
                     AllUsers.get(index).setPassword(Validations.PasswordValidation());
-                    System.out.println("password updated successfully");
+                    System.out.println("Password updated successfully");
                 } else if (choice == '3') {
-                    AllUsers.get(index).setFirst_name(Validations.NameValidation(" new Firstname", 3, 14));
-                    System.out.println("firstname updated successfully");
+                    AllUsers.get(index).setFirst_name(Validations.NameValidation("new Firstname", 3, 14));
+                    System.out.println("First Name updated successfully");
                 } else if (choice == '4') {
-                    AllUsers.get(index).setLast_name(Validations.NameValidation(" new Lastname", 3, 14));
-                    System.out.println("lastname updated successfully");
+                    AllUsers.get(index).setLast_name(Validations.NameValidation("new Lastname", 3, 14));
+                    System.out.println("Last Name updated successfully");
                 } else if (choice == '5') {
-                    // AllUsers.get(index).setAddress(Validations.AddressValidation());
-                    System.out.println("address updated successfully");
+                    String[] arrAddress = Validations.AddressValidation();
+                    AllUsers.get(index).setStreetAddress(arrAddress[0]);
+                    AllUsers.get(index).setStateAddress(arrAddress[1]);
+                    AllUsers.get(index).setZipAddress(arrAddress[2]);
+                    AllUsers.get(index).setAddress(arrAddress[0], arrAddress[1], arrAddress[2]);
+                    System.out.println("Address updated successfully");
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
-                    System.out.println("phone number updated successfully");
+                    System.out.println("Phone number updated successfully");
                 } else {
-                    System.out.println("invalid input! please try again..");
+                    System.out.println("Invalid input! please try again..");
                 }
             }
-            do {
-                System.out.println("countinue edting? 'y/n' ");
-                input = in.next();
-                if (input.toLowerCase().equals("y")) {
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (callingfrom.equals("Admin")) {
-                        editInformations("old", AllUsers, type, "Admin");
-                    } else if (callingfrom.equals("Customer")) {
-                        editInformations("old", AllUsers, type, "Customer");
-                    }
-                } else if (input.toLowerCase().equals("n")) {
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (callingfrom.equals("Admin")) {
-                        Manipulation(AllUsers, type);
-                    } else if (callingfrom.equals("Customer")) {
-                        Customers.showinfo(index, (ArrayList<Customers>) AllUsers, allTrips, null, this);
-                    }
-
-                } else {
-                    System.out.println("invalid input! please try again");
-                }
-            } while (input != "y" || input != "n");
-        }
+            System.out.println("Countinue edting? 'y/n' ");
+            input = in.next();
+            in.nextLine();
+        } while (input.equalsIgnoreCase("y"));
+        if (callingfrom.equals("Admin"))
+            Manipulation(AllUsers, type);
+        else if (callingfrom.equals("Customer"))
+            Customers.showinfo(index, (ArrayList<Customers>) AllUsers, allTrips, null, this);
         return;
-
     }
 
     public <T extends Personsinterface> void DeleteUsers(ArrayList<T> AllUsers, String status, String type) {
         if (status == "new") {
-            System.out.println("Please enter the " + type.toUpperCase() + " id you want to delete: ");
-            input = in.next();
-            for (int i = 0; i < AllUsers.size(); i++) {
-                if (AllUsers.get(i).getAccount_id().equals(input)) {
-                    checked = true;
-                    index = i;
-                }
-            }
-            if (checked == true) {
-                AllUsers.remove(index);
-                System.out.println("Account removed successfully!");
-                checked = false;
+            String text = type.toLowerCase().equals("customers") ? "a customer"
+                    : "a tourguide";
+            while (true) {
+                System.out.print("Use the index to delete " + text + ": ");
+                input = in.next();
+                in.nextLine();
                 try {
-                    Thread.sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    index = Integer.parseInt(input) - 1;
+                    AllUsers.remove(index);
+                    System.out.println("Account removed successfully!");
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Manipulation(AllUsers, type);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    System.out.println("Invalid Customer ID entered! please try again");
+                    continue;
                 }
-                Manipulation(AllUsers, type);
-
-            }
-            if (checked == false) {
-                System.out.println("Wrong input! Please try again..");
-                DeleteUsers(AllUsers, "new", type);
+                break;
             }
         } else {
             AllUsers.remove(index);
             System.out.println("Account removed successfully!");
             try {
-                Thread.sleep(400);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Manipulation(AllUsers, type);
         }
         return;
-
     }
 
     @Override

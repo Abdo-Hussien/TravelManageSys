@@ -31,7 +31,7 @@ public interface Personsinterface {
 
     public void setPhone_number(String phone_number);
 
-    public void setAddress(String address);
+    public void setAddress(String street, String state, String zip);
 
     public String getStreetAddress();
 
