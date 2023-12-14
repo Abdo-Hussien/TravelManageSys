@@ -85,17 +85,23 @@ public class Customers extends Person implements Personsinterface {
 
     public static void UserMainMenu(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers,
             BookingTickets bookingTickets, Admin edit, TravelItineraries dashboard, ArrayList<BookedTravels> booking) {
-        System.out.println("Welcome..!!");
         while (true) {
+            System.out.println("Welcome..!!");
             System.out.println("1- Profile settings.\n2- Trip.\n3- Cart.\n4- Sign out.");
             choice = in.nextInt();
             if (choice == 1) {
                 showinfo(Admin.index, allCustomers, allTrips, bookingTickets, edit);
             } else if (choice == 2) {
-                BookingManipulations.mainCustomer(allCustomers);
-                dashboard.dashboard(BookingManipulations.mainCustomer(allCustomers), allTrips);
+                booking = BookingManipulations.mainCustomer(allCustomers);
+                dashboard.dashboard(booking, allTrips);
             } else if (choice == 3) {
                 dashboard.dashboard(booking, allTrips);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e2) {
+                    e2.printStackTrace();
+                }
+                continue;
             } else if (choice == 4) {
                 break;
             } else {

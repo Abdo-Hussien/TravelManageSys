@@ -148,7 +148,7 @@ public class CustomerBooking {
                 bk.ticketMenu(CustomerBookedTrips, trip, tripsList);
                 // addBookingTrip(ChosenTrip, dateIndex);
                 // Call Ticket Functions!
-                ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 3000, allCustomers);
+                ErrorMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 500, allCustomers);
                 break;
             case 'b':
                 mainCustomer(allCustomers);
