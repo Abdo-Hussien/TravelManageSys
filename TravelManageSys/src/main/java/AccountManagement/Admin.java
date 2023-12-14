@@ -71,20 +71,24 @@ public class Admin implements Administration {
             choice = in.next().charAt(0);
             if (choice == '1') {
                 displayinfo(AllUsers, type);
+                return;
             } else if (choice == '2') {
                 editInformations("new", AllUsers, type, "Admin");
+                return;
             } else if (choice == '3') {
                 DeleteUsers(AllUsers, "new", type);
+                return;
             } else if (choice == '4') {
                 AllUsers.add((T) create_acc(type));
                 Manipulation(AllUsers, type);
-                break;
+                return;
             } else if (choice == '5') {
                 AdminMenu(allCustomers, allTourGuides, allTrips);
                 return;
             } else {
                 System.out.println("invalid input! please try again...");
                 Manipulation(AllUsers, type);
+                return;
             }
         } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' ||
                 choice != '5');
