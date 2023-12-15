@@ -4,6 +4,8 @@
  */
 package TravelManagement;
 
+import java.util.ArrayList;
+
 import AccountManagement.RandIDGenerator;
 
 /**
@@ -38,6 +40,7 @@ public class Silver extends Ticket {
         ticketTypeheader("Silver");
         System.out.println("how many sliver tickets you want?");
         addeddTicket = in.nextInt();
+        in.nextLine();
         if (addeddTicket > 0) {
             Scounter += addeddTicket;
             System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
@@ -56,6 +59,7 @@ public class Silver extends Ticket {
     public void Delete() {
         System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
+        in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Scounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");

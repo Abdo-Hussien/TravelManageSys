@@ -162,7 +162,7 @@ public class Customers extends Person implements Personsinterface {
         if (filteredTrips.size() == 1) {
             ShowTripDetails(filteredTrips.get(0), '?', allCustomers, tripsList);
             return;
-        } else if (filteredTrips.isEmpty()){
+        } else if (filteredTrips.isEmpty()) {
             CustomMessage("\nNo Trip Found with these preferences..", 3000, allCustomers, tripsList);
             return;
         }
@@ -192,6 +192,7 @@ public class Customers extends Person implements Personsinterface {
                 if (dateIndex == -1) {
                     CustomMessage("No dates available with the given information!", 2000, allCustomers, tripsList);
                     mainCustomer(allCustomers, tripsList);
+                    return;
                 }
                 ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
                         ChosenTrip.getStartDates()[dateIndex], ChosenTrip.getEndDates()[dateIndex]);
@@ -209,7 +210,8 @@ public class Customers extends Person implements Personsinterface {
         return;
     }
 
-    private void ShowTripDetails(Trip ChosenTrip, char Ans, ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {
+    private void ShowTripDetails(Trip ChosenTrip, char Ans, ArrayList<Customers> allCustomers,
+            ArrayList<Trip> tripsList) {
         Scanner input = new Scanner(System.in);
         if (Ans != '?') {
             System.out.println("\nWhich trip do you want to book?\t(Use the ID)");
@@ -240,7 +242,6 @@ public class Customers extends Person implements Personsinterface {
                 ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripType(), ChosenTrip.getTripId(),
                         ChosenTrip.getStartDates()[dateIndex], ChosenTrip.getEndDates()[dateIndex]);
                 CustomerBookedTickets.ticketMenu(CustomerBookedTrips, trip, tripsList);
-                CustomMessage("You successfully booked " + ChosenTrip.getTitle() + " Trip", 500, allCustomers, tripsList);
                 break;
             case 'b':
                 mainCustomer(allCustomers, tripsList);
@@ -266,7 +267,8 @@ public class Customers extends Person implements Personsinterface {
         return index;
     }
 
-    private void CustomMessage(String message, int timeout, ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {
+    private void CustomMessage(String message, int timeout, ArrayList<Customers> allCustomers,
+            ArrayList<Trip> tripsList) {
         try {
             System.out.println(message);
             Thread.sleep(timeout);
@@ -277,7 +279,8 @@ public class Customers extends Person implements Personsinterface {
         }
     }
 
-    public ArrayList<Trip> getFilteredTrips(String search_filter, ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {
+    public ArrayList<Trip> getFilteredTrips(String search_filter, ArrayList<Customers> allCustomers,
+            ArrayList<Trip> tripsList) {
         ArrayList<Trip> filteredTrips = new ArrayList<>();
         String[] Filters = search_filter.split("/");
         // Split Filters.

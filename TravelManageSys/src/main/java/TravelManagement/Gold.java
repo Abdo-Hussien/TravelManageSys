@@ -37,6 +37,7 @@ public class Gold extends Ticket {
         ticketTypeheader("Gold");
         System.out.println("how many Gold tickets you want?");
         addeddTicket = in.nextInt();
+        in.nextLine();
         if (addeddTicket > 0) {
             Gcounter += addeddTicket;
             System.out.println("Done! " + addeddTicket + " Gold tickets added to your cart");
@@ -55,6 +56,7 @@ public class Gold extends Ticket {
     public void Delete() {
         System.out.println("how many Gold tickets you want to delete?");
         deletedTicket = in.nextInt();
+        in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Gcounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
