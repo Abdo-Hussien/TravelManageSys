@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
+import AccountManagement.Admin;
 import AccountManagement.Person;
 import AccountManagement.Personsinterface;
 
@@ -19,10 +20,6 @@ import AccountManagement.Personsinterface;
 public class TourGuide extends Person implements Personsinterface {
 
     protected double salary;
-    protected String answer;
-    protected int month;
-
-    protected Scanner in = new Scanner(System.in);
 
     public TourGuide() {
     };
@@ -44,7 +41,7 @@ public class TourGuide extends Person implements Personsinterface {
 
     }
 
-    public int Calculatetripinmouth(ArrayList<Trip> Trips, String TourGuideID, int Month) {
+    public int CalcTripInMonth(ArrayList<Trip> Trips, String TourGuideID, int Month) {
         int tripsInMonth = (int) Trips.stream()
                 .filter(trip -> trip.getTourGuideID().equals(TourGuideID))
                 .flatMap(trip -> Arrays.stream(trip.getStartDates()))
@@ -55,7 +52,7 @@ public class TourGuide extends Person implements Personsinterface {
     }
 
     public double CalculateSalary(ArrayList<Trip> Trips, String TourGuideID, int Month) {
-        int tripsInMonth = Calculatetripinmouth(Trips, TourGuideID, Month);
+        int tripsInMonth = CalcTripInMonth(Trips, TourGuideID, Month);
         /*
          * for (Trip trip : Trips) {
          * if (trip.getTourGuideID().equals(TourGuideID)) {
@@ -66,7 +63,7 @@ public class TourGuide extends Person implements Personsinterface {
          * }
          */
         salary = tripsInMonth * 2173.43;
-        return salary;
+        return Math.round(salary * 100.0) / 100.0;
     }
 
     private static int getMonthFromDate(Date date) {
@@ -83,59 +80,91 @@ public class TourGuide extends Person implements Personsinterface {
         this.salary = salary;
     }
 
+    public void guideMenu(int index, ArrayList<TourGuide> allTourGuides, ArrayList<Trip> allTrips) {
+        Scanner in = new Scanner(System.in);
+        int choice;
+        System.out.println("Welcome " + allTourGuides.get(index).getFirst_name() + "! What would you like to do?");
+        System.out.println("1- Profile settings.\n2- Sign out.");
+        choice = in.nextInt();
+        in.nextLine();
+        switch (choice) {
+            case 1:
+                showDetails(index, allTourGuides, allTrips);
+                break;
+            case 2:
+                // Sign out;
+                break;
+            default:
+                break;
+        }
+    }
+
     public void showDetails(int index, ArrayList<TourGuide> allTourGuides, ArrayList<Trip> allTrips) {
-
-        System.out.println("\t\t\t\t\t\t\t\t\t  **** Tour guide information****");
-
-        System.out.println("id" + allTourGuides.get(index).account_id);
-        System.out.println("full name: " + allTourGuides.get(index).first_name + " "
-                + allTourGuides.get(index).last_name);
-        System.out.println("Username" + allTourGuides.get(index).username);
-        System.out.println("Address" + allTourGuides.get(index).address);
-        System.out.println("Age" + allTourGuides.get(index).age);
-        System.out.println("Gender" + allTourGuides.get(index).gender);
-        System.out.println("PhoneNumber" + allTourGuides.get(index).phone_number);
-        System.out.println("\t\t\t\t\t\t\t\t\t  **********************************");
-        System.out.println("Want to know the  trips you are responsible for in month? y/n");
+        String answer;
+        int month;
+        boolean[] foundTrip = { false };
+        Scanner in = new Scanner(System.in);
+        System.out.printf("%-20s**** Tour Guide Information ****%n", "");
+        System.out.printf("ID: %s%n", allTourGuides.get(index).account_id);
+        System.out.printf("Full Name: %s %s%n", allTourGuides.get(index).first_name,
+                allTourGuides.get(index).last_name);
+        System.out.printf("Username: %s%n", allTourGuides.get(index).username);
+        System.out.printf("Address: %s%n", allTourGuides.get(index).address);
+        System.out.printf("Age: %d%n", allTourGuides.get(index).age);
+        System.out.printf("Gender: %s%n", allTourGuides.get(index).gender);
+        System.out.printf("Phone Number: %s%n", allTourGuides.get(index).phone_number);
+        System.out.printf("%-20s**********************************%n", "");
+        System.out.printf("Want to know the trips you are responsible for this month? (y/n): ");
         answer = in.next();
-        if (answer.toLowerCase().equals("y")) {
-
-            System.out.println("Enter month:");
+        in.nextLine();
+        if (answer.equalsIgnoreCase("y")) {
+            System.out.print("Enter month: ");
             month = in.nextInt();
-            if (month >= 1 || month < 13) {
-                System.out.println("the total of trips:"
-                        + allTourGuides.get(index).Calculatetripinmouth(allTrips, account_id, month));
+            in.nextLine();
+            if (month >= 1 && month < 13) {
+                allTrips.stream()
+                        .filter(trip -> allTourGuides.get(index).account_id.equals(trip.getTourGuideID()))
+                        .forEach(trip -> {
+                            Arrays.stream(trip.getStartDates()).forEach(date -> {
+                                if (getMonthFromDate(date) + 1 == month) {
+                                    foundTrip[0] = true;
+                                    System.out.println(trip.getTitle() + "\n" + trip.getTripType() + " touring");
+                                    System.out.println(date);
+                                }
+                            });
+                        });
+                System.out.println("The total of trips: "
+                        + allTourGuides.get(index).CalcTripInMonth(allTrips, account_id, month));
                 System.out
-                        .println("The salary in this month = " + CalculateSalary(allTrips, account_id, index));
-                System.out.println("These are all the trips you have:");
-                for (int i = 0; i < allTrips.size(); i++) {
-                    if (allTourGuides.get(index).account_id.equals(allTrips.get(i).getTourGuideID())) {
-                        for (Date date : allTrips.get(i).getStartDates()) {
-                            if (getMonthFromDate(date) + 1 == month) {
-                                System.out.println(allTrips.get(i).getTitle());
-                                System.out.println("For " + allTrips.get(i).getTripType() + " touring");
-                                System.out.println("It is start at:" + allTrips.get(i).getStartDates());
-                                System.out.println("It is End at:" + allTrips.get(i).getEndDates());
-                            } else {
-                                System.out.println("you have zero trips in this month.");
-                            }
-                        }
-                    }
+                        .println("Your salary in this month is: " + CalculateSalary(allTrips, account_id, month));
+                System.out.printf("%-20s**********************************%n", "");
+
+                if (!foundTrip[0]) {
+                    System.out.println("You aren't guiding any trips in this given month.");
+                    System.out.println("Press any key (followed by Enter key) to go back...");
+                    in.next();
+                    in.nextLine();
+                    showDetails(index, allTourGuides, allTrips);
+                    return;
                 }
             } else {
-                System.out.println("wrong input! please try again.");
+                System.out.println("Invalid Month");
+                System.out.println("Press any key (followed by Enter key) to go back...");
+                in.next();
+                in.nextLine();
+                showDetails(index, allTourGuides, allTrips);
+                return;
             }
-        } else if (answer.toLowerCase().equals("n")) {
+        } else if (answer.equalsIgnoreCase("n")) {
 
+        } else {
+            System.out.println("Wrong input! please try again.");
+            System.out.println("Press any key (followed by Enter key) to go back...");
+            in.next();
+            in.nextLine();
+            showDetails(index, allTourGuides, allTrips);
+            return;
         }
-
-        else {
-            System.out.println("wrong input! please try again.");
-
-        }
-
-        System.out.println("");
-        System.out.println("\t\t\t\t\t\t\t\t\t  **********************************");
 
     }
 

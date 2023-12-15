@@ -48,13 +48,13 @@ public class TravelManageSys {
                     System.out.println("wrong username or password! please try again");
                 }
             } else if (choice == 2) {
-                admin.userMenu(allCustomers, "Customer");
+                admin.userMenu(allCustomers, "Customers");
                 Customers.UserMainMenu(allTrips, allCustomers, allBookTickets, admin, dashboard,
                         allBookTravels);
                 continue;
             } else if (choice == 3) {
                 admin.userMenu(allTourGuides, "TourGuide");
-                allTourGuides.get(1).showDetails(Admin.index, allTourGuides, allTrips);
+                allTourGuides.get(0).guideMenu(Admin.index, allTourGuides, allTrips);
             } else {
                 System.out.println("wrong input! please try again.");
                 continue;

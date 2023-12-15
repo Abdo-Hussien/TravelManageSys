@@ -89,6 +89,7 @@ public class Customers extends Person implements Personsinterface {
             System.out.println("Welcome..!!");
             System.out.println("1- Profile settings.\n2- Trip.\n3- Cart.\n4- Sign out.");
             choice = in.nextInt();
+            in.nextLine();
             if (choice == 1) {
                 showinfo(Admin.index, allCustomers, allTrips, bookingTickets, edit);
             } else if (choice == 2) {
