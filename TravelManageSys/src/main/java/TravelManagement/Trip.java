@@ -105,24 +105,24 @@ public abstract class Trip {
         System.out.println("\t\t\t\t\t\t\t\t  ************************************************");
     }
 
-    public void displayTripDetails(Trip trip) {
+    public void displayTripDetails() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
         Date[] endDates;
         ArrayList<Transportation> allTranports = new ArrayList<>();
-        startDates = trip.getStartDates();
-        endDates = trip.getEndDates();
-        String[] Activities = trip.getActivities();
+        startDates = this.getStartDates();
+        endDates = this.getEndDates();
+        String[] Activities = this.getActivities();
         System.out.println("**********************************");
-        System.out.println("Explore the Beauty of " + trip.getTitle() + ".");
+        System.out.println("Explore the Beauty of " + this.getTitle() + ".");
         System.out.println("**********************************");
         System.out.println("");
-        System.out.println(trip.getDescription());
+        System.out.println(this.getDescription());
         System.out.println("");
-        System.out.println(trip.getTitle());
-        System.out.println("For " + trip.getTripType() + " touring");
+        System.out.println(this.getTitle());
+        System.out.println("For " + this.getTripType() + " touring");
         // Cannot retrieve rate of ticket price from Silver class
-        System.out.println("$" + trip.TripPrice(0.05) + "/person <Silver tickets>");
+        System.out.println("$" + this.TripPrice(0.05) + "/person <Silver tickets>");
         System.out.println("Available dates:");
         for (int i = 0; i < startDates.length; i++)
             System.out.print("~ " + dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
@@ -132,20 +132,20 @@ public abstract class Trip {
             System.out.println("- " + game);
         }
         System.out.println("");
-        System.out.println("Staying at: " + trip.getHotelName());
-        System.out.println("Going by: " + trip.getTransportation(allTranports, transportID));
+        System.out.println("Staying at: " + this.getHotelName());
+        System.out.println("Going by: " + this.getTransportation(allTranports, transportID));
         System.out.println("Car Rentals (Optional)");
         System.out.println("");
         System.out.println("Avaliable Ticket:\n");
         System.out.println("Silver ticket <Regular  ticket>:");
         System.out.println("1- one meal.\n 2-Activities not included\n3-car rental with extra fees.");
-        System.out.println("price: $" + trip.TripPrice(0.05));
+        System.out.println("price: $" + this.TripPrice(0.05));
         System.out.println("Gold ticket :");
         System.out.println("1- half board.\n 2-one choosen Activity included\n3-car rental with extra fees.");
-        System.out.println("price: $" + trip.TripPrice(0.3));
+        System.out.println("price: $" + this.TripPrice(0.3));
         System.out.println("Platinum ticket :\n");
         System.out.println("1-Full board.\n2-All Activities included.\n3-free car rental.");
-        System.out.println("price: $" + trip.TripPrice(0.6));
+        System.out.println("price: $" + this.TripPrice(0.6));
         System.out.println("************************************************");
         System.out.println("Book Now and Embark on an Unforgettable Journey!");
         System.out.println("************************************************");
@@ -259,11 +259,16 @@ public abstract class Trip {
 
     public Transportation getTransportation(ArrayList<Transportation> transportations, int tripId,
             ArrayList<Trip> allTrips) {
-        for (int i = 0; i < transportations.size(); i++) {
-            if (transportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID)) {
+        for (int i = 0; i < transportations.size(); i++)
+            if (transportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
                 return transportations.get(i);
-            }
-        }
+        return null;
+    }
+
+    public Transportation getTransportation(ArrayList<Transportation> transportations, String transportID) {
+        for (int i = 0; i < transportations.size(); i++)
+            if (transportations.get(i).getTransportID().equals(transportID))
+                return transportations.get(i);
         return null;
     }
 

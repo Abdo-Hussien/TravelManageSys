@@ -4,23 +4,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Car {
+    protected String carID;
     protected String made;
     protected String model;
     protected String type;
     protected int noSeats;
     protected double price;
-    protected String carId;
 
     int choice;
     String ans;
     Scanner in = new Scanner(System.in);
 
-    public Car(String made, String model, String type, int noSeats, double price) {
+    public Car(String carID, String made, String model, String type, int noSeats, double price) {
+        this.carID = carID;
         this.made = made;
         this.model = model;
         this.type = type;
         this.noSeats = noSeats;
         this.price = price;
+    }
+
+    public String getCarID() {
+        return this.carID;
     }
 
     public String getMade() {

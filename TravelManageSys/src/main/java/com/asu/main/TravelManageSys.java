@@ -20,13 +20,13 @@ public class TravelManageSys {
         Scanner in = new Scanner(System.in);
         ArrayList<Customers> allCustomers = new ArrayList<Customers>(fileManipulation.getAllCustomers());
         ArrayList<TourGuide> allTourGuides = new ArrayList<TourGuide>(fileManipulation.getAllTourGuides());
-        ArrayList<Car> allCars = new ArrayList<Car>(fileManipulation.getAllCars());
         ArrayList<Trip> allTrips = new ArrayList<Trip>(fileManipulation.getAllTrips());
-        ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
-                fileManipulation.getAllTransportations());
-        ArrayList<Hotels> allHotels = new ArrayList<Hotels>(fileManipulation.getAllHotels());
-        ArrayList<BookedTravels> allBookTravels = new ArrayList<BookedTravels>();
-        BookingTickets allBookTickets = new BookingTickets();
+        // ArrayList<Car> allCars = new ArrayList<Car>(fileManipulation.getAllCars());
+        // ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
+        //         fileManipulation.getAllTransportations());
+        // ArrayList<Hotels> allHotels = new ArrayList<Hotels>(fileManipulation.getAllHotels());
+        // ArrayList<BookedTravels> allBookTravels = new ArrayList<BookedTravels>();
+        // BookingTickets allBookTickets = new BookingTickets();
 
         Admin admin = new Admin();
         TravelItineraries dashboard = new TravelItineraries();
@@ -48,9 +48,8 @@ public class TravelManageSys {
                     System.out.println("wrong username or password! please try again");
                 }
             } else if (choice == 2) {
-                admin.userMenu(allCustomers, "Customers");
-                Customers.UserMainMenu(allTrips, allCustomers, allBookTickets, admin, dashboard,
-                        allBookTravels);
+                Customers currentCustomer = (Customers) admin.userMenu(allCustomers, "Customers");
+                dashboard.dashboard(currentCustomer.UserMainMenu(allTrips, allCustomers), allTrips);
                 continue;
             } else if (choice == 3) {
                 admin.userMenu(allTourGuides, "TourGuide");

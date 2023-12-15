@@ -21,7 +21,7 @@ public class fileManipulation {
             ArrayList<Trip> AllTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
             String fileContent = Files.readString(path);
-            String Trips[] = fileContent.split("\\s+---\\s+");
+            String Trips[] = fileContent.split("\\s*---\\s*");
             for (String tripString : Trips) {
                 Trip trip = parseTrip(tripString);
                 if (trip != null)
@@ -29,7 +29,7 @@ public class fileManipulation {
             }
             return AllTrips;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Trips Reading failed");
             return null;
         }
     }
@@ -74,7 +74,7 @@ public class fileManipulation {
             ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
             String fileContent = Files.readString(path);
-            String Customers[] = fileContent.split("\\s+---\\s+");
+            String Customers[] = fileContent.split("\\s*---\\s*");
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
@@ -91,14 +91,14 @@ public class fileManipulation {
                     }
                 }
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
-                        : parseBookedTrip(Arrays.copyOfRange(customer, 8, 15));
+                        : parseBookedTrip(Arrays.copyOfRange(customer, 8, 17));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
                         TripHistory));
             }
             return AllCustomers;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Customers Reading failed");
             return null;
         }
     }
@@ -110,10 +110,12 @@ public class fileManipulation {
         String[] IDs = BookedTripsLine[0].split("\\s*\\|\\s*");
         String[] Names = BookedTripsLine[1].split("\\s*\\|\\s*");
         String[] TicketExpDates = BookedTripsLine[2].split("\\s*\\|\\s*");
-        String[] TicketIDs = BookedTripsLine[3].split("\\s*\\|\\s*");
-        String[] StartDates = BookedTripsLine[4].split("\\s*\\|\\s*");
-        String[] TicketTypes = BookedTripsLine[5].split("\\s*\\|\\s*");
-        String[] TicketCounter = BookedTripsLine[6].split("\\s*\\|\\s*");
+        String[] totalPrices = BookedTripsLine[3].split("\\s*\\|\\s*");
+        String[] carIDs = BookedTripsLine[4].split("\\s*\\|\\s*");
+        String[] TicketIDs = BookedTripsLine[5].split("\\s*\\|\\s*");
+        String[] StartDates = BookedTripsLine[6].split("\\s*\\|\\s*");
+        String[] TicketTypes = BookedTripsLine[7].split("\\s*\\|\\s*");
+        String[] TicketCounter = BookedTripsLine[8].split("\\s*\\|\\s*");
         for (int i = 0; i < IDs.length; i++) {
             String[] TripTicketIDs = TicketIDs[i].split("\\s*,\\s*");
             String[] TripTicketTypes = TicketTypes[i].split("\\s*,\\s*");
@@ -134,18 +136,19 @@ public class fileManipulation {
         for (int i = 0; i < IDs.length; i++) {
             CustomerBookedTrips
                     .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
-                            dateFormat.parse(TicketExpDates[i]), CustomerTickets));
+                            dateFormat.parse(TicketExpDates[i]), CustomerTickets, Double.parseDouble(totalPrices[i]), carIDs[i]));
+                            
         }
         return CustomerBookedTrips;
     }
-
+    
     // Function to get all TourGuides from the file
     public static ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/TourGuides.txt");
             String fileContent = Files.readString(path);
-            String TourGuides[] = fileContent.split("\\s+---\\s+");
+            String TourGuides[] = fileContent.split("\\s*---\\s*");
             for (String t : TourGuides) {
                 String[] tourguide = t.split(System.lineSeparator());
                 String[] Fullname = tourguide[1].split(" ");
@@ -155,7 +158,7 @@ public class fileManipulation {
             }
             return AllTourGuides;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Tourguides Reading failed");
             return null;
         }
     }
@@ -166,7 +169,7 @@ public class fileManipulation {
             ArrayList<Hotels> AllHotels = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/Hotels.txt");
             String fileContent = Files.readString(path);
-            String Hotels[] = fileContent.split("\\s+---\\s+");
+            String Hotels[] = fileContent.split("\\s*---\\s*");
             for (String t : Hotels) {
                 String[] hotel = t.split(System.lineSeparator());
                 AllHotels.add(new Hotels(hotel[0], Double.parseDouble(hotel[1]), Integer.parseInt(hotel[2]),
@@ -175,7 +178,7 @@ public class fileManipulation {
             }
             return AllHotels;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Hotels Reading failed");
             return null;
         }
     }
@@ -186,14 +189,14 @@ public class fileManipulation {
             ArrayList<Car> AllCars = new ArrayList<>();
             Path path = Paths.get("TravelManageSys\\src\\main\\java\\data\\Cars.txt");
             String fileContent = Files.readString(path);
-            String Cars[] = fileContent.split("\\s+---\\s+");
+            String Cars[] = fileContent.split("\\s*---\\s*");
             for (String c : Cars) {
                 String[] Car = c.split(System.lineSeparator());
-                AllCars.add(new Car(Car[0], Car[1], Car[2], Integer.parseInt(Car[3]), Double.parseDouble(Car[4])));
+                AllCars.add(new Car(Car[0], Car[1], Car[2], Car[3], Integer.parseInt(Car[4]), Double.parseDouble(Car[5])));
             }
             return AllCars;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Cars Reading failed");
             return null;
         }
     }
@@ -204,7 +207,7 @@ public class fileManipulation {
             ArrayList<Transportation> AllTransportations = new ArrayList<>();
             Path path = Paths.get("TravelManageSys/src/main/java/data/Transportation.txt");
             String fileContent = Files.readString(path);
-            String Transportations[] = fileContent.split("\\s+---\\s+");
+            String Transportations[] = fileContent.split("\\s*---\\s*");
             for (String t_str : Transportations) {
                 String[] Transportation = t_str.split(System.lineSeparator());
                 if (Transportation[0].toLowerCase().equals("flight")) {
@@ -219,7 +222,7 @@ public class fileManipulation {
             }
             return AllTransportations;
         } catch (Exception e) {
-            System.out.println("Path is invalid for Reading");
+            System.out.println("Transportations Reading failed");
             return null;
         }
     }

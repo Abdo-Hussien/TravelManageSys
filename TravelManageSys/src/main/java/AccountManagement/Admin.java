@@ -46,7 +46,7 @@ public class Admin implements Administration {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                break;
+                return;
             } else {
                 System.out.println("Invalid input! please choose only from the following options.");
                 continue;
@@ -185,8 +185,10 @@ public class Admin implements Administration {
         } while (input.equalsIgnoreCase("y"));
         if (callingfrom.equals("Admin"))
             Manipulation(AllUsers, type);
-        else if (callingfrom.equals("Customer"))
-            Customers.showinfo(index, (ArrayList<Customers>) AllUsers, allTrips, null, this);
+        else if (callingfrom.equals("Customer")) {
+            Customers current_customer = (Customers) AllUsers.get(0);
+            current_customer.showinfo(allCustomers, allTrips);
+        }
         return;
     }
 
@@ -255,7 +257,7 @@ public class Admin implements Administration {
                 tripsAvalability(AllTrip, customers, tourGuide);
             }
             trip = AllTrip.get(tripindex);
-            trip.displayTripDetails(trip);
+            trip.displayTripDetails();
             System.out.println("Press any key (followed by Enter key) to go back...");
             input = in.next();
             in.nextLine();
@@ -310,8 +312,9 @@ public class Admin implements Administration {
         return person;
     }
 
-    public <T extends Personsinterface> void login(ArrayList<T> allusers) {
+    public <T extends Personsinterface> T login(ArrayList<T> allusers) {
         int counter = 0;
+        T user = null;
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tLogin");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
@@ -323,31 +326,42 @@ public class Admin implements Administration {
             System.out.print("Enter your password: ");
             String pass = in.next();
             in.nextLine();
-            System.out.println("--------------------------------------");
-            for (int userindex = 0; userindex < allusers.size(); userindex++) {
-                T customer = allusers.get(userindex);
-                if (customer.getUsername().equals(userName) && customer.getPassword().equals(pass)){
-                    index = userindex;
-                    break;
-                }
-                else
-                    index = -1;
-            }
-            if (index == -1) {
+            user = CheckCredentials(allusers, userName, pass);
+            if (user == null) {
                 counter++;
                 System.out.println("You have " + counter + "/3 attempts left...");
-            } else if (index != -1) {
-                System.out.println("Login successful!");
-                break;
-            }
+            } else
+                return user;
+            System.out.println("--------------------------------------");
+
             if (counter == 3) {
                 System.out.println("Unfortunately you can't login... you have been timed out temporarily!");
                 System.exit(0);
+                return null;
             }
+        }
+        return null;
+    }
+
+    public <T extends Personsinterface> T CheckCredentials(ArrayList<T> allusers, String username, String password) {
+        T user = null;
+        for (int userindex = 0; userindex < allusers.size(); userindex++) {
+            user = allusers.get(userindex);
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                index = userindex;
+                break;
+            } else
+                index = -1;
+        }
+        if (index == -1) {
+            return null;
+        } else {
+            System.out.println("Login successful!");
+            return user;
         }
     }
 
-    public <T extends Personsinterface> void userMenu(ArrayList<T> users, String Account_Type) {
+    public <T extends Personsinterface> T userMenu(ArrayList<T> users, String Account_Type) {
         System.out.println("Choose an action you want to perfom.");
         System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
         System.out.println("1.) Create account.");
@@ -362,12 +376,12 @@ public class Admin implements Administration {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            login(users);
+            return login(users);
         } else if (userInput.equals("2"))
-            login(users);
+            return login(users);
         else {
             System.out.println("Invalid input! please choose only from the following options.");
-            userMenu(users, Account_Type);
+            return userMenu(users, Account_Type);
         }
     }
 }

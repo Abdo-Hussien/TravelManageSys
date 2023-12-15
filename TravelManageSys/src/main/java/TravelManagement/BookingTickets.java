@@ -160,7 +160,7 @@ public class BookingTickets {
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip.getTripId(), ChosenTrip.getTripName(),
                 ChosenTrip.getStarDate(), ChosenTrip.getEndDate(),
-                ticketList, 0.0);
+                ticketList, 2000.0, "2000");
         for (int i = 0; i < AllTrip.size(); i++) {
             if (AllTrip.get(i).getTripId().equals(ChosenTrip.getTripId())) {
                 AllTrip.get(i).setTicketCounter(totalTickets);

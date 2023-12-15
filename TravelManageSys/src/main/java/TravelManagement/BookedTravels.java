@@ -9,18 +9,19 @@ public class BookedTravels {
     protected String tripName;
     protected Date startDate;
     protected Date endDate;
-    protected Double totalPrice;
-    protected String model;
+    protected double totalPrice;
+    protected String carID;
     ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
 
     public BookedTravels(String tripId, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket,
-            Double price) {
+            double totalprice, String carID) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.Bookedticket = ticket;
-        this.totalPrice = price;
+        this.totalPrice = totalprice;
+        this.carID = carID;
     }
 
     public BookedTravels() {

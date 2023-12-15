@@ -93,7 +93,7 @@ public class TourGuide extends Person implements Personsinterface {
                 break;
             case 2:
                 // Sign out;
-                break;
+                return;
             default:
                 break;
         }
