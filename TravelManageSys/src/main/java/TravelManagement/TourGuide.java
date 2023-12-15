@@ -80,16 +80,16 @@ public class TourGuide extends Person implements Personsinterface {
         this.salary = salary;
     }
 
-    public void guideMenu(int index, ArrayList<TourGuide> allTourGuides, ArrayList<Trip> allTrips) {
+    public void guideMenu(ArrayList<Trip> allTrips) {
         Scanner in = new Scanner(System.in);
         int choice;
-        System.out.println("Welcome " + allTourGuides.get(index).getFirst_name() + "! What would you like to do?");
+        System.out.println("Welcome " + this.getFirst_name() + "! What would you like to do?");
         System.out.println("1- Profile settings.\n2- Sign out.");
         choice = in.nextInt();
         in.nextLine();
         switch (choice) {
             case 1:
-                showDetails(index, allTourGuides, allTrips);
+                showDetails(allTrips);
                 break;
             case 2:
                 // Sign out;
@@ -99,20 +99,20 @@ public class TourGuide extends Person implements Personsinterface {
         }
     }
 
-    public void showDetails(int index, ArrayList<TourGuide> allTourGuides, ArrayList<Trip> allTrips) {
+    public void showDetails(ArrayList<Trip> allTrips) {
         String answer;
         int month;
         boolean[] foundTrip = { false };
         Scanner in = new Scanner(System.in);
         System.out.printf("%-20s**** Tour Guide Information ****%n", "");
-        System.out.printf("ID: %s%n", allTourGuides.get(index).account_id);
-        System.out.printf("Full Name: %s %s%n", allTourGuides.get(index).first_name,
-                allTourGuides.get(index).last_name);
-        System.out.printf("Username: %s%n", allTourGuides.get(index).username);
-        System.out.printf("Address: %s%n", allTourGuides.get(index).address);
-        System.out.printf("Age: %d%n", allTourGuides.get(index).age);
-        System.out.printf("Gender: %s%n", allTourGuides.get(index).gender);
-        System.out.printf("Phone Number: %s%n", allTourGuides.get(index).phone_number);
+        System.out.printf("ID: %s%n", this.account_id);
+        System.out.printf("Full Name: %s %s%n", this.first_name,
+                this.last_name);
+        System.out.printf("Username: %s%n", this.username);
+        System.out.printf("Address: %s%n", this.address);
+        System.out.printf("Age: %d%n", this.age);
+        System.out.printf("Gender: %s%n", this.gender);
+        System.out.printf("Phone Number: %s%n", this.phone_number);
         System.out.printf("%-20s**********************************%n", "");
         System.out.printf("Want to know the trips you are responsible for this month? (y/n): ");
         answer = in.next();
@@ -123,7 +123,7 @@ public class TourGuide extends Person implements Personsinterface {
             in.nextLine();
             if (month >= 1 && month < 13) {
                 allTrips.stream()
-                        .filter(trip -> allTourGuides.get(index).account_id.equals(trip.getTourGuideID()))
+                        .filter(trip -> this.account_id.equals(trip.getTourGuideID()))
                         .forEach(trip -> {
                             Arrays.stream(trip.getStartDates()).forEach(date -> {
                                 if (getMonthFromDate(date) + 1 == month) {
@@ -134,25 +134,24 @@ public class TourGuide extends Person implements Personsinterface {
                             });
                         });
                 System.out.println("The total of trips: "
-                        + allTourGuides.get(index).CalcTripInMonth(allTrips, account_id, month));
+                        + this.CalcTripInMonth(allTrips, account_id, month));
                 System.out
                         .println("Your salary in this month is: " + CalculateSalary(allTrips, account_id, month));
                 System.out.printf("%-20s**********************************%n", "");
 
-                if (!foundTrip[0]) {
+                if (!foundTrip[0])
                     System.out.println("You aren't guiding any trips in this given month.");
-                    System.out.println("Press any key (followed by Enter key) to go back...");
-                    in.next();
-                    in.nextLine();
-                    showDetails(index, allTourGuides, allTrips);
-                    return;
-                }
+                System.out.println("Press any key (followed by Enter key) to go back...");
+                in.next();
+                in.nextLine();
+                showDetails(allTrips);
+                return;
             } else {
                 System.out.println("Invalid Month");
                 System.out.println("Press any key (followed by Enter key) to go back...");
                 in.next();
                 in.nextLine();
-                showDetails(index, allTourGuides, allTrips);
+                showDetails(allTrips);
                 return;
             }
         } else if (answer.equalsIgnoreCase("n")) {
@@ -162,7 +161,7 @@ public class TourGuide extends Person implements Personsinterface {
             System.out.println("Press any key (followed by Enter key) to go back...");
             in.next();
             in.nextLine();
-            showDetails(index, allTourGuides, allTrips);
+            showDetails(allTrips);
             return;
         }
 

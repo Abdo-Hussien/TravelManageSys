@@ -32,8 +32,8 @@ public class TravelManageSys {
         Admin admin = new Admin();
 
         do {
-            System.out.println("Welcome to Our Travel Agency !");
-            System.out.println("1- Admin\n" + "2- Customer\n" + "3- TourGuide");
+            System.out.println("\nWelcome to Our Travel Agency !\n");
+            System.out.println("1- Admin\n" + "2- Customer\n" + "3- TourGuide\n" + "4- Leave.");
             System.out.print("Choice: ");
             choice = in.nextInt();
             in.nextLine();
@@ -53,27 +53,29 @@ public class TravelManageSys {
                 }
             } else if (choice == 2) {
                 Customers currentCustomer = (Customers) admin.userMenu(allCustomers, "Customer");
-                RunCustomer(currentCustomer, admin, allCustomers, allTrips);
+                RunCustomer(currentCustomer, allCustomers, allTrips);
                 continue;
             } else if (choice == 3) {
-                admin.userMenu(allTourGuides, "TourGuide");
-                allTourGuides.get(0).guideMenu(Admin.index, allTourGuides, allTrips);
-            } else {
+                TourGuide currentTourGuide = (TourGuide) admin.userMenu(allTourGuides, "TourGuide");
+                currentTourGuide.guideMenu(allTrips);
+                continue;
+            } else if (choice == 4)
+                System.exit(0);
+            else {
                 System.out.println("wrong input! please try again.");
                 continue;
             }
-            break;
         } while (choice != 1 || choice != 2 || choice != 3);
 
     }
 
-    private static void RunCustomer(Customers currentCustomer, Admin admin, ArrayList<Customers> allCustomers,
+    private static void RunCustomer(Customers currentCustomer, ArrayList<Customers> allCustomers,
             ArrayList<Trip> allTrips) {
         TravelItineraries dashboard = new TravelItineraries();
         if (currentCustomer.UserMainMenu(allTrips, allCustomers) == null)
             return;
         dashboard.dashboard(currentCustomer, allTrips);
-        RunCustomer(currentCustomer, admin, allCustomers, allTrips);
+        RunCustomer(currentCustomer, allCustomers, allTrips);
         return;
     }
 }
