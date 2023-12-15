@@ -388,4 +388,7 @@ public class Customers extends Person implements Personsinterface {
     public ArrayList<BookedTravels> getCustomerBookedTrips() {
         return CustomerBookedTrips;
     }
+    public int getCustomerBookedTripsCount() {
+        return CustomerBookedTrips.isEmpty() ? 0 : CustomerBookedTrips.size();
+    }
 }

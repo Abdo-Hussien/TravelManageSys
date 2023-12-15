@@ -30,7 +30,7 @@ public class TravelItineraries {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Dashboard");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        if (customer.getCustomerBookedTrips().size() == 0) {
+        if (customer.getCustomerBookedTripsCount() == 0) {
             System.out.println("Your cart is empty!");
             System.out.println();
             try {
@@ -38,6 +38,7 @@ public class TravelItineraries {
             } catch (InterruptedException e2) {
                 e2.printStackTrace();
             }
+            customer.UserMainMenu(AllTrip, null);
             System.out.println();
         } else {
             System.out.println("you booked: ");

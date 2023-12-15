@@ -49,7 +49,8 @@ public class TravelManageSys {
                 }
             } else if (choice == 2) {
                 Customers currentCustomer = (Customers) admin.userMenu(allCustomers, "Customers");
-                dashboard.dashboard(currentCustomer.UserMainMenu(allTrips, allCustomers), allTrips);
+                currentCustomer.UserMainMenu(allTrips, allCustomers);
+                dashboard.dashboard(currentCustomer, allTrips);
                 continue;
             } else if (choice == 3) {
                 admin.userMenu(allTourGuides, "TourGuide");

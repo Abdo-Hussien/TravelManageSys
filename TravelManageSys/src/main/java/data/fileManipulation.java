@@ -90,7 +90,7 @@ public class fileManipulation {
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
                 }
-                CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? null
+                CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? new ArrayList<BookedTravels>()
                         : parseBookedTrip(Arrays.copyOfRange(customer, 8, 17));
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
