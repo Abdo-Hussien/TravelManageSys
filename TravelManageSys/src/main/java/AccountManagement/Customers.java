@@ -98,8 +98,35 @@ public class Customers extends Person implements Personsinterface {
     public void displayBookedTrips(ArrayList<Trip> AllTrips) {
         this.CustomerBookedTrips.stream()
                 .forEach(bookedTrip -> {
-                    System.out.println(AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getHotelName());
+                    System.out.println();
+                    System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+                    System.out.println();
+                    System.out.println("\t\t\t\t"+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTitle());
+                    System.out.println("\n");
+                    System.out.println("Type : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTripType()+"\t\t"+"Total Price : "+bookedTrip.getTotalPrice()+"\t\t"+"Trip ID : "+bookedTrip.getTripId());
+                    System.out.println("\n");
+                    System.out.println("Trip Capacity : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) -1000 ).getCapacity()+"\t"+"Number of tickets bought : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTicketCounter());
+                    System.out.println();
+                    System.out.println("Tour Guide ID : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTourGuideID());
+                    System.out.println();
+                    System.out.println("Start Date : "+bookedTrip.getStartDate());
+                    System.out.println("End Date : "+bookedTrip.getEndDate());
+                    System.out.println();
+                    System.out.println("Hotel : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getHotelName());
+                    System.out.println();
+                    System.out.println("ACtivities : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getActivities());
+                    System.out.println();
+                    System.out.println("Discreption : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getDescription());
+                    System.out.println();
+                    System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
                 });
+
+
+
+        
+
+
+                
     }
 
     public void mainCustomer(ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {
