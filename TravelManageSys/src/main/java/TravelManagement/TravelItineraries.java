@@ -46,12 +46,14 @@ public class TravelItineraries {
                 System.out.println("Trip ID: " + bookedTravel.get(i).getTripId());
                 System.out.println("Trip will start at: " +
                         bookedTravel.get(i).getStartDate());
-                System.out.println("Trip will end at : " + bookedTravel.get(i).getEnDate());
+                System.out.println("Trip will end at : " + bookedTravel.get(i).getEndDate());
                 System.out.println("your tickets:");
                 for (int j = 0; j < bookedTravel.get(i).Bookedticket.size(); j++) {
                     System.out.println(bookedTravel.get(i).Bookedticket.get(j).getCounter() + " "
                             + bookedTravel.get(i).Bookedticket.get(j).getType());
                 }
+                System.out.println("total price for tickets: " + bookedTravel.get(i).getTotalPrice());
+                System.out.println("Transportation by: " + AllTrip.get((Integer.parseInt(bookedTravel.get(i).getTripId()) - 1000)).getTransportation());
             }
             do {
                 System.out.println("******************************");

@@ -4,7 +4,6 @@
  */
 package TravelManagement;
 
-
 import AccountManagement.RandIDGenerator;
 
 /**
@@ -14,7 +13,7 @@ import AccountManagement.RandIDGenerator;
 public class Platinum extends Ticket {
     int Pcounter;
 
-    public Platinum(String TicketID,String TicketType, int TicketCounter) {
+    public Platinum(String TicketID, String TicketType, int TicketCounter) {
         ticketId = TicketID;
         type = TicketType;
         Pcounter = TicketCounter;
@@ -30,8 +29,8 @@ public class Platinum extends Ticket {
     }
 
     @Override
-    public double Ticket_Price() {
-        return 0.6;
+    public double Ticket_Price(double price) {
+        return (0.6 * price) + price;
     }
 
     public void Add() {

@@ -29,6 +29,7 @@ public abstract class Transportation {
     public int getMaxCapacity() {
         return this.maxCapacity;
     }
+
     public String getTransportID() {
         return this.transportID;
     }

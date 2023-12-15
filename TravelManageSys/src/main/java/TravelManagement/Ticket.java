@@ -23,10 +23,6 @@ public abstract class Ticket {
 
     public abstract void setType();
 
-    public double Ticket_Price() {
-        return 0;
-    }
-
     public void ticketTypeheader(String type) {
         System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t\t\t\t\t\t\t" + type.toUpperCase() + " TICKET");
@@ -39,5 +35,7 @@ public abstract class Ticket {
     public abstract void Delete();
 
     public abstract int getCounter();
+
+    public abstract double Ticket_Price(double price);
 
 }

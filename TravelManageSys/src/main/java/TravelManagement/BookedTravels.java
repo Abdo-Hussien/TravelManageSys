@@ -9,14 +9,18 @@ public class BookedTravels {
     protected String tripName;
     protected Date startDate;
     protected Date endDate;
+    protected Double totalPrice;
+    protected String model;
     ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
 
-    public BookedTravels(String tripId, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket) {
+    public BookedTravels(String tripId, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket,
+            Double price) {
         this.tripId = tripId;
         this.tripName = tripName;
         this.startDate = startDate;
         this.endDate = endDate;
         this.Bookedticket = ticket;
+        this.totalPrice = price;
     }
 
     public BookedTravels() {
@@ -34,7 +38,7 @@ public class BookedTravels {
         return this.startDate;
     }
 
-    public Date getEnDate() {
+    public Date getEndDate() {
         return this.endDate;
     }
 
@@ -51,4 +55,9 @@ public class BookedTravels {
             System.out.println(Bookedticket.get(i).getCounter() + " " + Bookedticket.get(i).getType());
         }
     }
+
+    public Double getTotalPrice() {
+        return this.totalPrice;
+    }
+
 }

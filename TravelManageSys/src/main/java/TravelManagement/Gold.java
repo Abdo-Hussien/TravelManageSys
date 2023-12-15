@@ -4,7 +4,6 @@
  */
 package TravelManagement;
 
-
 import AccountManagement.RandIDGenerator;
 
 /**
@@ -30,8 +29,8 @@ public class Gold extends Ticket {
     }
 
     @Override
-    public double Ticket_Price() {
-        return 0.3;
+    public double Ticket_Price(double price) {
+        return (0.3 * price) + price;
     }
 
     public void Add() {
