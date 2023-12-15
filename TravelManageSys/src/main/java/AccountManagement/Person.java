@@ -3,6 +3,8 @@ package AccountManagement;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import TravelManagement.BookedTravels;
+import TravelManagement.BookingTickets;
 import TravelManagement.TourGuide;
 
 public class Person {
@@ -19,6 +21,9 @@ public class Person {
     protected String password;
     protected String gender;
     protected String account_id; // given to user by a random method
+    protected ArrayList<BookedTravels> CustomerBookedTrips;
+    protected BookingTickets CustomerBookedTickets;
+    protected ArrayList<String> CustomerTravelHistory;
 
     public Person(String first_name, String last_name, String username, int age, String phone_number, String address,
             String password, String gender, String account_id) {

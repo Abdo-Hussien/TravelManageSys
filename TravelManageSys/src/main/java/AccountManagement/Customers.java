@@ -20,9 +20,7 @@ import data.fileManipulation;
 
 public class Customers extends Person implements Personsinterface {
     private ArrayList<Trip> tripsList;
-    private ArrayList<BookedTravels> CustomerBookedTrips;
-    private BookingTickets CustomerBookedTickets;
-    private String[] CustomerTravelHistory;
+
     // Filter Search Preferences
     private double price_start;
     private double price_end;
@@ -50,6 +48,7 @@ public class Customers extends Person implements Personsinterface {
         // this.CustomerBookedTrips = oldBookingTrips;
         tripsList = new ArrayList<>();
         this.CustomerBookedTickets = new BookingTickets();
+        this.CustomerTravelHistory = tripHistory;
         this.CustomerBookedTrips = oldBookingTrips;
         this.tripsHistory = tripHistory;
     }
