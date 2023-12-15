@@ -3,6 +3,8 @@ package AccountManagement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import TravelManagement.BookedTravels;
+import TravelManagement.BookingTickets;
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
 
@@ -282,6 +284,9 @@ public class Admin implements Administration {
             person = new TourGuide();
         else if (Account_Type.equalsIgnoreCase("Customer"))
             person = new Customers();
+        person.CustomerBookedTickets = new BookingTickets();
+        person.CustomerTravelHistory = new ArrayList<String>();
+        person.CustomerBookedTrips = new ArrayList<BookedTravels>();
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tCreate Account ");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");

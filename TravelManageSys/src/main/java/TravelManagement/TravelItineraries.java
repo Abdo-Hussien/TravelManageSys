@@ -38,7 +38,6 @@ public class TravelItineraries {
             } catch (InterruptedException e2) {
                 e2.printStackTrace();
             }
-            customer.UserMainMenu(AllTrip, null);
             System.out.println();
         } else {
             System.out.println("you booked: ");
@@ -76,8 +75,7 @@ public class TravelItineraries {
                 } else if (choice == '4') {
                     cancelTrip(customer);
                 } else if (choice == '5') {
-                    
-                    break;
+                    return;
                 } else {
                     System.out.println("wrong input! please try again");
                 }

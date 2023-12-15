@@ -189,10 +189,6 @@ public abstract class Trip {
         return this.TicketCounter;
     }
 
-    public void getTicketCounter(int TicketCounter) {
-        this.TicketCounter = TicketCounter;
-    }
-
     public void setTripId(String tripId) {
         this.tripId = tripId;
     }
