@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import data.fileManipulation;
+
 /**
  *
  * @author bmood
@@ -26,6 +28,8 @@ public abstract class Trip {
     private String[] activities;
     private String hotelName; // mandatory
     private String transportID;
+    private static ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
+        fileManipulation.getAllTransportations());
 
     public Trip() {
         Capacity = 0;
@@ -133,7 +137,7 @@ public abstract class Trip {
         }
         System.out.println("");
         System.out.println("Staying at: " + this.getHotelName());
-        System.out.println("Going by: " + this.getTransportation(allTranports, transportID));
+        System.out.println("Going by: " + this.getTransportation(transportID).getPickUp());
         System.out.println("Car Rentals (Optional)");
         System.out.println("");
         System.out.println("Avaliable Ticket:\n");
@@ -253,18 +257,18 @@ public abstract class Trip {
         this.hotelName = hotelName;
     }
 
-    public Transportation getTransportation(ArrayList<Transportation> transportations, int tripId,
+    public Transportation getTransportation(int tripId,
             ArrayList<Trip> allTrips) {
-        for (int i = 0; i < transportations.size(); i++)
-            if (transportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
-                return transportations.get(i);
+        for (int i = 0; i < allTransportations.size(); i++)
+            if (allTransportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
+                return allTransportations.get(i);
         return null;
     }
 
-    public Transportation getTransportation(ArrayList<Transportation> transportations, String transportID) {
-        for (int i = 0; i < transportations.size(); i++)
-            if (transportations.get(i).getTransportID().equals(transportID))
-                return transportations.get(i);
+    public Transportation getTransportation(String transportID) {
+        for (int i = 0; i < allTransportations.size(); i++)
+            if (allTransportations.get(i).getTransportID().equals(transportID))
+                return allTransportations.get(i);
         return null;
     }
 
@@ -277,5 +281,9 @@ public abstract class Trip {
 
     public void setTicketCounter(int TicketCounter) {
         this.TicketCounter += TicketCounter;
+    }
+
+    public String getTransportID() {
+        return this.transportID;
     }
 }

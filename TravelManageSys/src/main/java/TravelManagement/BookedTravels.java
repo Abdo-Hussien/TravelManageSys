@@ -51,10 +51,8 @@ public class BookedTravels {
         this.startDate = EndDate;
     }
 
-    public void getBookedticket() {
-        for (int i = 0; i < Bookedticket.size(); i++) {
-            System.out.println(Bookedticket.get(i).getCounter() + " " + Bookedticket.get(i).getType());
-        }
+    public ArrayList<Ticket> getBookedticket() {
+        return Bookedticket;
     }
 
     public Double getTotalPrice() {

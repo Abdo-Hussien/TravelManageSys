@@ -90,8 +90,9 @@ public class fileManipulation {
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
                 }
+                String[] BookedTripsLine = Arrays.copyOfRange(customer, 8, 17);
                 CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? new ArrayList<BookedTravels>()
-                        : parseBookedTrip(Arrays.copyOfRange(customer, 8, 17));
+                        : parseBookedTrip(BookedTripsLine);
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
                         TripHistory));
@@ -106,7 +107,6 @@ public class fileManipulation {
     // Function to convert String to BookedTravels
     public static ArrayList<BookedTravels> parseBookedTrip(String[] BookedTripsLine) throws ParseException {
         ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
-        ArrayList<Ticket> CustomerTickets = new ArrayList<>();
         String[] IDs = BookedTripsLine[0].split("\\s*\\|\\s*");
         String[] Names = BookedTripsLine[1].split("\\s*\\|\\s*");
         String[] TicketExpDates = BookedTripsLine[2].split("\\s*\\|\\s*");
@@ -117,6 +117,7 @@ public class fileManipulation {
         String[] TicketTypes = BookedTripsLine[7].split("\\s*\\|\\s*");
         String[] TicketCounter = BookedTripsLine[8].split("\\s*\\|\\s*");
         for (int i = 0; i < IDs.length; i++) {
+            ArrayList<Ticket> CustomerTickets = new ArrayList<>();
             String[] TripTicketIDs = TicketIDs[i].split("\\s*,\\s*");
             String[] TripTicketTypes = TicketTypes[i].split("\\s*,\\s*");
             String[] TripTicketCounter = TicketCounter[i].split("\\s*,\\s*");
@@ -131,17 +132,15 @@ public class fileManipulation {
                     CustomerTickets.add(new Platinum(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
-
-        }
-        for (int i = 0; i < IDs.length; i++) {
             CustomerBookedTrips
                     .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
-                            dateFormat.parse(TicketExpDates[i]), CustomerTickets, Double.parseDouble(totalPrices[i]), carIDs[i]));
-                            
+                            dateFormat.parse(TicketExpDates[i]), CustomerTickets,
+                            Double.parseDouble(totalPrices[i]),
+                            carIDs[i]));
         }
         return CustomerBookedTrips;
     }
-    
+
     // Function to get all TourGuides from the file
     public static ArrayList<TourGuide> getAllTourGuides() {
         try {
@@ -192,7 +191,8 @@ public class fileManipulation {
             String Cars[] = fileContent.split("\\s*---\\s*");
             for (String c : Cars) {
                 String[] Car = c.split(System.lineSeparator());
-                AllCars.add(new Car(Car[0], Car[1], Car[2], Car[3], Integer.parseInt(Car[4]), Double.parseDouble(Car[5])));
+                AllCars.add(
+                        new Car(Car[0], Car[1], Car[2], Car[3], Integer.parseInt(Car[4]), Double.parseDouble(Car[5])));
             }
             return AllCars;
         } catch (Exception e) {

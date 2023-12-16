@@ -14,6 +14,7 @@ import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
 import TravelManagement.ChosenTrip;
 import TravelManagement.GeneralTours;
+import TravelManagement.Transportation;
 import TravelManagement.Trip;
 
 public class Customers extends Person implements Personsinterface {
@@ -98,35 +99,49 @@ public class Customers extends Person implements Personsinterface {
     public void displayBookedTrips(ArrayList<Trip> AllTrips) {
         this.CustomerBookedTrips.stream()
                 .forEach(bookedTrip -> {
-                    System.out.println();
-                    System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
-                    System.out.println();
-                    System.out.println("\t\t\t\t"+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTitle());
-                    System.out.println("\n");
-                    System.out.println("Type : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTripType()+"\t\t"+"Total Price : "+bookedTrip.getTotalPrice()+"\t\t"+"Trip ID : "+bookedTrip.getTripId());
-                    System.out.println("\n");
-                    System.out.println("Trip Capacity : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) -1000 ).getCapacity()+"\t"+"Number of tickets bought : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTicketCounter());
-                    System.out.println();
-                    System.out.println("Tour Guide ID : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTourGuideID());
-                    System.out.println();
-                    System.out.println("Start Date : "+bookedTrip.getStartDate());
-                    System.out.println("End Date : "+bookedTrip.getEndDate());
-                    System.out.println();
-                    System.out.println("Hotel : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getHotelName());
-                    System.out.println();
-                    System.out.println("ACtivities : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getActivities());
-                    System.out.println();
-                    System.out.println("Discreption : "+AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getDescription());
-                    System.out.println();
-                    System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+                    int[] TicketsCounter = { 0 };
+                    Transportation transportation = AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000)
+                            .getTransportation(
+                                    AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTransportID());
+                    bookedTrip.getBookedticket().forEach(ticket -> {
+                        TicketsCounter[0] += ticket.getCounter();
+                    });
+                    System.out.printf("%s\n",
+                            "~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~-~-~-~");
+                    System.out.printf("%-40s%s\n\n",
+                            "", AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTitle());
+                    System.out.printf("Tour Guide ID : %-10s%n",
+                            AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTourGuideID());
+                    System.out.printf("Type : %-30sTotal Price : %-30sTrip ID : %-10s%n",
+                            AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getTripType(),
+                            bookedTrip.getTotalPrice(), bookedTrip.getTripId());
+                    System.out.printf("Trip Capacity : %-51sNumber of tickets bought : %-10s%n",
+                            AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getCapacity(),
+                            TicketsCounter[0]);
+                    System.out.printf("Start Date : %-42sEnd Date : %-20s\n\n", bookedTrip.getStartDate(),
+                            bookedTrip.getEndDate());
+                    System.out.printf("| %-40s | %-38s | %-7s |%n", "Ticket ID", "Type", "Counter");
+                    System.out.println(
+                            "|------------------------------------------|----------------------------------------|---------|");
+
+                    bookedTrip.getBookedticket().forEach(ticket -> {
+                        System.out.printf("| %-40s | %-38s | %-7s |%n", ticket.getTicketID(), ticket.getType(),
+                                ticket.getCounter());
+                    });
+
+                    System.out.println(
+                            "|------------------------------------------|----------------------------------------|---------|");
+                    System.out.printf("Pickup : %-30s%n", transportation.getPickUp());
+                    System.out.printf("Staying At : %-30s%n",
+                            AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getHotelName());
+                    String[] activities = AllTrips.get(Integer.parseInt(bookedTrip.getTripId()) - 1000).getActivities();
+                    System.out.printf("Activities :%n");
+                    for (String activity : activities)
+                        System.out.printf("%-3s- %s%n", "", activity);
+                    System.out.printf("%s\n",
+                            "~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~-~-~-~");
                 });
 
-
-
-        
-
-
-                
     }
 
     public void mainCustomer(ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {

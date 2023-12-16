@@ -38,4 +38,8 @@ public abstract class Ticket {
 
     public abstract double Ticket_Price(double price);
 
+    public String getTicketID() {
+        return this.ticketId;
+    }
+
 }
