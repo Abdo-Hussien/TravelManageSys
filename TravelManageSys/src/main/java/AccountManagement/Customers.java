@@ -83,15 +83,14 @@ public class Customers extends Person {
             switch (choice) {
                 case '1':
                     Admin admin = new Admin();
-                    admin.editInformations("old", allCustomers, "Customers", "Customer");
-                    break;
+                    admin.editInformations("old", allCustomers, "Customer", "Customer");
+                    return;
                 case '2':
                     UserMainMenu(allTrips, allCustomers);
-                    break;
-
+                    return;
                 default:
                     System.out.println("Wrong input! Please try again..");
-                    continue;
+                    break;
             }
         }
     }
@@ -180,7 +179,7 @@ public class Customers extends Person {
             in.nextLine();
             if (choice == 1) {
                 this.showinfo(allCustomers, allTrips);
-                break;
+                return null;
             } else if (choice == 2) {
                 this.mainCustomer(allCustomers, allTrips);
                 break;

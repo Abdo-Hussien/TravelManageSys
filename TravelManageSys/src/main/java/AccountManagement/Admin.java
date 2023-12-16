@@ -188,8 +188,11 @@ public class Admin implements Administration {
         if (callingfrom.equals("Admin"))
             Manipulation(AllUsers, type);
         else if (callingfrom.equals("Customer")) {
-            Customers current_customer = (Customers) AllUsers.get(0);
+            Customers current_customer = (Customers) AllUsers.get(index);
             current_customer.showinfo(allCustomers, allTrips);
+        } else if (callingfrom.equals("Tourguide")) {
+            TourGuide current_TourGuide = (TourGuide) AllUsers.get(index);
+            current_TourGuide.showinfo(allTourGuides, allTrips);
         }
         return;
     }
@@ -367,6 +370,7 @@ public class Admin implements Administration {
     }
 
     public <T extends Personsinterface> T userMenu(ArrayList<T> users, String Account_Type) {
+        Person current_person;
         System.out.println("Choose an action you want to perfom.");
         System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
         System.out.println("1.) Create account.");
@@ -375,16 +379,20 @@ public class Admin implements Administration {
         String userInput = in.next();
         in.nextLine();
         if (userInput.equals("1")) {
-            users.add((T) create_acc(Account_Type));
+            current_person = (Person) create_acc(Account_Type);
+            index = users.indexOf(current_person);
+            users.add((T) current_person);
             try {
                 Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return login(users);
-        } else if (userInput.equals("2"))
-            return login(users);
-        else {
+        } else if (userInput.equals("2")) {
+            current_person = (Person) login(users);
+            index = users.indexOf(current_person);
+            return (T) current_person;
+        } else {
             System.out.println("Invalid input! please choose only from the following options.");
             return userMenu(users, Account_Type);
         }
