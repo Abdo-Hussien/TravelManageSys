@@ -5,6 +5,7 @@
 package TravelManagement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.w3c.dom.Attr;
@@ -22,6 +23,7 @@ public class TravelItineraries {
     protected String input;
     protected char choice;
     protected boolean checked = false;
+    int ans;
 
     public TravelItineraries() {
     }
@@ -52,10 +54,15 @@ public class TravelItineraries {
                     System.out.println(customer.getCustomerBookedTrips().get(i).Bookedticket.get(j).getCounter() + " "
                             + customer.getCustomerBookedTrips().get(i).Bookedticket.get(j).getType());
                 }
-                System.out.println("total price for tickets: " + customer.getCustomerBookedTrips().get(i).getTotalPrice());
+                System.out.println(
+                        "total price for tickets: " + customer.getCustomerBookedTrips().get(i).getTotalPrice());
                 // System.out.println(
-                //         "Transportation by: " + AllTrip.get((Integer.parseInt(customer.getCustomerBookedTrips().get(i).getTripId()) - 1000))
-                //                 .getTransportation(null, customer.getCustomerBookedTrips().get(i).getTripId()));
+                // "Transportation by: " +
+                // AllTrip.get((Integer.parseInt(customer.getCustomerBookedTrips().get(i).getTripId())
+                // - 1000))
+                // .getTransportation(null,
+                // customer.getCustomerBookedTrips().get(i).getTripId()));
+                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
             do {
                 System.out.println("******************************");
@@ -114,15 +121,28 @@ public class TravelItineraries {
         }
         if (checked == true) {
             System.out.println(AllTrip.get(index).getTitle());
-            System.out.println("Available dates:");
-            System.out.println("Start dates: " + AllTrip.get(index).getStartDates());
-            System.out.println("End dates: " + AllTrip.get(index).getEndDates());
+            System.out.println("Available dates:\n");
+
+            System.out.println("Start dates: ");
+            int size = AllTrip.get(index).getStartDates().length;
+            Date[] startDate = new Date[size];
+            startDate = AllTrip.get(index).getStartDates();
+            for (int i = 0; i < size; i++) {
+                System.out.println(i + 1 + "-" + startDate[i]);
+            }
+            System.out.println("End dates: ");
+            size = AllTrip.get(index).getEndDates().length;
+            Date[] EndDate = new Date[size];
+            EndDate = AllTrip.get(index).getEndDates();
+            for (int i = 0; i < size; i++) {
+                System.out.println(i + 1 + "-" + EndDate[i]);
+            }
             System.out.println("Enter start date: ");
-            input = in.next();
-            customer.getCustomerBookedTrips().get(BookedTravelsindex).setStartDate(null);
+            ans = in.nextInt();
+            customer.getCustomerBookedTrips().get(BookedTravelsindex).setStartDate(startDate[ans - 1]);
             System.out.println("Enter End date: ");
-            input = in.next();
-            customer.getCustomerBookedTrips().get(BookedTravelsindex).setEnDate(null);
+            ans = in.nextInt();
+            customer.getCustomerBookedTrips().get(BookedTravelsindex).setEnDate(EndDate[ans - 1]);
         }
         if (checked == false) {
             System.out.println("invalid ID enterd.");
@@ -141,7 +161,7 @@ public class TravelItineraries {
         if (checked) {
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
-            // main
+            return;
         } else {
             System.out.println("invalid ID enterd.");
         }
