@@ -13,7 +13,7 @@ import AccountManagement.RandIDGenerator;
  * @author bmood
  */
 public class Silver extends Ticket {
-    int Scounter;
+    private int Scounter;
 
     public Silver(String TicketID, String TicketType, int TicketCounter) {
         ticketId = TicketID;

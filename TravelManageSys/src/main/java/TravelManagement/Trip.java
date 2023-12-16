@@ -53,6 +53,7 @@ public abstract class Trip {
         this.transportID = transportID;
     }
 
+    // Displays trip(s) according to a specific filter 
     public static void displaySearchTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
@@ -65,7 +66,6 @@ public abstract class Trip {
             System.out.println(trip.getTripId());
             System.out.println(trip.getTitle());
             System.out.println("For " + trip.getTripType() + " touring");
-            // Cannot retrieve rate of ticket price from Silver class
             System.out.println("$" + trip.TripPrice(0.05) + "/person");
             System.out.println("Available dates:");
             for (int i = 0; i < startDates.length; i++)
@@ -74,7 +74,7 @@ public abstract class Trip {
             System.out.println("-------------------------------");
         }
     }
-
+    // Displays the featured Trips (Shows specific Trips only)
     public static void displayTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
@@ -94,9 +94,6 @@ public abstract class Trip {
             System.out.print("\t\t\t\t " + "$" + trip.TripPrice(0.05) + "/person");
         }
         System.out.println("");
-        // System.out.println("For " + trip.getTripType() + " touring");
-        // Cannot retrieve rate of ticket price from Silver class
-        // System.out.println("$" + 1299.99 + "/person");
         for (Trip trip : trips) {
             startDates = trip.getStartDates();
             endDates = trip.getEndDates();
@@ -109,11 +106,11 @@ public abstract class Trip {
         System.out.println("\t\t\t\t\t\t\t\t  ************************************************");
     }
 
+    // Displays full information about a specific trip
     public void displayTripDetails() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
         Date[] endDates;
-        ArrayList<Transportation> allTranports = new ArrayList<>();
         startDates = this.getStartDates();
         endDates = this.getEndDates();
         String[] Activities = this.getActivities();
@@ -125,8 +122,6 @@ public abstract class Trip {
         System.out.println("");
         System.out.println(this.getTitle());
         System.out.println("For " + this.getTripType() + " touring");
-        // Cannot retrieve rate of ticket price from Silver class
-        System.out.println("$" + this.TripPrice(0.05) + "/person <Silver tickets>");
         System.out.println("Available dates:");
         for (int i = 0; i < startDates.length; i++)
             System.out.print("~ " + dateFormat.format(startDates[i]) + "\t" + dateFormat.format(endDates[i]) + "\n");
@@ -155,6 +150,7 @@ public abstract class Trip {
         System.out.println("************************************************");
     }
 
+    // Gets a specific trip from a list of trips by it's ID
     public Trip getTrip(ArrayList<Trip> tripsList, String id) {
         for (Trip bookedTravels : tripsList) {
             if (bookedTravels.getTripId().equals(id)) {
@@ -164,6 +160,7 @@ public abstract class Trip {
         return null;
     }
 
+    // Shows the available trips according to the avalability and capacity
     public static void displayAdminTrips(ArrayList<Trip> AllTrip) {
         System.out.println("All available Trips!: " + AllTrip.size());
         System.out.println("_________________________________________________________________\n");
@@ -180,11 +177,12 @@ public abstract class Trip {
         }
     }
 
+    // Returns the price of a trip with the rate of a specific ticket
     public double TripPrice(double rate) {
         Double GeneralPrice = initPrice + rate * initPrice;
         return Math.round(GeneralPrice * 100.0) / 100.0;
     }
-
+    // Setters and Getters
     public String getTripId() {
         return this.tripId;
     }
@@ -257,6 +255,7 @@ public abstract class Trip {
         this.hotelName = hotelName;
     }
 
+    // Each Trip has a Transportation so it gets it by trip ID
     public Transportation getTransportation(int tripId,
             ArrayList<Trip> allTrips) {
         for (int i = 0; i < allTransportations.size(); i++)
@@ -265,6 +264,10 @@ public abstract class Trip {
         return null;
     }
 
+    /* 
+    Returns a transportation by the transportation ID,
+    This is for linkage of Transportation class with Trip class
+    */
     public Transportation getTransportation(String transportID) {
         for (int i = 0; i < allTransportations.size(); i++)
             if (allTransportations.get(i).getTransportID().equals(transportID))
@@ -272,6 +275,7 @@ public abstract class Trip {
         return null;
     }
 
+    //Returns a Tour Guide by the TourGuide ID
     public TourGuide getTourGuide(ArrayList<TourGuide> TourGuides, String tourGuideID) {
         for (TourGuide tourGuide : TourGuides)
             if (tourGuide.getAccount_id().equals(tourGuideID))

@@ -11,7 +11,7 @@ import AccountManagement.RandIDGenerator;
  * @author bmood
  */
 public class Gold extends Ticket {
-    int Gcounter;
+    private int Gcounter;
 
     public Gold(String TicketID, String TicketType, int TicketCounter) {
         ticketId = TicketID;
