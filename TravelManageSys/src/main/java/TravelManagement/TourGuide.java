@@ -17,7 +17,7 @@ import AccountManagement.Personsinterface;
  *
  * @author bmood
  */
-public class TourGuide extends Person implements Personsinterface {
+public class TourGuide extends Person  {
 
     protected double salary;
 

@@ -17,7 +17,7 @@ import TravelManagement.GeneralTours;
 import TravelManagement.Transportation;
 import TravelManagement.Trip;
 
-public class Customers extends Person implements Personsinterface {
+public class Customers extends Person {
     // Filter Search Preferences
     private double price_start;
     private double price_end;

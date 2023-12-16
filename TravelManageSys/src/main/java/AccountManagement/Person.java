@@ -7,7 +7,7 @@ import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
 import TravelManagement.TourGuide;
 
-public class Person {
+public abstract class Person implements Personsinterface{
 
     protected String first_name;
     protected String last_name;
