@@ -80,13 +80,13 @@ public class TravelItineraries {
                 } else if (choice == '3') {
                     reschedule(customer, AllTrip);
                 } else if (choice == '4') {
-                    cancelTrip(customer);
+                    cancelTrip(customer, AllTrip);
                 } else if (choice == '5') {
                     return;
                 } else {
                     System.out.println("wrong input! please try again");
                 }
-            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4');
+            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4'||choice != '5');
 
         }
     }
@@ -99,6 +99,7 @@ public class TravelItineraries {
     public void showDetails(ArrayList<Trip> AllTrip) {
         System.out.println("Enter the trip ID you want to show details about");
         input = in.next();
+
         Trip trip = AllTrip.get(0).getTrip(AllTrip, input);
         trip.displayTripDetails();
     }
@@ -106,50 +107,49 @@ public class TravelItineraries {
     public void reschedule(Customers customer, ArrayList<Trip> AllTrip) {
         System.out.println("Enter the trip ID you want to reschedul it: ");
         input = in.next();
-        for (int i = 0; i < AllTrip.size(); i++) {
-            if (AllTrip.get(i).getTripId().equals(input)) {
-                checked = true;
-                index = i;
-            }
-        }
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++) {
-            for (int j = 0; j < AllTrip.size(); j++) {
-                if (customer.getCustomerBookedTrips().get(i).getTripId().equals(AllTrip.get(j).getTripId())) {
-                    BookedTravelsindex = i;
-                }
+            if (customer.getCustomerBookedTrips().get(i).getTripId().equals(input)) {
+                checked = true;
+                BookedTravelsindex = i;
             }
         }
         if (checked == true) {
-            System.out.println(AllTrip.get(index).getTitle());
+            System.out.println(AllTrip.get(Integer.parseInt(input) - 1000).getTitle());
             System.out.println("Available dates:\n");
-
             System.out.println("Start dates: ");
-            int size = AllTrip.get(index).getStartDates().length;
+            int size = AllTrip.get(Integer.parseInt(input) - 1000).getStartDates().length;
             Date[] startDate = new Date[size];
-            startDate = AllTrip.get(index).getStartDates();
+            startDate = AllTrip.get(Integer.parseInt(input) - 1000).getStartDates();
             for (int i = 0; i < size; i++) {
                 System.out.println(i + 1 + "-" + startDate[i]);
             }
-            System.out.println("End dates: ");
-            size = AllTrip.get(index).getEndDates().length;
+            size = AllTrip.get(Integer.parseInt(input) - 1000).getEndDates().length;
             Date[] EndDate = new Date[size];
-            EndDate = AllTrip.get(index).getEndDates();
-            for (int i = 0; i < size; i++) {
-                System.out.println(i + 1 + "-" + EndDate[i]);
-            }
+            EndDate = AllTrip.get(Integer.parseInt(input) - 1000).getEndDates();
             System.out.println("Enter start date: ");
             ans = in.nextInt();
-            customer.getCustomerBookedTrips().get(BookedTravelsindex).setStartDate(startDate[ans - 1]);
-            System.out.println("Enter End date: ");
-            ans = in.nextInt();
-            customer.getCustomerBookedTrips().get(BookedTravelsindex).setEnDate(EndDate[ans - 1]);
-        }
-        if (checked == false) {
+            in.nextLine();
+            customer.getCustomerBookedTrips().get(BookedTravelsindex).startDate = startDate[ans - 1];
+            customer.getCustomerBookedTrips().get(BookedTravelsindex).endDate = EndDate[ans - 1];
+            System.out.println("\nReschedule done successfully!");
+            System.out.println("your new dates will be: ");
+            System.out.println(
+                    "new Start date: " + customer.getCustomerBookedTrips().get(BookedTravelsindex).getStartDate() + "\t"
+                            + "new End date: "
+                            + customer.getCustomerBookedTrips().get(BookedTravelsindex).getEndDate());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e2) {
+                e2.printStackTrace();
+            }
+            dashboard(customer, AllTrip);
+            return;
+        } else if (checked == false) {
             System.out.println("invalid ID enterd.");
         }
     }
 
-    public void cancelTrip(Customers customer) {
+    public void cancelTrip(Customers customer, ArrayList<Trip> AllTrip) {
         System.out.println("Enter the trip ID you want to cancel it: ");
         input = in.next();
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++) {
@@ -161,6 +161,12 @@ public class TravelItineraries {
         if (checked) {
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e2) {
+                e2.printStackTrace();
+            }
+            dashboard(customer, AllTrip);
             return;
         } else {
             System.out.println("invalid ID enterd.");
