@@ -21,15 +21,6 @@ public class TravelManageSys {
         ArrayList<Customers> allCustomers = new ArrayList<Customers>(fileManipulation.getAllCustomers());
         ArrayList<TourGuide> allTourGuides = new ArrayList<TourGuide>(fileManipulation.getAllTourGuides());
         ArrayList<Trip> allTrips = new ArrayList<Trip>(fileManipulation.getAllTrips());
-        // ArrayList<Car> allCars = new ArrayList<Car>(fileManipulation.getAllCars());
-        // ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
-        // fileManipulation.getAllTransportations());
-        // ArrayList<Hotels> allHotels = new
-        // ArrayList<Hotels>(fileManipulation.getAllHotels());
-        // ArrayList<BookedTravels> allBookTravels = new ArrayList<BookedTravels>();
-        // BookingTickets allBookTickets = new BookingTickets();
-
-        // allCustomers.get(0).displayBookedTrips(allTrips);
         Admin admin = new Admin();
 
         do {

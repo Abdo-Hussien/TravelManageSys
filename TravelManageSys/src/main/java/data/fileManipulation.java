@@ -86,7 +86,7 @@ public class fileManipulation {
                     }
                 } else {
                     if (!customer[15].equalsIgnoreCase("No Trips History")) {
-                        String[] strTripHistory = customer[15].split("\\s*\\|\\s*");
+                        String[] strTripHistory = customer[17].split("\\s*\\|\\s*");
                         TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
                     }
                 }

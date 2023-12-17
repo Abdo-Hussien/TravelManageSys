@@ -1,7 +1,7 @@
 wzdz2
 Omar Hassan
-omar123
-pass123
+1
+1
 23
 Male
 2476 Gnatty Creek Road | New York | 11234 | 
@@ -19,8 +19,8 @@ Platinum , Silver , | Gold , |
 ---
 abc45
 Emily Johnson
-emily456
-summer2023
+2
+2
 29
 Female
 112 Oak Street | California | 56282 | 

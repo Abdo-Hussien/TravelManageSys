@@ -1,13 +1,11 @@
 package AccountManagement;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
-import TravelManagement.TourGuide;
 
-public abstract class Person implements Personsinterface{
+public abstract class Person implements Personsinterface {
 
     protected String first_name;
     protected String last_name;
@@ -171,4 +169,15 @@ public abstract class Person implements Personsinterface{
         this.gender = gender;
     }
 
+    public void setCustomerBookedTrips(ArrayList<BookedTravels> customerBookedTrips) {
+        this.CustomerBookedTrips = customerBookedTrips;
+    }
+
+    public ArrayList<String> getCustomerTravelHistory() {
+        return this.CustomerTravelHistory;
+    }
+
+    public void setCustomerTravelHistory(ArrayList<String> CustomerTravelHistory) {
+        this.CustomerTravelHistory = CustomerTravelHistory;
+    }
 }
