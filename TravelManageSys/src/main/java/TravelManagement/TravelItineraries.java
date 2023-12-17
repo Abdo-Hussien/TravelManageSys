@@ -61,7 +61,7 @@ public class TravelItineraries {
                         dashboard(customer, allTrips);
                     break;
                 } else if (choice == '4') {
-                    cancelTrip(allTrips, customer);
+                    cancelTrip(customer);
                     dashboard(customer, allTrips);
                     break;
                 } else if (choice == '5') {
@@ -71,23 +71,6 @@ public class TravelItineraries {
                 }
             } while (choice != '1' || choice != '2' || choice != '3' || choice != '4');
 
-        }
-    }
-
-    private boolean CheckTripCapacity(ArrayList<Trip> tripsList, String tripID) {
-        if (tripsList.get(Integer.parseInt(tripID) - 1000).getCapacity() > tripsList
-                .get(Integer.parseInt(tripID) - 1000).getTicketCounter()) {
-            return true;
-        }
-        return false;
-    }
-
-    private void CustomMessage(String message, int timeout) {
-        try {
-            System.out.println(message);
-            Thread.sleep(timeout);
-        } catch (InterruptedException e) {
-            System.out.println("Thread error sleeping.");
         }
     }
 
@@ -188,29 +171,17 @@ public class TravelItineraries {
         }
     }
 
-    public void cancelTrip(ArrayList<Trip> allTrips, Customers customer) {
+    public void cancelTrip(Customers customer) {
         System.out.println("Enter the trip ID you want to cancel it: ");
         input = in.next();
         in.nextLine();
-        int[] TicketsCounter = { 0 };
-        Trip trip = Trip.getTrip(getCustomerBookedTripsDetails(allTrips, customer), input);
-        if (trip == null) {
-            System.out.println("Invalid Trip ID!\n");
-            return;
-        }
-        int tripindex = allTrips.indexOf(trip);
-
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++) {
             if (customer.getCustomerBookedTrips().get(i).getTripID().equals(input)) {
                 checked = true;
-                customer.getCustomerBookedTrips().get(i).getBookedticket().forEach(ticket -> {
-                    TicketsCounter[0] += ticket.getCounter();
-                });
                 index = i;
             }
         }
         if (checked) {
-            allTrips.get(tripindex).setTicketCounter(-TicketsCounter[0]);
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
             return;
