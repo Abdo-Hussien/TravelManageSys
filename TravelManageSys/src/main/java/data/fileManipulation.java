@@ -1,5 +1,8 @@
 package data;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -227,4 +230,109 @@ public class fileManipulation {
         }
     }
 
+    public static void writeTourGuides(ArrayList<TourGuide> TourGuides) {
+        String filePath = "TravelManageSys/src/main/java/data/newTourGuides.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (TourGuide guide : TourGuides) {
+                writer.write(guide.getAccount_id());
+                writer.write("\n"); // Use '\n' as a delimiter
+
+                writer.write(guide.getFirst_name() + " " + guide.getLast_name());
+                writer.write("\n");
+
+                writer.write(guide.getUsername());
+                writer.write("\n");
+
+                writer.write(guide.getPassword());
+                writer.write("\n");
+
+                writer.write(String.valueOf(guide.getAge()));
+                writer.write("\n");
+
+                writer.write(guide.getGender());
+                writer.write("\n");
+
+                String address = guide.getStreetAddress() + " | " + guide.getStateAddress() + " | "
+                        + guide.getZipAddress();
+                writer.write(address);
+                writer.write("\n");
+
+                writer.write(guide.getPhone_number());
+                writer.write("\n");
+
+                writer.write("---"); // Delimiter between TourGuide objects
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeCustomers(ArrayList<Customers> Customers){
+        String filePath = "TravelManageSys/src/main/java/data/newTourGuides.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Customers customer : Customers) {
+                writer.write(customer.getAccount_id());
+                writer.write("\n");
+
+                writer.write(customer.getFirst_name() + " " + customer.getLast_name());
+                writer.write("\n");
+
+                writer.write(String.valueOf(customer.getAge()));
+                writer.write("\n");
+
+                writer.write(customer.getGender());
+                writer.write("\n");
+
+                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | " + customer.getZipAddress();
+                writer.write(address);
+                writer.write("\n");
+
+                writer.write(customer.getPhone_number());
+                writer.write("\n");
+
+                // Writing additional customer details
+                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                    writer.write(bookedtrips.getTripID() + " | ");
+
+                }
+                writer.write("\n");
+                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                    writer.write(bookedtrips.getTripName() + " | ");
+                }
+                writer.write("\n");
+                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                    writer.write(bookedtrips.getStartDate() + " | ");
+                }
+                writer.write("\n");
+                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                    writer.write(bookedtrips.getTotalPrice() + " | ");
+                }
+                writer.write("\n");
+                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                    if (bookedtrips.getCarID().equals(null)) {
+                        writer.write("No car" + " | ");
+                    }
+                    else{
+                        writer.write(bookedtrips.getCarID() + " | ");
+                    }
+                }
+                writer.write("\n");
+                // for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                //     writer.write(bookedtrips.geta() + " | ");
+                // }
+                // writer.write("\n");
+                // writer.write(customer.get());
+                // writer.write("\n");
+                // writer.write(customer.ge());
+                // writer.write("\n");
+
+                writer.write("---"); // Delimiter between Customer objects
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 }
