@@ -24,6 +24,9 @@ public class Car {
         this.price = price;
     }
 
+    public Car() {
+    }
+
     public String getCarID() {
         return this.carID;
     }
@@ -48,37 +51,27 @@ public class Car {
         return this.price;
     }
 
-    public void displayCarInfo(int index) {
-
+    public void displayCarDetails() {
+        System.out.println("Car ID: " + getCarID());
+        System.out.println("Made: " + getMade());
+        System.out.println("Model: " + getModel());
+        System.out.println("Type: " + getType());
+        System.out.println("Number of Seats: " + getNoSeats());
+        System.out.println("Price: $" + getPrice());
     }
 
-    public void addCar(int index, ArrayList<BookedTravels> bookedTravels) {
-    }
-
-    public void displayalCars(ArrayList<Car> allCars) {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t          CAR RENTAL");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\n");
-
+    public static void displayAllCars(ArrayList<Car> allCars) {
         System.out.println("All available Cars!: " + allCars.size());
-        System.out.println("_________________________________________________________________\n");
-        System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Car index", "Car Name", "Car model", "Car price");
-        System.out.println("_________________________________________________________________");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.printf("%-10s | %-25s | %-10s -> (%s)\n", "Car index", "Car Name", "Car model", "Car price");
+        System.out.println("-----------------------------------------------------------------------");
 
         for (int i = 0; i < allCars.size(); i++) {
-            System.out.printf("%-10s | %-25s | %-13s -> (%d)\n",
+            System.out.printf("%-10s | %-25s | %-10s -> ($%.2f)\n",
                     i + 1,
                     allCars.get(i).getMade(),
                     allCars.get(i).getMade(),
                     allCars.get(i).getPrice());
-        }
-        System.out.println("Chooce car by its index: ");
-        choice = in.nextInt();
-        System.out.println("Want to show more information about this car?  y/n");
-        ans = in.nextLine();
-        if (ans.toUpperCase().endsWith("Y")) {
-
         }
     }
 }

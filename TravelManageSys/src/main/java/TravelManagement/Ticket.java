@@ -30,11 +30,13 @@ public abstract class Ticket {
         System.out.println();
     }
 
-    public abstract void Add();
+    public abstract int Add();
 
-    public abstract void Delete();
+    public abstract int Delete();
 
     public abstract int getCounter();
+
+    public abstract void setCounter();
 
     public abstract double Ticket_Price(double price);
 

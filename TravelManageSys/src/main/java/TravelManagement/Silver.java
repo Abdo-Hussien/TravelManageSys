@@ -4,8 +4,6 @@
  */
 package TravelManagement;
 
-import java.util.ArrayList;
-
 import AccountManagement.RandIDGenerator;
 
 /**
@@ -36,7 +34,7 @@ public class Silver extends Ticket {
         return (0.05 * price) + price;
     }
 
-    public void Add() {
+    public int Add() {
         ticketTypeheader("Silver");
         System.out.println("how many sliver tickets you want?");
         addeddTicket = in.nextInt();
@@ -44,35 +42,36 @@ public class Silver extends Ticket {
         if (addeddTicket > 0) {
             Scounter += addeddTicket;
             System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
-        }
-        // else if(addeddTicket > tirpcapacity) {
-        // System.out.println("too many tickets entered! avalibale tickerts is"+
-        // avalibale);
-        // }
-        else {
+            return addeddTicket;
+        } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            Add();
+            return Add();
         }
 
     }
 
-    public void Delete() {
+    public int Delete() {
         System.out.println("how many sliver tickets you want to delete?");
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Scounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
-                Delete();
+                return Delete();
             } else {
                 Scounter -= deletedTicket;
                 System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+                return deletedTicket;
             }
         } else {
-
             System.out.println("invalid number of tickets entered! Please try again.");
-            Delete();
+            return Delete();
         }
+    }
+
+    @Override
+    public void setCounter() {
+        this.Scounter = 0;
     }
 
     @Override

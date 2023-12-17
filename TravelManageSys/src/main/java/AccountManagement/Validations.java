@@ -1,10 +1,10 @@
 package AccountManagement;
 
 import java.util.Scanner;
-import java.util.regex.PatternSyntaxException;
 
 public class Validations {
     static Scanner in = new Scanner(System.in);
+
     static String NameValidation(String input_type, int low_range, int high_range) {
         while (true) {
             System.out.println("Please enter your " + input_type + ": ");
@@ -68,49 +68,57 @@ public class Validations {
     static String[] AddressValidation() {
         while (true) {
             System.out.println("Please enter your address: \n");
-            System.out.println("Example: 890 Abdelhaleem Sabry Street | Cairo | 11234  \n");
+            System.out.println("Please follow this format -> 012 street name | state | zip code");
+            System.out.println("Example: 890 Abdelhaleem Sabry Street | Cairo | 11234\n");
             String address = in.nextLine();
             try {
                 address = address + " | ";
                 String[] splittedAddress = address.split("\\s*\\|\\s*");
                 int count = address.length() - address.replaceAll("\\|", "").length();
-                if (count != 3) {
-                    System.out.println("Invalid address format. Please follow the address format given!");
-                    continue;
-                }
+                if (count != 3)
+                    throw new Exception("Invalid address format. Please follow the address format given!");
                 return splittedAddress;
             } catch (Exception e) {
-                System.out.println("An error occurred while processing the address. Please try again.");
+                System.out.println("Error Message: " + e.getMessage() + "\n");
                 continue;
             }
         }
     }
 
     static String PasswordValidation() {
-        System.out.println("Note : your password should be a minimum of 8 character & maximum of 16 ");
+        System.out.println("Note: Your password should be a minimum of 8 characters and a maximum of 16.");
+        System.out.println(
+                "It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.\n");
         while (true) {
-            System.out.println("Create a strong password for your account: \n");
+            System.out.println("Create a strong password for your account: ");
             String pass = in.next();
             in.nextLine();
             System.out.println("");
-            if (pass.length() < 8) {
-                System.out.println("Weak password detected!");
+
+            if (pass.length() < 8 || pass.length() > 16) {
+                System.out.println("Invalid password length! Please enter a password between 8 and 16 characters.");
                 continue;
-            } else if (pass.length() > 16) {
-                System.out.println("Password is too long !");
+            }
+
+            // Check if the password contains at least one uppercase letter, one lowercase
+            // letter, one digit, and one special character
+            if (!pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*")
+                    || !pass.matches(".*[^A-Za-z0-9].*")) {
+                System.out.println(
+                        "Weak password! Make sure it includes at least one uppercase letter, one lowercase letter, one digit, and one special character.");
                 continue;
+            }
+
+            System.out.println("Enter your password again to confirm: ");
+            System.out.println("");
+            String confirm_pass = in.next();
+            in.nextLine();
+            System.out.println("");
+
+            if (confirm_pass.equals(pass)) {
+                return pass;
             } else {
-                System.out.println("Enter your password again to confirm : ");
-                System.out.println("");
-                String confirm_pass = in.next();
-                in.nextLine();
-                System.out.println("");
-                if (confirm_pass.equals(pass))
-                    return pass;
-                else {
-                    System.out.println("Passwords don't match ,try again !");
-                    continue;
-                }
+                System.out.println("Passwords don't match, try again!");
             }
         }
     }

@@ -2,61 +2,106 @@ package TravelManagement;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public class BookedTravels {
-    protected String tripId;
-    protected String tripName;
-    protected Date startDate;
-    protected Date endDate;
-    protected double totalPrice;
-    protected String carID;
-    ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
+    private ChosenTrip chosenTrip;
+    private ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
 
-    public BookedTravels(String tripId, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket,
+    public BookedTravels(String tripID, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket,
             double totalprice, String carID) {
-        this.tripId = tripId;
-        this.tripName = tripName;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.chosenTrip = new ChosenTrip(tripID, tripName, startDate, endDate, totalprice, carID);
         this.Bookedticket = ticket;
-        this.totalPrice = totalprice;
-        this.carID = carID;
     }
 
     public BookedTravels() {
+        this.chosenTrip = new ChosenTrip();
+        this.Bookedticket = new ArrayList<Ticket>();
     }
 
-    public String getTripId() {
-        return this.tripId;
+    public ChosenTrip getChosenTrip() {
+        return this.chosenTrip;
+    }
+
+    public void setChosenTrip(String tripID, String tripName, Date startDate, Date endDate,
+            double totalprice, String carID) {
+        this.chosenTrip.setTripID(tripID);
+        this.chosenTrip.setTripName(tripName);
+        this.chosenTrip.setStartDate(startDate);
+        this.chosenTrip.setEndDate(endDate);
+        this.chosenTrip.setTotalPrice(totalprice);
+        this.chosenTrip.setCarID(carID);
+    }
+
+    public String getTripID() {
+        return this.chosenTrip.getTripID();
+    }
+
+    public void setTripID(String tripID) {
+        this.chosenTrip.setTripID(tripID);
     }
 
     public String getTripName() {
-        return this.tripName;
+        return this.chosenTrip.getTripName();
+    }
+
+    public void setTripName(String tripName) {
+        this.chosenTrip.setTripName(tripName);
     }
 
     public Date getStartDate() {
-        return this.startDate;
-    }
-
-    public Date getEndDate() {
-        return this.endDate;
+        return this.chosenTrip.getStartDate();
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        this.chosenTrip.setStartDate(startDate);
     }
 
-    public void setEnDate(Date EndDate) {
-        this.startDate = EndDate;
+    public Date getEndDate() {
+        return this.chosenTrip.getEndDate();
+    }
+
+    public void setEndDate(Date endDate) {
+        this.chosenTrip.setEndDate(endDate);
+    }
+
+    public double getTotalPrice() {
+        return this.chosenTrip.getTotalPrice();
+    }
+
+    public void addToTotalPrice(double price_to_add) {
+        this.chosenTrip.addToTotalPrice(price_to_add);
+    }
+
+    public void subtractFromTotalPrice(double price_to_subtract) {
+        this.chosenTrip.addToTotalPrice(price_to_subtract);
+    }
+
+    public String getCarID() {
+        return this.chosenTrip.getCarID();
+    }
+
+    public void setCarID(String carID) {
+        this.chosenTrip.setCarID(carID);
+    }
+
+    public void setBookedticket(ArrayList<Ticket> Bookedticket) {
+        this.Bookedticket = Bookedticket;
+    }
+
+    public static boolean appendTicket(ArrayList<BookedTravels> bookedTravels, ArrayList<Ticket> Bookedticket,
+            String TripID) {
+        int i = -1;
+        for (i = 0; i < bookedTravels.size(); i++) {
+            if (TripID.equals(bookedTravels.get(i).getTripID())) {
+                bookedTravels.get(i).Bookedticket.addAll(Bookedticket);
+                return true;
+            }
+        }
+        return false;
     }
 
     public ArrayList<Ticket> getBookedticket() {
         return Bookedticket;
-    }
-
-    public Double getTotalPrice() {
-        return this.totalPrice;
     }
 
 }

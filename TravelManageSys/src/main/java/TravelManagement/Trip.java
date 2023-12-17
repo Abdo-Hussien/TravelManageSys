@@ -29,7 +29,7 @@ public abstract class Trip {
     private String hotelName; // mandatory
     private String transportID;
     private static ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
-        fileManipulation.getAllTransportations());
+            fileManipulation.getAllTransportations());
 
     public Trip() {
         Capacity = 0;
@@ -53,7 +53,7 @@ public abstract class Trip {
         this.transportID = transportID;
     }
 
-    // Displays trip(s) according to a specific filter 
+    // Displays trip(s) according to a specific filter
     public static void displaySearchTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date[] startDates;
@@ -74,6 +74,7 @@ public abstract class Trip {
             System.out.println("-------------------------------");
         }
     }
+
     // Displays the featured Trips (Shows specific Trips only)
     public static void displayTrips(ArrayList<Trip> trips) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -151,12 +152,10 @@ public abstract class Trip {
     }
 
     // Gets a specific trip from a list of trips by it's ID
-    public Trip getTrip(ArrayList<Trip> tripsList, String id) {
-        for (Trip bookedTravels : tripsList) {
-            if (bookedTravels.getTripId().equals(id)) {
-                return bookedTravels;
-            }
-        }
+    public static Trip getTrip(ArrayList<Trip> Trips, String tripid) {
+        for (Trip trip : Trips)
+            if (trip.getTripId().equals(tripid))
+                return trip;
         return null;
     }
 
@@ -182,6 +181,7 @@ public abstract class Trip {
         Double GeneralPrice = initPrice + rate * initPrice;
         return Math.round(GeneralPrice * 100.0) / 100.0;
     }
+
     // Setters and Getters
     public String getTripId() {
         return this.tripId;
@@ -264,10 +264,10 @@ public abstract class Trip {
         return null;
     }
 
-    /* 
-    Returns a transportation by the transportation ID,
-    This is for linkage of Transportation class with Trip class
-    */
+    /*
+     * Returns a transportation by the transportation ID,
+     * This is for linkage of Transportation class with Trip class
+     */
     public Transportation getTransportation(String transportID) {
         for (int i = 0; i < allTransportations.size(); i++)
             if (allTransportations.get(i).getTransportID().equals(transportID))
@@ -275,7 +275,7 @@ public abstract class Trip {
         return null;
     }
 
-    //Returns a Tour Guide by the TourGuide ID
+    // Returns a Tour Guide by the TourGuide ID
     public TourGuide getTourGuide(ArrayList<TourGuide> TourGuides, String tourGuideID) {
         for (TourGuide tourGuide : TourGuides)
             if (tourGuide.getAccount_id().equals(tourGuideID))

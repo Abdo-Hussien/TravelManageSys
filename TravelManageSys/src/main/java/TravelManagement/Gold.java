@@ -33,7 +33,7 @@ public class Gold extends Ticket {
         return (0.3 * price) + price;
     }
 
-    public void Add() {
+    public int Add() {
         ticketTypeheader("Gold");
         System.out.println("how many Gold tickets you want?");
         addeddTicket = in.nextInt();
@@ -41,34 +41,36 @@ public class Gold extends Ticket {
         if (addeddTicket > 0) {
             Gcounter += addeddTicket;
             System.out.println("Done! " + addeddTicket + " Gold tickets added to your cart");
-        }
-        // else if(addeddTicket > tirpcapacity) {
-        // System.out.println("too many tickets entered! avalibale tickerts is"+
-        // avalibale);
-        // }
-        else {
+            return addeddTicket;
+        } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            Add();
+            return Add();
         }
 
     }
 
-    public void Delete() {
+    public int Delete() {
         System.out.println("how many Gold tickets you want to delete?");
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Gcounter) {
                 System.out.println("you entered more tickets than you have! please tyr again...");
-                Delete();
+                return Delete();
             } else {
                 Gcounter -= deletedTicket;
                 System.out.println("Done! " + deletedTicket + " Gold tickets deleted from your cart");
+                return deletedTicket;
             }
         } else {
             System.out.println("invalid number of tickets entered! Please try again.");
-            Delete();
+            return Delete();
         }
+    }
+
+    @Override
+    public void setCounter() {
+        this.Gcounter = 0;
     }
 
     @Override

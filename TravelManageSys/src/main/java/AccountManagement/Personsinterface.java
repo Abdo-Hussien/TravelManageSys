@@ -1,51 +1,51 @@
 package AccountManagement;
 
 public interface Personsinterface {
-    public String getFirst_name();
+    String getFirst_name();
 
-    public String getLast_name();
+    String getLast_name();
 
-    public String getUsername();
+    String getUsername();
 
-    public int getAge();
+    int getAge();
 
-    public String getPhone_number();
+    String getPhone_number();
 
-    public String getAddress();
+    String getAddress();
 
-    public String getPassword();
+    String getPassword();
 
-    public String getGender();
+    String getGender();
 
-    public String getAccount_id();
+    String getAccount_id();
 
-    public int getTripHistoryCounter();
+    int getTripHistoryCounter();
 
-    public void setFirst_name(String first_name);
+    void setFirst_name(String first_name);
 
-    public void setLast_name(String last_name);
+    void setLast_name(String last_name);
 
-    public void setUsername(String username);
+    void setUsername(String username);
 
-    public void setAge(int age);
+    void setAge(int age);
 
-    public void setPhone_number(String phone_number);
+    void setPhone_number(String phone_number);
 
-    public void setAddress(String street, String state, String zip);
+    void setAddress(String street, String state, String zip);
 
-    public String getStreetAddress();
+    String getStreetAddress();
 
-    public void setStreetAddress(String streetAddress);
+    void setStreetAddress(String streetAddress);
 
-    public String getStateAddress();
+    String getStateAddress();
 
-    public void setStateAddress(String stateAddress);
+    void setStateAddress(String stateAddress);
 
-    public String getZipAddress();
+    String getZipAddress();
 
-    public void setZipAddress(String zipAddress);
+    void setZipAddress(String zipAddress);
 
-    public void setPassword(String password);
+    void setPassword(String password);
 
-    public void setGender(String gender);
+    void setGender(String gender);
 }
