@@ -269,7 +269,7 @@ public class fileManipulation {
         }
     }
 
-    public static void writeCustomers(ArrayList<Customers> Customers){
+    public static void writeCustomers(ArrayList<Customers> Customers) {
         String filePath = "TravelManageSys/src/main/java/data/newTourGuides.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -286,7 +286,8 @@ public class fileManipulation {
                 writer.write(customer.getGender());
                 writer.write("\n");
 
-                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | " + customer.getZipAddress();
+                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | "
+                        + customer.getZipAddress();
                 writer.write(address);
                 writer.write("\n");
 
@@ -294,34 +295,33 @@ public class fileManipulation {
                 writer.write("\n");
 
                 // Writing additional customer details
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                     writer.write(bookedtrips.getTripID() + " | ");
 
                 }
                 writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                     writer.write(bookedtrips.getTripName() + " | ");
                 }
                 writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                     writer.write(bookedtrips.getStartDate() + " | ");
                 }
                 writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                     writer.write(bookedtrips.getTotalPrice() + " | ");
                 }
                 writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
+                for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                     if (bookedtrips.getCarID().equals(null)) {
                         writer.write("No car" + " | ");
-                    }
-                    else{
+                    } else {
                         writer.write(bookedtrips.getCarID() + " | ");
                     }
                 }
                 writer.write("\n");
                 // for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                //     writer.write(bookedtrips.geta() + " | ");
+                // writer.write(bookedtrips.geta() + " | ");
                 // }
                 // writer.write("\n");
                 // writer.write(customer.get());
@@ -335,4 +335,5 @@ public class fileManipulation {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 }
