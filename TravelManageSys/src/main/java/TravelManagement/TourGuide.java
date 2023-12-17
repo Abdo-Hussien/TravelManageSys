@@ -153,7 +153,7 @@ public class TourGuide extends Person {
                             if (getMonthFromDate(date) + 1 == month) {
                                 foundTrip[0] = true;
                                 System.out
-                                        .println(trip.getTitle() + "\n" + trip.getTripType() + " touring");
+                                        .println(trip.getTripName() + "\n" + trip.getTripType() + " touring");
                                 System.out.println(date);
                             }
                         });

@@ -65,7 +65,7 @@ public class BookedTravels {
     }
 
     public double getTotalPrice() {
-        return this.chosenTrip.getTotalPrice();
+        return Math.round(this.chosenTrip.getTotalPrice() * 100) / 100;
     }
 
     public void addToTotalPrice(double price_to_add) {
@@ -102,6 +102,10 @@ public class BookedTravels {
 
     public ArrayList<Ticket> getBookedticket() {
         return Bookedticket;
+    }
+
+    public void setTripPrice(double totalPrice) {
+        this.chosenTrip.setTotalPrice(totalPrice);
     }
 
 }

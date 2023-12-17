@@ -70,7 +70,7 @@ public class Car {
             System.out.printf("%-10s | %-25s | %-10s -> ($%.2f)\n",
                     i + 1,
                     allCars.get(i).getMade(),
-                    allCars.get(i).getMade(),
+                    allCars.get(i).getModel(),
                     allCars.get(i).getPrice());
         }
     }

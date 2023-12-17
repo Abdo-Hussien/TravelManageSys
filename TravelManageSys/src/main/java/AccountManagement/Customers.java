@@ -99,8 +99,8 @@ public class Customers extends Person {
 
         // Display Trip IDs and Titles in a single loop
         for (String id : this.getCustomerTravelHistory()) {
-            String tripId = allTrips.get(Integer.parseInt(id) - 1000).getTripId();
-            String title = allTrips.get(Integer.parseInt(id) - 1000).getTitle();
+            String tripId = allTrips.get(Integer.parseInt(id) - 1000).getTripID();
+            String title = allTrips.get(Integer.parseInt(id) - 1000).getTripName();
             System.out.printf("| %-40s | %-38s |%n", tripId, title);
         }
 
@@ -119,7 +119,7 @@ public class Customers extends Person {
                         TicketsCounter[0] += ticket.getCounter();
                     });
                     System.out.printf("%-40s%s\n\n",
-                            "", AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTitle());
+                            "", AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTripName());
                     System.out.printf("Tour Guide ID : %-20sTotal Price : %-30sTrip ID : %-10s%n",
                             AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTourGuideID(),
                             bookedTrip.getTotalPrice(), bookedTrip.getTripID());
@@ -274,7 +274,7 @@ public class Customers extends Person {
             return;
         }
         ChosenTrip.displayTripDetails();
-        System.out.println("A. Book " + ChosenTrip.getTitle() + " trip");
+        System.out.println("A. Book " + ChosenTrip.getTripName() + " trip");
         System.out.println("B. Go Back");
         System.out.print("Choice: ");
         Ans = Character.toLowerCase(in.next().charAt(0));
@@ -303,25 +303,16 @@ public class Customers extends Person {
             CustomMessage("No dates available with the given information!", 1500);
             return false;
         }
-        ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripId(), ChosenTrip.getTitle(),
+        ChosenTrip trip = new ChosenTrip(ChosenTrip.getTripID(), ChosenTrip.getTripName(),
                 ChosenTrip.getStartDates()[dateIndex], ChosenTrip.getEndDates()[dateIndex], 0.0, null);
         String ChosenCarID = rentACar();
-        if (ChosenCarID == null)
-            trip.setCarID(ChosenCarID);
-        else {
+        trip.setCarID(ChosenCarID);
+        if (ChosenCarID != null) {
             trip.addToTotalPrice(allCars.get(Integer.parseInt(ChosenCarID) - 2000).getPrice());
             CustomMessage("You successfully rented " + allCars.get(Integer.parseInt(ChosenCarID) - 2000).getMade() + " "
                     + allCars.get(Integer.parseInt(ChosenCarID) - 2000).getModel(), 1000);
         }
-        boolean ticket_done = CustomerBookedTickets.ticketMenu(CustomerBookedTrips, trip, tripsList);
-        if (!ticket_done)
-            this.getCustomerBookedTrips().stream().forEach(bookedtrip -> {
-                bookedtrip.getBookedticket().stream().forEach(ticket -> ticket.setCounter());
-            });
-        if (this.discount != 0.0 && ticket_done) {
-            trip.setTotalPrice(applyDiscount(trip.getTotalPrice()));
-            CustomMessage("Discount applied", 1000);
-        }
+        CustomerBookedTickets.ticketMenu(this, trip, tripsList, allCars);
         return true;
     }
 
@@ -435,7 +426,7 @@ public class Customers extends Person {
             if (Filters[i].matches("\\d+(\\.\\d+)?")) {
                 try {
                     price_start = Double.parseDouble(Filters[i]);
-                    price_end = Double.parseDouble(i + 1 == Filters.length ? "99999999" : Filters[i + 1]);
+                    price_end = Double.parseDouble(i + 1 == Filters.length ? "99999999.99" : Filters[i + 1]);
                     i += 1;
                     continue;
                 } catch (Exception e) {
@@ -450,7 +441,7 @@ public class Customers extends Person {
     private boolean tripSearch(Trip trip, String search_filter) {
         if (search_filter == null)
             return true;
-        return trip.getTitle().toLowerCase().contains(search_filter.toLowerCase())
+        return trip.getTripName().toLowerCase().contains(search_filter.toLowerCase())
                 || trip.getDescription().toLowerCase().contains(search_filter.toLowerCase())
                 || trip.getTripType().toLowerCase().contains(search_filter.toLowerCase());
     }
@@ -516,6 +507,13 @@ public class Customers extends Person {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public boolean discountActive() {
+        if (this.discount != 0) {
+            return true;
+        }
+        return false;
     }
 
     public double getDiscount() {

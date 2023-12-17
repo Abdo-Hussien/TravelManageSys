@@ -52,7 +52,7 @@ public class TravelItineraries {
                 choice = in.next().charAt(0);
                 in.nextLine();
                 if (choice == '1') {
-                    checkOut(customer);
+                    checkOut(customer, allTrips);
                     break;
                 } else if (choice == '2') {
                     showDetails(getCustomerBookedTripsDetails(allTrips, customer));
@@ -74,12 +74,34 @@ public class TravelItineraries {
         }
     }
 
-    public void checkOut(Customers customer) {
+    private boolean CheckTripCapacity(ArrayList<Trip> tripsList, String tripID) {
+        if (tripsList.get(Integer.parseInt(tripID) - 1000).getCapacity() > tripsList
+                .get(Integer.parseInt(tripID) - 1000).getTicketCounter()) {
+            return true;
+        }
+        return false;
+    }
+
+    private void CustomMessage(String message, int timeout) {
+        try {
+            System.out.println(message);
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            System.out.println("Thread error sleeping.");
+        }
+    }
+
+    public void checkOut(Customers customer, ArrayList<Trip> allTrips) {
         customer.setTripHistory(customer.getCustomerBookedTrips());
+        for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+            int ticketsCounter = 0;
+            for (Ticket ticket : bookedtrip.getBookedticket()) {
+                ticketsCounter += ticket.getCounter();
+            }
+            int tripID = Integer.parseInt(bookedtrip.getTripID()) - 1000;
+            allTrips.get(tripID).setTicketCounter(ticketsCounter);
+        }
         customer.setCustomerBookedTrips(new ArrayList<>());
-        customer.getCustomerBookedTrips().stream().forEach(bookedtrip -> {
-            bookedtrip.getBookedticket().stream().forEach(ticket -> ticket.setCounter());
-        });
         // write in file
         System.out.println(
                 "Congratulations! You've successfully booked your trips. Get ready for unforgettable adventures!");
@@ -117,7 +139,7 @@ public class TravelItineraries {
         }
         index = AllTrip.indexOf(trip);
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++)
-            if (customer.getCustomerBookedTrips().get(i).getTripID().equals(trip.getTripId()))
+            if (customer.getCustomerBookedTrips().get(i).getTripID().equals(trip.getTripID()))
                 BookedTravelsindex = i;
         return assignNewDate(trip, customer);
     }
@@ -130,7 +152,7 @@ public class TravelItineraries {
             pause(1000);
             return true;
         }
-        System.out.println(trip.getTitle());
+        System.out.println(trip.getTripName());
         System.out.println("Available dates:\n");
         System.out.printf("%-6s| %-29s| %-12s%n", "Index", "Start Dates", "End Dates");
         System.out.println("------|------------------------------|-----------------------------");
