@@ -24,10 +24,9 @@ public abstract class Ticket {
     public abstract void setType();
 
     public void ticketTypeheader(String type) {
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("\t\t\t\t\t\t\t\t" + type.toUpperCase() + " TICKET");
-        System.out.println("\t\t\t\t\t\t\t ~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println();
+        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("%-12s %s\n", "", type.toUpperCase());
+        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     public abstract int Add();
@@ -36,7 +35,7 @@ public abstract class Ticket {
 
     public abstract int getCounter();
 
-    public abstract void setCounter();
+    public abstract void setCounter(int counter);
 
     public abstract double Ticket_Price(double price);
 

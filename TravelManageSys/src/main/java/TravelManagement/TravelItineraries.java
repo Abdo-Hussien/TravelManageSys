@@ -52,7 +52,7 @@ public class TravelItineraries {
                 choice = in.next().charAt(0);
                 in.nextLine();
                 if (choice == '1') {
-                    checkOut(customer);
+                    checkOut(customer, allTrips);
                     break;
                 } else if (choice == '2') {
                     showDetails(getCustomerBookedTripsDetails(allTrips, customer));
@@ -61,7 +61,7 @@ public class TravelItineraries {
                         dashboard(customer, allTrips);
                     break;
                 } else if (choice == '4') {
-                    cancelTrip(allTrips, customer);
+                    cancelTrip(customer);
                     dashboard(customer, allTrips);
                     break;
                 } else if (choice == '5') {
@@ -74,12 +74,17 @@ public class TravelItineraries {
         }
     }
 
-    public void checkOut(Customers customer) {
+    public void checkOut(Customers customer, ArrayList<Trip> allTrips) {
         customer.setTripHistory(customer.getCustomerBookedTrips());
+        for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+            int ticketsCounter = 0;
+            for (Ticket ticket : bookedtrip.getBookedticket()) {
+                ticketsCounter += ticket.getCounter();
+            }
+            int tripID = Integer.parseInt(bookedtrip.getTripID()) - 1000;
+            allTrips.get(tripID).setTicketCounter(ticketsCounter);
+        }
         customer.setCustomerBookedTrips(new ArrayList<>());
-        customer.getCustomerBookedTrips().stream().forEach(bookedtrip -> {
-            bookedtrip.getBookedticket().stream().forEach(ticket -> ticket.setCounter());
-        });
         // write in file
         System.out.println(
                 "Congratulations! You've successfully booked your trips. Get ready for unforgettable adventures!");
@@ -117,7 +122,7 @@ public class TravelItineraries {
         }
         index = AllTrip.indexOf(trip);
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++)
-            if (customer.getCustomerBookedTrips().get(i).getTripID().equals(trip.getTripId()))
+            if (customer.getCustomerBookedTrips().get(i).getTripID().equals(trip.getTripID()))
                 BookedTravelsindex = i;
         return assignNewDate(trip, customer);
     }
@@ -130,7 +135,7 @@ public class TravelItineraries {
             pause(1000);
             return true;
         }
-        System.out.println(trip.getTitle());
+        System.out.println(trip.getTripName());
         System.out.println("Available dates:\n");
         System.out.printf("%-6s| %-29s| %-12s%n", "Index", "Start Dates", "End Dates");
         System.out.println("------|------------------------------|-----------------------------");
@@ -166,29 +171,17 @@ public class TravelItineraries {
         }
     }
 
-    public void cancelTrip(ArrayList<Trip> allTrips, Customers customer) {
+    public void cancelTrip(Customers customer) {
         System.out.println("Enter the trip ID you want to cancel it: ");
         input = in.next();
         in.nextLine();
-        int[] TicketsCounter = { 0 };
-        Trip trip = Trip.getTrip(getCustomerBookedTripsDetails(allTrips, customer), input);
-        if (trip == null) {
-            System.out.println("Invalid Trip ID!\n");
-            return;
-        }
-        int tripindex = allTrips.indexOf(trip);
-
         for (int i = 0; i < customer.getCustomerBookedTrips().size(); i++) {
             if (customer.getCustomerBookedTrips().get(i).getTripID().equals(input)) {
                 checked = true;
-                customer.getCustomerBookedTrips().get(i).getBookedticket().forEach(ticket -> {
-                    TicketsCounter[0] += ticket.getCounter();
-                });
                 index = i;
             }
         }
         if (checked) {
-            allTrips.get(tripindex).setTicketCounter(-TicketsCounter[0]);
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
 

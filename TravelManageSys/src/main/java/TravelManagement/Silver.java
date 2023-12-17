@@ -36,42 +36,44 @@ public class Silver extends Ticket {
 
     public int Add() {
         ticketTypeheader("Silver");
-        System.out.println("how many sliver tickets you want?");
+        System.out.println("How many sliver tickets do you want?");
+        System.out.print("Choice: ");
         addeddTicket = in.nextInt();
         in.nextLine();
         if (addeddTicket > 0) {
             Scounter += addeddTicket;
-            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart");
+            System.out.println("Done! " + addeddTicket + " sliver tickets added to your cart!");
             return addeddTicket;
         } else {
-            System.out.println("invalid number of tickets entered! Please try again.");
+            System.out.println("Invalid number of tickets entered! please try again...");
             return Add();
         }
 
     }
 
     public int Delete() {
-        System.out.println("how many sliver tickets you want to delete?");
+        System.out.println("How many sliver tickets do you want to delete?");
+        System.out.print("Choice: ");
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Scounter) {
-                System.out.println("you entered more tickets than you have! please tyr again...");
+                System.out.println("You entered more tickets than you have! please try again...");
                 return Delete();
             } else {
                 Scounter -= deletedTicket;
-                System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart");
+                System.out.println("Done! " + deletedTicket + " sliver tickets deleted from your cart!");
                 return deletedTicket;
             }
         } else {
-            System.out.println("invalid number of tickets entered! Please try again.");
+            System.out.println("Invalid number of tickets entered! please try again...");
             return Delete();
         }
     }
 
     @Override
-    public void setCounter() {
-        this.Scounter = 0;
+    public void setCounter(int counter) {
+        this.Scounter = counter;
     }
 
     @Override

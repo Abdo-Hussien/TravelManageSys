@@ -35,42 +35,44 @@ public class Platinum extends Ticket {
 
     public int Add() {
         ticketTypeheader("Platinum");
-        System.out.println("how many Platinum tickets you want?");
+        System.out.println("How many Platinum tickets you want?");
+        System.out.print("Choice: ");
         addeddTicket = in.nextInt();
         in.nextLine();
         if (addeddTicket > 0) {
             Pcounter += addeddTicket;
-            System.out.println("Done! " + addeddTicket + " Platinum tickets added to your cart");
+            System.out.println("Done! " + addeddTicket + " platinum tickets added to your cart!");
             return addeddTicket;
         } else {
-            System.out.println("invalid number of tickets entered! Please try again.");
+            System.out.println("Invalid number of tickets entered! please try again...");
             return Add();
         }
 
     }
 
     public int Delete() {
-        System.out.println("how many Platinum tickets you want to delete?");
+        System.out.println("How many Platinum tickets you want to delete?");
+        System.out.print("Choice: ");
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
             if (deletedTicket > Pcounter) {
-                System.out.println("you entered more tickets than you have! please tyr again...");
+                System.out.println("You entered more tickets than you have! please try again...");
                 return Delete();
             } else {
                 Pcounter -= deletedTicket;
-                System.out.println("Done! " + deletedTicket + " Platinum tickets deleted from your cart");
+                System.out.println("Done! " + deletedTicket + " platinum tickets deleted from your cart!");
                 return deletedTicket;
             }
         } else {
-            System.out.println("invalid number of tickets entered! Please try again.");
+            System.out.println("Invalid number of tickets entered! please try again...");
             return Delete();
         }
     }
 
     @Override
-    public void setCounter() {
-        this.Pcounter = 0;
+    public void setCounter(int counter) {
+        this.Pcounter = counter;
     }
 
     @Override

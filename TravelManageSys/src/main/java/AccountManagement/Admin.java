@@ -7,6 +7,7 @@ import TravelManagement.BookedTravels;
 import TravelManagement.BookingTickets;
 import TravelManagement.TourGuide;
 import TravelManagement.Trip;
+import data.fileManipulation;
 
 public class Admin implements Administration {
     protected Scanner in = new Scanner(System.in);
@@ -42,6 +43,7 @@ public class Admin implements Administration {
                 tripsAvalability(allTrips, allCustomers, allTourGuides);
                 break;
             } else if (choice == '4') {
+                fileManipulation.writeTourGuides(allTourGuides);
                 System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);
@@ -189,10 +191,10 @@ public class Admin implements Administration {
             Manipulation(AllUsers, type);
         else if (callingfrom.equals("Customer")) {
             Customers current_customer = (Customers) AllUsers.get(index);
-            current_customer.showinfo(allCustomers, allTrips);
+            current_customer.showinfo((ArrayList<Customers>)AllUsers, allTrips);
         } else if (callingfrom.equals("Tourguide")) {
             TourGuide current_TourGuide = (TourGuide) AllUsers.get(index);
-            current_TourGuide.showinfo(allTourGuides, allTrips);
+            current_TourGuide.showinfo((ArrayList<TourGuide>)AllUsers, allTrips);
         }
         return;
     }
