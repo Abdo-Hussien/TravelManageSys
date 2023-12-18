@@ -161,19 +161,19 @@ public abstract class Trip {
     }
 
     // Shows the available trips according to the avalability and capacity
-    public static void displayAdminTrips(ArrayList<Trip> AllTrip) {
-        System.out.println("All available Trips!: " + AllTrip.size());
+    public static void displayAdminTrips(ArrayList<Trip> allTrips) {
+        System.out.println("All available Trips!: " + allTrips.size());
         System.out.println("_________________________________________________________________\n");
         System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
         System.out.println("_________________________________________________________________");
 
-        for (int i = 0; i < AllTrip.size(); i++) {
+        for (int i = 0; i < allTrips.size(); i++) {
             System.out.printf("%-10s | %-25s | %d/%-13s -> (%d)\n",
-                    AllTrip.get(i).getTripID(),
-                    AllTrip.get(i).getTripName(),
-                    AllTrip.get(i).getTicketCounter(),
-                    AllTrip.get(i).getCapacity(),
-                    AllTrip.get(i).getCapacity() - AllTrip.get(i).getTicketCounter());
+                    allTrips.get(i).getTripID(),
+                    allTrips.get(i).getTripName(),
+                    allTrips.get(i).getTicketCounter(),
+                    allTrips.get(i).getCapacity(),
+                    allTrips.get(i).getCapacity() - allTrips.get(i).getTicketCounter());
         }
     }
 

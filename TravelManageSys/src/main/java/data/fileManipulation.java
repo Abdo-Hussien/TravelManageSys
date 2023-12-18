@@ -74,28 +74,21 @@ public class fileManipulation {
     public static ArrayList<Customers> getAllCustomers() {
         try {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
-            ArrayList<BookedTravels> CustomerBookedTrips = new ArrayList<>();
+            ArrayList<BookedTravels> CustomerBookedTrips;
+            ArrayList<String> TripHistory;
             Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
             String fileContent = Files.readString(path);
             String Customers[] = fileContent.split("\\s*---\\s*");
             for (String c : Customers) {
                 String[] customer = c.split(System.lineSeparator());
                 String[] Fullname = customer[1].split(" ");
-                ArrayList<String> TripHistory = new ArrayList<>();
-                if (customer[8].equalsIgnoreCase("No Booked Trips")) {
-                    if (!customer[9].equalsIgnoreCase("No Trips History")) {
-                        String[] strTripHistory = customer[9].split("\\s*\\|\\s*");
-                        TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
-                    }
-                } else {
-                    if (!customer[15].equalsIgnoreCase("No Trips History")) {
-                        String[] strTripHistory = customer[17].split("\\s*\\|\\s*");
-                        TripHistory = new ArrayList<>(Arrays.asList(strTripHistory));
-                    }
-                }
+                Boolean bookedTripsChecker = customer[8].equalsIgnoreCase("No Booked Trips");
+                if (bookedTripsChecker)
+                    TripHistory = handleTripHistory(customer[9]);
+                else
+                    TripHistory = handleTripHistory(customer[17]);
                 String[] BookedTripsLine = Arrays.copyOfRange(customer, 8, 17);
-                CustomerBookedTrips = customer[8].equalsIgnoreCase("No Booked Trips") ? new ArrayList<BookedTravels>()
-                        : parseBookedTrip(BookedTripsLine);
+                CustomerBookedTrips = handleBookedTravels(BookedTripsLine, bookedTripsChecker);
                 AllCustomers.add(new Customers(customer[0], Fullname[0], Fullname[1], customer[2], customer[3],
                         Integer.parseInt(customer[4]), customer[5], customer[6], customer[7], CustomerBookedTrips,
                         TripHistory));
@@ -105,6 +98,21 @@ public class fileManipulation {
             System.out.println("Customers Reading failed");
             return null;
         }
+    }
+
+    public static ArrayList<String> handleTripHistory(String TripHistoryLine) {
+        if (!TripHistoryLine.equalsIgnoreCase("No Trips History")) {
+            String[] strTripHistory = TripHistoryLine.split("\\s*\\|\\s*");
+            return new ArrayList<>(Arrays.asList(strTripHistory));
+        }
+        return new ArrayList<String>();
+    }
+
+    public static ArrayList<BookedTravels> handleBookedTravels(String[] BookedTripsLines, boolean bookedTripsChecker)
+            throws ParseException {
+        if (bookedTripsChecker)
+            return new ArrayList<BookedTravels>();
+        return parseBookedTrip(BookedTripsLines);
     }
 
     // Function to convert String to BookedTravels
@@ -264,13 +272,13 @@ public class fileManipulation {
                 writer.write("---"); // Delimiter between TourGuide objects
                 writer.write("\n");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Tourguides Writing failed");
         }
     }
 
-    public static void writeCustomers(ArrayList<Customers> Customers){
-        String filePath = "TravelManageSys/src/main/java/data/newTourGuides.txt";
+    public static void writeCustomers(ArrayList<Customers> Customers) {
+        String filePath = "TravelManageSys/src/main/java/data/newCustomers.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customers customer : Customers) {
@@ -280,59 +288,86 @@ public class fileManipulation {
                 writer.write(customer.getFirst_name() + " " + customer.getLast_name());
                 writer.write("\n");
 
+                writer.write(customer.getUsername());
+                writer.write("\n");
+
+                writer.write(customer.getPassword());
+                writer.write("\n");
+
                 writer.write(String.valueOf(customer.getAge()));
                 writer.write("\n");
 
                 writer.write(customer.getGender());
                 writer.write("\n");
 
-                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | " + customer.getZipAddress();
-                writer.write(address);
+                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | "
+                        + customer.getZipAddress();
+                writer.write(address + " | ");
                 writer.write("\n");
 
                 writer.write(customer.getPhone_number());
                 writer.write("\n");
 
-                // Writing additional customer details
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                    writer.write(bookedtrips.getTripID() + " | ");
-
-                }
-                writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                    writer.write(bookedtrips.getTripName() + " | ");
-                }
-                writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                    writer.write(bookedtrips.getStartDate() + " | ");
-                }
-                writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                    writer.write(bookedtrips.getTotalPrice() + " | ");
-                }
-                writer.write("\n");
-                for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                    if (bookedtrips.getCarID().equals(null)) {
-                        writer.write("No car" + " | ");
+                if (customer.getCustomerBookedTrips().isEmpty())
+                    writer.write("No Booked Trips");
+                else {
+                    // Writing additional customer details
+                    for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
+                        writer.write(bookedtrips.getTripID() + " | ");
+                    writer.write("\n");
+                    for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
+                        writer.write(bookedtrips.getTripName() + " | ");
+                    writer.write("\n");
+                    for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
+                        writer.write(dateFormat.format(bookedtrips.getEndDate()) + " | ");
+                    writer.write("\n");
+                    for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
+                        writer.write(bookedtrips.getTotalPrice() + " | ");
+                    writer.write("\n");
+                    for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
+                        if (bookedtrips.getCarID().equals(null) || bookedtrips.getCarID().equals(""))
+                            writer.write("No car" + " | ");
+                        else
+                            writer.write(bookedtrips.getCarID() + " | ");
                     }
-                    else{
-                        writer.write(bookedtrips.getCarID() + " | ");
+                    writer.write("\n");
+                    for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+                        for (Ticket ticket : bookedtrip.getBookedticket())
+                            writer.write(ticket.getTicketID() + " , ");
+                        writer.write("| ");
+                    }
+                    writer.write("\n");
+                    for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+                        for (int i = 0; i < bookedtrip.getBookedticket().size(); i++)
+                            writer.write(dateFormat.format(bookedtrip.getStartDate()) + " , ");
+                        writer.write("| ");
+                    }
+                    writer.write("\n");
+                    for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+                        for (Ticket ticket : bookedtrip.getBookedticket())
+                            writer.write(ticket.getType() + " , ");
+                        writer.write("| ");
+                    }
+                    writer.write("\n");
+                    for (BookedTravels bookedtrip : customer.getCustomerBookedTrips()) {
+                        for (Ticket ticket : bookedtrip.getBookedticket())
+                            writer.write(ticket.getCounter() + " , ");
+                        writer.write("| ");
                     }
                 }
                 writer.write("\n");
-                // for(BookedTravels bookedtrips : customer.getCustomerBookedTrips()){
-                //     writer.write(bookedtrips.geta() + " | ");
-                // }
-                // writer.write("\n");
-                // writer.write(customer.get());
-                // writer.write("\n");
-                // writer.write(customer.ge());
-                // writer.write("\n");
-
+                if (customer.getCustomerTravelHistory().isEmpty())
+                    writer.write("No Trips History");
+                else {
+                    for (String tripID : customer.getCustomerTravelHistory())
+                        writer.write(tripID + " | ");
+                }
+                writer.write("\n");
                 writer.write("---"); // Delimiter between Customer objects
                 writer.write("\n");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Customers Writing failed");
         }
+    }
 }

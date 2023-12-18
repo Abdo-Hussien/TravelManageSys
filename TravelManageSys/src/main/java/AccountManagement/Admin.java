@@ -44,6 +44,7 @@ public class Admin implements Administration {
                 break;
             } else if (choice == '4') {
                 fileManipulation.writeTourGuides(allTourGuides);
+                fileManipulation.writeCustomers(allCustomers);
                 System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);

@@ -69,9 +69,8 @@ public class Customers extends Person {
         System.out.println("Password: " + this.getPassword());
         System.out.println("Address: " + this.getAddress());
         System.out.println("Phone number: " + this.getPhone_number());
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         while (true) {
-
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println("1- Edit your information.\n2- Trip history.\n3- Go back.");
             int choice = in.next().charAt(0);
             switch (choice) {
@@ -93,8 +92,15 @@ public class Customers extends Person {
     }
 
     public void displayTripHistory(ArrayList<Trip> allTrips) {
+        if (this.getCustomerTravelHistory().isEmpty()) {
+            CustomMessage(
+                    "You don't have any trips in your history with us!\nYour journey awaits, and the story of your adventures is ready to unfold.",
+                    2000);
+            return;
+        }
+        System.out.println("Embark on the memories of your travels:\n");
         System.out.println("|------------------------------------------|----------------------------------------|");
-        System.out.printf("| %-40s | %-38s |%n", "Trip IDs", "Titles");
+        System.out.printf("| %-40s | %-38s |%n", "Trip IDs", "Trip Names");
         System.out.println("|------------------------------------------|----------------------------------------|");
 
         // Display Trip IDs and Titles in a single loop
@@ -108,42 +114,56 @@ public class Customers extends Person {
         System.out.println("|------------------------------------------|----------------------------------------|");
     }
 
-    public void displayBookedTrips(ArrayList<Trip> AllTrips) {
-        this.CustomerBookedTrips.stream()
-                .forEach(bookedTrip -> {
-                    int[] TicketsCounter = { 0 };
-                    Transportation transportation = AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000)
-                            .getTransportation(
-                                    AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTransportID());
-                    bookedTrip.getBookedticket().forEach(ticket -> {
-                        TicketsCounter[0] += ticket.getCounter();
-                    });
-                    System.out.printf("%-40s%s\n\n",
-                            "", AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTripName());
-                    System.out.printf("Tour Guide ID : %-20sTotal Price : %-30sTrip ID : %-10s%n",
-                            AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getTourGuideID(),
-                            bookedTrip.getTotalPrice(), bookedTrip.getTripID());
-                    System.out.printf("Start Date : %-42sEnd Date : %-20s\n", bookedTrip.getStartDate(),
-                            bookedTrip.getEndDate());
-                    System.out.printf("Number of tickets bought : %-10s\n\n", TicketsCounter[0]);
-                    System.out.printf("| %-40s | %-38s | %-7s |\n", "Ticket ID", "Type", "Counter");
-                    System.out.println(
-                            "|------------------------------------------|----------------------------------------|---------|");
+    public void displayBookedTripsDetails(ArrayList<Trip> AllTrips) {
+        int[] TicketsCounter = { 0 };
+        BookedTravels customerBookedTrips;
+        Transportation transportation;
+        System.out.print("Please use the index to display booking details of a trip: ");
+        choice = in.nextInt();
+        in.nextLine();
+        try {
+            customerBookedTrips = this.CustomerBookedTrips.get(choice - 1);
+        } catch (IndexOutOfBoundsException e) {
+            CustomMessage("Invalid index.. please write an index of one of the previous booked trips!", 300);
+            displayBookedTripsDetails(AllTrips);
+            return;
+        }
+        transportation = AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000)
+                .getTransportation(
+                        AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTransportID());
+        customerBookedTrips.getBookedticket().forEach(ticket -> {
+            TicketsCounter[0] += ticket.getCounter();
+        });
+        System.out.printf("\n%s\n",
+                "************************************************************************************************");
+        System.out.printf("%-40s%s\n\n",
+                "", AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTripName());
+        System.out.printf("Tour Guide ID : %-20sTotal Price : %-30sTrip ID : %-10s%n",
+                AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTourGuideID(),
+                customerBookedTrips.getTotalPrice(), customerBookedTrips.getTripID());
+        System.out.printf("Start Date : %-42sEnd Date : %-20s\n", customerBookedTrips.getStartDate(),
+                customerBookedTrips.getEndDate());
+        System.out.printf("Number of tickets bought : %-10s\n\n", TicketsCounter[0]);
+        System.out.printf("| %-40s | %-38s | %-7s |\n", "Ticket ID", "Type", "Counter");
+        System.out.println(
+                "|------------------------------------------|----------------------------------------|---------|");
 
-                    bookedTrip.getBookedticket().forEach(ticket -> {
-                        System.out.printf("| %-40s | %-38s | %-7s |%n", ticket.getTicketID(), ticket.getType(),
-                                ticket.getCounter());
-                    });
+        customerBookedTrips.getBookedticket().forEach(ticket -> {
+            System.out.printf("| %-40s | %-38s | %-7s |%n", ticket.getTicketID(), ticket.getType(),
+                    ticket.getCounter());
+        });
 
-                    System.out.println(
-                            "|------------------------------------------|----------------------------------------|---------|");
-                    System.out.printf("Pickup : %-50sStaying At : %-30s%n", transportation.getPickUp(),
-                            AllTrips.get(Integer.parseInt(bookedTrip.getTripID()) - 1000).getHotelName());
-                    System.out.printf("%s\n",
-                            "************************************************************************************************");
-
-                });
-
+        System.out.println(
+                "|------------------------------------------|----------------------------------------|---------|");
+        System.out.printf("Pickup : %-50sStaying At : %-30s%n", transportation.getPickUp(),
+                AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getHotelName());
+        boolean isCarRented = customerBookedTrips.getCarID() != null;
+        System.out.printf("Car Rental: %-60s", isCarRented);
+        if (isCarRented) {
+            // Show Car rental details.
+        }
+        System.out.printf("\n%s\n",
+                "************************************************************************************************");
     }
 
     public void mainCustomer(ArrayList<Customers> allCustomers, ArrayList<Trip> tripsList) {
@@ -177,25 +197,28 @@ public class Customers extends Person {
         int choice;
         while (true) {
             System.out.println("\nWelcome " + this.getFirst_name() + "! What would you like to do?");
+            if (this.discount > 0.0)
+                System.out.println("~ You have an active " + (int) (this.discount * 100) + "% discount!!");
             if (this.getCustomerTravelHistory().size() > 2 && this.getCustomerTravelHistory().size() < 5)
                 setDiscount(0.05);
             if (this.getCustomerTravelHistory().size() > 4 && this.getCustomerTravelHistory().size() < 8)
                 setDiscount(0.1);
             if (this.getCustomerTravelHistory().size() > 7)
                 setDiscount(0.2);
-            System.out.println("~ You have an active " + (int) (this.discount * 100) + "% discount!!");
             System.out.println("\n1- Profile settings.\n2- Trip.\n3- Cart.\n4- Sign out.");
             choice = in.nextInt();
             in.nextLine();
             if (choice == 1) {
                 this.showinfo(allCustomers, allTrips);
-                return null;
+                break;
             } else if (choice == 2) {
                 this.mainCustomer(allCustomers, allTrips);
                 break;
             } else if (choice == 3) {
                 break;
             } else if (choice == 4) {
+                fileManipulation.writeCustomers(allCustomers);
+                CustomMessage("Sign out successfully", 2000);
                 return null;
             } else {
                 System.out.println("Invalid input! please choose only from the following options.");
@@ -489,10 +512,6 @@ public class Customers extends Person {
 
     public ArrayList<BookedTravels> getCustomerBookedTrips() {
         return CustomerBookedTrips;
-    }
-
-    public int getCustomerBookedTripsCount() {
-        return CustomerBookedTrips.isEmpty() ? 0 : CustomerBookedTrips.size();
     }
 
     public int getTripHistoryCounter() {

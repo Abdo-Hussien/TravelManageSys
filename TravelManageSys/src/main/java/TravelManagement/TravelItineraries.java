@@ -32,21 +32,19 @@ public class TravelItineraries {
         System.out.printf("%-40sDashboard\n", "");
         System.out.printf("%s\n",
                 "~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~-~-~-~");
-        if (customer.getCustomerBookedTripsCount() == 0) {
+        if (customer.getCustomerBookedTrips().isEmpty()) {
             System.out.println("Your cart is empty!");
             System.out.println();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e2) {
-                e2.printStackTrace();
-            }
-            System.out.println();
+            System.out.println("Press any key (followed by Enter key) to go back...");
+            in.next();
+            in.nextLine();
+            return;
         } else {
-            customer.displayBookedTrips(allTrips);
+            BookedTravels.displayTableBookedTrips(customer.getCustomerBookedTrips());
             do {
                 System.out.println("1- Check out.\n" +
-                        "2- Show details.\n" +
-                        "3- reschedule trip.\n" +
+                        "2- Show booking details.\n" +
+                        "3- Reschedule trip.\n" +
                         "4- Cancel trip.\n" +
                         "5- Go back.\n");
                 choice = in.next().charAt(0);
@@ -55,7 +53,7 @@ public class TravelItineraries {
                     checkOut(customer, allTrips);
                     break;
                 } else if (choice == '2') {
-                    showDetails(getCustomerBookedTripsDetails(allTrips, customer));
+                    customer.displayBookedTripsDetails(allTrips);
                 } else if (choice == '3') {
                     if (reschedule(customer, allTrips))
                         dashboard(customer, allTrips);
@@ -145,7 +143,7 @@ public class TravelItineraries {
         System.out.print("Choose which date: ");
         ans = in.nextInt();
         in.nextLine();
-        if (ans >= AvailableStartDates.length) {
+        if (ans > AvailableStartDates.length) {
             System.out.println("Input isn't included in the choices, please choose from the following dates\n");
             pause(1000);
             assignNewDate(trip, customer);

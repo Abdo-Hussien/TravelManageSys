@@ -32,6 +32,22 @@ public class BookedTravels {
         this.chosenTrip.setCarID(carID);
     }
 
+    public static void displayTableBookedTrips(ArrayList<BookedTravels> trips) {
+        System.out.println("All Booked Trips: " + trips.size());
+        System.out.println("-----------------------------------------------------------------------------");
+        System.out.printf("%-7s | %-10s | %-20s | %-15s | %-12s |\n", "Index", "Trip ID", "Trip Name", "Total Price",
+                "Car Rental");
+        System.out.println("-----------------------------------------------------------------------------");
+        for (int i = 0; i < trips.size(); i++)
+            System.out.printf("%-7s | %-10s | %-20s | %-15s | %-12s |\n",
+                    i + 1,
+                    trips.get(i).getTripID(),
+                    trips.get(i).getTripName(),
+                    trips.get(i).getTotalPrice(),
+                    (trips.get(i).getCarID() != null ? "true" : "false"));
+        System.out.println("-----------------------------------------------------------------------------");
+    }
+
     public String getTripID() {
         return this.chosenTrip.getTripID();
     }
@@ -65,7 +81,7 @@ public class BookedTravels {
     }
 
     public double getTotalPrice() {
-        return Math.round(this.chosenTrip.getTotalPrice() * 100) / 100;
+        return Math.round(this.chosenTrip.getTotalPrice() * 1000.0) / 1000.0;
     }
 
     public void addToTotalPrice(double price_to_add) {
