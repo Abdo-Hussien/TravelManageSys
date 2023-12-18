@@ -67,7 +67,7 @@ public class TravelItineraries {
                 } else {
                     System.out.println("wrong input! please try again");
                 }
-            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4');
+            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4'||choice != '5');
 
         }
     }
@@ -182,6 +182,7 @@ public class TravelItineraries {
         if (checked) {
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
+
             return;
         } else {
             System.out.println("Invalid Trip ID.");
