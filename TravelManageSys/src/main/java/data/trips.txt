@@ -16,13 +16,8 @@ jdksy1
 Bali
 Couple
 999.99
-<<<<<<< HEAD
-05-11-2023 | 29-11-2023 | 01-12-2023 | 
-10-11-2023 | 29-2-2023 | 01-3-2023 | 
-=======
 05-11-2023 | 15-12-2023 | 29-11-2023 | 05-12-2023 | 
 10-11-2023 | 20-12-2023 | 01-12-2023 | 08-12-2023 | 
->>>>>>> d9a3823864d5d472ca0d89b78a734648551de6e4
 Bali, the famed 'Island of the Gods,' is known for its highly developed arts, including traditional and modern dance, sculpture, painting, leather, metalworking, and music.
 xvz34
 120
