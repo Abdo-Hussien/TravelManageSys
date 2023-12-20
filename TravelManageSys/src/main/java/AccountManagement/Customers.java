@@ -197,14 +197,14 @@ public class Customers extends Person {
         int choice;
         while (true) {
             System.out.println("\nWelcome " + this.getFirst_name() + "! What would you like to do?");
-            if (this.discount > 0.0)
-                System.out.println("~ You have an active " + (int) (this.discount * 100) + "% discount!!");
             if (this.getCustomerTravelHistory().size() > 2 && this.getCustomerTravelHistory().size() < 5)
                 setDiscount(0.05);
             if (this.getCustomerTravelHistory().size() > 4 && this.getCustomerTravelHistory().size() < 8)
                 setDiscount(0.1);
             if (this.getCustomerTravelHistory().size() > 7)
                 setDiscount(0.2);
+            if (this.discount > 0.0)
+                System.out.println("~ You have an active " + (int) (this.discount * 100) + "% discount!!");
             System.out.println("\n1- Profile settings.\n2- Trip.\n3- Cart.\n4- Sign out.");
             choice = in.nextInt();
             in.nextLine();

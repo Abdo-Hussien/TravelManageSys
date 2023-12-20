@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import AccountManagement.Customers;
 import data.fileManipulation;
 
 /**
@@ -161,17 +162,25 @@ public abstract class Trip {
     }
 
     // Shows the available trips according to the avalability and capacity
-    public static void displayAdminTrips(ArrayList<Trip> allTrips) {
+    public static void displayAdminTrips(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers) {
         System.out.println("All available Trips!: " + allTrips.size());
         System.out.println("_________________________________________________________________\n");
         System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
         System.out.println("_________________________________________________________________");
-
+        int tripHistoryCounter = 0;
         for (int i = 0; i < allTrips.size(); i++) {
+            tripHistoryCounter = 0;
+            for (Customers customer : allCustomers) {
+                for (String trip_id : customer.getCustomerTravelHistory()) {
+                    if (trip_id.equals(allTrips.get(i).getTripID())) {
+                        tripHistoryCounter += 1;
+                    }
+                }
+            }
             System.out.printf("%-10s | %-25s | %d/%-13s -> (%d)\n",
                     allTrips.get(i).getTripID(),
                     allTrips.get(i).getTripName(),
-                    allTrips.get(i).getTicketCounter(),
+                    allTrips.get(i).getTicketCounter() + tripHistoryCounter,
                     allTrips.get(i).getCapacity(),
                     allTrips.get(i).getCapacity() - allTrips.get(i).getTicketCounter());
         }

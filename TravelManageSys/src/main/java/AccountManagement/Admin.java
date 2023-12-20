@@ -240,7 +240,7 @@ public class Admin implements Administration {
     @Override
     public void tripsAvalability(ArrayList<Trip> AllTrip, ArrayList<Customers> customers,
             ArrayList<TourGuide> tourGuide) {
-        Trip.displayAdminTrips(AllTrip);
+        Trip.displayAdminTrips(AllTrip, customers);
         System.out.println("*****************************************");
         System.out.println("1-To show more details about trip");
         System.out.println("2-To get back");
