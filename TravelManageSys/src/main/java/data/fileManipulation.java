@@ -239,7 +239,7 @@ public class fileManipulation {
     }
 
     public static void writeTourGuides(ArrayList<TourGuide> TourGuides) {
-        String filePath = "TravelManageSys/src/main/java/data/newTourGuides.txt";
+        String filePath = "TravelManageSys/src/main/java/data/TourGuides.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (TourGuide guide : TourGuides) {
@@ -278,7 +278,7 @@ public class fileManipulation {
     }
 
     public static void writeCustomers(ArrayList<Customers> Customers) {
-        String filePath = "TravelManageSys/src/main/java/data/newCustomers.txt";
+        String filePath = "TravelManageSys/src/main/java/data/customers.txt";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customers customer : Customers) {
