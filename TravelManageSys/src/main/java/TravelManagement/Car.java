@@ -52,12 +52,12 @@ public class Car {
     }
 
     public void displayCarDetails() {
-        System.out.println("Car ID: " + getCarID());
-        System.out.println("Made: " + getMade());
-        System.out.println("Model: " + getModel());
-        System.out.println("Type: " + getType());
-        System.out.println("Number of Seats: " + getNoSeats());
-        System.out.println("Price: $" + getPrice());
+        System.out.println("------------------------------------");
+        System.out.println("Car ID: " + this.getCarID());
+        System.out.printf("Made: %-20sModel: %-20s%n", this.getMade(), this.getModel());
+        System.out.printf("Type: %-20sPrice: %-20s%n", this.getType(), '$' + this.getPrice());
+        System.out.println("Number of Seats: " + this.getNoSeats());
+        System.out.println("------------------------------------");
     }
 
     public static void displayAllCars(ArrayList<Car> allCars) {

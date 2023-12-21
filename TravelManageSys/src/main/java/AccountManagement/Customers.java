@@ -140,7 +140,7 @@ public class Customers extends Person {
                 "", AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTripName());
         System.out.printf("Tour Guide ID : %-20sTotal Price : %-30sTrip ID : %-10s%n",
                 AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTourGuideID(),
-                customerBookedTrips.getTotalPrice(), customerBookedTrips.getTripID());
+                '$' + customerBookedTrips.getTotalPrice(), customerBookedTrips.getTripID());
         System.out.printf("Start Date : %-42sEnd Date : %-20s\n", customerBookedTrips.getStartDate(),
                 customerBookedTrips.getEndDate());
         System.out.printf("Number of tickets bought : %-10s\n\n", TicketsCounter[0]);
@@ -158,9 +158,12 @@ public class Customers extends Person {
         System.out.printf("Pickup : %-50sStaying At : %-30s%n", transportation.getPickUp(),
                 AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getHotelName());
         boolean isCarRented = customerBookedTrips.getCarID() != null;
-        System.out.printf("Car Rental: %-60s", isCarRented);
+        System.out.printf("Car Rental : %-60s", isCarRented);
         if (isCarRented) {
-            // Show Car rental details.
+            Car rentedCar = allCars.get(Integer.parseInt(customerBookedTrips.getCarID()) - 2000);
+            System.out.printf("Car ID : %-20sPrice : %-20s%n", customerBookedTrips.getCarID(),
+                    '$' + rentedCar.getPrice());
+            System.out.printf("Made : %-20sModel : %-20s%n", rentedCar.getMade(), rentedCar.getModel());
         }
         System.out.printf("\n%s\n",
                 "************************************************************************************************");

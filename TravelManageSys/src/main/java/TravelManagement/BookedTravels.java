@@ -43,7 +43,7 @@ public class BookedTravels {
                     i + 1,
                     trips.get(i).getTripID(),
                     trips.get(i).getTripName(),
-                    trips.get(i).getTotalPrice(),
+                    '$' + trips.get(i).getTotalPrice(),
                     (trips.get(i).getCarID() != null ? "true" : "false"));
         System.out.println("-----------------------------------------------------------------------------");
     }
