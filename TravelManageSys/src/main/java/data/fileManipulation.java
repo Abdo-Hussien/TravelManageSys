@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import AccountManagement.Customers;
+import AccountManagement.Personsinterface;
 import TravelManagement.*;
 
 public class fileManipulation {
@@ -238,76 +239,51 @@ public class fileManipulation {
         }
     }
 
-    public static void writeTourGuides(ArrayList<TourGuide> TourGuides) {
-        String filePath = "TravelManageSys/src/main/java/data/TourGuides.txt";
+    public static <T extends Personsinterface> void writepersonalinfo(ArrayList<T> allLists, String path) {
+        String filePath = path;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (TourGuide guide : TourGuides) {
-                writer.write(guide.getAccount_id());
+            for (T user : allLists) {
+                writer.write(user.getAccount_id());
                 writer.write(System.lineSeparator()); // Use '\n' as a delimiter
 
-                writer.write(guide.getFirst_name() + " " + guide.getLast_name());
+                writer.write(user.getFirst_name() + " " + user.getLast_name());
                 writer.write(System.lineSeparator());
 
-                writer.write(guide.getUsername());
+                writer.write(user.getUsername());
                 writer.write(System.lineSeparator());
 
-                writer.write(guide.getPassword());
+                writer.write(user.getPassword());
                 writer.write(System.lineSeparator());
 
-                writer.write(String.valueOf(guide.getAge()));
+                writer.write(String.valueOf(user.getAge()));
                 writer.write(System.lineSeparator());
 
-                writer.write(guide.getGender());
+                writer.write(user.getGender());
                 writer.write(System.lineSeparator());
 
-                String address = guide.getStreetAddress() + " | " + guide.getStateAddress() + " | "
-                        + guide.getZipAddress();
+                String address = user.getStreetAddress() + " | " + user.getStateAddress() + " | "
+                        + user.getZipAddress();
                 writer.write(address + " | ");
                 writer.write(System.lineSeparator());
 
-                writer.write(guide.getPhone_number());
+                writer.write(user.getPhone_number());
                 writer.write(System.lineSeparator());
 
                 writer.write("---"); // Delimiter between TourGuide objects
                 writer.write(System.lineSeparator());
             }
         } catch (Exception e) {
-            System.out.println("Tourguides Writing failed");
+            System.out.println("prsonal informations Writing failed");
         }
     }
 
-    public static void writeCustomers(ArrayList<Customers> Customers) {
-        String filePath = "TravelManageSys/src/main/java/data/customers.txt";
-
+    public static <T extends Personsinterface> void writeCustomers(ArrayList<Customers> Customers, String path,
+            ArrayList<T> allLists) {
+        String filePath = path;
+        writepersonalinfo(Customers, "TravelManageSys/src/main/java/data/customers.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customers customer : Customers) {
-                writer.write(customer.getAccount_id());
-                writer.write(System.lineSeparator());
-
-                writer.write(customer.getFirst_name() + " " + customer.getLast_name());
-                writer.write(System.lineSeparator());
-
-                writer.write(customer.getUsername());
-                writer.write(System.lineSeparator());
-
-                writer.write(customer.getPassword());
-                writer.write(System.lineSeparator());
-
-                writer.write(String.valueOf(customer.getAge()));
-                writer.write(System.lineSeparator());
-
-                writer.write(customer.getGender());
-                writer.write(System.lineSeparator());
-
-                String address = customer.getStreetAddress() + " | " + customer.getStateAddress() + " | "
-                        + customer.getZipAddress();
-                writer.write(address + " | ");
-                writer.write(System.lineSeparator());
-
-                writer.write(customer.getPhone_number());
-                writer.write(System.lineSeparator());
-
                 if (customer.getCustomerBookedTrips().isEmpty())
                     writer.write("No Booked Trips");
                 else {
@@ -315,15 +291,19 @@ public class fileManipulation {
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
                         writer.write(bookedtrips.getTripID() + " | ");
                     writer.write(System.lineSeparator());
+
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
                         writer.write(bookedtrips.getTripName() + " | ");
                     writer.write(System.lineSeparator());
+
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
                         writer.write(dateFormat.format(bookedtrips.getEndDate()) + " | ");
                     writer.write(System.lineSeparator());
+
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips())
                         writer.write(bookedtrips.getTotalPrice() + " | ");
                     writer.write(System.lineSeparator());
+
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
                         if (bookedtrips.getCarID().equals(null) || bookedtrips.getCarID().equals(""))
                             writer.write("No car" + " | ");
@@ -366,6 +346,7 @@ public class fileManipulation {
                 writer.write("---"); // Delimiter between Customer objects
                 writer.write(System.lineSeparator());
             }
+
         } catch (Exception e) {
             System.out.println("Customers Writing failed");
         }

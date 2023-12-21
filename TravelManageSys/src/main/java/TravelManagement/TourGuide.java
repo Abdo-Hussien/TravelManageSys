@@ -91,7 +91,7 @@ public class TourGuide extends Person {
                 showinfo(allTourGuides, allTrips);
                 break;
             case 2:
-            fileManipulation.writeTourGuides(allTourGuides);
+            fileManipulation.writepersonalinfo(allTourGuides, "TravelManageSys/src/main/java/data/TourGuides.txt");
                 // Sign out;
                 return;
             default:

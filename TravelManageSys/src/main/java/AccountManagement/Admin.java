@@ -43,8 +43,9 @@ public class Admin implements Administration {
                 tripsAvalability(allTrips, allCustomers, allTourGuides);
                 break;
             } else if (choice == '4') {
-                fileManipulation.writeTourGuides(allTourGuides);
-                fileManipulation.writeCustomers(allCustomers);
+                fileManipulation.writepersonalinfo(allTourGuides, "TravelManageSys/src/main/java/data/TourGuides.txt");
+                fileManipulation.writeCustomers(allCustomers, "TravelManageSys/src/main/java/data/customers.txt",
+                        allCustomers);
                 System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);
@@ -192,10 +193,10 @@ public class Admin implements Administration {
             Manipulation(AllUsers, type);
         else if (callingfrom.equals("Customer")) {
             Customers current_customer = (Customers) AllUsers.get(index);
-            current_customer.showinfo((ArrayList<Customers>)AllUsers, allTrips);
+            current_customer.showinfo((ArrayList<Customers>) AllUsers, allTrips);
         } else if (callingfrom.equals("Tourguide")) {
             TourGuide current_TourGuide = (TourGuide) AllUsers.get(index);
-            current_TourGuide.showinfo((ArrayList<TourGuide>)AllUsers, allTrips);
+            current_TourGuide.showinfo((ArrayList<TourGuide>) AllUsers, allTrips);
         }
         return;
     }
