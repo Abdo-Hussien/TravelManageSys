@@ -116,6 +116,7 @@ public class Customers extends Person {
 
     public void displayBookedTripsDetails(ArrayList<Trip> AllTrips) {
         int[] TicketsCounter = { 0 };
+        boolean[] foundPlatinumTicket = { false };
         BookedTravels customerBookedTrips;
         Transportation transportation;
         System.out.print("Please use the index to display booking details of a trip: ");
@@ -140,7 +141,7 @@ public class Customers extends Person {
                 "", AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTripName());
         System.out.printf("Tour Guide ID : %-20sTotal Price : %-30sTrip ID : %-10s%n",
                 AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTourGuideID(),
-                '$' + customerBookedTrips.getTotalPrice(), customerBookedTrips.getTripID());
+                "$" + customerBookedTrips.getTotalPrice(), customerBookedTrips.getTripID());
         System.out.printf("Start Date : %-42sEnd Date : %-20s\n", customerBookedTrips.getStartDate(),
                 customerBookedTrips.getEndDate());
         System.out.printf("Number of tickets bought : %-10s\n\n", TicketsCounter[0]);
@@ -151,6 +152,8 @@ public class Customers extends Person {
         customerBookedTrips.getBookedticket().forEach(ticket -> {
             System.out.printf("| %-40s | %-38s | %-7s |%n", ticket.getTicketID(), ticket.getType(),
                     ticket.getCounter());
+            if (ticket.getType().equalsIgnoreCase("Platinum"))
+                foundPlatinumTicket[0] = true;
         });
 
         System.out.println(
@@ -158,11 +161,14 @@ public class Customers extends Person {
         System.out.printf("Pickup : %-50sStaying At : %-30s%n", transportation.getPickUp(),
                 AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getHotelName());
         boolean isCarRented = customerBookedTrips.getCarID() != null;
-        System.out.printf("Car Rental : %-60s", isCarRented);
+        System.out.printf("Car Rental : %-60s%n", isCarRented);
         if (isCarRented) {
             Car rentedCar = allCars.get(Integer.parseInt(customerBookedTrips.getCarID()) - 2000);
-            System.out.printf("Car ID : %-20sPrice : %-20s%n", customerBookedTrips.getCarID(),
-                    '$' + rentedCar.getPrice());
+            System.out.printf("Car ID : %-20s", customerBookedTrips.getCarID());
+            if (foundPlatinumTicket[0])
+                System.out.printf("Price : %-20s%n", "Free");
+            else
+                System.out.printf("Price : %-20s%n", "$" + rentedCar.getPrice());
             System.out.printf("Made : %-20sModel : %-20s%n", rentedCar.getMade(), rentedCar.getModel());
         }
         System.out.printf("\n%s\n",
@@ -544,7 +550,7 @@ public class Customers extends Person {
     }
 
     public double applyDiscount(double originalPrice) {
-        return Math.round((originalPrice - (originalPrice * discount)) * 100) / 100;
+        return Math.round((originalPrice - (originalPrice * discount)) * 1000) / 1000;
     }
 
     private void CustomMessage(String message, int timeout) {
