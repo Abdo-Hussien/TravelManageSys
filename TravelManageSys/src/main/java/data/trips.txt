@@ -35,7 +35,7 @@ General
 An Egyptian town in the Suez Governorate, lying on the western shore of the Red Sea's Gulf of Suez. Being a year-round sunshine destination with gentle waves of the clear Red Sea makes Al-Ain al-Sokhna an ideal destination to break from the city's congestion.
 xvz34   | 08-12-                                                                        
 165
-0
+1
 Parachuting | Parasailing | Skiing | 
 Tolip Resort El Galala Majestic
 xyt3pqr
@@ -49,7 +49,7 @@ Couple
 Sydney, the capital of New South Wales, is known for its stunning harbor, iconic landmarks like the Sydney Opera House, and beautiful beaches.
 xvz34
 225
-0
+1
 Harbour Cruise | Bridge Climb | Taronga Zoo Visit | 
 Park Hyatt Sydney
 ab12cd3
@@ -63,7 +63,7 @@ General
 Tokyo, the bustling capital of Japan, is a blend of modern skyscrapers and historic temples. Explore the vibrant neighborhoods, indulge in sushi, and experience the unique blend of tradition and technology.
 yab67
 455
-0
+2
 Robot Restaurant Show | Tsukiji Fish Market Tour | Sumo Wrestling Match | 
 Aman Tokyo
 efg45hi
@@ -77,7 +77,7 @@ Family
 Rome, the capital of Italy, is a city steeped in history, with ancient ruins, art, and delicious cuisine. Visit the Colosseum, Vatican City, and enjoy authentic pasta in the heart of the Eternal City.
 yab67
 50
-0
+4
 Colosseum Tour | Vatican Museums | Pizza Making Class | 
 Hotel Eden
 opq89rst
@@ -91,7 +91,7 @@ Couple
 Santorini, a Greek island in the Aegean Sea, is famous for its white-washed buildings and stunning sunsets. Explore the charming villages, relax on the black sand beaches, and savor Greek cuisine.
 erts2
 20
-0
+1
 Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
 Canaves Oia Hotel
 uvw10xyz
@@ -105,7 +105,7 @@ General
 Machu Picchu, the ancient Incan citadel in Peru, is a UNESCO World Heritage site. Embark on the Inca Trail, marvel at the breathtaking views, and immerse yourself in the rich history of this mystical place.
 abc45
 30
-0
+1
 Inca Trail Trek | Machu Picchu Tour | Sacred Valley Exploration | 
 Belmond Sanctuary Lodge
 abc11def
@@ -119,7 +119,7 @@ Couple
 The Maldives, a tropical paradise in the Indian Ocean, is known for its overwater bungalows, crystal-clear waters, and vibrant coral reefs. Experience luxury and romance in this idyllic island destination.
 abc45
 110
-0
+2
 Snorkeling Safari | Dolphin Watching | Private Beach Dinner | 
 Gili Lankanfushi
 ghi12jkl
@@ -133,7 +133,7 @@ General
 Barcelona, the capital of Catalonia, is known for its unique architecture, including the famous Sagrada Familia. Explore the lively streets, indulge in tapas, and enjoy the artistic atmosphere of this vibrant city.
 abc45
 50
-0
+2
 Sagrada Familia Tour | Gothic Quarter Exploration | Flamenco Show | 
 W Barcelona
 mno13pqr
@@ -147,7 +147,7 @@ Couple
 Dubai, a city of opulence and modernity, boasts iconic skyscrapers, luxury shopping, and desert adventures. Experience the glamour of the city and enjoy a desert safari, visit the Burj Khalifa, and indulge in world-class shopping.
 abc45
 165
-0
+12
 Desert Safari | Burj Khalifa Observation Deck | Shopping in Dubai Mall | 
 Burj Al Arab Jumeirah
 stu14vwx
@@ -161,7 +161,7 @@ General
 Queenstown, New Zealand, is a haven for adventure seekers with its stunning landscapes and adrenaline-pumping activities. Enjoy bungee jumping, jet boating, and explore the breathtaking fjords of the South Island.
 abc45
 75
-0
+1
 Bungee Jumping | Milford Sound Cruise | Skydiving | 
 Matakauri Lodge
 yz15abc
@@ -273,7 +273,7 @@ Family
 Vancouver, Canada, is surrounded by mountains, forests, and the Pacific Ocean. Explore Stanley Park, go whale watching, and experience the diverse culinary scene in this vibrant Canadian city.
 tg003
 200
-0
+1
 Stanley Park Biking | Whale Watching Tour | Grouse | 
 Royal Mansour Marrakech
 stu23vwx

@@ -24,7 +24,7 @@ public class fileManipulation {
     public static ArrayList<Trip> getAllTrips() {
         try {
             ArrayList<Trip> AllTrips = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys/src/main/java/data/trips.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Trips.txt");
             String fileContent = Files.readString(path);
             String Trips[] = fileContent.split("\\s*---\\s*");
             for (String tripString : Trips) {
@@ -78,7 +78,7 @@ public class fileManipulation {
             ArrayList<Customers> AllCustomers = new ArrayList<>();
             ArrayList<BookedTravels> CustomerBookedTrips;
             ArrayList<String> TripHistory;
-            Path path = Paths.get("TravelManageSys/src/main/java/data/customers.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Customers.txt");
             String fileContent = Files.readString(path);
             String Customers[] = fileContent.split("\\s*---\\s*");
             for (String c : Customers) {
@@ -158,7 +158,7 @@ public class fileManipulation {
     public static ArrayList<TourGuide> getAllTourGuides() {
         try {
             ArrayList<TourGuide> AllTourGuides = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys/src/main/java/data/TourGuides.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Tourguides.txt");
             String fileContent = Files.readString(path);
             String TourGuides[] = fileContent.split("\\s*---\\s*");
             for (String t : TourGuides) {
@@ -218,7 +218,7 @@ public class fileManipulation {
     public static ArrayList<Transportation> getAllTransportations() {
         try {
             ArrayList<Transportation> AllTransportations = new ArrayList<>();
-            Path path = Paths.get("TravelManageSys/src/main/java/data/Transportation.txt");
+            Path path = Paths.get("TravelManageSys/src/main/java/data/Transportations.txt");
             String fileContent = Files.readString(path);
             String Transportations[] = fileContent.split("\\s*---\\s*");
             for (String t_str : Transportations) {
@@ -269,7 +269,7 @@ public class fileManipulation {
     }
 
     public static void writeTourguides(ArrayList<TourGuide> Tourguides) {
-        String filePath = "TravelManageSys/src/main/java/data/TourGuides.txt";
+        String filePath = "TravelManageSys/src/main/java/data/Tourguides.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (TourGuide tourGuide : Tourguides) {
                 writePersonalInfo(writer, tourGuide, filePath);
@@ -282,7 +282,7 @@ public class fileManipulation {
     }
 
     public static void writeCustomers(ArrayList<Customers> Customers) {
-        String filePath = "TravelManageSys/src/main/java/data/customers.txt";
+        String filePath = "TravelManageSys/src/main/java/data/Customers.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customers customer : Customers) {
                 writePersonalInfo(writer, customer, filePath);
@@ -353,4 +353,59 @@ public class fileManipulation {
             System.out.println("Customers Writing failed");
         }
     }
+
+    public static void writeTrips(ArrayList<Trip> Trips) {
+        String filePath = "TravelManageSys/src/main/java/data/Trips.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Trip trip : Trips) {
+                writer.write(trip.getTripID());
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getTripName());
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getTripType());
+                writer.write(System.lineSeparator());
+
+                writer.write(String.valueOf(trip.getInitPrice()));
+                writer.write(System.lineSeparator());
+
+                for (Date date : trip.getStartDates())
+                    writer.write(dateFormat.format(date) + " | ");
+                writer.write(System.lineSeparator());
+                
+                for (Date date : trip.getEndDates())
+                    writer.write(dateFormat.format(date) + " | ");
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getDescription());
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getTourGuideID());
+                writer.write(System.lineSeparator());
+
+                writer.write(String.valueOf(trip.getCapacity()));
+                writer.write(System.lineSeparator());
+
+                writer.write(String.valueOf(trip.getTicketCounter()));
+                writer.write(System.lineSeparator());
+
+                for (String activity : trip.getActivities())
+                    writer.write(activity + " | ");
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getHotelName());
+                writer.write(System.lineSeparator());
+
+                writer.write(trip.getTransportID());
+                writer.write(System.lineSeparator());
+
+                writer.write("---"); // Delimiter between Trips objects
+                writer.write(System.lineSeparator());
+            }
+        } catch (Exception e) {
+            System.out.println("Customers Writing failed");
+        }
+    }
+
 }

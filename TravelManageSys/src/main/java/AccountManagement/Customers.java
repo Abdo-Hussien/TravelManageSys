@@ -221,6 +221,7 @@ public class Customers extends Person {
                 break;
             } else if (choice == 4) {
                 fileManipulation.writeCustomers(allCustomers);
+                fileManipulation.writeTrips(allTrips);
                 CustomMessage("Sign out successfully", 2000);
                 return null;
             } else {

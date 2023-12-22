@@ -45,6 +45,7 @@ public class Admin implements Administration {
             } else if (choice == '4') {
                 fileManipulation.writeTourguides(allTourGuides);
                 fileManipulation.writeCustomers(allCustomers);
+                fileManipulation.writeTrips(allTrips);
                 System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);
@@ -242,8 +243,8 @@ public class Admin implements Administration {
             ArrayList<TourGuide> tourGuide) {
         Trip.displayAdminTrips(AllTrip, customers);
         System.out.println("*****************************************");
-        System.out.println("1-To show more details about trip");
-        System.out.println("2-To get back");
+        System.out.println("1- Show more details about trip.");
+        System.out.println("2- Go back.");
         choice = in.next().charAt(0);
         Trip trip;
         int tripindex = 0;

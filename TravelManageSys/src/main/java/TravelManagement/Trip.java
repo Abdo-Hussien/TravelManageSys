@@ -167,20 +167,11 @@ public abstract class Trip {
         System.out.println("_________________________________________________________________\n");
         System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
         System.out.println("_________________________________________________________________");
-        int tripHistoryCounter = 0;
         for (int i = 0; i < allTrips.size(); i++) {
-            tripHistoryCounter = 0;
-            for (Customers customer : allCustomers) {
-                for (String trip_id : customer.getCustomerTravelHistory()) {
-                    if (trip_id.equals(allTrips.get(i).getTripID())) {
-                        tripHistoryCounter += 1;
-                    }
-                }
-            }
             System.out.printf("%-10s | %-25s | %d/%-13s -> (%d)\n",
                     allTrips.get(i).getTripID(),
                     allTrips.get(i).getTripName(),
-                    allTrips.get(i).getTicketCounter() + tripHistoryCounter,
+                    allTrips.get(i).getTicketCounter(),
                     allTrips.get(i).getCapacity(),
                     allTrips.get(i).getCapacity() - allTrips.get(i).getTicketCounter());
         }

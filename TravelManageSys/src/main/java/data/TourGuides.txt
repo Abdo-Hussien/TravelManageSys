@@ -14,7 +14,7 @@ pass555
 2
 Male
 1978 Elm Drive Road | New York | 23413 | 
-+2066223196 
++2066223196
 ---
 erts2
 Mahmoud Eman
@@ -32,7 +32,7 @@ pass343
 23
 Female
 2993 Randall Drive Road | Hawaii | 80771 | 
-+2024180205 
++2024180205
 ---
 xyz78
 Hussein Idris
