@@ -7,11 +7,7 @@ Male
 2476 Gnatty Creek Road | New York | 11234 | 
 +201158885496
 No Booked Trips
-<<<<<<< HEAD
 1005 | 1009 | 
-=======
-1005 | 1009 | 1004 | 1001 | 1007 | 1010 | 
->>>>>>> 650e0d443a8a485a3fe35119575d12642d1bf0d1
 ---
 abc45
 Emily Johnson

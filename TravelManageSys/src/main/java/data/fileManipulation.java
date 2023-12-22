@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import AccountManagement.Customers;
+import AccountManagement.Person;
 import AccountManagement.Personsinterface;
 import TravelManagement.*;
 
@@ -239,51 +240,52 @@ public class fileManipulation {
         }
     }
 
-    public static <T extends Personsinterface> void writepersonalinfo(ArrayList<T> allLists, String path) {
-        String filePath = path;
+    public static void writePersonalInfo(BufferedWriter writer, Person user, String path) throws IOException {
+        writer.write(user.getAccount_id());
+        writer.write(System.lineSeparator()); // Use '\n' as a delimiter
 
+        writer.write(user.getFirst_name() + " " + user.getLast_name());
+        writer.write(System.lineSeparator());
+
+        writer.write(user.getUsername());
+        writer.write(System.lineSeparator());
+
+        writer.write(user.getPassword());
+        writer.write(System.lineSeparator());
+
+        writer.write(String.valueOf(user.getAge()));
+        writer.write(System.lineSeparator());
+
+        writer.write(user.getGender());
+        writer.write(System.lineSeparator());
+
+        String address = user.getStreetAddress() + " | " + user.getStateAddress() + " | "
+                + user.getZipAddress();
+        writer.write(address + " | ");
+        writer.write(System.lineSeparator());
+
+        writer.write(user.getPhone_number());
+        writer.write(System.lineSeparator());
+    }
+
+    public static void writeTourguides(ArrayList<TourGuide> Tourguides) {
+        String filePath = "TravelManageSys/src/main/java/data/TourGuides.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (T user : allLists) {
-                writer.write(user.getAccount_id());
-                writer.write(System.lineSeparator()); // Use '\n' as a delimiter
-
-                writer.write(user.getFirst_name() + " " + user.getLast_name());
-                writer.write(System.lineSeparator());
-
-                writer.write(user.getUsername());
-                writer.write(System.lineSeparator());
-
-                writer.write(user.getPassword());
-                writer.write(System.lineSeparator());
-
-                writer.write(String.valueOf(user.getAge()));
-                writer.write(System.lineSeparator());
-
-                writer.write(user.getGender());
-                writer.write(System.lineSeparator());
-
-                String address = user.getStreetAddress() + " | " + user.getStateAddress() + " | "
-                        + user.getZipAddress();
-                writer.write(address + " | ");
-                writer.write(System.lineSeparator());
-
-                writer.write(user.getPhone_number());
-                writer.write(System.lineSeparator());
-
+            for (TourGuide tourGuide : Tourguides) {
+                writePersonalInfo(writer, tourGuide, filePath);
                 writer.write("---"); // Delimiter between TourGuide objects
                 writer.write(System.lineSeparator());
             }
         } catch (Exception e) {
-            System.out.println("prsonal informations Writing failed");
+            System.out.println("Tourguides Writing failed");
         }
     }
 
-    public static <T extends Personsinterface> void writeCustomers(ArrayList<Customers> Customers, String path,
-            ArrayList<T> allLists) {
-        String filePath = path;
-        writepersonalinfo(Customers, "TravelManageSys/src/main/java/data/customers.txt");
+    public static void writeCustomers(ArrayList<Customers> Customers) {
+        String filePath = "TravelManageSys/src/main/java/data/customers.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Customers customer : Customers) {
+                writePersonalInfo(writer, customer, filePath);
                 if (customer.getCustomerBookedTrips().isEmpty())
                     writer.write("No Booked Trips");
                 else {

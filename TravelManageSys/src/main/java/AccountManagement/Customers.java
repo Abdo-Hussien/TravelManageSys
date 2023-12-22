@@ -220,7 +220,7 @@ public class Customers extends Person {
             } else if (choice == 3) {
                 break;
             } else if (choice == 4) {
-                fileManipulation.writeCustomers(allCustomers, "TravelManageSys/src/main/java/data/customers.txt",allCustomers);
+                fileManipulation.writeCustomers(allCustomers);
                 CustomMessage("Sign out successfully", 2000);
                 return null;
             } else {

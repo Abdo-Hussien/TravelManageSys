@@ -43,9 +43,8 @@ public class Admin implements Administration {
                 tripsAvalability(allTrips, allCustomers, allTourGuides);
                 break;
             } else if (choice == '4') {
-                fileManipulation.writepersonalinfo(allTourGuides, "TravelManageSys/src/main/java/data/TourGuides.txt");
-                fileManipulation.writeCustomers(allCustomers, "TravelManageSys/src/main/java/data/customers.txt",
-                        allCustomers);
+                fileManipulation.writeTourguides(allTourGuides);
+                fileManipulation.writeCustomers(allCustomers);
                 System.out.println("Sign out successfully");
                 try {
                     Thread.sleep(300);

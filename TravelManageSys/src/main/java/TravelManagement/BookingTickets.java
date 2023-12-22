@@ -16,7 +16,6 @@ public class BookingTickets {
 
     public boolean ticketMenu(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> AllTrip, ArrayList<Car> allCars) {
-        double tripPrice;
         System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.printf("%-12s %s\n", "", "TICKETS");
         System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -29,63 +28,53 @@ public class BookingTickets {
         System.out.print("Choice: ");
         choice = in.nextInt();
         in.nextLine();
-        if (choice == 1) {
-            for (int i = 0; i < ticketList.size(); i++) {
-                if (ticketList.get(i).getType().equalsIgnoreCase("silver")) {
-                    Typeisfound = true;
-                    index = i;
-                }
-            }
-            if (Typeisfound == true) {
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.05);
-                ChosenTrip.addToTotalPrice(ticketList.get(index).Add() * tripPrice);
-            } else {
-                ticketList.add(new Silver());
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.05);
-                ChosenTrip.addToTotalPrice(ticketList.get(ticketList.size() - 1).Add() * tripPrice);
-                ticketList.get(ticketList.size() - 1).setType();
-            }
-            return TicketEditMenu(customer, ChosenTrip, AllTrip, allCars);
-        } else if (choice == 2) {
-            for (int i = 0; i < ticketList.size(); i++) {
-                if (ticketList.get(i).getType().equalsIgnoreCase("gold")) {
-                    Typeisfound = true;
-                    index = i;
-                }
-            }
-            if (Typeisfound == true) {
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.3);
-                ChosenTrip.addToTotalPrice(ticketList.get(index).Add() * tripPrice);
-            } else {
-                ticketList.add(new Gold());
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.3);
-                ChosenTrip.addToTotalPrice(ticketList.get(ticketList.size() - 1).Add() * tripPrice);
-                ticketList.get(ticketList.size() - 1).setType();
-            }
-            return TicketEditMenu(customer, ChosenTrip, AllTrip, allCars);
-        } else if (choice == 3) {
-            for (int i = 0; i < ticketList.size(); i++) {
-                if (ticketList.get(i).getType().equalsIgnoreCase("platinum")) {
-                    Typeisfound = true;
-                    index = i;
-                }
-            }
-            if (Typeisfound == true) {
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.6);
-                ChosenTrip.addToTotalPrice(ticketList.get(index).Add() * tripPrice);
-            } else {
-                ticketList.add(new Platinum());
-                tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.6);
-                ChosenTrip.addToTotalPrice(ticketList.get(ticketList.size() - 1).Add() * tripPrice);
-                ticketList.get(ticketList.size() - 1).setType();
-
-            }
-            return TicketEditMenu(customer, ChosenTrip, AllTrip, allCars);
-        } else {
-            System.out.println("Invalid input! please try again...");
-            return ticketMenu(customer, ChosenTrip, AllTrip, allCars);
+        switch (choice) {
+            case 1:
+                AddTicket(ChosenTrip, AllTrip, Silver.class, new Silver());
+                break;
+            case 2:
+                AddTicket(ChosenTrip, AllTrip, Gold.class, new Gold());
+                break;
+            case 3:
+                AddTicket(ChosenTrip, AllTrip, Platinum.class, new Platinum());
+                break;
+            default:
+                System.out.println("Invalid input! please try again...");
+                return ticketMenu(customer, ChosenTrip, AllTrip, allCars);
         }
+        return TicketEditMenu(customer, ChosenTrip, AllTrip, allCars);
+    }
 
+    public void AddTicket(ChosenTrip ChosenTrip,
+            ArrayList<Trip> AllTrip, Class<? extends Ticket> ticketType, Ticket newTicket) {
+        double tripPrice = 0;
+        for (int i = 0; i < ticketList.size(); i++) {
+            if (ticketType.isInstance(ticketList.get(i))) {
+                Typeisfound = true;
+                index = i;
+            }
+        }
+        if (Typeisfound == true) {
+            tripPrice = calcTicketPrice(ChosenTrip, AllTrip, index);
+            ChosenTrip.addToTotalPrice(ticketList.get(index).Add() * tripPrice);
+        } else {
+            ticketList.add(newTicket);
+            tripPrice = calcTicketPrice(ChosenTrip, AllTrip, ticketList.size() - 1);
+            ChosenTrip.addToTotalPrice(ticketList.get(ticketList.size() - 1).Add() * tripPrice);
+            ticketList.get(ticketList.size() - 1).setType();
+        }
+    }
+
+    private double calcTicketPrice(ChosenTrip ChosenTrip,
+            ArrayList<Trip> AllTrip, int index_of_ticket) {
+        double tripPrice = 0;
+        if (ticketList.get(index_of_ticket) instanceof Silver)
+            tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.05);
+        if (ticketList.get(index_of_ticket) instanceof Gold)
+            tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.3);
+        if (ticketList.get(index_of_ticket) instanceof Platinum)
+            tripPrice = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).TripPrice(0.6);
+        return tripPrice;
     }
 
     public boolean TicketEditMenu(Customers customer, ChosenTrip ChosenTrip,
@@ -101,7 +90,7 @@ public class BookingTickets {
             return ticketMenu(customer, ChosenTrip, AllTrip, allCars);
         } else if (choice == 2) {
             boolean isDeleted = DeleteTicket(customer, ChosenTrip, AllTrip, allCars);
-            if (isDeleted)
+            if (isDeleted) // If Not Deleted then Error
                 return isDeleted;
             CustomMessage("No tickets Deleted: You chose a ticket that isn't added to your cart...", 500);
             return TicketEditMenu(customer, ChosenTrip, AllTrip, allCars);
@@ -115,12 +104,20 @@ public class BookingTickets {
 
     public boolean DeleteTicket(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> allTrips, ArrayList<Car> allCars) {
+        int Counter = 0;
+        for (Ticket ticket : ticketList)
+            Counter += ticket.getCounter();
+        if (Counter == 0) {
+            CustomMessage("You have 0 tickets!", 500);
+            return TicketEditMenu(customer, ChosenTrip, allTrips, allCars);
+        }
         System.out.println("Your Cart:");
         for (int i = 0; i < ticketList.size(); i++) {
             System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).type + " tickets");
             System.out.println("**********");
         }
-        System.out.println("What type of ticket you want to delete?" + "\"Enter ticketType\" ");
+
+        System.out.println("What type of ticket you want to delete?" + "   \'Enter Ticket type\' ");
         System.out.println("Example: Silver, Regular, Gold, ...");
         System.out.println("Back to return to ticket editing menu!");
         String ans = in.next();
@@ -159,6 +156,11 @@ public class BookingTickets {
     public boolean confirmTicket(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> AllTrip, ArrayList<Car> allCars) {
         for (int i = 0; i < ticketList.size(); i++) {
+            if (ticketList.get(i).getCounter() == 0) {
+                ticketList.remove(i);
+                i--;
+                continue;
+            }
             totalTickets += ticketList.get(i).getCounter();
             if (ticketList.get(i) instanceof Platinum && ChosenTrip.getCarID() != null) {
                 double carPrice = allCars.get(Integer.parseInt(ChosenTrip.getCarID()) - 2000).getPrice();
@@ -169,7 +171,7 @@ public class BookingTickets {
         int alltickets = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).getTicketCounter() + totalTickets;
         if (!CheckTripCapacity(AllTrip, ChosenTrip.getTripID(), alltickets)) {
             CustomMessage("Booking Cancelled (REASON):\n~ Trip is full!\n~ Trip Capacity is "
-                        + AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).getCapacity(), 2000);
+                    + AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).getCapacity(), 2000);
             return false;
         }
         System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");

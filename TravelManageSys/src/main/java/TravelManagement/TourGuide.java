@@ -12,6 +12,7 @@ import java.util.Scanner;
 import AccountManagement.Admin;
 import AccountManagement.Person;
 import data.fileManipulation;
+
 /**
  *
  * @author bmood
@@ -91,7 +92,7 @@ public class TourGuide extends Person {
                 showinfo(allTourGuides, allTrips);
                 break;
             case 2:
-            fileManipulation.writepersonalinfo(allTourGuides, "TravelManageSys/src/main/java/data/TourGuides.txt");
+                fileManipulation.writeTourguides(allTourGuides);
                 // Sign out;
                 return;
             default:
@@ -124,7 +125,8 @@ public class TourGuide extends Person {
                 admin.editInformations("old", allTourGuides, "Tourguide", "Tourguide");
                 break;
             case 2:
-                while (!findMonth(allTourGuides, allTrips));
+                while (!findMonth(allTourGuides, allTrips))
+                    ;
             case 3:
                 guideMenu(allTourGuides, allTrips);
                 break;
@@ -189,6 +191,5 @@ public class TourGuide extends Person {
     public int getTripHistoryCounter() {
         return 0;
     }
-
 
 }
