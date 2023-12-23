@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import AccountManagement.Customers;
+import AccountManagement.Person;
 import data.fileManipulation;
 
 /**
@@ -134,17 +135,21 @@ public abstract class Trip {
         }
         System.out.println("");
         System.out.println("Staying at: " + this.getHotelName());
-        System.out.println("Going by: " + this.getTransportation(transportID).getPickUp());
+        Transportation transportation = this.getTransportation(transportID);
+        if (transportation instanceof Bus)
+            System.out.println("Bus Company: " + ((Bus) transportation).getBusCompany());
+        else if (transportation instanceof Flight)
+            System.out.println("Airline Company: " + ((Flight) transportation).getAirline());
         System.out.println("Car Rentals (Optional)");
         System.out.println("");
         System.out.println("Avaliable Tickets:");
-        System.out.println("Silver ticket <Regular  ticket>:");
+        System.out.println("Silver ticket <Regular  ticket> :");
         System.out.println(" ~ One meal.\n ~ Activities not included.\n ~ Car rental with extra fees.");
         System.out.println("Price: $" + this.TripPrice(0.05) + "\n");
-        System.out.println("Gold ticket:");
+        System.out.println("Gold ticket :");
         System.out.println(" ~ Half board.\n ~ One choosen Activity included.\n ~ Car rental with extra fees.");
         System.out.println("Price: $" + this.TripPrice(0.3) + "\n");
-        System.out.println("Platinum ticket :\n");
+        System.out.println("Platinum ticket :");
         System.out.println(" ~ Full board.\n ~ All Activities included.\n ~ Free car rental.");
         System.out.println("Price: $" + this.TripPrice(0.6) + "\n");
         System.out.println("************************************************");
@@ -162,7 +167,7 @@ public abstract class Trip {
     }
 
     // Shows the available trips according to the avalability and capacity
-    public static void displayAdminTrips(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers) {
+    public static void displayAdminTrips(ArrayList<Trip> allTrips, ArrayList<Person> allCustomers2) {
         System.out.println("All available Trips!: " + allTrips.size());
         System.out.println("_________________________________________________________________\n");
         System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
@@ -254,15 +259,6 @@ public abstract class Trip {
 
     public void setHotelName(String hotelName) {
         this.hotelName = hotelName;
-    }
-
-    // Each Trip has a Transportation so it gets it by trip ID
-    public Transportation getTransportation(int tripId,
-            ArrayList<Trip> allTrips) {
-        for (int i = 0; i < allTransportations.size(); i++)
-            if (allTransportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
-                return allTransportations.get(i);
-        return null;
     }
 
     /*

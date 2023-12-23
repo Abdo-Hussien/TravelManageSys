@@ -10,24 +10,18 @@ package TravelManagement;
  * @author bmood
  */
 public abstract class Transportation {
-    private String transportID;
-    private String pickUp;
-    private int maxCapacity;
+    protected String transportID;
+    protected String pickUp;
 
     // Super Constructor
-    public Transportation(String pickUp, int maxCapacity, String transportID) {
+    public Transportation(String pickUp, String transportID) {
         this.pickUp = pickUp;
-        this.maxCapacity = maxCapacity;
         this.transportID = transportID;
     }
 
     // Getter methods
     public String getPickUp() {
         return this.pickUp;
-    }
-
-    public int getMaxCapacity() {
-        return this.maxCapacity;
     }
 
     public String getTransportID() {
