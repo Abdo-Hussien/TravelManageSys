@@ -9,7 +9,7 @@ xvz34
 220
 20
 Snorkeling | Scuba Diving | Mayan Ruins Tour | 
-Grand Fiesta Americana Coral Beach
+Tolip Resort El Galala Majestic
 jdksy1
 ---
 1001
@@ -23,7 +23,7 @@ xvz34
 120
 0
 Surfing | Rafting | Elephant Safari | 
-Ubud Hanging Gardens
+Tolip Resort El Galala Majestic
 duiwgh2
 ---
 1002
@@ -37,7 +37,7 @@ xvz34   | 08-12-
 165
 1
 Parachuting | Parasailing | Skiing | 
-Tolip Resort El Galala Majestic
+Ubud Hanging Gardens
 xyt3pqr
 ---
 1003
@@ -51,7 +51,7 @@ xvz34
 225
 1
 Harbour Cruise | Bridge Climb | Taronga Zoo Visit | 
-Park Hyatt Sydney
+Ubud Hanging Gardens
 ab12cd3
 ---
 1004
@@ -65,7 +65,7 @@ yab67
 455
 2
 Robot Restaurant Show | Tsukiji Fish Market Tour | Sumo Wrestling Match | 
-Aman Tokyo
+Rennisence
 efg45hi
 ---
 1005
@@ -79,7 +79,7 @@ yab67
 50
 4
 Colosseum Tour | Vatican Museums | Pizza Making Class | 
-Hotel Eden
+Rennisence
 opq89rst
 ---
 1006
@@ -93,7 +93,7 @@ erts2
 20
 20
 Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
-Canaves Oia Hotel
+Tanoak Resort
 uvw10xyz
 ---
 1007
@@ -107,7 +107,7 @@ abc45
 30
 1
 Inca Trail Trek | Machu Picchu Tour | Sacred Valley Exploration | 
-Belmond Sanctuary Lodge
+Tanoak Resort
 abc11def
 ---
 1008
@@ -121,7 +121,7 @@ abc45
 110
 32
 Snorkeling Safari | Dolphin Watching | Private Beach Dinner | 
-Gili Lankanfushi
+Tanoak Resort
 ghi12jkl
 ---
 1009
@@ -135,7 +135,7 @@ abc45
 50
 2
 Sagrada Familia Tour | Gothic Quarter Exploration | Flamenco Show | 
-W Barcelona
+Tolip Hotel Alexandria
 mno13pqr
 ---
 1010
@@ -149,7 +149,7 @@ abc45
 165
 12
 Desert Safari | Burj Khalifa Observation Deck | Shopping in Dubai Mall | 
-Burj Al Arab Jumeirah
+Tolip Hotel Alexandria
 stu14vwx
 ---
 1011
@@ -163,7 +163,7 @@ abc45
 75
 1
 Bungee Jumping | Milford Sound Cruise | Skydiving | 
-Matakauri Lodge
+Tolip Hotel Alexandria
 yz15abc
 ---
 1012
@@ -191,7 +191,7 @@ xyz78
 225
 0
 Christ the Redeemer Tour | Samba Night Out | Copacabana Beach Relaxation | 
-Belmond Copacabana Palace
+Hoshinoya Kyoto
 jkl17mno
 ---
 1014
@@ -205,7 +205,7 @@ xyz78
 170
 0
 Phi Phi Islands Tour | Thai Massage Spa Day | Sunset Dinner Cruise | 
-Amanpuri
+Hoshinoya Kyoto
 pqr18stu
 ---
 1015
@@ -219,7 +219,7 @@ tg001
 20
 0
 Table Mountain Hike | Cape Peninsula Tour | Wine Tasting in Stellenbosch | 
-Ellerman House
+Penguin Village Dahab
 vwx19yz
 ---
 1016
@@ -233,7 +233,7 @@ tg002
 50
 0
 Old Quarter Exploration | Water Puppet Show | Street Food Tour | 
-Sofitel Legend Metropole Hanoi
+Penguin Village Dahab
 abc20def
 ---
 1017
@@ -247,7 +247,7 @@ tg002
 60
 10
 Golden Circle Tour | Blue Lagoon Relaxation | Northern Lights Hunt | 
-The Retreat at Blue Lagoon
+Penguin Village Dahab
 ghi21jkl
 ---
 1018
@@ -261,7 +261,7 @@ tg003
 300
 0
 Jemaa el-Fna Square Exploration | Bahia Palace Tour | Camel Ride in the Palmeraie | 
-Royal Mansour Marrakech
+Le Méridien Dahab Resort & SPA
 mno22pqr
 ---
 1019
