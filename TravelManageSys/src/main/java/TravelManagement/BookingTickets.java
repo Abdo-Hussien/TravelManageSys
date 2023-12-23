@@ -16,9 +16,10 @@ public class BookingTickets {
 
     public boolean ticketMenu(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> AllTrip, ArrayList<Car> allCars) {
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.printf("%-12s %s\n", "", "TICKETS");
-        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~\n");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Choose Your Ticket Type:");
         System.out.println("1. Silver Ticket (Regular Ticket) ");
@@ -172,10 +173,12 @@ public class BookingTickets {
                 CustomMessage("Car rental for free!", 500);
             }
         }
-        int alltickets = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).getTicketCounter() + totalTickets;
+        Trip trip = AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000);
+        int alltickets = trip.getTicketCounter() + totalTickets;
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         if (!CheckTripCapacity(AllTrip, ChosenTrip.getTripID(), alltickets)) {
-            CustomMessage("Booking Cancelled (REASON):\n~ Trip is full!\n~ Trip Capacity is "
-                    + AllTrip.get(Integer.parseInt(ChosenTrip.getTripID()) - 1000).getCapacity(), 2000);
+            CustomMessage("Booking Cancelled (REASON):\n ~ Added tickets exceeds trip capacity.\n\n ~ Available seats: "
+                    + (trip.getCapacity() - trip.getTicketCounter()), 2000);
             return false;
         }
         System.out.println("Your Ticket(s) Has Been Confirmed Sucussfully!");
@@ -186,7 +189,7 @@ public class BookingTickets {
         boolean foundOldBookedTrip = false;
         if (customer.getCustomerBookedTrips() != null && customer.getCustomerBookedTrips().size() != 0) {
             foundOldBookedTrip = BookedTravels.appendTicket(customer.getCustomerBookedTrips(), ticketList,
-                    ChosenTrip.getTripID()); 
+                    ChosenTrip.getTripID());
         }
         if (!foundOldBookedTrip) {
             if (customer.discountActive()) {
@@ -204,7 +207,7 @@ public class BookingTickets {
     }
 
     private boolean CheckTripCapacity(ArrayList<Trip> tripsList, String tripID, int tickets) {
-        if (tripsList.get(Integer.parseInt(tripID) - 1000).getCapacity() > tickets) {
+        if (tripsList.get(Integer.parseInt(tripID) - 1000).getCapacity() >= tickets) {
             return true;
         }
         return false;

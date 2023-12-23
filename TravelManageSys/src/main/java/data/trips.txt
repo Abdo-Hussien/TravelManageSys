@@ -91,7 +91,7 @@ Couple
 Santorini, a Greek island in the Aegean Sea, is famous for its white-washed buildings and stunning sunsets. Explore the charming villages, relax on the black sand beaches, and savor Greek cuisine.
 erts2
 20
-1
+20
 Oia Sunset Cruise | Akrotiri Archaeological Site | Wine Tasting Tour | 
 Canaves Oia Hotel
 uvw10xyz
@@ -245,7 +245,7 @@ Family
 Reykjavik, the capital of Iceland, is a gateway to stunning natural wonders, including geysers, waterfalls, and the Northern Lights. Experience the magic of the Golden Circle, relax in the Blue Lagoon, and chase the Aurora Borealis.
 tg002
 60
-0
+10
 Golden Circle Tour | Blue Lagoon Relaxation | Northern Lights Hunt | 
 The Retreat at Blue Lagoon
 ghi21jkl

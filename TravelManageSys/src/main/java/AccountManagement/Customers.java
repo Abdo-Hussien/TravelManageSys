@@ -550,7 +550,7 @@ public class Customers extends Person {
     }
 
     public double applyDiscount(double originalPrice) {
-        return Math.round((originalPrice - (originalPrice * discount)) * 1000) / 1000;
+        return originalPrice - (originalPrice * discount);
     }
 
     private void CustomMessage(String message, int timeout) {

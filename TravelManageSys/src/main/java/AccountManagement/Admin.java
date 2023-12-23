@@ -47,11 +47,7 @@ public class Admin implements Administration {
                 fileManipulation.writeCustomers(allCustomers);
                 fileManipulation.writeTrips(allTrips);
                 System.out.println("Sign out successfully");
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                pause(300);
                 return;
             } else {
                 System.out.println("Invalid input! please choose only from the following options.");
@@ -82,8 +78,10 @@ public class Admin implements Administration {
                 editInformations("new", AllUsers, type, "Admin");
                 return;
             } else if (choice == '3') {
-                DeleteUsers(AllUsers, "new", type);
-                return;
+                if (DeleteUsers(AllUsers, "new", type))
+                    return;
+                else
+                    continue;
             } else if (choice == '4') {
                 AllUsers.add((T) create_acc(type));
                 Manipulation(AllUsers, type);
@@ -113,7 +111,12 @@ public class Admin implements Administration {
                 Person.DisplayUserDetails(AllUsers.get(index));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Invalid Customer ID entered! please try again");
-                continue;
+                if (try_again())
+                    continue;
+                else {
+                    Manipulation(AllUsers, type);
+                    return;
+                }
             }
             break;
         }
@@ -126,14 +129,12 @@ public class Admin implements Administration {
                 editInformations("null", AllUsers, type, "Admin");
                 break;
             case '2':
-                DeleteUsers(AllUsers, "old", "Customer");
-                break;
+                if (DeleteUsers(AllUsers, "old", "Customer"))
+                    break;
+                else
+                    Manipulation(AllUsers, type);
             case '3':
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                pause(300);
                 Manipulation(AllUsers, "Customer");
                 break;
             default:
@@ -181,19 +182,13 @@ public class Admin implements Administration {
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
                     System.out.println("Phone number updated successfully");
-                } else if (choice == '7') {
-                    //function bta3 options lel user
-                    
-                }
-                
-                
-                else {
+                } else if (choice == '7')
+                    break;
+                else
                     System.out.println("Invalid input! please try again..");
-                }
             }
-            System.out.println("Countinue edting? 'y/n' ");
-            input = in.next();
-            in.nextLine();
+            if (!try_again())
+                break;
         } while (input.equalsIgnoreCase("y"));
         if (callingfrom.equals("Admin"))
             Manipulation(AllUsers, type);
@@ -204,10 +199,9 @@ public class Admin implements Administration {
             TourGuide current_TourGuide = (TourGuide) AllUsers.get(index);
             current_TourGuide.showinfo((ArrayList<TourGuide>) AllUsers, allTrips);
         }
-        return;
     }
 
-    public <T extends Personsinterface> void DeleteUsers(ArrayList<T> AllUsers, String status, String type) {
+    public <T extends Personsinterface> boolean DeleteUsers(ArrayList<T> AllUsers, String status, String type) {
         if (status == "new") {
             String text = type.toLowerCase().equals("customer") ? "a customer"
                     : "a tourguide";
@@ -219,29 +213,24 @@ public class Admin implements Administration {
                     index = Integer.parseInt(input) - 1;
                     AllUsers.remove(index);
                     System.out.println("Account removed successfully!");
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    pause(300);
                     Manipulation(AllUsers, type);
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    System.out.println("Invalid Customer ID entered! please try again");
-                    continue;
+                    System.out.println("Invalid Customer ID entered!");
+                    if (try_again())
+                        continue;
+                    else
+                        return false;
                 }
                 break;
             }
         } else {
             AllUsers.remove(index);
             System.out.println("Account removed successfully!");
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            pause(300);
             Manipulation(AllUsers, type);
         }
-        return;
+        return true;
     }
 
     @Override
@@ -264,31 +253,23 @@ public class Admin implements Administration {
                     throw new IndexOutOfBoundsException("Invalid Trip ID! please try again..");
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e2) {
-                    e2.printStackTrace();
-                }
+                pause(500);
                 tripsAvalability(AllTrip, customers, tourGuide);
+                return;
             }
             trip = AllTrip.get(tripindex);
             trip.displayTripDetails();
             System.out.println("Press any key (followed by Enter key) to go back...");
             input = in.next();
             in.nextLine();
-            tripsAvalability(AllTrip, customers, tourGuide);
         } else if (choice == '2') {
             AdminMenu(customers, tourGuide, AllTrip);
             return;
         } else {
             System.out.println("invaild input! please try again");
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            tripsAvalability(AllTrip, customers, tourGuide);
+            pause(300);
         }
+        tripsAvalability(AllTrip, customers, tourGuide);
     }
 
     public Person create_acc(String Account_Type) {
@@ -348,6 +329,8 @@ public class Admin implements Administration {
             if (user == null) {
                 counter++;
                 System.out.println("You have " + counter + "/3 attempts left...");
+                if (!try_again())
+                    return null;
             } else
                 return user;
             System.out.println("--------------------------------------");
@@ -380,7 +363,7 @@ public class Admin implements Administration {
     }
 
     public <T extends Personsinterface> T userMenu(ArrayList<T> users, String Account_Type) {
-        Person current_person;
+        Person current_person = null;
         System.out.println("Choose an action you want to perfom.");
         System.out.println(".~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.~~~~~~~~~~~.");
         System.out.println("1.) Create account.");
@@ -392,19 +375,48 @@ public class Admin implements Administration {
             current_person = (Person) create_acc(Account_Type);
             index = users.indexOf(current_person);
             users.add((T) current_person);
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return login(users);
+            pause(300);
+            return checkLogin(current_person, users, Account_Type);
         } else if (userInput.equals("2")) {
-            current_person = (Person) login(users);
-            index = users.indexOf(current_person);
-            return (T) current_person;
+            return checkLogin(current_person, users, Account_Type);
         } else {
             System.out.println("Invalid input! please choose only from the following options.");
-            return userMenu(users, Account_Type);
+            if (try_again())
+                return userMenu(users, Account_Type);
+            else
+                return null;
         }
     }
+
+    public <T extends Personsinterface> T checkLogin(Person current_person, ArrayList<T> users, String Account_Type) {
+        current_person = (Person) login(users);
+        if (current_person == null)
+            return userMenu(users, Account_Type);
+        index = users.indexOf(current_person);
+        return (T) current_person;
+    }
+
+    private boolean try_again() {
+        System.out.println("Do you want to try again? (y/n)");
+        choice = in.next().toLowerCase().charAt(0);
+        switch (choice) {
+            case 'y':
+                return true;
+            case 'n':
+                return false;
+            default:
+                System.out.println("Invalid Input..");
+                pause(500);
+                return try_again();
+        }
+    }
+
+    public void pause(int timeout) {
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e2) {
+            e2.printStackTrace();
+        }
+    }
+
 }

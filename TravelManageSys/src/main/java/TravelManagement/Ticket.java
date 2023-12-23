@@ -24,9 +24,10 @@ public abstract class Ticket {
     public abstract void setType();
 
     public void ticketTypeheader(String type) {
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.printf("%-12s %s\n", "", type.toUpperCase());
-        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("%-3s %s\n", "", "~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
     public abstract int Add();

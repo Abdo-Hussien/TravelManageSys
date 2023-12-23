@@ -68,7 +68,7 @@ public class TravelItineraries {
                 } else {
                     System.out.println("wrong input! please try again");
                 }
-            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4'||choice != '5');
+            } while (choice != '1' || choice != '2' || choice != '3' || choice != '4' || choice != '5');
 
         }
     }
@@ -141,10 +141,12 @@ public class TravelItineraries {
         for (int key = 0; key < AvailableStartDates.length; key++) {
             System.out.printf("%-6d| %-12s | %-12s%n", key + 1, AvailableStartDates[key], AvailableEndDates[key]);
         }
-        System.out.print("Choose which date: ");
+        System.out.print("Choose which date. (\'-1\' to go back) -> ");
         ans = in.nextInt();
         in.nextLine();
-        if (ans > AvailableStartDates.length) {
+        if (ans == -1)
+            return true;
+        if (ans > AvailableStartDates.length || ans < 1) {
             System.out.println("Input isn't included in the choices, please choose from the following dates\n");
             pause(1000);
             assignNewDate(trip, customer);
@@ -183,11 +185,28 @@ public class TravelItineraries {
         if (checked) {
             customer.getCustomerBookedTrips().remove(index);
             System.out.println("Trip cancelled successfully.");
-
             return;
         } else {
             System.out.println("Invalid Trip ID.");
-            pause(1000);
+            if (try_again())
+                cancelTrip(customer);
+            else
+                return;
+        }
+    }
+
+    private boolean try_again() {
+        System.out.println("Do you want to try again? (y/n)");
+        choice = in.next().toLowerCase().charAt(0);
+        switch (choice) {
+            case 'y':
+                return true;
+            case 'n':
+                return false;
+            default:
+                System.out.println("Invalid Input..");
+                pause(500);
+                return try_again();
         }
     }
 

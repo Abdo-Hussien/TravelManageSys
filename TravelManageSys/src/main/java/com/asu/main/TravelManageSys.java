@@ -40,15 +40,19 @@ public class TravelManageSys {
                     admin.AdminMenu(allCustomers, allTourGuides, allTrips);
                     continue;
                 } else {
-                    System.out.println("wrong username or password! please try again");
+                    System.out.println("Wrong username or password!");
                     continue;
                 }
             } else if (choice == 2) {
                 Customers currentCustomer = (Customers) admin.userMenu(allCustomers, "Customer");
+                if (currentCustomer == null)
+                    continue;
                 RunCustomer(currentCustomer, allCustomers, allTrips);
                 continue;
             } else if (choice == 3) {
                 TourGuide currentTourGuide = (TourGuide) admin.userMenu(allTourGuides, "TourGuide");
+                if (currentTourGuide == null)
+                    continue;
                 currentTourGuide.guideMenu(allTourGuides, allTrips);
                 continue;
             } else if (choice == 4)
