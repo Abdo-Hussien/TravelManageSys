@@ -157,8 +157,7 @@ public class Admin implements Administration {
                         "3- First Name\n" +
                         "4- Last Name\n" +
                         "5- Address\n" +
-                        "6- Phone number\n" +
-                        "7- Go back\n");
+                        "6- Phone number\n");
                 choice = in.next().charAt(0);
                 if (choice == '1') {
                     AllUsers.get(index).setUsername(Validations.NameValidation("new Username", 8, 22));
@@ -182,8 +181,7 @@ public class Admin implements Administration {
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
                     System.out.println("Phone number updated successfully");
-                } else if (choice == '7')
-                    break;
+                } 
                 else
                     System.out.println("Invalid input! please try again..");
             }
@@ -274,6 +272,7 @@ public class Admin implements Administration {
 
     public Person create_acc(String Account_Type) {
         Person person = null;
+        //checks if the user is a customer or a tour guide
         if (Account_Type.equalsIgnoreCase("TourGuide"))
             person = new TourGuide();
         else if (Account_Type.equalsIgnoreCase("Customer"))
@@ -329,7 +328,7 @@ public class Admin implements Administration {
             user = CheckCredentials(allusers, userName, pass);
             if (user == null) {
                 attempts--;
-                System.out.println("You have " + attempts + "/5 attempts left...");
+                System.out.println("You have " + attempts + " attempts left...");
                 if(attempts!=0){
                 if (!try_again())
                     return null;
