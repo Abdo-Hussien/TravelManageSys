@@ -1,5 +1,6 @@
 package AccountManagement;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Validations {
@@ -10,11 +11,11 @@ public class Validations {
             System.out.println("Please enter your " + input_type + ": ");
             String name = in.next();
             in.nextLine();
-            if (name.length() < low_range) {
+            if (name.length() < low_range  ) {
                 System.out.println("Invalid!");
                 continue;
             }
-            if (name.length() > high_range)
+            if (name.length() > high_range )
                 System.out.println(input_type + " is too long.");
             else
                 return name;
@@ -27,7 +28,7 @@ public class Validations {
             System.out.println("The state code (+20) is added. \n");
             String phone_no = in.next();
             in.nextLine();
-            if (phone_no.length() == 10)
+            if (phone_no.length() == 10 && !phone_no.matches(".*[^A-Za-z0-9].*")&&!phone_no.matches(".*[A-Z].*") && !phone_no.matches(".*[a-z].*"))
                 return "+20" + phone_no;
             else {
                 System.out.println("Invalid phone number, the phone number should be 10 numbers !");
@@ -38,16 +39,28 @@ public class Validations {
 
     static int AgeValidation() {
         while (true) {
+            try{
             System.out.println("Enter your age: ");
             int Age = in.nextInt();
             in.nextLine();
             System.out.println("");
+            
+           
             if (Age < 16 || Age > 90) {
                 System.out.println("Invalid age, the minimum age to create an account is 16 and maximum is 90 !");
                 continue;
             } else {
                 return Age;
             }
+        }
+        
+                    catch (InputMismatchException e) {
+                        // Handle the case where the input is not an integer
+                        System.out.println("Invalid input! Please enter a valid integer for age.");
+                        in.nextLine();
+                        continue;
+                    }
+        
         }
     }
 
@@ -68,7 +81,7 @@ public class Validations {
     static String[] AddressValidation() {
         while (true) {
             System.out.println("Please enter your address: \n");
-            System.out.println("Please follow this format -> 012 street name | state | zip code");
+            System.out.println("Please follow this format -> 012 street  | state name | zip code");
             System.out.println("Example: 890 Abdelhaleem Sabry Street | Cairo | 11234\n");
             String address = in.nextLine();
             try {
@@ -87,8 +100,7 @@ public class Validations {
 
     static String PasswordValidation() {
         System.out.println("Note: Your password should be a minimum of 8 characters and a maximum of 16.");
-        System.out.println(
-                "It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.\n");
+        System.out.println( "It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.\n");
         while (true) {
             System.out.println("Create a strong password for your account: ");
             String pass = in.next();
@@ -102,6 +114,7 @@ public class Validations {
 
             // Check if the password contains at least one uppercase letter, one lowercase
             // letter, one digit, and one special character
+
             if (!pass.matches(".*[A-Z].*") || !pass.matches(".*[a-z].*") || !pass.matches(".*\\d.*")
                     || !pass.matches(".*[^A-Za-z0-9].*")) {
                 System.out.println(

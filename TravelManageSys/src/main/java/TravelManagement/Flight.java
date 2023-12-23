@@ -4,8 +4,8 @@ public class Flight extends Transportation {
     private String airline;
 
     // Constructor
-    public Flight(String pickUp, int maxCapacity, String airline, String transportID) {
-        super(pickUp, maxCapacity, transportID);
+    public Flight(String pickUp, String airline, String transportID) {
+        super(pickUp, transportID);
         this.airline = airline;
     }
 

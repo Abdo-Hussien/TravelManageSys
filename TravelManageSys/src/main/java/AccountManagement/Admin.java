@@ -157,8 +157,7 @@ public class Admin implements Administration {
                         "3- First Name\n" +
                         "4- Last Name\n" +
                         "5- Address\n" +
-                        "6- Phone number\n" +
-                        "7- Go back\n");
+                        "6- Phone number\n");
                 choice = in.next().charAt(0);
                 if (choice == '1') {
                     AllUsers.get(index).setUsername(Validations.NameValidation("new Username", 8, 22));
@@ -182,8 +181,7 @@ public class Admin implements Administration {
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
                     System.out.println("Phone number updated successfully");
-                } else if (choice == '7')
-                    break;
+                } 
                 else
                     System.out.println("Invalid input! please try again..");
             }
@@ -274,6 +272,7 @@ public class Admin implements Administration {
 
     public Person create_acc(String Account_Type) {
         Person person = null;
+        //checks if the user is a customer or a tour guide
         if (Account_Type.equalsIgnoreCase("TourGuide"))
             person = new TourGuide();
         else if (Account_Type.equalsIgnoreCase("Customer"))
@@ -312,12 +311,12 @@ public class Admin implements Administration {
     }
 
     public <T extends Personsinterface> T login(ArrayList<T> allusers) {
-        int counter = 0;
+        int attempts = 5; 
         T user = null;
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tLogin");
         System.out.println("~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*\n");
-        while (counter != 3) {
+        while (attempts != 0) {
             System.out.print("Enter your username: ");
             String userName = in.next();
             in.nextLine();
@@ -325,17 +324,20 @@ public class Admin implements Administration {
             System.out.print("Enter your password: ");
             String pass = in.next();
             in.nextLine();
+            System.out.println("");
             user = CheckCredentials(allusers, userName, pass);
             if (user == null) {
-                counter++;
-                System.out.println("You have " + counter + "/3 attempts left...");
+                attempts--;
+                System.out.println("You have " + attempts + " attempts left...");
+                if(attempts!=0){
                 if (!try_again())
                     return null;
+                }
             } else
                 return user;
             System.out.println("--------------------------------------");
 
-            if (counter == 3) {
+            if (attempts == 0) {
                 System.out.println("Unfortunately you can't login... you have been timed out temporarily!");
                 System.exit(0);
                 return null;
