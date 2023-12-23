@@ -21,11 +21,19 @@ public class Hotels {
             boolean booking, boolean swimmingpool, boolean restaurant) {
         this.Hotelname = Hotelname;
         this.rate = rate;
+        //  Not used attributes.
         this.numofRooms = numofRooms;
         this.booking = booking;
         this.swimmingpool = swimmingpool;
         this.restaurant = restaurant;
+    }
+    
+    public String getHotelname(){
+        return this.Hotelname;
+    }
 
+    public double getRate(){
+        return this.rate;
     }
 
 }

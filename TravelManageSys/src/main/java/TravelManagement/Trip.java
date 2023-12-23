@@ -32,6 +32,9 @@ public abstract class Trip {
     private static ArrayList<Transportation> allTransportations = new ArrayList<Transportation>(
             fileManipulation.getAllTransportations());
 
+    private static ArrayList<Hotels> AllHotels = new ArrayList<Hotels>(
+            fileManipulation.getAllHotels());
+
     public Trip() {
         Capacity = 0;
     }
@@ -133,7 +136,8 @@ public abstract class Trip {
             System.out.println("- " + game);
         }
         System.out.println("");
-        System.out.println("Staying at: " + this.getHotelName());
+        System.out.println("Staying at: " + this.getHotel(this.hotelName).getHotelname());
+        System.out.println("Hotel rating: " + this.getHotel(this.hotelName).getRate());
         System.out.println("Going by: " + this.getTransportation(transportID).getPickUp());
         System.out.println("Car Rentals (Optional)");
         System.out.println("");
@@ -252,18 +256,14 @@ public abstract class Trip {
         return this.hotelName;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-    }
-
     // Each Trip has a Transportation so it gets it by trip ID
-    public Transportation getTransportation(int tripId,
-            ArrayList<Trip> allTrips) {
-        for (int i = 0; i < allTransportations.size(); i++)
-            if (allTransportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
-                return allTransportations.get(i);
-        return null;
-    }
+    // public Transportation getTransportation(int tripId,
+    //         ArrayList<Trip> allTrips) {
+    //     for (int i = 0; i < allTransportations.size(); i++)
+    //         if (allTransportations.get(i).getTransportID().equals(allTrips.get(tripId).transportID))
+    //             return allTransportations.get(i);
+    //     return null;
+    // }
 
     /*
      * Returns a transportation by the transportation ID,
@@ -275,12 +275,11 @@ public abstract class Trip {
                 return allTransportations.get(i);
         return null;
     }
-
-    // Returns a Tour Guide by the TourGuide ID
-    public TourGuide getTourGuide(ArrayList<TourGuide> TourGuides, String tourGuideID) {
-        for (TourGuide tourGuide : TourGuides)
-            if (tourGuide.getAccount_id().equals(tourGuideID))
-                return tourGuide;
+    //Returns an Hotel by the Hotel name
+    public Hotels getHotel(String hotelName) {
+        for (int i = 0; i < AllHotels.size(); i++)
+            if (AllHotels.get(i).getHotelname().equals(hotelName))
+                return AllHotels.get(i);
         return null;
     }
 

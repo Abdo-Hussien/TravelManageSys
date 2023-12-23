@@ -15,6 +15,7 @@ import TravelManagement.BookingTickets;
 import TravelManagement.Car;
 import TravelManagement.ChosenTrip;
 import TravelManagement.GeneralTours;
+import TravelManagement.Hotels;
 import TravelManagement.Transportation;
 import TravelManagement.Trip;
 import data.fileManipulation;
@@ -119,6 +120,8 @@ public class Customers extends Person {
         boolean[] foundPlatinumTicket = { false };
         BookedTravels customerBookedTrips;
         Transportation transportation;
+        Hotels hotel;
+
         System.out.print("Please use the index to display booking details of a trip: ");
         choice = in.nextInt();
         in.nextLine();
@@ -134,7 +137,11 @@ public class Customers extends Person {
                         AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getTransportID());
         customerBookedTrips.getBookedticket().forEach(ticket -> {
             TicketsCounter[0] += ticket.getCounter();
+
         });
+        hotel = AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000)
+                .getHotel(
+                        AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getHotelName());
         System.out.printf("\n%s\n",
                 "************************************************************************************************");
         System.out.printf("%-40s%s\n\n",
@@ -159,7 +166,8 @@ public class Customers extends Person {
         System.out.println(
                 "|------------------------------------------|----------------------------------------|---------|");
         System.out.printf("Pickup : %-50sStaying At : %-30s%n", transportation.getPickUp(),
-                AllTrips.get(Integer.parseInt(customerBookedTrips.getTripID()) - 1000).getHotelName());
+                hotel.getHotelname());
+        System.out.println("Hotel rating: " + hotel.getRate());
         boolean isCarRented = customerBookedTrips.getCarID() != null;
         System.out.printf("Car Rental : %-60s%n", isCarRented);
         if (isCarRented) {
