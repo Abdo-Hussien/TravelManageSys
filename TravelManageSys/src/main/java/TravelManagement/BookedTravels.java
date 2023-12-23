@@ -3,12 +3,14 @@ package TravelManagement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import AccountManagement.Customers;
+
 public class BookedTravels {
     private ChosenTrip chosenTrip;
     private ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
 
-    //fixed bookedTravels constructor
-    public BookedTravels(ChosenTrip ChosenTrip,ArrayList<Ticket> ticket) {
+    // fixed bookedTravels constructor
+    public BookedTravels(ChosenTrip ChosenTrip, ArrayList<Ticket> ticket) {
         this.chosenTrip = ChosenTrip;
         this.Bookedticket = ticket;
     }
@@ -95,12 +97,24 @@ public class BookedTravels {
         this.Bookedticket = Bookedticket;
     }
 
-    public static boolean appendTicket(ArrayList<BookedTravels> bookedTravels, ArrayList<Ticket> Bookedticket,
-            String TripID) {
+    public static boolean appendTicket(Customers customer, ArrayList<Ticket> Bookedticket,
+            ArrayList<Trip> allTrips, ChosenTrip trip) {
         int i = -1;
-        for (i = 0; i < bookedTravels.size(); i++) {
-            if (TripID.equals(bookedTravels.get(i).getTripID())) {
-                bookedTravels.get(i).Bookedticket.addAll(Bookedticket);
+        for (i = 0; i < customer.getCustomerBookedTrips().size(); i++) {
+            if (trip.getTripID().equals(customer.getCustomerBookedTrips().get(i).getTripID())) {
+                //  Append Tickets.
+                customer.getCustomerBookedTrips().get(i).Bookedticket.addAll(Bookedticket);
+                //  Add prices of new added tickets.
+                for (Ticket ticket : Bookedticket) {
+                    double ticket_price = ticket.getCounter() * ticket.Ticket_Price(allTrips.get(Integer.parseInt(trip.getTripID()) - 1000).getInitPrice());
+                    if (customer.discountActive()) {
+                        trip.setTotalPrice(customer.applyDiscount(ticket_price));
+                        CustomMessage("Discount applied", 1000);
+                    }
+                    customer.getCustomerBookedTrips().get(i).chosenTrip.addToTotalPrice(trip.getTotalPrice());
+                }
+                //  Replace Car ID.
+                customer.getCustomerBookedTrips().get(i).chosenTrip.setCarID(trip.getCarID());
                 return true;
             }
         }
@@ -113,6 +127,15 @@ public class BookedTravels {
 
     public void setTripPrice(double totalPrice) {
         this.chosenTrip.setTotalPrice(totalPrice);
+    }
+
+    private static void CustomMessage(String message, int timeout) {
+        try {
+            System.out.println(message);
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            System.out.println("Thread error sleeping.");
+        }
     }
 
 }

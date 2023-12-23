@@ -188,15 +188,15 @@ public class BookingTickets {
         System.out.println("Total Tickets: " + totalTickets);
         boolean foundOldBookedTrip = false;
         if (customer.getCustomerBookedTrips() != null && customer.getCustomerBookedTrips().size() != 0) {
-            foundOldBookedTrip = BookedTravels.appendTicket(customer.getCustomerBookedTrips(), ticketList,
-                    ChosenTrip.getTripID());
+            foundOldBookedTrip = BookedTravels.appendTicket(customer, ticketList,
+                    AllTrip, ChosenTrip);
         }
+
         if (!foundOldBookedTrip) {
             if (customer.discountActive()) {
                 ChosenTrip.setTotalPrice(customer.applyDiscount(ChosenTrip.getTotalPrice()));
                 CustomMessage("Discount applied", 1000);
             }
-            // fixed bookedTravels constructor
             BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip, ticketList);
             customer.getCustomerBookedTrips().add(oldBookedTravels);
         }

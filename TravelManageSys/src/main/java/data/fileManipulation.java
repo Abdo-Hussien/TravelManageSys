@@ -305,7 +305,7 @@ public class fileManipulation {
                     writer.write(System.lineSeparator());
 
                     for (BookedTravels bookedtrips : customer.getCustomerBookedTrips()) {
-                        if (bookedtrips.getCarID().equals(null) || bookedtrips.getCarID().equals(""))
+                        if (bookedtrips.getCarID() == null)
                             writer.write("No car" + " | ");
                         else
                             writer.write(bookedtrips.getCarID() + " | ");
