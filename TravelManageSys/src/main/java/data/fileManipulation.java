@@ -145,11 +145,9 @@ public class fileManipulation {
                     CustomerTickets.add(new Platinum(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
-            CustomerBookedTrips
-                    .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
-                            dateFormat.parse(TicketExpDates[i]), CustomerTickets,
-                            Double.parseDouble(totalPrices[i]),
-                            carIDs[i]));
+            ChosenTrip chosenTrip = new ChosenTrip(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
+                    dateFormat.parse(TicketExpDates[i]), Double.parseDouble(totalPrices[i]), carIDs[i]);
+            CustomerBookedTrips.add(new BookedTravels(chosenTrip, CustomerTickets));
         }
         return CustomerBookedTrips;
     }
@@ -373,7 +371,7 @@ public class fileManipulation {
                 for (Date date : trip.getStartDates())
                     writer.write(dateFormat.format(date) + " | ");
                 writer.write(System.lineSeparator());
-                
+
                 for (Date date : trip.getEndDates())
                     writer.write(dateFormat.format(date) + " | ");
                 writer.write(System.lineSeparator());

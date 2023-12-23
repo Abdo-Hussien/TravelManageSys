@@ -7,19 +7,10 @@ public class BookedTravels {
     private ChosenTrip chosenTrip;
     private ArrayList<Ticket> Bookedticket = new ArrayList<Ticket>();
 
-    public BookedTravels(String tripID, String tripName, Date startDate, Date endDate, ArrayList<Ticket> ticket,
-            double totalprice, String carID) {
-        this.chosenTrip = new ChosenTrip(tripID, tripName, startDate, endDate, totalprice, carID);
+    //fixed bookedTravels constructor
+    public BookedTravels(ChosenTrip ChosenTrip,ArrayList<Ticket> ticket) {
+        this.chosenTrip = ChosenTrip;
         this.Bookedticket = ticket;
-    }
-
-    public BookedTravels() {
-        this.chosenTrip = new ChosenTrip();
-        this.Bookedticket = new ArrayList<Ticket>();
-    }
-
-    public ChosenTrip getChosenTrip() {
-        return this.chosenTrip;
     }
 
     public void setChosenTrip(String tripID, String tripName, Date startDate, Date endDate,
