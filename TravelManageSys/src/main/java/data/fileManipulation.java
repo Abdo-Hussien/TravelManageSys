@@ -223,12 +223,12 @@ public class fileManipulation {
                 String[] Transportation = t_str.split(System.lineSeparator());
                 if (Transportation[0].toLowerCase().equals("flight")) {
                     AllTransportations
-                            .add(new Flight(Transportation[1], Integer.parseInt(Transportation[2]), Transportation[3],
-                                    Transportation[4]));
+                            .add(new Flight(Transportation[1], Transportation[2],
+                                    Transportation[3]));
                 } else if (Transportation[0].toLowerCase().equals("bus")) {
                     AllTransportations
-                            .add(new Bus(Transportation[1], Integer.parseInt(Transportation[2]), Transportation[3],
-                                    Transportation[4]));
+                            .add(new Bus(Transportation[1], Transportation[2],
+                                    Transportation[3]));
                 }
             }
             return AllTransportations;
