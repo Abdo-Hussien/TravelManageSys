@@ -22,6 +22,15 @@ public class ChosenTrip {
         this.carID = carID;
     }
 
+    public ChosenTrip(ChosenTrip chosenTrip) {
+        this.tripName = chosenTrip.getTripName();
+        this.tripID = chosenTrip.getTripID();
+        this.startDate = chosenTrip.getStartDate();
+        this.endDate = chosenTrip.getEndDate();
+        this.totalPrice = chosenTrip.getTotalPrice();
+        this.carID = chosenTrip.getCarID();
+    }
+
     public String getTripID() {
         return this.tripID;
     }
