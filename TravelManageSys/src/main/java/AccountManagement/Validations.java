@@ -1,5 +1,6 @@
 package AccountManagement;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Validations {
@@ -38,16 +39,28 @@ public class Validations {
 
     static int AgeValidation() {
         while (true) {
+            try{
             System.out.println("Enter your age: ");
             int Age = in.nextInt();
             in.nextLine();
             System.out.println("");
+            
+           
             if (Age < 16 || Age > 90) {
                 System.out.println("Invalid age, the minimum age to create an account is 16 and maximum is 90 !");
                 continue;
             } else {
                 return Age;
             }
+        }
+        
+                    catch (InputMismatchException e) {
+                        // Handle the case where the input is not an integer
+                        System.out.println("Invalid input! Please enter a valid integer for age.");
+                        in.nextLine();
+                        continue;
+                    }
+        
         }
     }
 
