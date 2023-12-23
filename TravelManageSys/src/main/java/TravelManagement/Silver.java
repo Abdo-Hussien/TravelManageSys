@@ -37,7 +37,7 @@ public class Silver extends Ticket {
     public int Add() {
         ticketTypeheader("Silver");
         System.out.println("How many sliver tickets do you want?");
-        System.out.print("Choice: ");
+        System.out.print("Choice: "); //remove choice
         addeddTicket = in.nextInt();
         in.nextLine();
         if (addeddTicket > 0) {
@@ -53,7 +53,7 @@ public class Silver extends Ticket {
 
     public int Delete() {
         System.out.println("How many sliver tickets do you want to delete?");
-        System.out.print("Choice: ");
+        System.out.print("Choice: "); //remove choice
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
