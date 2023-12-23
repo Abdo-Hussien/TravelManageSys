@@ -17,7 +17,15 @@ Emily Johnson
 Female
 112 Oak Street | California | 56282 | 
 +4085557890
-No Booked Trips
+1000 | 
+Cancun | 
+20-12-2023 | 
+12159.92 | 
+2007 | 
+Imf , | 
+15-12-2023 , | 
+platinum , | 
+4 , | 
 1006 | 
 ---
 xyz78

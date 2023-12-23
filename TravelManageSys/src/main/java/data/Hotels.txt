@@ -47,7 +47,7 @@ false
 false
 true
 ---
-Le Méridien Dahab Resort & SPA
+Le Meridien Dahab Resort & SPA
 5.0
 10
 false
