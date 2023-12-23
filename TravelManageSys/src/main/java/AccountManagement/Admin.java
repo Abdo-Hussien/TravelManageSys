@@ -156,10 +156,10 @@ public class Admin implements Administration {
                         "3- First Name\n" +
                         "4- Last Name\n" +
                         "5- Address\n" +
-                        "6- Phone number\n");
+                        "6- Phone number\n" +
+                        "7- Go back\n");
                 choice = in.next().charAt(0);
                 if (choice == '1') {
-                    System.out.println("Enter new username: ");
                     AllUsers.get(index).setUsername(Validations.NameValidation("new Username", 8, 22));
                     System.out.println("Username updated successfully");
                 } else if (choice == '2') {
@@ -181,7 +181,13 @@ public class Admin implements Administration {
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
                     System.out.println("Phone number updated successfully");
-                } else {
+                } else if (choice == '7') {
+                    //function bta3 options lel user
+                    
+                }
+                
+                
+                else {
                     System.out.println("Invalid input! please try again..");
                 }
             }

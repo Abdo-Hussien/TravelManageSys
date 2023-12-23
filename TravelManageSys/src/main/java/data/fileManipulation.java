@@ -146,11 +146,11 @@ public class fileManipulation {
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
             //Fixing later due to changes in bookedTravels constructor
-            CustomerBookedTrips
-                    .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
-                            dateFormat.parse(TicketExpDates[i]), CustomerTickets,
-                            Double.parseDouble(totalPrices[i]),
-                            carIDs[i]));
+            // CustomerBookedTrips
+            //         .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
+            //                 dateFormat.parse(TicketExpDates[i]), CustomerTickets,
+            //                 Double.parseDouble(totalPrices[i]),
+            //                 carIDs[i]));
         }
         return CustomerBookedTrips;
     }
