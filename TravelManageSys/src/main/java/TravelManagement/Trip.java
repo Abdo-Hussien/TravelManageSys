@@ -171,7 +171,7 @@ public abstract class Trip {
     }
 
     // Shows the available trips according to the avalability and capacity
-    public static void displayAdminTrips(ArrayList<Trip> allTrips, ArrayList<Person> allCustomers2) {
+    public static void displayAdminTrips(ArrayList<Trip> allTrips, ArrayList<Customers> allCustomers2) {
         System.out.println("All available Trips!: " + allTrips.size());
         System.out.println("_________________________________________________________________\n");
         System.out.printf("%-10s | %-25s | %-15s -> (%s)\n", "Trip ID", "Trip Name", "Availability", "Remaining");
