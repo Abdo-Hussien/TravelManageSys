@@ -89,7 +89,7 @@ public class BookingTickets {
         if (choice == 1) {
             return ticketMenu(customer, ChosenTrip, AllTrip, allCars);
         } else if (choice == 2) {
-            boolean isDeleted = DeleteTicket(customer, ChosenTrip, AllTrip, allCars);
+            boolean isDeleted = ViewCart(customer, ChosenTrip, AllTrip, allCars);
             if (isDeleted) // If Not Deleted then Error
                 return isDeleted;
             CustomMessage("No tickets Deleted: You chose a ticket that isn't added to your cart...", 500);
@@ -102,7 +102,7 @@ public class BookingTickets {
         }
     }
 
-    public boolean DeleteTicket(Customers customer, ChosenTrip ChosenTrip,
+    public boolean ViewCart(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> allTrips, ArrayList<Car> allCars) {
         int Counter = 0;
         for (Ticket ticket : ticketList)
@@ -116,9 +116,13 @@ public class BookingTickets {
             System.out.println(ticketList.get(i).getCounter() + " " + ticketList.get(i).type + " tickets");
             System.out.println("**********");
         }
+        return DeleteTicket(customer, ChosenTrip, allTrips, allCars);
+    }
 
+    public boolean DeleteTicket(Customers customer, ChosenTrip ChosenTrip,
+            ArrayList<Trip> allTrips, ArrayList<Car> allCars) {
         System.out.println("What type of ticket you want to delete?" + "   \'Enter Ticket type\' ");
-        System.out.println("Example: Silver, Regular, Gold, ..."); //silver hya hya regular
+        System.out.println("Example: Silver, Regular, Gold, ..."); // silver hya hya regular
         System.out.println("Back to return to ticket editing menu!");
         String ans = in.next();
         in.nextLine();
@@ -136,9 +140,9 @@ public class BookingTickets {
             return TicketEditMenu(customer, ChosenTrip, allTrips, allCars);
         else {
             System.out.println("Invalid input! please try again");
-            return DeleteTicket(customer, ChosenTrip, allTrips, allCars); //elmafrod ttl3 3nd el ticket type
+            return DeleteTicket(customer, ChosenTrip, allTrips, allCars); // elmafrod ttl3 3nd el ticket type
         }
-    };
+    }
 
     private boolean checkTicketDeletion(Customers customer, ArrayList<Trip> allTrips,
             ChosenTrip ChosenTrip, String ticket_type, double rate, ArrayList<Car> allCars) { /////
@@ -182,15 +186,15 @@ public class BookingTickets {
         boolean foundOldBookedTrip = false;
         if (customer.getCustomerBookedTrips() != null && customer.getCustomerBookedTrips().size() != 0) {
             foundOldBookedTrip = BookedTravels.appendTicket(customer.getCustomerBookedTrips(), ticketList,
-                    ChosenTrip.getTripID());
+                    ChosenTrip.getTripID()); 
         }
         if (!foundOldBookedTrip) {
             if (customer.discountActive()) {
                 ChosenTrip.setTotalPrice(customer.applyDiscount(ChosenTrip.getTotalPrice()));
                 CustomMessage("Discount applied", 1000);
             }
-            //fixed bookedTravels constructor
-            BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip,ticketList);
+            // fixed bookedTravels constructor
+            BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip, ticketList);
             customer.getCustomerBookedTrips().add(oldBookedTravels);
         }
         CustomMessage("You successfully booked " + ChosenTrip.getTripName() + " Trip", 300);

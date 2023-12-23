@@ -36,7 +36,6 @@ public class Platinum extends Ticket {
     public int Add() {
         ticketTypeheader("Platinum");
         System.out.println("How many Platinum tickets you want?");
-        System.out.print("Choice: ");
         addeddTicket = in.nextInt();
         in.nextLine();
         if (addeddTicket > 0) {
@@ -52,7 +51,6 @@ public class Platinum extends Ticket {
 
     public int Delete() {
         System.out.println("How many Platinum tickets you want to delete?");
-        System.out.print("Choice: ");
         deletedTicket = in.nextInt();
         in.nextLine();
         if (deletedTicket > 0) {
