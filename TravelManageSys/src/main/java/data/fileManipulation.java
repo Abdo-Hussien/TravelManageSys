@@ -145,6 +145,7 @@ public class fileManipulation {
                     CustomerTickets.add(new Platinum(TripTicketIDs[j],
                             TripTicketTypes[j], Integer.parseInt(TripTicketCounter[j])));
             }
+            //Fixing later due to changes in bookedTravels constructor
             CustomerBookedTrips
                     .add(new BookedTravels(IDs[i], Names[i], dateFormat.parse(StartDates[i]),
                             dateFormat.parse(TicketExpDates[i]), CustomerTickets,

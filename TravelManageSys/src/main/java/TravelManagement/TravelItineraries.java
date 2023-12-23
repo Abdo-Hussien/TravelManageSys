@@ -9,19 +9,20 @@ import java.util.Date;
 import java.util.Scanner;
 
 import AccountManagement.Customers;
+import data.fileManipulation;
 
 /**
  *
  * @author bmood
  */
 public class TravelItineraries {
-    int index;
-    int BookedTravelsindex;
-    protected Scanner in = new Scanner(System.in);
-    protected String input;
-    protected char choice;
-    protected boolean checked = false;
-    int ans;
+    private int index;
+    private int BookedTravelsindex;
+    private Scanner in = new Scanner(System.in);
+    private String input;
+    private char choice;
+    private boolean checked = false;
+    private int ans;
 
     public TravelItineraries() {
     }

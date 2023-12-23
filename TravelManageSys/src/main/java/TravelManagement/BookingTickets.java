@@ -189,9 +189,8 @@ public class BookingTickets {
                 ChosenTrip.setTotalPrice(customer.applyDiscount(ChosenTrip.getTotalPrice()));
                 CustomMessage("Discount applied", 1000);
             }
-            BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip.getTripID(), ChosenTrip.getTripName(),
-                    ChosenTrip.getStartDate(), ChosenTrip.getEndDate(), ticketList, ChosenTrip.getTotalPrice(),
-                    ChosenTrip.getCarID());
+            //fixed bookedTravels constructor
+            BookedTravels oldBookedTravels = new BookedTravels(ChosenTrip,ticketList);
             customer.getCustomerBookedTrips().add(oldBookedTravels);
         }
         CustomMessage("You successfully booked " + ChosenTrip.getTripName() + " Trip", 300);
