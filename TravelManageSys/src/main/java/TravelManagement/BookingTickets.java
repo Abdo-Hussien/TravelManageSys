@@ -123,11 +123,11 @@ public class BookingTickets {
     public boolean DeleteTicket(Customers customer, ChosenTrip ChosenTrip,
             ArrayList<Trip> allTrips, ArrayList<Car> allCars) {
         System.out.println("What type of ticket you want to delete?" + "   \'Enter Ticket type\' ");
-        System.out.println("Example: Silver, Regular, Gold, ..."); // silver hya hya regular
+        System.out.println("Example: Silver, Regular, Gold, ...");
         System.out.println("Back to return to ticket editing menu!");
         String ans = in.next();
         in.nextLine();
-        if (ans.length() < 3) { // remove if
+        if (ans.length() < 3) { 
             System.out.println("Invalid input! please try again");
             return DeleteTicket(customer, ChosenTrip, allTrips, allCars);
         }
@@ -141,7 +141,7 @@ public class BookingTickets {
             return TicketEditMenu(customer, ChosenTrip, allTrips, allCars);
         else {
             System.out.println("Invalid input! please try again");
-            return DeleteTicket(customer, ChosenTrip, allTrips, allCars); // elmafrod ttl3 3nd el ticket type
+            return DeleteTicket(customer, ChosenTrip, allTrips, allCars);
         }
     }
 
