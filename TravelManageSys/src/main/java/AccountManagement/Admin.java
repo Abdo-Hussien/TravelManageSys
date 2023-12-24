@@ -181,13 +181,12 @@ public class Admin implements Administration {
                 } else if (choice == '6') {
                     AllUsers.get(index).setPhone_number(Validations.PhoneValidation());
                     System.out.println("Phone number updated successfully");
-                } 
-                else
+                } else
                     System.out.println("Invalid input! please try again..");
             }
             if (!try_again())
                 break;
-        } while (input.equalsIgnoreCase("y"));
+        } while (true);
         if (callingfrom.equals("Admin"))
             Manipulation(AllUsers, type);
         else if (callingfrom.equals("Customer")) {
@@ -272,7 +271,7 @@ public class Admin implements Administration {
 
     public Person create_acc(String Account_Type) {
         Person person = null;
-        //checks if the user is a customer or a tour guide
+        // checks if the user is a customer or a tour guide
         if (Account_Type.equalsIgnoreCase("TourGuide"))
             person = new TourGuide();
         else if (Account_Type.equalsIgnoreCase("Customer"))
@@ -311,7 +310,7 @@ public class Admin implements Administration {
     }
 
     public <T extends Personsinterface> T login(ArrayList<T> allusers) {
-        int attempts = 5; 
+        int attempts = 5;
         T user = null;
         System.out.println("\n~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
         System.out.println("\t\tLogin");
@@ -329,9 +328,9 @@ public class Admin implements Administration {
             if (user == null) {
                 attempts--;
                 System.out.println("You have " + attempts + " attempts left...");
-                if(attempts!=0){
-                if (!try_again())
-                    return null;
+                if (attempts != 0) {
+                    if (!try_again())
+                        return null;
                 }
             } else
                 return user;
